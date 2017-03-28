@@ -6,4 +6,4 @@
   - Added File Input library by Jasny
   - change filter colors for example pages
   - fix Charts responsive issue when switching from Desktop to Mobile
-  - added PerfectScrollbar just for Windows, fix problem in MacOs and Ubuntu
+  - added PerfectScrollbar just for Windows, fix problem in MacOs and Ubuntu..

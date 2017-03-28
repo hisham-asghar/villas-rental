@@ -1,0 +1,612 @@
+﻿
+<form action="#" method="post" novalidate="novalidate">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-md-offset-1 col-lg-4 col-lg-offset-2">
+            <input type="hidden" name="StartDate" value="dd/MM/yyyy">
+            <input data-val="true" data-val-number="The field PageSize must be a number." data-val-required="The PageSize field is required." id="PageSize" name="PageSize" type="hidden" value="6" aria-required="true">
+            <div class="form-group">
+                <label class="text-capitalize">from</label>
+                <div class="input-group from-date date">
+
+                    <input class="form-control datepicker" data-val="true" data-val-date="The field From must be a date." data-val-required="The From field is required." id="From" name="From" type="text" value="25/03/2017" aria-required="true">
+
+                    <span class="input-group-addon">
+                        <span class="glyphicon calendar-icon"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+            <div class="form-group">
+                <label class="text-capitalize">to</label>
+                <div class="input-group to-date date">
+
+                    <input class="form-control datepicker" data-val="true" data-val-date="The field To must be a date." data-val-isdateafter="Date to must be greater than date from." data-val-isdateafter-allowequaldates="True" data-val-isdateafter-groupselector="" data-val-isdateafter-propertytested="From" data-val-required="The To field is required." id="To" name="To" type="text" value="30/03/2017" aria-required="true">
+
+
+                    <span class="input-group-addon">
+                        <span class="glyphicon calendar-icon"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+            <div class="form-group select2-fill">
+                <label for="to">Status</label>
+                <select class="selectpicker" data-style="select-with-transition" title="Status" data-size="7">
+                    <option value="Available" selected="selected">Available</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Booked">Booked</option>
+                    <option value="Blocked">Blocked</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <input data-val="true" data-val-required="The IsStandardMode field is required." id="IsStandardMode" name="IsStandardMode" type="hidden" value="false" aria-required="true">
+    <hr />
+    <div class="row availability-tabs">
+        <ul class="nav nav-pills nav-pills-info nav-pills-icons nav-justified nav-divider">
+            <li role="presentation" class="active">
+                <a href="#standardTab" aria-controls="standardTab" role="tab" data-toggle="tab" aria-expanded="true">Standard</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#weekdaysTab" aria-controls="weekdaysTab" role="tab" data-toggle="tab" aria-expanded="false">weekdays</a>
+            </li>
+        </ul>
+        <div class="tab-content padding-top20 padding-bottom20">
+            <div role="tabpanel" class="tab-pane active" id="standardTab">
+                <div class="container-fluid">
+
+
+                    <div class="row select-height-34">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="StandardPrice_Price">Daily Price €</label>
+                                <input class="form-control" style="margin-top: 8px;" data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." id="StandardPrice_Price" name="StandardPrice.Price" type="text" value="2035" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="StandardPrice_MinStay">Min. stay length</label>
+                                <select class="selectpicker" data-style="select-with-transition" title="Min. stay length" data-size="7" name="StandardPrice.MinStay" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option selected="selected">7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="StandardPrice_ExtraGuestPrice">Extra guest price</label>
+                                <input class="form-control" style="margin-top: 8px;" data-val="true" data-val-number="The field ExtraGuestPrice must be a number." data-val-required="The ExtraGuestPrice field is required." id="StandardPrice_ExtraGuestPrice" name="StandardPrice.ExtraGuestPrice" type="text" value="0" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="StandardPrice_ChangeoverType">Changeover type</label>
+                                <select class="selectpicker" data-style="select-with-transition" title="Changeover type" name="StandardPrice.ChangeoverType" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option value="CheckInOnly">Check in</option>
+                                    <option value="CheckOutOnly">Check out</option>
+                                    <option value="None" selected="selected">None</option>
+                                    <option value="Both">Both</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <label class="font-bold">Apply to weekdays</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 select-all-container">
+                            <div class="checkbox checkbox-inline">
+                                <label>
+                                    <input type="checkbox" name="optionsCheckboxes">
+                                    All
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 day-of-week-container ">
+                            <div class="checkbox checkbox-inline">
+                                <label>
+                                    <input type="checkbox" name="optionsCheckboxes">
+                                    Mon
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 day-of-week-container ">
+                            <div class="checkbox checkbox-inline">
+                                <label>
+                                    <input type="checkbox" name="optionsCheckboxes">
+                                    Tue
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 day-of-week-container ">
+                            <div class="checkbox checkbox-inline">
+                                <label>
+                                    <input type="checkbox" name="optionsCheckboxes">
+                                    Wed
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 day-of-week-container ">
+                            <div class="checkbox checkbox-inline">
+                                <label>
+                                    <input type="checkbox" name="optionsCheckboxes">
+                                    Thu
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 day-of-week-container ">
+                            <div class="checkbox checkbox-inline">
+                                <label>
+                                    <input type="checkbox" name="optionsCheckboxes">
+                                    Fri
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 day-of-week-container ">
+                            <div class="checkbox checkbox-inline">
+                                <label>
+                                    <input type="checkbox" name="optionsCheckboxes">
+                                    Sat
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 day-of-week-container disabled">
+                            <div class="checkbox checkbox-inline">
+                                <label>
+                                    <input type="checkbox" name="optionsCheckboxes">
+                                    Sun
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="weekdaysTab">
+                <div class="container-fluid">
+                    <div class="font-bold text-uppercase">
+                        Monday
+                    </div>
+
+
+                    <div class="row select-height-34">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Monday__Price">Daily Price €</label>
+                                <input class="form-control" data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." id="WeekdayPrices_Monday__Price" name="WeekdayPrices[Monday].Price" type="text" value="2035" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Monday__MinStay">Min. stay length</label>
+                                <select name="WeekdayPrices[Monday].MinStay" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option selected="selected">7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Monday].MinStay-27-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Monday].MinStay-27-container" title="7">7</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Monday__ExtraGuestPrice">Extra guest price</label>
+                                <input class="form-control" data-val="true" data-val-number="The field ExtraGuestPrice must be a number." data-val-required="The ExtraGuestPrice field is required." id="WeekdayPrices_Monday__ExtraGuestPrice" name="WeekdayPrices[Monday].ExtraGuestPrice" type="text" value="0" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Monday__ChangeoverType">Changeover type</label>
+                                <select name="WeekdayPrices[Monday].ChangeoverType" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option value="CheckInOnly">Check in</option>
+                                    <option value="CheckOutOnly">Check out</option>
+                                    <option value="None" selected="selected">None</option>
+                                    <option value="Both">Both</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Monday].ChangeoverType-gy-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Monday].ChangeoverType-gy-container" title="None">None</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="font-bold text-uppercase">
+                        Tuesday
+                    </div>
+
+
+                    <div class="row select-height-34">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Tuesday__Price">Daily Price €</label>
+                                <input class="form-control" data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." id="WeekdayPrices_Tuesday__Price" name="WeekdayPrices[Tuesday].Price" type="text" value="2035" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Tuesday__MinStay">Min. stay length</label>
+                                <select name="WeekdayPrices[Tuesday].MinStay" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option selected="selected">7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Tuesday].MinStay-7a-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Tuesday].MinStay-7a-container" title="7">7</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Tuesday__ExtraGuestPrice">Extra guest price</label>
+                                <input class="form-control" data-val="true" data-val-number="The field ExtraGuestPrice must be a number." data-val-required="The ExtraGuestPrice field is required." id="WeekdayPrices_Tuesday__ExtraGuestPrice" name="WeekdayPrices[Tuesday].ExtraGuestPrice" type="text" value="0" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Tuesday__ChangeoverType">Changeover type</label>
+                                <select name="WeekdayPrices[Tuesday].ChangeoverType" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option value="CheckInOnly">Check in</option>
+                                    <option value="CheckOutOnly">Check out</option>
+                                    <option value="None" selected="selected">None</option>
+                                    <option value="Both">Both</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Tuesday].ChangeoverType-c5-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Tuesday].ChangeoverType-c5-container" title="None">None</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="font-bold text-uppercase">
+                        Wednesday
+                    </div>
+
+
+                    <div class="row select-height-34">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Wednesday__Price">Daily Price €</label>
+                                <input class="form-control" data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." id="WeekdayPrices_Wednesday__Price" name="WeekdayPrices[Wednesday].Price" type="text" value="2035" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Wednesday__MinStay">Min. stay length</label>
+                                <select name="WeekdayPrices[Wednesday].MinStay" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option selected="selected">7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Wednesday].MinStay-tv-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Wednesday].MinStay-tv-container" title="7">7</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Wednesday__ExtraGuestPrice">Extra guest price</label>
+                                <input class="form-control" data-val="true" data-val-number="The field ExtraGuestPrice must be a number." data-val-required="The ExtraGuestPrice field is required." id="WeekdayPrices_Wednesday__ExtraGuestPrice" name="WeekdayPrices[Wednesday].ExtraGuestPrice" type="text" value="0" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Wednesday__ChangeoverType">Changeover type</label>
+                                <select name="WeekdayPrices[Wednesday].ChangeoverType" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option value="CheckInOnly">Check in</option>
+                                    <option value="CheckOutOnly">Check out</option>
+                                    <option value="None" selected="selected">None</option>
+                                    <option value="Both">Both</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Wednesday].ChangeoverType-e9-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Wednesday].ChangeoverType-e9-container" title="None">None</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="font-bold text-uppercase">
+                        Thursday
+                    </div>
+
+
+                    <div class="row select-height-34">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Thursday__Price">Daily Price €</label>
+                                <input class="form-control" data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." id="WeekdayPrices_Thursday__Price" name="WeekdayPrices[Thursday].Price" type="text" value="2035" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Thursday__MinStay">Min. stay length</label>
+                                <select name="WeekdayPrices[Thursday].MinStay" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option selected="selected">7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Thursday].MinStay-14-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Thursday].MinStay-14-container" title="7">7</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Thursday__ExtraGuestPrice">Extra guest price</label>
+                                <input class="form-control" data-val="true" data-val-number="The field ExtraGuestPrice must be a number." data-val-required="The ExtraGuestPrice field is required." id="WeekdayPrices_Thursday__ExtraGuestPrice" name="WeekdayPrices[Thursday].ExtraGuestPrice" type="text" value="0" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Thursday__ChangeoverType">Changeover type</label>
+                                <select name="WeekdayPrices[Thursday].ChangeoverType" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option value="CheckInOnly">Check in</option>
+                                    <option value="CheckOutOnly">Check out</option>
+                                    <option value="None" selected="selected">None</option>
+                                    <option value="Both">Both</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Thursday].ChangeoverType-io-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Thursday].ChangeoverType-io-container" title="None">None</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="font-bold text-uppercase">
+                        Friday
+                    </div>
+
+
+                    <div class="row select-height-34">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Friday__Price">Daily Price €</label>
+                                <input class="form-control" data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." id="WeekdayPrices_Friday__Price" name="WeekdayPrices[Friday].Price" type="text" value="2035" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Friday__MinStay">Min. stay length</label>
+                                <select name="WeekdayPrices[Friday].MinStay" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option selected="selected">7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Friday__ExtraGuestPrice">Extra guest price</label>
+                                <input class="form-control" data-val="true" data-val-number="The field ExtraGuestPrice must be a number." data-val-required="The ExtraGuestPrice field is required." id="WeekdayPrices_Friday__ExtraGuestPrice" name="WeekdayPrices[Friday].ExtraGuestPrice" type="text" value="0" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Friday__ChangeoverType">Changeover type</label>
+                                <select name="WeekdayPrices[Friday].ChangeoverType" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option value="CheckInOnly">Check in</option>
+                                    <option value="CheckOutOnly">Check out</option>
+                                    <option value="None" selected="selected">None</option>
+                                    <option value="Both">Both</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Friday].ChangeoverType-i8-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Friday].ChangeoverType-i8-container" title="None">None</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="font-bold text-uppercase">
+                        Saturday
+                    </div>
+
+
+                    <div class="row select-height-34">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Saturday__Price">Daily Price €</label>
+                                <input class="form-control" data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." id="WeekdayPrices_Saturday__Price" name="WeekdayPrices[Saturday].Price" type="text" value="2035" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Saturday__MinStay">Min. stay length</label>
+                                <select name="WeekdayPrices[Saturday].MinStay" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option selected="selected">7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Saturday].MinStay-xv-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Saturday].MinStay-xv-container" title="7">7</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Saturday__ExtraGuestPrice">Extra guest price</label>
+                                <input class="form-control" data-val="true" data-val-number="The field ExtraGuestPrice must be a number." data-val-required="The ExtraGuestPrice field is required." id="WeekdayPrices_Saturday__ExtraGuestPrice" name="WeekdayPrices[Saturday].ExtraGuestPrice" type="text" value="0" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Saturday__ChangeoverType">Changeover type</label>
+                                <select name="WeekdayPrices[Saturday].ChangeoverType" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option value="CheckInOnly">Check in</option>
+                                    <option value="CheckOutOnly">Check out</option>
+                                    <option value="None" selected="selected">None</option>
+                                    <option value="Both">Both</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Saturday].ChangeoverType-18-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Saturday].ChangeoverType-18-container" title="None">None</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="font-bold text-uppercase">
+                        Sunday
+                    </div>
+
+
+                    <div class="row select-height-34">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Sunday__Price">Daily Price €</label>
+                                <input class="form-control" data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." id="WeekdayPrices_Sunday__Price" name="WeekdayPrices[Sunday].Price" type="text" value="2035" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Sunday__MinStay">Min. stay length</label>
+                                <select name="WeekdayPrices[Sunday].MinStay" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option selected="selected">7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                    <option>13</option>
+                                    <option>14</option>
+                                    <option>15</option>
+                                    <option>16</option>
+                                    <option>17</option>
+                                    <option>18</option>
+                                    <option>19</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Sunday].MinStay-lw-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Sunday].MinStay-lw-container" title="7">7</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="WeekdayPrices_Sunday__ExtraGuestPrice">Extra guest price</label>
+                                <input class="form-control" data-val="true" data-val-number="The field ExtraGuestPrice must be a number." data-val-required="The ExtraGuestPrice field is required." id="WeekdayPrices_Sunday__ExtraGuestPrice" name="WeekdayPrices[Sunday].ExtraGuestPrice" type="text" value="0" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <div class="form-group select2-fill">
+                                <label for="WeekdayPrices_Sunday__ChangeoverType">Changeover type</label>
+                                <select name="WeekdayPrices[Sunday].ChangeoverType" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                                    <option value="CheckInOnly">Check in</option>
+                                    <option value="CheckOutOnly">Check out</option>
+                                    <option value="None" selected="selected">None</option>
+                                    <option value="Both">Both</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-WeekdayPrices[Sunday].ChangeoverType-w2-container"><span class="select2-selection__rendered" id="select2-WeekdayPrices[Sunday].ChangeoverType-w2-container" title="None">None</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

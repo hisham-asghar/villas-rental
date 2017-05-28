@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "_MyLayout2";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+@section scripts{
+    @RenderSection("scripts",false)
+}
+@section headScripts{
+    @RenderSection("headScripts", false)    
+}
+<style>
+    .main_navigation li > a:not(.btn) {
+        padding-top: 8px;
+    }
+</style>
+<nav class="navbar navbar-transparent navbar-absolute " style="padding: 0; margin-top: 1%;">
+    @Html.Partial("~/Views/Shared/HeaderNavBar.cshtml")
+</nav>
+@RenderBody()

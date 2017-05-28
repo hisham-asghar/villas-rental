@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "BestOptions";
+}
+
+<h2>Services</h2>
+<h2>Main Page Best Options Settings</h2>
+<div class="col-md-12">
+    <form method="post" enctype="multipart/form-data">
+        <div class="card">
+            <div class="card-content">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h3>Box 1</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service1H.MetaText" name="@ViewBag.service1H.MetaName" placeholder="Best For" class="form-control">
+                        </div>
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service1SH.MetaText" name="@ViewBag.service1SH.MetaName" placeholder="Heading" class="form-control">
+                        </div>
+                        <div class="form-group  is-empty">
+                            <label class="control-label"> Content </label>
+                            <textarea class="form-control" name="@ViewBag.service1B.MetaName" rows="5">
+                                @ViewBag.service1B.MetaText
+                            </textarea>
+                        </div>
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service1LN.MetaText" name="@ViewBag.service1LN.MetaName" placeholder="Link Text" class="form-control">
+                        </div>
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service1L.MetaText" name="@ViewBag.service1L.MetaName" placeholder="Link" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='@((ViewBag.service1IMG.MetaText == null || ViewBag.service1IMG.MetaText == "") ? "/Content/assets/img/image_placeholder.jpg" : "/uploads/" + ViewBag.service1IMG.MetaText)' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="pic1" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-content">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h3>Box 2</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service2H.MetaText" name="@ViewBag.service2H.MetaName" placeholder="Best For" class="form-control">
+                        </div>
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service2SH.MetaText" name="@ViewBag.service2SH.MetaName" placeholder="Heading" class="form-control">
+                        </div>
+                        <div class="form-group  is-empty">
+                            <label class="control-label"> Content </label>
+                            <textarea class="form-control" name="@ViewBag.service2B.MetaName" rows="5">@ViewBag.service2B.MetaText</textarea>
+                        </div>
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service2LN.MetaText" name="@ViewBag.service2LN.MetaName" placeholder="Link Text" class="form-control">
+                        </div>
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service2L.MetaText" name="@ViewBag.service2L.MetaName" placeholder="Link" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='@((ViewBag.service2IMG.MetaText == null || ViewBag.service2IMG.MetaText == "") ? "/Content/assets/img/image_placeholder.jpg" : "/uploads/" + ViewBag.service2IMG.MetaText)' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="pic2" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h3>Box 3</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service3H.MetaText" name="@ViewBag.service3H.MetaName" placeholder="Best For" class="form-control">
+                        </div>
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service3SH.MetaText" name="@ViewBag.service3SH.MetaName" placeholder="Heading" class="form-control">
+                        </div>
+                        <div class="form-group  is-empty">
+                            <label class="control-label"> Content </label>
+                            <textarea class="form-control" name="@ViewBag.service3B.MetaName" rows="5">@ViewBag.service3B.MetaText</textarea>
+                        </div>
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service3LN.MetaText" name="@ViewBag.service3LN.MetaName" placeholder="Link Text" class="form-control">
+                        </div>
+                        <div class="form-group is-empty">
+                            <input type="text" value="@ViewBag.service3L.MetaText" name="@ViewBag.service3L.MetaName" placeholder="Link" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='@((ViewBag.service3IMG.MetaText == null || ViewBag.service3IMG.MetaText == "") ? "/Content/assets/img/image_placeholder.jpg" : "/uploads/" + ViewBag.service3IMG.MetaText)' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="pic3" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-info">Update</button>
+        </div>
+    </form>
+</div>

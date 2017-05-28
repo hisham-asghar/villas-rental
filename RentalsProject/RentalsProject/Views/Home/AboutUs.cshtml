@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<h2>About Us Settings</h2>
+<div class="col-md-12 card">
+    <div class="card-content">
+        <form method="post">
+
+            <div class="col-md-12">
+                <div class="title">
+                    <h3>Tag Line</h3>
+                </div>
+                <div class="form-group  is-empty">
+                    <label class="control-label"> You can write your text here...</label>
+                    <textarea class="form-control" name="@ViewBag.AboutTagLine.MetaName" rows="5">@ViewBag.AboutTagLine.MetaText</textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="title">
+                    <h3>Text</h3>
+                </div>
+                <div class="form-group  is-empty">
+                    <label class="control-label"> You can write your text here...</label>
+                    <textarea id="editingData" class="form-control" name="@ViewBag.AboutText.MetaName" rows="5">@ViewBag.AboutText.MetaText</textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-info">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/Content/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#editingData',
+        skin: 'lightgray',
+        toolbar: 'save | newdocument | bold | italic | underline | strikethrough |alignleft | aligncenter | alignright | alignjustify | styleselect | formatselect | fontselect | fontsizeselect | cut | copy | paste | bullist | numlist | outdent | indent | blockquote | undo | redo | removeformat | subscript | superscript | forecolor backcolor',
+        plugins: 'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker'+
+            ' searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking'+
+            ' save table contextmenu directionality emoticons template paste textcolor'
+    });
+</script>

@@ -1,0 +1,10 @@
+﻿[
+    {
+        "Key" :"ReservationEmail",
+        "Value" : "hisham@octacer.com"
+    },
+    {
+        "Key" :"UploadLocation",
+        "Value" : "http://localhost:54557/uploads/"
+    }
+]

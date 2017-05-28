@@ -1,128 +1,131 @@
 ﻿@{
     ViewBag.Title = "Index";
+    ViewBag.serverLoc = "http://localhost:54557";
 }
 
 <div class="cd-section" id="headers">
-    <!--     *********     HEADER 1      *********      
-    <!--     *********    END HEADER 1      *********      -->
-    <!--     *********     HEADER 2      *********      -->
     <div class="header-2">
         <div class="page-header header-filter" style="background-image: url('/Content/assets/img/d_casa_oliver.jpg');">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 text-center">
-                        <h1 class="title">                            
-                            What's Your Dream Vacation?
-                        </h1>
-                        <h4>
-                            Luxury Vacation Rentals Around the World
-                        </h4>
-                    </div>
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="card card-raised card-form-horizontal">
-                            <div class="content">
-                                <form method="" action="sections.html">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">location_on</i>
-                                                </span>
-                                                <div class="form-group is-empty"><input type="text" class="form-control" placeholder="Where's your luxury retreat?"><span class="material-input"></span></div>
+            <div class="container-fluid">
+
+                <div class="container" style="padding:15px;margin:0px;width:auto; padding-top: 40vh;">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="card card-raised card-form-horizontal">
+                                <div class="content">
+                                    <form method="post" action="#">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group label-static">
+                                                    <label class="control-label">
+                                                        Where's your luxury retreat?
+                                                    </label>
+                                                    <select class="select form-control" placeholder="Select a destination">
+                                                        <option disabled selected class="disabled">Select a destination</option>
+                                                        <option value="BAHAMAS">BAHAMAS </option>
+                                                        <option value="MIAMI">MIAMI </option>
+                                                        <option value="LOS ANGELES">LOS ANGELES </option>
+                                                        <option value="LAS VEGAS">LAS VEGAS </option>
+                                                        <option value="FRENCH RIVIERA">FRENCH RIVIERA </option>
+                                                        <option value="GREEK ISLANDS">GREEK ISLANDS </option>
+                                                        <option value="IBIZA">IBIZA </option>
+                                                        <option value="NEW ENGLAND">NEW ENGLAND </option>
+                                                        <option value="HAMPTONS">HAMPTONS </option>
+                                                        <option value="PALM SPRINGS">PALM SPRINGS </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Check in</label>
+                                                    <input type="text" class="form-control StartDate" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Check out</label>
+                                                    <input type="text" class="EndDate form-control" value="10/10/2016">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group is-empty">
+                                                    <input type="number" value="" placeholder="Guests" class="form-control">
+                                                    <span class="material-input"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-info btn-block">Search</button>
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Check in</label>
-                                                <input type="text" class="datepicker form-control">
-                                                <span class="material-input"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Check out</label>
-                                                <input type="text" class="datepicker form-control">
-                                                <span class="material-input"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group is-empty">
-                                                <input type="number" value="" placeholder="Guests" class="form-control">
-                                                <span class="material-input"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button type="button" class="btn btn-info btn-block">Search</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-md-offset-4">
-                        <h4>
-                            <b style="color:white;text-shadow: 1px 1px 1px black;">Top destinations: </b>
-                            <a href="/vacation-rentals/caribbean/st-martin/" style="color:white;text-shadow: 1px 1px 1px black;text-decoration: underline;">St. Martin</a>, 
-                            <a href="/vacation-rentals/caribbean/barbados/" style="color:white;text-shadow: 1px 1px 1px black;text-decoration: underline;">Barbados</a>, 
-                            <a href="/vacation-rentals/hawaii/maui/" style="color:white;text-shadow: 1px 1px 1px black;text-decoration: underline;">Maui</a>, 
-                            <a href="/vacation-rentals/california" style="color:white;text-shadow: 1px 1px 1px black;text-decoration: underline;">California</a>.
-                        </h4>
+                        <div class="col-md-6 col-md-offset-4 hide">
+                            <h4>
+                                <b style="color:white;text-shadow: 1px 1px 1px black;">Top destinations: </b>
+                                <a href="/vacation-rentals/caribbean/st-martin/" style="color:white;text-shadow: 1px 1px 1px black;text-decoration: underline;">St. Martin</a>,
+                                <a href="/vacation-rentals/caribbean/barbados/" style="color:white;text-shadow: 1px 1px 1px black;text-decoration: underline;">Barbados</a>,
+                                <a href="/vacation-rentals/hawaii/maui/" style="color:white;text-shadow: 1px 1px 1px black;text-decoration: underline;">Maui</a>,
+                                <a href="/vacation-rentals/california" style="color:white;text-shadow: 1px 1px 1px black;text-decoration: underline;">California</a>.
+                            </h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--     *********    END HEADER 2      *********      -->
-    <!--     *********     HEADER 3      *********      -->
-    <!--     *********    END HEADER 3      *********      -->
 </div>
+
+<style>
+    .doubleshow .text-left * {
+        text-align: center !important;
+    }
+    .card-block-promo{
+        background:transparent;box-shadow: 0 0 0 ;z-index:100;margin-top:25vh;
+    }
+</style>
 <div class="cd-section" id="features">
     <div class="container">
         <!--     *********     FEATURES 1      *********      -->
-        <div class="features-1">
+        <div style="text-align:center">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="info">
+                    <div class="info" style="padding:40px;">
                         <div class="icon icon-info">
                             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 width="95.17px" height="80px" viewBox="0 0 95.17 86.168" style="enable-background:new 0 0 95.17 86.168;"
+                                 width="50px" height="50px" viewBox="0 0 95.17 86.168" style="enable-background:new 0 0 95.17 86.168;"
                                  xml:space="preserve">
                                 <image style="overflow:visible;" width="120" height="360" xlink:href="/Content/assets/img/iBrandPromise.png" transform="matrix(1 0 0 1 -11.8726 -16.855)"></image>
                             </svg>
                         </div>
-                        <h4 class="info-title">OVER 3700 PROFESSIONALLY INSPECTED VILLAS</h4>
-                        <p>
-                            Your vacation time is valuable, which is why we handpick and inspect every property. The result? Vacation rentals that won’t leave you with unwanted surprises.
-                        </p>
+                        <h4 class="info-title">@ViewBag.servicePanel1H.MetaText</h4>
+                        <p>@ViewBag.servicePanel1B.MetaText</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="info">
+                    <div class="info" style="padding:40px;">
                         <div class="icon icon-success">
                             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 width="106.971px" height="80px" viewBox="0 0 106.971 78.454" style="enable-background:new 0 0 106.971 78.454;"
+                                 width="50px" height="50px" viewBox="0 0 106.971 78.454" style="enable-background:new 0 0 106.971 78.454;"
                                  xml:space="preserve">
-                                <image style="overflow:visible;" width="120" height="360" xlink:href="/Content/assets/img/iBrandPromise.png" transform="matrix(1 0 0 1 -7.0332 -140.9824)"></image>
+                            <image style="overflow:visible;" width="120" height="360" xlink:href="/Content/assets/img/iBrandPromise.png" transform="matrix(1 0 0 1 -7.0332 -140.9824)"></image>
                             </svg>
                         </div>
-                        <h4 class="info-title">24/7 GUEST SUPPORT</h4>
-                        <p>
-                            Every guest is appointed a Personal Concierge, with local service now available in key destinations.  Upon arrival, our 24Seven Concierge is available 24/7.
-                        </p>
+                        <h4 class="info-title">@ViewBag.servicePanel2H.MetaText</h4>
+                        <p>@ViewBag.servicePanel2B.MetaText</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="info">
+                    <div class="info" style="padding:40px;">
                         <div class="icon icon-danger">
                             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 width="106.135px" height="80px" viewBox="0 0 106.135 80" style="enable-background:new 0 0 106.135 80;" xml:space="preserve">
-                                <image style="overflow:visible;" width="120" height="360" xlink:href="/Content/assets/img/iBrandPromise.png" transform="matrix(1 0 0 1 -6.9507 -259.8774)"></image>
+                                 width="50px" height="50px" viewBox="0 0 106.135 80" style="enable-background:new 0 0 106.135 80;" xml:space="preserve">
+                            <image style="overflow:visible;" width="120" height="360" xlink:href="/Content/assets/img/iBrandPromise.png" transform="matrix(1 0 0 1 -6.9507 -259.8774)"></image>
                             </svg>
                         </div>
-                        <h4 class="info-title">PRICE MATCH GUARANTEE</h4>
-                        <p>
-                            Who says top quality and great value can't go hand in hand? At Luxury Retreats you can rest easy knowing you’re enjoying competitive nightly rates.
-                        </p>
+                        <h4 class="info-title">@ViewBag.servicePanel3H.MetaText</h4>
+                        <p>@ViewBag.servicePanel3B.MetaText</p>
                     </div>
                 </div>
             </div>
@@ -136,58 +139,44 @@
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <div class="carousel slide" data-ride="carousel">
                 <!-- Wrapper for slides -->
-                <div class="carousel-inner">
+                <div class="carousel-inner doubleshow">
                     <div class="item active">
                         <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_new800x660.jpg');height:100%;">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-left">
-                                            <h1 class="title">Material Kit PRO</h1>
-                                            <h4>Dolce & Gabbana is a luxury Italian fashion house founded in 1985 in Legnano by Italian designers Domenico Dolce and Stefano Gabbana. The two met in Milan in 1980 and designed for the same fashion house.</h4>
-                                            <br />
-                                            <div class="buttons">
-                                                <a href="sections.html#pablo" class="btn btn-primary btn-lg">
-                                                    Read More
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-facebook-square"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-get-pocket"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_new800x660.jpg');height:90vh;">
+                                <div class="card card-block-promo" style="">
+                                    <div class="content">
+                                        <a href="#pablo">
+                                            <h2 class="card-title" style="text-transform:uppercase; color:#fff;">
+                                                Special Offer
+                                            </h2>
+                                        </a>
+                                        <p class="card-description" style="color:#fff;">
+                                            Special Offers on villas
+                                        </p>
+                                        <br />
+                                        <a href="#pablo" class="label label-rose" style="border-radius:0">
+                                            View Collection
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_beachfront800x660.jpg');height:100%;">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-left">
-                                            <h1 class="title">Material Kit PRO</h1>
-                                            <h4>Dolce & Gabbana is a luxury Italian fashion house founded in 1985 in Legnano by Italian designers Domenico Dolce and Stefano Gabbana. The two met in Milan in 1980 and designed for the same fashion house.</h4>
-                                            <br />
-                                            <div class="buttons">
-                                                <a href="sections.html#pablo" class="btn btn-primary btn-lg">
-                                                    Read More
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-facebook-square"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-get-pocket"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_promotion800x660.jpg');height:90vh;">
+                                <div class="card card-block-promo" >
+                                    <div class="content">
+                                        <a href="#pablo">
+                                            <h2 class="card-title" style="text-transform:uppercase; color:#fff;">
+                                                Beachfront
+                                            </h2>
+                                        </a>
+                                        <p class="card-description" style="color:#fff;">
+                                            Beachfront vacation rentals steps from the sand
+                                        </p>
+                                        <br />
+                                        <a href="#pablo" class="label label-rose" style="border-radius:0">
+                                            View Collection
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -195,223 +184,83 @@
                     </div>
                     <div class="item ">
                         <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_beachfront800x660.jpg');height:100%;">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-left">
-                                            <h1 class="title">Material Kit PRO</h1>
-                                            <h4>Dolce & Gabbana is a luxury Italian fashion house founded in 1985 in Legnano by Italian designers Domenico Dolce and Stefano Gabbana. The two met in Milan in 1980 and designed for the same fashion house.</h4>
-                                            <br />
-                                            <div class="buttons">
-                                                <a href="sections.html#pablo" class="btn btn-primary btn-lg">
-                                                    Read More
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-facebook-square"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-get-pocket"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_promotion800x660.jpg');height:90vh;">
+                                <div class="card card-block-promo">
+                                    <div class="content">
+                                        <a href="#pablo">
+                                            <h2 class="card-title" style="text-transform:uppercase; color:#fff;">
+                                                Beachfront
+                                            </h2>
+                                        </a>
+                                        <p class="card-description" style="color:#fff;">
+                                            Beachfront vacation rentals steps from the sand
+                                        </p>
+                                        <br />
+                                        <a href="#pablo" class="label label-rose" style="border-radius:0">
+                                            View Collection
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_promotion800x660.jpg');height:100%;">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-left">
-                                            <h1 class="title">Material Kit PRO</h1>
-                                            <h4>Dolce & Gabbana is a luxury Italian fashion house founded in 1985 in Legnano by Italian designers Domenico Dolce and Stefano Gabbana. The two met in Milan in 1980 and designed for the same fashion house.</h4>
-                                            <br />
-                                            <div class="buttons">
-                                                <a href="sections.html#pablo" class="btn btn-primary btn-lg">
-                                                    Read More
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-facebook-square"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-get-pocket"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_new800x660.jpg');height:90vh;">
+                                <div class="card card-block-promo">
+                                    <div class="content">
+                                        <a href="#pablo">
+                                            <h2 class="card-title" style="text-transform:uppercase; color:#fff;">
+                                                City Sites
+                                            </h2>
+                                        </a>
+                                        <p class="card-description" style="color:#fff;">
+                                            City Sites Description
+                                        </p>
+                                        <br />
+                                        <a href="#pablo" class="label label-rose" style="border-radius:0">
+                                            View Collection
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
+                    <div class="item ">
                         <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_promotion800x660.jpg');height:100%;">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-left">
-                                            <h1 class="title">Material Kit PRO</h1>
-                                            <h4>Dolce & Gabbana is a luxury Italian fashion house founded in 1985 in Legnano by Italian designers Domenico Dolce and Stefano Gabbana. The two met in Milan in 1980 and designed for the same fashion house.</h4>
-                                            <br />
-                                            <div class="buttons">
-                                                <a href="sections.html#pablo" class="btn btn-primary btn-lg">
-                                                    Read More
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-facebook-square"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-get-pocket"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_new800x660.jpg');height:90vh;">
+                                <div class="card card-block-promo">
+                                    <div class="content">
+                                        <a href="#pablo">
+                                            <h2 class="card-title" style="text-transform:uppercase; color:#fff;">
+                                                City Sites Description
+                                            </h2>
+                                        </a>
+                                        <p class="card-description" style="color:#fff;">
+                                            Beachfront vacation rentals steps from the sand
+                                        </p>
+                                        <br />
+                                        <a href="#pablo" class="label label-rose" style="border-radius:0">
+                                            View Collection
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_honeymoon800x660.jpg');height:100%;">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-left">
-                                            <h1 class="title">Material Kit PRO</h1>
-                                            <h4>Dolce & Gabbana is a luxury Italian fashion house founded in 1985 in Legnano by Italian designers Domenico Dolce and Stefano Gabbana. The two met in Milan in 1980 and designed for the same fashion house.</h4>
-                                            <br />
-                                            <div class="buttons">
-                                                <a href="sections.html#pablo" class="btn btn-primary btn-lg">
-                                                    Read More
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-facebook-square"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-get-pocket"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_honeymoon800x660.jpg');height:100%;">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-left">
-                                            <h1 class="title">Material Kit PRO</h1>
-                                            <h4>Dolce & Gabbana is a luxury Italian fashion house founded in 1985 in Legnano by Italian designers Domenico Dolce and Stefano Gabbana. The two met in Milan in 1980 and designed for the same fashion house.</h4>
-                                            <br />
-                                            <div class="buttons">
-                                                <a href="sections.html#pablo" class="btn btn-primary btn-lg">
-                                                    Read More
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-facebook-square"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-get-pocket"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_city800x660.jpg');height:100%;">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-left">
-                                            <h1 class="title">Material Kit PRO</h1>
-                                            <h4>Dolce & Gabbana is a luxury Italian fashion house founded in 1985 in Legnano by Italian designers Domenico Dolce and Stefano Gabbana. The two met in Milan in 1980 and designed for the same fashion house.</h4>
-                                            <br />
-                                            <div class="buttons">
-                                                <a href="sections.html#pablo" class="btn btn-primary btn-lg">
-                                                    Read More
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-facebook-square"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-get-pocket"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_city800x660.jpg');height:100%;">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-left">
-                                            <h1 class="title">Material Kit PRO</h1>
-                                            <h4>Dolce & Gabbana is a luxury Italian fashion house founded in 1985 in Legnano by Italian designers Domenico Dolce and Stefano Gabbana. The two met in Milan in 1980 and designed for the same fashion house.</h4>
-                                            <br />
-                                            <div class="buttons">
-                                                <a href="sections.html#pablo" class="btn btn-primary btn-lg">
-                                                    Read More
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-facebook-square"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-get-pocket"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_new800x660.jpg');height:100%;">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6 text-left">
-                                            <h1 class="title">Material Kit PRO</h1>
-                                            <h4>Dolce & Gabbana is a luxury Italian fashion house founded in 1985 in Legnano by Italian designers Domenico Dolce and Stefano Gabbana. The two met in Milan in 1980 and designed for the same fashion house.</h4>
-                                            <br />
-                                            <div class="buttons">
-                                                <a href="sections.html#pablo" class="btn btn-primary btn-lg">
-                                                    Read More
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-facebook-square"></i>
-                                                </a>
-                                                <a href="sections.html#pablo" class="btn btn-just-icon btn-white btn-simple btn-lg">
-                                                    <i class="fa fa-get-pocket"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_new800x660.jpg');height:90vh;">
+                                <div class="card card-block-promo" style="">
+                                    <div class="content">
+                                        <a href="#pablo">
+                                            <h2 class="card-title" style="text-transform:uppercase; color:#fff;">
+                                                Special Offer
+                                            </h2>
+                                        </a>
+                                        <p class="card-description" style="color:#fff;">
+                                            Special Offers on villas
+                                        </p>
+                                        <br />
+                                        <a href="#pablo" class="label label-rose" style="border-radius:0">
+                                            View Collection
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -429,14 +278,13 @@
         </div>
     </div>
 </div>
-
 <div class="cd-section" id="testimonials">
     <!--     *********    TESTIMONIALS 2     *********      -->
     <div class="testimonials-2 section-gray">
         <div class="container">
             <div class="row">
                 <div id="carousel-testimonial" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
+                    <div class="carousel-inner " role="listbox">
                         <div class="item active">
                             <div class="card card-profile card-plain">
                                 <div class="col-md-5">
@@ -444,58 +292,26 @@
                                         <a href="sections.html#pablo">
                                             <img class="img" src="//resources.luxuryretreats.com/www/images/vr5/whatsnewwithuspyramid.png">
                                         </a>
-                                        <div class="ripple-container"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7" style="text-align:left;">
-                                    <div class="content">
-                                        <h3 class="card-title">What’s new with us?</h3>
-                                        <h5 class="category text-muted">Did you tune-in to The $100,000 Pyramid?</h5>
-                                        <p class="card-description">
-                                            If you’ve been watching this season you must’ve noticed the incredible Luxury Retreats villa getaways given to the lucky winners!
-                                        </p>
-                                        <a style="font-weight:bold;" class="text-success" href="http://exclusives.luxuryretreats.com/pyramid-show/" target="_blank">Explore our prize villas</a>
-                                        <br />
-                                        <i class="whoCaption">Pictured: Beach Enclave, Turks and Caicos</i>                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="card card-profile card-plain">
-                                <div class="col-md-5">
-                                    <div class="card-image" style="    border-radius: 500px;">
-                                        <a href="sections.html#pablo">
-                                            <img class="img" src="//resources.luxuryretreats.com/www/images/vr5/home_SkiDestination.png">
-                                        </a>
-                                        <div class="ripple-container"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-7" style="text-align:left;">
                                     <div class="content">
                                         <h3 class="card-title">What’s new with us?</h3>
                                         <h5 class="category text-muted">
-                                            New Ski Destination
+                                            You will be assigned a dedicated concierge that will manage your entire stay, from planning to checkout, 24 hours, 7 hours, 7 days a week.
                                         </h5>
-                                        <p class="card-description">
-                                            Steamboat Springs is our latest North American ski resort destination, joining Breckenridge, Aspen, Telluride and the Vail Valley in our growing Colorado portfolio.
-                                        </p>
-                                        <a style="font-weight:bold;" class="text-success" href="http://exclusives.luxuryretreats.com/pyramid-show/" target="_blank">
-                                            Take Me to Steamboat Springs 
-                                        </a>
-                                        <br />
-                                        <i class="whoCaption">
-                                            Pictured: Steamboat Springs, CO    
-                                        </i>
+                                        <p class="card-description"></p>
+                                        <a style="font-weight:bold;" class="text-success" href="/Home/CONCIERGE" target="_blank">Explore</a>
+                                        <br />           
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <a class="left carousel-control" href="sections.html#carousel-testimonial" role="button" data-slide="prev">
+                    <a class="left carousel-control hide" href="sections.html#carousel-testimonial" role="button" data-slide="prev">
                         <i class="material-icons" aria-hidden="true">chevron_left</i>
                     </a>
-                    <a class="right carousel-control" href="sections.html#carousel-testimonial" role="button" data-slide="next">
+                    <a class="right carousel-control hide" href="sections.html#carousel-testimonial" role="button" data-slide="next">
                         <i class="material-icons" aria-hidden="true">chevron_right</i>
                     </a>
                 </div>
@@ -519,59 +335,56 @@
                     <div class="card card-plain">
                         <a href="#" target="_blank">
                             <div class="card-image">
-                                <img src="//resources.luxuryretreats.com/www/images/vr5/home_dest_BigIsland530x260.jpg" />
+                                <img src='@((ViewBag.service1IMG.MetaText == null || ViewBag.service1IMG.MetaText == "") ? ViewBag.serverLoc + "/Content/assets/img/image_placeholder.jpg" : ViewBag.serverLoc + "/uploads/" + ViewBag.service1IMG.MetaText)' />
                             </div>
                         </a>
                         <div class="content">
                             <a href="#" target="_blank">
-                                <img src="//resources.luxuryretreats.com/www/images/vr5/iBestForResort.png" style="width:45px">
-                                <h4 class="card-title" style="display:inline-block;">Best For: Resort Living</h4>
+                                <h4 class="card-title" style="display:inline-block;">@ViewBag.service1H.MetaText</h4>
                             </a>
-                            <h3 class="category card-title">The Big Island </h3>
+                            <h3 class="category card-title">@ViewBag.service1SH.MetaText </h3>
                             <p class="card-description">
-                                Impressive natural beauty meets luxe resort living on Hawaii's largest island.  Spend your days exploring Big Island's beaches and national parks, or take in the views from its world-class spas and golf courses.
+                                @ViewBag.service1B.MetaText
                             </p>
-                            <a class="btn btn-default btn-sm" href="/vacation-rentals/hawaii/big-island/">View all <span>69</span> villas</a>
+                            <a class="btn btn-default btn-sm" href="@ViewBag.service1L.MetaText">@ViewBag.service1LN.MetaText</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card card-plain">
-                        <a href="http://www.creative-tim.com/product/light-bootstrap-dashboard-pro" target="_blank">
+                        <a href="#" target="_blank">
                             <div class="card-image">
-                                <img src="//resources.luxuryretreats.com/www/images/vr5/home_dest_RivieraMaya530x260.jpg" />
+                                <img src='@((ViewBag.service2IMG.MetaText == null || ViewBag.service2IMG.MetaText == "") ? ViewBag.serverLoc + "/Content/assets/img/image_placeholder.jpg" : ViewBag.serverLoc + "/uploads/" + ViewBag.service2IMG.MetaText)' />
                             </div>
                         </a>
                         <div class="content">
-                            <a href="http://www.creative-tim.com/product/light-bootstrap-dashboard-pro" target="_blank">
-                                <img src="//resources.luxuryretreats.com/www/images/vr5/iBestForNatural.png" style="width:45px">
-                                <h4 class="card-title" style="display:inline-block;">Best For: Natural Beauty</h4>
+                            <a href="#" target="_blank">
+                                <h4 class="card-title" style="display:inline-block;">Best For: @ViewBag.service2H.MetaText</h4>
                             </a>
-                            <h3 class="category card-title">The Riviera Maya</h3>
+                            <h3 class="category card-title">@ViewBag.service2SH.MetaText </h3>
                             <p class="card-description">
-                                Home to miles of pristine Caribbean coastline, the Riviera Maya boasts some of Mexico's best beaches.  Beyond sand and sea, explore ancient pyramids and Playa Del Carmen's exciting dining scene.
+                                @ViewBag.service2B.MetaText
                             </p>
-                            <a class="btn btn-default btn-sm" href="/vacation-rentals/mexico/riviera-maya/">View all <span>90</span> villas</a>
+                            <a class="btn btn-default btn-sm" href="@ViewBag.service2L.MetaText">@ViewBag.service2LN.MetaText</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card card-plain">
-                        <a href="http://www.creative-tim.com/product/get-shit-done-pro" target="_blank">
+                        <a href="#" target="_blank">
                             <div class="card-image">
-                                <img src="//resources.luxuryretreats.com/www/images/vr5/home_dest_LakeTahoe530x260.jpg" />
+                                <img src='@((ViewBag.service3IMG.MetaText == null || ViewBag.service3IMG.MetaText == "") ? ViewBag.serverLoc + "/Content/assets/img/image_placeholder.jpg" : ViewBag.serverLoc + "/uploads/" + ViewBag.service3IMG.MetaText)' />
                             </div>
                         </a>
                         <div class="content">
-                            <a href="http://www.creative-tim.com/product/get-shit-done-pro" target="_blank">
-                                <img src="//resources.luxuryretreats.com/www/images/vr5/iBestForActive.png" style="width:45px">
-                                <h4 class="card-title" style="display:inline-block;">Best For: Active Vacationers</h4>
+                            <a href="#" target="_blank">
+                                <h4 class="card-title" style="display:inline-block;">Best For: @ViewBag.service3H.MetaText</h4>
                             </a>
-                            <h3 class="category  card-title">California - Lake Tahoe</h3>
+                            <h3 class="category card-title">@ViewBag.service3SH.MetaText </h3>
                             <p class="card-description">
-                                Straddling the border of Nevada and California, Lake Tahoe is a dream come true for active vacationers. The largest alpine lake in North America, it has endless options for summer aquatic adventures and come winter there’s world-renowned skiing and boarding.
+                                @ViewBag.service3B.MetaText
                             </p>
-                            <a class="btn btn-default btn-sm" href="/vacation-rentals/united-states/california-lake-tahoe/">View all <span>11</span> villas</a>
+                            <a class="btn btn-default btn-sm" href="@ViewBag.service3L.MetaText">@ViewBag.service3LN.MetaText</a>
                         </div>
                     </div>
                 </div>
@@ -594,42 +407,23 @@
                                         <i class="material-icons">format_quote</i>
                                     </div>
                                     <div class="content">
-                                        <h5 class="card-description">
-                                            Your products, all the kits that I have downloaded from your site and worked with are sooo cool! I love the color mixtures, cards... everything. Keep up the great work!
+                                        <h5 class="card-description">                                            
+                                            STAY TMG and BOOK NOW!
                                         </h5>
                                     </div>
 
                                     <div class="footer">
-                                        <h4 class="card-title">Alec Thompson</h4>
-                                        <h6 class="category">alecthompson</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="col-md-4 col-md-offset-4">
-                                <div class="card card-testimonial">
-                                    <div class="icon">
-                                        <i class="material-icons">format_quote</i>
-                                    </div>
-                                    <div class="content">
-                                        <h5 class="card-description">
-                                            Your products, all the kits that I have downloaded from your site and worked with are sooo cool! I love the color mixtures, cards... everything. Keep up the great work!
-                                        </h5>
-                                    </div>
-
-                                    <div class="footer">
-                                        <h4 class="card-title">Alec Thompson</h4>
-                                        <h6 class="category">alecthompson</h6>
+                                        <h4 class="card-title">Cesar Garcia David</h4>
+                                        <h6 class="category">CEO</h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <a class="left carousel-control" href="#carousel-testimonial2" role="button" data-slide="prev">
+                    <a class="left carousel-control hide" href="#carousel-testimonial2" role="button" data-slide="prev">
                         <i class="material-icons" aria-hidden="true">chevron_left</i>
                     </a>
-                    <a class="right carousel-control" href="#carousel-testimonial2" role="button" data-slide="next">
+                    <a class="right carousel-control hide" href="#carousel-testimonial2" role="button" data-slide="next">
                         <i class="material-icons" aria-hidden="true">chevron_right</i>
                     </a>
                 </div>
@@ -709,24 +503,16 @@
                                             <label class="control-label">I would like to go to...</label>
                                             <select class="select form-control" placeholder="Select a destination">
                                                 <option disabled selected class="disabled">Select a destination</option>
-                                                <option value="1">Paris </option>
-                                                <option value="1">Bucharest</option>
-                                                <option value="1">Rome</option>
-                                                <option value="1">New York</option>
-                                                <option value="1">Miami </option>
-                                                <option value="1">Piatra Neamt</option>
-                                                <option value="1">Paris </option>
-                                                <option value="1">Bucharest</option>
-                                                <option value="1">Rome</option>
-                                                <option value="1">New York</option>
-                                                <option value="1">Miami </option>
-                                                <option value="1">Piatra Neamt</option>
-                                                <option value="1">Paris </option>
-                                                <option value="1">Bucharest</option>
-                                                <option value="1">Rome</option>
-                                                <option value="1">New York</option>
-                                                <option value="1">Miami </option>
-                                                <option value="1">Piatra Neamt</option>
+                                                <option value="BAHAMAS">BAHAMAS </option>
+                                                <option value="MIAMI">MIAMI </option>
+                                                <option value="LOS ANGELES">LOS ANGELES </option>
+                                                <option value="LAS VEGAS">LAS VEGAS </option>
+                                                <option value="FRENCH RIVIERA">FRENCH RIVIERA </option>
+                                                <option value="GREEK ISLANDS">GREEK ISLANDS </option>
+                                                <option value="IBIZA">IBIZA </option>
+                                                <option value="NEW ENGLAND">NEW ENGLAND </option>
+                                                <option value="HAMPTONS">HAMPTONS </option>
+                                                <option value="PALM SPRINGS">PALM SPRINGS </option>
                                             </select>
                                         </div>
                                     </div>
@@ -757,7 +543,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="checkbox">
+                                        <div class="checkbox hide">
                                             <label>
                                                 <input type="checkbox" name="optionsCheckboxes">
                                                 I'm not a robot
@@ -783,7 +569,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h4 class="title">Want More From Luxury Retreats</h4>
+                    <h4 class="title">Want More From The Maruca Group</h4>
                     <p class="description">
                         Get exclusive offers straight to your inbox:
                     </p>
@@ -791,7 +577,7 @@
                 <div class="col-md-6">
                     <div class="card card-plain card-form-horizontal">
                         <div class="content">
-                            <form method="" action="index.html">
+                            <form method="post" action="/">
                                 <div class="row">
                                     <div class="col-sm-8">
 
@@ -803,7 +589,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
-                                        <button type="button" class="btn btn-rose btn-round btn-block">Subscribe</button>
+                                        <button type="button" class="btn btn-rose btn-block">Subscribe</button>
                                     </div>
                                 </div>
                             </form>
@@ -815,3 +601,39 @@
         </div>
     </div>
 </div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.StartDate').datetimepicker({
+                format: 'MM/DD/YYYY',
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove',
+                    inline: true
+                }
+            });
+            $('.EndDate').datetimepicker({
+                format: 'MM/DD/YYYY',
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove',
+                    inline: true
+                }
+            });
+        });
+    </script>
+}

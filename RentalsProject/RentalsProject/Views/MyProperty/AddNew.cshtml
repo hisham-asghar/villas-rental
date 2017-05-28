@@ -1,19 +1,172 @@
 ﻿@section scripts{
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHany7JvZZML3stmpWrJNthfhlYbUXdho&callback=initMap"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVTDNg0tY6gnDu6NnoIuVG7VTtvS9pyzU"></script>
     <script type="text/javascript">
+        var rateId = 1;
         $(document).ready(function () {
+
+
             demo.initMaterialWizard();
-            CustomMap(40.748817, -73.985428);
+
+            $("#saveProjectbtn").click(function () {
+                $("#innerformImages").remove();
+                FinishAdd();
+            })
+
+            CustomMap(32.4690717, 74.39393389999998);
+            $('.datetimepicker').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove'
+                },
+                viewMode: 'months',
+                format : 'DD/MM/YYYY'
+            });
+            $("#AmenitiesTypes input[type='checkbox']").each(function() {
+                $(this).change(function() {
+                    var chkVal = $(this).val();
+                    debugger;
+                    if ($(this).prop("checked")) {
+                        var hidden = $("<input type=hidden />");
+                        hidden.attr("name", "model.amenities");
+                        hidden.attr("value", $(this).attr("name"));
+                        $(this).closest(".checkbox").append(hidden);
+                    } else {
+                        $(this).closest(".checkbox").find("input[type=hidden]").remove();
+                    }
+                    return true;
+                });
+            });
+
+            $("#TagsTypes input[type='checkbox']").each(function() {
+                $(this).change(function() {
+                    var chkVal = $(this).val();
+                    debugger;
+                    if ($(this).prop("checked")) {
+                        var hidden = $("<input type=hidden />");
+                        hidden.attr("name", "model.tags");
+                        hidden.attr("value", $(this).attr("name"));
+                        $(this).closest(".checkbox").append(hidden);
+                    } else {
+                        $(this).closest(".checkbox").find("input[type=hidden]").remove();
+                    }
+                    return true;
+                });
+            });
+            $("#addRateBtn").click(function() {
+                var tr =
+                    $('<tr><td><div class="form-group"><label class="label-control">Start Date</label><input type="text" name="model.rates[' + rateId + '].sd" class="form-control datetimepicker" value="01/01/2016" /></div></td><td><div class="form-group"><label class="label-control">End Date</label><input type="text" name="model.rates[' + rateId + '].ed" class="form-control datetimepicker" value="31/12/2016" /></div></td><td><div class="form-group is-empty"><input type="number" name="model.rates[' + rateId + '].price" value="" placeholder="Price" class="form-control"></div></td></tr>');
+                $("#ratesList").append(tr);
+                tr.find('.datetimepicker').datetimepicker({
+                    icons: {
+                        time: "fa fa-clock-o",
+                        date: "fa fa-calendar",
+                        up: "fa fa-chevron-up",
+                        down: "fa fa-chevron-down",
+                        previous: 'fa fa-chevron-left',
+                        next: 'fa fa-chevron-right',
+                        today: 'fa fa-screenshot',
+                        clear: 'fa fa-trash',
+                        close: 'fa fa-remove'
+                    },
+                    viewMode: 'months',
+                    format: 'DD/MM/YYYY'
+                });
+                rateId++;
+            });
         });
+
+        function priceClick(x) {
+            $('#' + x + ' > a').trigger('click');
+        }
+
+        function showResult(result) {
+            debugger;
+            var lati = result.geometry.location.lat();
+            var longi = result.geometry.location.lng();
+            console.log(lati + " : lati");
+            console.log(longi + " : longi");
+            $("#longi").val(longi);
+            $("#lati").val(lati);
+            CustomMap(longi, lati);
+        }
+
+        function generateBtnClick() {
+            debugger;
+            var address = $("#street").val();
+            address += ", " + $("#city").val();
+            address += ", " + $("#country").val();
+            getLatitudeLongitude(showResult, address);
+        }
+
+        function getLatitudeLongitude(callback, address) {
+            // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
+            debugger;
+            // Initialize the Geocoder
+            geocoder = new google.maps.Geocoder();
+            if (geocoder) {
+                geocoder.geocode({
+                        'address': address
+                    },
+                    function(results, status) {
+                        debugger;
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            showResult(results[0]);
+                        }
+                    });
+            }
+        }
+
         function CustomMap(longi, lati) {
+            debugger;
             var myLatlng = new google.maps.LatLng(longi, lati);
             var mapOptions = {
-                zoom: 13,
+                zoom: 10,
                 center: myLatlng,
-                scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+                scrollwheel: true,
+//we disable de scroll over the map, it is a really annoing when you scroll through page
                 disableDefaultUI: true, // a way to quickly hide all controls
                 zoomControl: true,
-                styles: [{ "featureType": "water", "stylers": [{ "saturation": 43 }, { "lightness": -11 }, { "hue": "#0088ff" }] }, { "featureType": "road", "elementType": "geometry.fill", "stylers": [{ "hue": "#ff0000" }, { "saturation": -100 }, { "lightness": 99 }] }, { "featureType": "road", "elementType": "geometry.stroke", "stylers": [{ "color": "#808080" }, { "lightness": 54 }] }, { "featureType": "landscape.man_made", "elementType": "geometry.fill", "stylers": [{ "color": "#ece2d9" }] }, { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [{ "color": "#ccdca1" }] }, { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#767676" }] }, { "featureType": "road", "elementType": "labels.text.stroke", "stylers": [{ "color": "#ffffff" }] }, { "featureType": "poi", "stylers": [{ "visibility": "off" }] }, { "featureType": "landscape.natural", "elementType": "geometry.fill", "stylers": [{ "visibility": "on" }, { "color": "#b8cb93" }] }, { "featureType": "poi.park", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.sports_complex", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.medical", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.business", "stylers": [{ "visibility": "simplified" }] }]
+                styles: [
+                    {
+                        "featureType": "water",
+                        "stylers": [{ "saturation": 43 }, { "lightness": -11 }, { "hue": "#0088ff" }]
+                    }, {
+                        "featureType": "road",
+                        "elementType": "geometry.fill",
+                        "stylers": [{ "hue": "#ff0000" }, { "saturation": -100 }, { "lightness": 99 }]
+                    }, {
+                        "featureType": "road",
+                        "elementType": "geometry.stroke",
+                        "stylers": [{ "color": "#808080" }, { "lightness": 54 }]
+                    }, {
+                        "featureType": "landscape.man_made",
+                        "elementType": "geometry.fill",
+                        "stylers": [{ "color": "#ece2d9" }]
+                    }, {
+                        "featureType": "poi.park",
+                        "elementType": "geometry.fill",
+                        "stylers": [{ "color": "#ccdca1" }]
+                    },
+                    { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#767676" }] },
+                    { "featureType": "road", "elementType": "labels.text.stroke", "stylers": [{ "color": "#ffffff" }] },
+                    { "featureType": "poi", "stylers": [{ "visibility": "off" }] },
+                    {
+                        "featureType": "landscape.natural",
+                        "elementType": "geometry.fill",
+                        "stylers": [{ "visibility": "on" }, { "color": "#b8cb93" }]
+                    }, { "featureType": "poi.park", "stylers": [{ "visibility": "on" }] },
+                    { "featureType": "poi.sports_complex", "stylers": [{ "visibility": "on" }] },
+                    { "featureType": "poi.medical", "stylers": [{ "visibility": "on" }] },
+                    { "featureType": "poi.business", "stylers": [{ "visibility": "simplified" }] }
+                ]
 
             }
 
@@ -21,448 +174,540 @@
 
             var marker = new google.maps.Marker({
                 position: myLatlng,
-                title: "Custom Skin & Settings Map!"
+                title: "Property Map"
             });
 
             marker.setMap(map);
         }
+
+        function FinishAdd() {
+            $("#propertyDetails").submit();
+        }
+       
+    </script>
+
+<script src="~/Scripts/jQuery.FileUpload/vendor/jquery.ui.widget.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/tmpl.min.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/load-image.all.min.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/canvas-to-blob.min.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.iframe-transport.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-process.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-image.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-audio.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-video.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-validate.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-ui.js"></script>
+<script src="~/Scripts/blueimp-gallery2/js/blueimp-gallery.js"></script>
+<script src="~/Scripts/blueimp-gallery2/js/jquery.blueimp-gallery.min.js"></script>
+<script src="~/Scripts/blueimp-gallery2/js/blueimp-gallery-video.js"></script>
+<script src="~/Scripts/blueimp-gallery2/js/blueimp-gallery-indicator.js"></script>
+<script src="~/Scripts/blueimp-gallery2/js/jquery.blueimp-gallery.js"></script>
+<script>
+
+    var $form = null;
+    $(function () {
+
+        $form = $('#fileupload').fileupload({
+            dataType: 'json',
+            maxFileSize: 1024 * 1024 * 10,
+            done: function (e, data) {
+                debugger;
+                var files = data.result.files;
+                for (var f in files) {
+                    debugger;
+                    var hidden = $("<input type=hidden name=model.ImagesList>");
+                    hidden.val(files[f].guid);
+                    $("#saveProject").append(hidden);
+                }
+            }
+        });
+
+    });
+    $('#fileupload').addClass('fileupload-processing');
+
 </script>
-}               
-<div class="col-sm-8 col-sm-offset-2">
-<!-- Wizard container -->
-<div class="wizard-container">
-<div class="card wizard-card" data-color="rose" id="wizardProfile">
-<form action="" method="">
-<!-- You can switch " data-color="purple" " with one of the next bright colors: "green", "orange", "red", "blue" -->
-<div class="wizard-header">
-    <h3 class="wizard-title">
-        Add New Property
-    </h3>
-</div>
-<div class="wizard-navigation">
-    <ul>
-        <li>
-            <a href="#basic_info" data-toggle="tab">BASIC INFO</a>
-        </li>
-        <li>
-            <a href="#AMENITIES" data-toggle="tab">AMENITIES</a>
-        </li>
-        <li>
-            <a href="#address" data-toggle="tab">DESCRIPTION</a>
-        </li>
-        <li>
-            <a href="#address" data-toggle="tab">PHOTOS</a>
-        </li>
-        <li>
-            <a href="#address" data-toggle="tab">PRICE / AVAILABILITY</a>
-        </li>
-        <li>
-            <a href="#address" data-toggle="tab">CHECKIN / CHECKOUT</a>
-        </li>
-        <li>
-            <a href="#address" data-toggle="tab">PAYMENTS</a>
-        </li>
-    </ul>
-</div>
-<div class="tab-content">
-<div class="tab-pane" id="basic_info">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="input-group">
-                <span class="input-group-addon">
-                    Property Name:
-                </span>
-                <div class="form-group label-floating">
-                    <label class="control-label">
-                        Give your Property a name. 70 characters is ideal. 0 /150
-                        <small>(required)</small>
-                    </label>
-                    <input name="propertyname" type="text" class="form-control">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="input-group">
-                <span class="input-group-addon">
-                    Property Type:
-                </span>
 
-                <span class="input-group-addon" style="padding-right: 0;">
-                    It's
-                </span>
-                <div class="form-group label-floating col-md-4">
-                    <label class="control-label">Please Select</label>
-                    <select class="form-control" data-val="true" data-val-number="The field Type must be a number." data-val-required="Property Type is required" data-validation-index="1" id="Details_Type" name="Details.Type" tabindex="-1" aria-hidden="true" aria-required="true">
-                        <option disabled="" selected=""></option>
-                        <option value="3">Apartment</option>
-                        <option value="4">Bed and breakfast</option>
-                        <option value="7">Chalet</option>
-                        <option value="16">Guest house</option>
-                        <option value="20">Hotel</option>
-                        <option value="30">Resort</option>
-                        <option value="35">Villa</option>
-                        <option value="37">Castle</option>
-                        <option value="63">Aparthotel</option>
-                        <option value="64">Boat</option>
-                        <option value="65">Cottage</option>
-                        <option value="66">Camping</option>
-                        <option value="67">House</option>
-                    </select>
-                </div>
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                </span>
-                <span class="input-group-addon" style="padding-right: 0; padding-left: 0;">
-                    & it sleeps
-                </span>
-                <div class="col-md-4">
-                    <div class="form-group label-floating">
-                        <label class="control-label"></label>
-                        <input class="form-control" type="text" name="min_length" minlength="5" />
-                    </div>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <span class="input-group-addon">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                </span>
-                <span class="input-group-addon" style="padding-right: 0; padding-left: 0;">
-                    people. It's on floor number
-                </span>
-                <div class="form-group label-floating col-md-6">
-                    <label class="control-label">Please Select</label>
-                    <select class="form-control" data-val="true" data-val-number="The field Type must be a number." data-val-required="Property Type is required" data-validation-index="1" id="Details_Type" name="Details.Type" tabindex="-1" aria-hidden="true" aria-required="true">
-                        <option disabled="" selected=""></option>
-                        <option value="3">Apartment</option>
-                        <option value="4">Bed and breakfast</option>
-                        <option value="7">Chalet</option>
-                        <option value="16">Guest house</option>
-                        <option value="20">Hotel</option>
-                        <option value="30">Resort</option>
-                        <option value="35">Villa</option>
-                        <option value="37">Castle</option>
-                        <option value="63">Aparthotel</option>
-                        <option value="64">Boat</option>
-                        <option value="65">Cottage</option>
-                        <option value="66">Camping</option>
-                        <option value="67">House</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-
-            <div class="input-group">
-                <span class="input-group-addon">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                </span>
-                <span class="input-group-addon" style="padding-right: 0; padding-left: 0;">
-                    and it's total size is
-                </span>
-                <div class="col-md-8">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Meter Sqaure</label>
-                        <input class="form-control" type="text" name="min_length" minlength="5" />
-                    </div>
-                    or
-                    <div class="form-group label-floating">
-                        <label class="control-label">Square Feet</label>
-                        <input class="form-control" type="text" name="min_length" minlength="5" />
-                    </div>
-                </div>
-            </div>
-            <hr />
-            <div class="input-group">
-                <span class="input-group-addon">
-                    Location:
-                </span>
-                <div class="row col-xs-9">
-                    <div class="col-sm-12">
-                        <h4 class="info-text"> Please type the address of your property </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                </span>
+}        
+<style>
+    ul.nav-pills > li > a {
+        border-radius: 10px !important;
+    }
+</style>
+<div class="col-md-12">
+    <div class="col-sm-2">
+        <ul class="nav nav-pills nav-pills-rose nav-stacked">
+            <li id="basic_infoLi" class="active">
+                <a href="#basic_info" data-toggle="tab">
+                    <i class="material-icons">launch</i>
+                    BASIC INFO
+                </a>
+            </li>
+            <li id="amenitiesLi">
+                <a href="#amenities" data-toggle="tab">
+                    <i class="material-icons">launch</i>
+                    AMENITIES
+                </a>
+            </li>
+            <li id="descriptionLi">
+                <a href="#description" data-toggle="tab">
+                    <i class="material-icons">launch</i>
+                    DESCRIPTION
+                </a>
+            </li>
+            <li id="photosLi">
+                <a href="#photos" data-toggle="tab">
+                    <i class="material-icons">launch</i>
+                    EXTRAS
+                </a>
+            </li>
+            <li id="priceLi">
+                <a href="#price" data-toggle="tab">
+                    <i class="material-icons">launch</i>
+                    PRICE / AVAILABILITY
+                </a>
+            </li>
+            <li id="finishLi">
+                <a href="#finish" data-toggle="tab">
+                    <i class="material-icons">check</i>
+                    Finish
+                </a>
+            </li>
+        </ul>
+    </div>
+<div class="col-sm-10">
+    <form class="" action="/MyProperty/AddNewProperty" id="propertyDetails" method="post" enctype="multipart/form-data">
+        <div class="tab-content">
+            <div class="tab-pane active" id="basic_info">
                 <div class="row">
-                    <div class="col-sm-5">
-                        <div class="form-group label-floating">
-                            <label class="control-label">Street Name or No.</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <div class="form-group label-floating">
-                            <label class="control-label">Country</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <div class="form-group label-floating">
-                            <label class="control-label">City</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-sm-5">
-                        <div class="form-group label-floating">
-                            <label class="control-label">Postcode</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="card" style="background: rgba(238, 238, 238, 0.62);">
-                <div class="card-header card-header-icon" data-background-color="rose">
-                    <i class="material-icons">room</i>
-                </div>
-                <div class="card-content">
-                    <h4 class="card-title">Custom Skin & Settings Map</h4>
-                    <div id="customSkinMap" class="map"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--                      -->
-    <div class="tab-pane" id="AMENITIES">
-        <h4 class="info-text" style="font-weight:bold;"> Composition </h4>
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1">
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 width="39.822px" height="30.089px" viewBox="0 0 39.822 30.089" style="enable-background:new 0 0 39.822 30.089;"
-                                 xml:space="preserve">
-                                <image style="overflow:visible;" width="50" height="50" xlink:href="/Content/assets/img/bed.png" transform="matrix(0.7501 0 0 0.7501 -0.644 -9.6831)">
-                                </image>
-                            </svg>
-                        </span>
-                        <div class="form-group label-floating is-empty">
-                            <label class="control-label">Number of bedrooms</label>
-                            <input class="form-control" type="number" name="number" number="true" />
-                            <span class="help-block"> (keep 0 if it's a studio)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 width="39.822px" height="30.089px" viewBox="0 0 39.822 30.089" style="enable-background:new 0 0 39.822 30.089;"
-                                 xml:space="preserve">
-                            <image style="overflow:visible;" width="50" height="50" xlink:href="/Content/assets/img/bath.png" transform="matrix(0.7501 0 0 0.7501 -0.644 -9.6831)">
-                                </image>
-                            </svg>
-                        </span>
-                        <div class="form-group label-floating is-empty">
-                            <label class="control-label">Number of bathrooms </label>
-                            <input class="form-control" type="number" name="number" number="true" />
-                            <span class="help-block"> (or shower rooms)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 width="39.822px" height="30.089px" viewBox="0 0 39.822 30.089" style="enable-background:new 0 0 39.822 30.089;"
-                                 xml:space="preserve">
-                            <image style="overflow:visible;" width="50" height="50" xlink:href="/Content/assets/img/toilet.png" transform="matrix(0.7501 0 0 0.7501 -0.644 -9.6831)">
-                                </image>
-                            </svg>
-                        </span>
-                        <div class="form-group label-floating">
-                            <label class="control-label">Number of toilets </label>
-                            <input class="form-control" type="number" name="number" number="true" />
-                            <span class="help-block"> (that are separate from bathrooms) </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <div class="card">
+                        <div class="card-content">
 
-        <h4 class="info-text" style="font-weight:bold;"> General Amenities </h4>
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1">
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Separate kitchen
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Terrace
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Heating
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Smoking allowed
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Linen & towels
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Air conditioning
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Wheelchair access
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Swimming pool
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Pets allowed
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Elevator
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Parking
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Internet
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inline">
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes">
-                            Baby Cot.
-                        </label>
+                            <div class="title">
+                                <h3>Basic Info</h3>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        Property Name:
+                                    </span>
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">
+                                            Give your Property a name. 70 characters is ideal. 0 /150
+                                            <small>(required)</small>
+                                        </label>
+                                        <input name="model.propertyname" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        Property Type:
+                                    </span>
+
+                                    <span class="input-group-addon" style="padding-right: 0;">
+                                        It's
+                                    </span>
+                                    <div class="form-group label-floating col-md-4">
+                                        <label class="control-label">Please Select</label>
+                                        <select class="form-control" name="model.propertyType" data-val="true" data-val-number="The field Type must be a number." data-val-required="Property Type is required" data-validation-index="1" id="Details_Type" name="Details.Type" tabindex="-1" aria-hidden="true" aria-required="true">
+                                            <option disabled="" selected=""></option>
+                                            @foreach (var type in ViewBag.propertyTypes)
+                                            {
+                                                <option value="@type.PropertyTypeId">@type.PropertyTypeName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    <span class="input-group-addon" style="padding-right: 0; padding-left: 0;">
+                                        & it people limit
+                                    </span>
+                                    <div class="col-md-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Max. Guests Limit</label>
+                                            <input class="form-control" type="text" name="model.maxguests" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <hr />
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        Location:
+                                    </span>
+                                    <div class="row col-xs-9">
+                                        <div class="col-sm-12">
+                                            <h4 class="info-text"> Please type the address of your property </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Street Name or No.</label>
+                                                <input type="text" id="street" name="model.street" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Country</label>
+                                                <input type="text" id="country" name="model.country" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <select class="select form-control" id="city" name="model.city" placeholder="Choose an option">
+                                                @foreach(var c in ViewBag.cities)
+                                                {
+                                                    <option value="@c.CityId">@c.CityName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Postcode</label>
+                                                <input type="text" id="postalcode" name="model.postalcode" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button id="generateMap" type="button" class="btn btn-info pull-right" onclick="return generateBtnClick()">Generate</button>
+
+                                <input type="hidden" id="longi" name="model.longitude" class="form-control">
+                                <input type="hidden" id="lati" name="model.latitude" class="form-control">
+                                <div class="card" style="background: rgba(238, 238, 238, 0.62);">
+                                    <div class="card-header card-header-icon" data-background-color="rose">
+                                        <i class="material-icons">room</i>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="card-title">Property Map</h4>
+                                        <div id="customSkinMap" class="map"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button onclick="priceClick('amenitiesLi')" data-toggle="tab" class="btn btn-info pull-right">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- -->
+            <div class="tab-pane" id="amenities">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title"></div>
+                        <h4 class="info-text" style="font-weight: bold;"> Composition </h4>
+                        <div class="row">
+                            <div class="col-lg-10 col-lg-offset-1">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                 width="39.822px" height="30.089px" viewBox="0 0 39.822 30.089" style="enable-background: new 0 0 39.822 30.089;"
+                                                 xml:space="preserve">
+                                            <image style="overflow: visible;" width="50" height="50" xlink:href="/Content/assets/img/bed.png" transform="matrix(0.7501 0 0 0.7501 -0.644 -9.6831)">
+                                    </image>
+                                </svg>
+                                        </span>
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Number of bedrooms</label>
+                                            <input class="form-control" type="number" name="model.bedrooms" number="true" />
+                                            <span class="help-block"> (keep 0 if it's a studio)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                 width="39.822px" height="30.089px" viewBox="0 0 39.822 30.089" style="enable-background: new 0 0 39.822 30.089;"
+                                                 xml:space="preserve">
+                                            <image style="overflow: visible;" width="50" height="50" xlink:href="/Content/assets/img/bath.png" transform="matrix(0.7501 0 0 0.7501 -0.644 -9.6831)">
+                                    </image>
+                                </svg>
+                                        </span>
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Number of bathrooms </label>
+                                            <input class="form-control" type="number" name="model.bathrooms" number="true" />
+                                            <span class="help-block"> (or shower rooms)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                 width="39.822px" height="30.089px" viewBox="0 0 39.822 30.089" style="enable-background: new 0 0 39.822 30.089;"
+                                                 xml:space="preserve">
+                                            <image style="overflow: visible;" width="50" height="50" xlink:href="/Content/assets/img/toilet.png" transform="matrix(0.7501 0 0 0.7501 -0.644 -9.6831)">
+                                    </image>
+                                </svg>
+                                        </span>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Number of toilets </label>
+                                            <input class="form-control" type="number" name="model.toilets" number="true" />
+                                            <span class="help-block"> (that are separate from bathrooms) </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="info-text" style="font-weight: bold;"> General Amenities </h4>
+                        <div class="row">
+                            <div class="col-lg-10 col-lg-offset-1" id="AmenitiesTypes">
+                                @foreach (var type in ViewBag.amenitiesTypes)
+                                {
+                                    <div class="col-md-4">
+                                        <div class="checkbox checkbox-inline">
+                                            <label>
+                                                <input type="checkbox" name="@type.AmenitiesTypeId">
+                                                @type.AmenitiesTypeName
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button onclick="priceClick('basic_infoLi')" data-toggle="tab" class="btn btn-default pull-left">
+                                Back
+                            </button>
+                            <button onclick="priceClick('descriptionLi')" data-toggle="tab" class="btn btn-info pull-right">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="description">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">
+                                Description
+                            </div>
+                            <div class="col-sm-12" id="TagsTypes">
+                                @foreach (var type in ViewBag.TagTypes)
+                                {
+                                    <div class="col-md-4">
+                                        <div class="checkbox checkbox-inline">
+                                            <label>
+                                                <input type="checkbox" name="@type.TagId">
+                                                @type.TagName
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Write some description about Property</label>
+                                    <textarea name="model.description" id="editingData" class="form-control" rows="8"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button onclick="priceClick('amenitiesLi')" data-toggle="tab" class="btn btn-default pull-left">
+                                    Back
+                                </button>
+                                <button onclick="priceClick('photosLi')" data-toggle="tab" class="btn btn-info pull-right">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="photos">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">
+                                Extras
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        Video URL:
+                                    </span>
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">
+                                            <small>(required)</small>
+                                        </label>
+                                        <input name="model.videoURL" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                PDF File
+                                <input name="files" type="file" class="form-control" style="opacity: 1;    position: relative;">
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="col-md-5 col-sm-8">
+                                    <h2><small>Banner</small></h2>
+                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail img-raised">
+                                            <img src="/Content/assets/img/image_placeholder.jpg" alt="...">
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
+                                        <div>
+                                            <span class="btn btn-raised btn-default btn-file">
+                                                <span class="fileinput-new">Select image</span>
+                                                <span class="fileinput-exists">Change</span>
+                                                <input type="file" name="banner">
+                                            </span>
+                                            <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="saveProject">
+                            </div>
+                            <div class="col-md-12">
+                                <button onclick="priceClick('descriptionLi')" data-toggle="tab" class="btn btn-default pull-left">
+                                    Back
+                                </button>
+                                <button onclick="priceClick('priceLi')" data-toggle="tab" class="btn btn-info pull-right">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="price">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">
+                                <h2>Price Details</h2>
+                                <p>
+                                    Give Details Price For Full Year,Time Details will be ignored
+                                </p>
+                            </div>
+                            <div class="">
+
+                                <button id="addRateBtn" data-toggle="tab" class="btn btn-info pull-right">
+                                    Add Row
+                                </button>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                From
+                                            </th>
+                                            <th>
+                                                To
+                                            </th>
+                                            <th>
+                                                Price
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ratesList">
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label class="label-control">Start Date</label>
+                                                    <input type="text" name="model.rates[0].sd" class="form-control datetimepicker" value="01/01/2016" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label class="label-control">End Date</label>
+                                                    <input type="text" name="model.rates[0].ed" class="form-control datetimepicker" value="31/12/2016" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group is-empty">
+                                                    <input type="number" name="model.rates[0].price" value="" placeholder="Price" class="form-control">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12">
+                                <button onclick="priceClick('photosLi')" data-toggle="tab" class="btn btn-default pull-left">
+                                    Back
+                                </button>
+                                <button onclick="priceClick('finishLi')" data-toggle="tab" class="btn btn-info pull-right">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="finish">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">
+                                Save Property
+                            </div>
+                            <div class="col-md-12">
+                                <button onclick="priceClick('priceLi')" data-toggle="tab" class="btn btn-default pull-left">
+                                    Back
+                                </button>
+                                <button type="button" id="saveProjectbtn" class="btn btn-success pull-right">
+                                    Finish
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="col-md-12">
+        <!-- blueimp File Upload & Gallery styles -->
+        <link rel="stylesheet" href="~/Content/jQuery.FileUpload/css/jquery.fileupload.css" />
+        <link rel="stylesheet" href="~/Content/jQuery.FileUpload/css/jquery.fileupload-ui.css" />
+        <link rel="stylesheet" href="~/Content/blueimp-gallery2/css/blueimp-gallery.css" />
+        <link rel="stylesheet" href="~/Content/blueimp-gallery2/css/blueimp-gallery-video.css" />
+        <link rel="stylesheet" href="~/Content/blueimp-gallery2/css/blueimp-gallery-indicator.css" />
+        <div id="innerformImages">
+            @Html.Partial("_Files")
         </div>
     </div>
-<div class="tab-pane" id="address">
-    <div class="row">
-        <div class="col-sm-12">
-            <h4 class="info-text"> Are you living in a nice area? </h4>
-        </div>
-        <div class="col-sm-7 col-sm-offset-1">
-            <div class="form-group label-floating">
-                <label class="control-label">Street Name</label>
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group label-floating">
-                <label class="control-label">Street No.</label>
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="col-sm-5 col-sm-offset-1">
-            <div class="form-group label-floating">
-                <label class="control-label">City</label>
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="col-sm-5">
-            <div class="form-group label-floating">
-                <label class="control-label">Country</label>
-                <select name="country" class="form-control">
-                    <option disabled="" selected=""></option>
-                    <option value="Afghanistan"> Afghanistan </option>
-                    <option value="Albania"> Albania </option>
-                    <option value="Algeria"> Algeria </option>
-                    <option value="American Samoa"> American Samoa </option>
-                    <option value="Andorra"> Andorra </option>
-                    <option value="Angola"> Angola </option>
-                    <option value="Anguilla"> Anguilla </option>
-                    <option value="Antarctica"> Antarctica </option>
-                    <option value="...">...</option>
-                </select>
-            </div>
-        </div>
-    </div>
 </div>
 </div>
-<div class="wizard-footer">
-    <div class="pull-right">
-        <input type='button' class='btn btn-next btn-fill btn-rose btn-wd' name='next' value='Next'/>
-        <input type='button' class='btn btn-finish btn-fill btn-rose btn-wd' name='finish' value='Finish'/>
-    </div>
-    <div class="pull-left">
-        <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous'/>
-    </div>
-    <div class="clearfix"></div>
-</div>
-</form>
-</div>
-</div>
-<!-- wizard container -->
-</div>
+<
+
 <!--  Google Maps Plugin    -->
+
+<script src="/Content/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#editingData',
+        skin: 'lightgray',
+        toolbar: 'save | newdocument | bold | italic | underline | strikethrough |alignleft | aligncenter | alignright | alignjustify | styleselect | formatselect | fontselect | fontsizeselect | cut | copy | paste | bullist | numlist | outdent | indent | blockquote | undo | redo | removeformat | subscript | superscript | forecolor backcolor',
+        plugins: 'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker' +
+            ' searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking' +
+            ' save table contextmenu directionality emoticons template paste textcolor'
+    });
+</script>
+

@@ -20,6 +20,9 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,10 +42,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="antlr.runtime, Version=2.7.6.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ical.Net.2.3.0\lib\net40\antlr.runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ical.Net, Version=2.1.0.30342, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ical.Net.2.3.0\lib\net40\Ical.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ical.Net.Collections, Version=2.1.0.30341, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ical.Net.2.3.0\lib\net40\Ical.Net.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NodaTime, Version=1.3.0.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ical.Net.2.3.0\lib\net40\NodaTime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -59,9 +85,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -130,199 +153,25 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CarsController.cs" />
+    <Compile Include="Controllers\DestinationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MagzinesController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\YachtsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CustomActions.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\SendEmailModel.cs" />
+    <Compile Include="Models\Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\assets\assets-for-demo\b_1.jpg" />
-    <Content Include="Content\assets\assets-for-demo\b_2.jpg" />
-    <Content Include="Content\assets\assets-for-demo\b_3.jpg" />
-    <Content Include="Content\assets\assets-for-demo\b_4.jpg" />
-    <Content Include="Content\assets\assets-for-demo\cards-test.png" />
-    <Content Include="Content\assets\assets-for-demo\content-test.png" />
-    <Content Include="Content\assets\assets-for-demo\demo.css" />
-    <Content Include="Content\assets\assets-for-demo\ex-about-us.jpg" />
-    <Content Include="Content\assets\assets-for-demo\ex-blog-post.jpg" />
-    <Content Include="Content\assets\assets-for-demo\ex-blog-posts.jpg" />
-    <Content Include="Content\assets\assets-for-demo\ex-contact.jpg" />
-    <Content Include="Content\assets\assets-for-demo\ex-landing.jpg" />
-    <Content Include="Content\assets\assets-for-demo\ex-login.jpg" />
-    <Content Include="Content\assets\assets-for-demo\ex-pricing.jpg" />
-    <Content Include="Content\assets\assets-for-demo\ex-product.jpg" />
-    <Content Include="Content\assets\assets-for-demo\ex-profile.jpg" />
-    <Content Include="Content\assets\assets-for-demo\ex-register.jpg" />
-    <Content Include="Content\assets\assets-for-demo\f_1.jpg" />
-    <Content Include="Content\assets\assets-for-demo\f_2.jpg" />
-    <Content Include="Content\assets\assets-for-demo\f_3.jpg" />
-    <Content Include="Content\assets\assets-for-demo\f_4.jpg" />
-    <Content Include="Content\assets\assets-for-demo\f_5.jpg" />
-    <Content Include="Content\assets\assets-for-demo\harvard.jpg" />
-    <Content Include="Content\assets\assets-for-demo\h_1.jpg" />
-    <Content Include="Content\assets\assets-for-demo\h_2.jpg" />
-    <Content Include="Content\assets\assets-for-demo\h_3.jpg" />
-    <Content Include="Content\assets\assets-for-demo\h_4.jpg" />
-    <Content Include="Content\assets\assets-for-demo\jquery.sharrre.js" />
-    <Content Include="Content\assets\assets-for-demo\microsoft.jpg" />
-    <Content Include="Content\assets\assets-for-demo\modernizr.js" />
-    <Content Include="Content\assets\assets-for-demo\m_1.jpg" />
-    <Content Include="Content\assets\assets-for-demo\m_2.jpg" />
-    <Content Include="Content\assets\assets-for-demo\pro_1.jpg" />
-    <Content Include="Content\assets\assets-for-demo\pro_2.jpg" />
-    <Content Include="Content\assets\assets-for-demo\pro_3.jpg" />
-    <Content Include="Content\assets\assets-for-demo\pro_4.jpg" />
-    <Content Include="Content\assets\assets-for-demo\p_1.jpg" />
-    <Content Include="Content\assets\assets-for-demo\p_2.jpg" />
-    <Content Include="Content\assets\assets-for-demo\p_3.jpg" />
-    <Content Include="Content\assets\assets-for-demo\p_4.jpg" />
-    <Content Include="Content\assets\assets-for-demo\p_5.jpg" />
-    <Content Include="Content\assets\assets-for-demo\stanford.jpg" />
-    <Content Include="Content\assets\assets-for-demo\team_1.jpg" />
-    <Content Include="Content\assets\assets-for-demo\team_2.jpg" />
-    <Content Include="Content\assets\assets-for-demo\team_3.jpg" />
-    <Content Include="Content\assets\assets-for-demo\team_4.jpg" />
-    <Content Include="Content\assets\assets-for-demo\team_5.jpg" />
-    <Content Include="Content\assets\assets-for-demo\test1.jpg" />
-    <Content Include="Content\assets\assets-for-demo\test2.jpg" />
-    <Content Include="Content\assets\assets-for-demo\test3.jpg" />
-    <Content Include="Content\assets\assets-for-demo\t_1.jpg" />
-    <Content Include="Content\assets\assets-for-demo\t_2.jpg" />
-    <Content Include="Content\assets\assets-for-demo\t_3.jpg" />
-    <Content Include="Content\assets\assets-for-demo\vertical-nav.css" />
-    <Content Include="Content\assets\assets-for-demo\vertical-nav.js" />
-    <Content Include="Content\assets\assets-for-demo\vodafone.jpg" />
-    <Content Include="Content\assets\css\bootstrap.min.css" />
-    <Content Include="Content\assets\css\material-kit.css" />
-    <Content Include="Content\assets\img\apple-icon.png" />
-    <Content Include="Content\assets\img\bg.jpg" />
-    <Content Include="Content\assets\img\bg2.jpg" />
-    <Content Include="Content\assets\img\bg3.jpg" />
-    <Content Include="Content\assets\img\bg5.jpg" />
-    <Content Include="Content\assets\img\dg1.jpg" />
-    <Content Include="Content\assets\img\dg2.jpg" />
-    <Content Include="Content\assets\img\examples\blog1.jpg" />
-    <Content Include="Content\assets\img\examples\blog3.jpg" />
-    <Content Include="Content\assets\img\examples\blog4.jpg" />
-    <Content Include="Content\assets\img\examples\blog5.jpg" />
-    <Content Include="Content\assets\img\examples\blog6.jpg" />
-    <Content Include="Content\assets\img\examples\blog7.jpg" />
-    <Content Include="Content\assets\img\examples\blog8.jpg" />
-    <Content Include="Content\assets\img\examples\card-blog1.jpg" />
-    <Content Include="Content\assets\img\examples\card-blog2.jpg" />
-    <Content Include="Content\assets\img\examples\card-blog4.jpg" />
-    <Content Include="Content\assets\img\examples\card-product1.jpg" />
-    <Content Include="Content\assets\img\examples\card-product2.jpg" />
-    <Content Include="Content\assets\img\examples\card-product3.jpg" />
-    <Content Include="Content\assets\img\examples\card-product4.jpg" />
-    <Content Include="Content\assets\img\examples\card-profile1.jpg" />
-    <Content Include="Content\assets\img\examples\card-profile2.jpg" />
-    <Content Include="Content\assets\img\examples\card-profile4.jpg" />
-    <Content Include="Content\assets\img\examples\card-project1.jpg" />
-    <Content Include="Content\assets\img\examples\card-project2.jpg" />
-    <Content Include="Content\assets\img\examples\card-project3.jpg" />
-    <Content Include="Content\assets\img\examples\card-project4.jpg" />
-    <Content Include="Content\assets\img\examples\chris4.jpg" />
-    <Content Include="Content\assets\img\examples\chris5.jpg" />
-    <Content Include="Content\assets\img\examples\chris6.jpg" />
-    <Content Include="Content\assets\img\examples\chris7.jpg" />
-    <Content Include="Content\assets\img\examples\chris9.jpg" />
-    <Content Include="Content\assets\img\examples\office1.jpg" />
-    <Content Include="Content\assets\img\examples\office2.jpg" />
-    <Content Include="Content\assets\img\examples\office3.jpg" />
-    <Content Include="Content\assets\img\examples\office4.jpg" />
-    <Content Include="Content\assets\img\examples\office5.jpg" />
-    <Content Include="Content\assets\img\examples\product1.jpg" />
-    <Content Include="Content\assets\img\examples\product2.jpg" />
-    <Content Include="Content\assets\img\examples\product3.jpg" />
-    <Content Include="Content\assets\img\examples\product4.jpg" />
-    <Content Include="Content\assets\img\faces\avatar.jpg" />
-    <Content Include="Content\assets\img\faces\card-profile1-square.jpg" />
-    <Content Include="Content\assets\img\faces\card-profile2-square.jpg" />
-    <Content Include="Content\assets\img\faces\card-profile4-square.jpg" />
-    <Content Include="Content\assets\img\faces\card-profile5-square.jpg" />
-    <Content Include="Content\assets\img\faces\card-profile6-square.jpg" />
-    <Content Include="Content\assets\img\faces\christian.jpg" />
-    <Content Include="Content\assets\img\faces\kendall.jpg" />
-    <Content Include="Content\assets\img\faces\marc.jpg" />
-    <Content Include="Content\assets\img\favicon.png" />
-    <Content Include="Content\assets\img\image_placeholder.jpg" />
-    <Content Include="Content\assets\img\office2.jpg" />
-    <Content Include="Content\assets\img\placeholder.jpg" />
-    <Content Include="Content\assets\img\presentation\components.jpg" />
-    <Content Include="Content\assets\img\product1.jpg" />
-    <Content Include="Content\assets\img\product2.jpg" />
-    <Content Include="Content\assets\img\product3.jpg" />
-    <Content Include="Content\assets\img\sections\iphone.png" />
-    <Content Include="Content\assets\img\sections\iphone2.png" />
-    <Content Include="Content\assets\js\bootstrap-datepicker.js" />
-    <Content Include="Content\assets\js\bootstrap.min.js" />
-    <Content Include="Content\assets\js\jasny-bootstrap.min.js" />
-    <Content Include="Content\assets\js\jquery.dropdown.js" />
-    <Content Include="Content\assets\js\jquery.flexisel.js" />
-    <Content Include="Content\assets\js\jquery.min.js" />
-    <Content Include="Content\assets\js\jquery.tagsinput.js" />
-    <Content Include="Content\assets\js\material-kit.js" />
-    <Content Include="Content\assets\js\material.min.js" />
-    <Content Include="Content\assets\js\nouislider.min.js" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\jquery-ui.css" />
-    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
-    <Content Include="Content\themes\base\jquery.ui.all.css" />
-    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
-    <Content Include="Content\themes\base\jquery.ui.base.css" />
-    <Content Include="Content\themes\base\jquery.ui.button.css" />
-    <Content Include="Content\themes\base\jquery.ui.core.css" />
-    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
-    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
-    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
-    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
-    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
-    <Content Include="Content\themes\base\jquery.ui.slider.css" />
-    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
-    <Content Include="Content\themes\base\jquery.ui.theme.css" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <None Include="App_Data\data.json" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <None Include="Properties\PublishProfiles\RentalsClient.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -339,7 +188,9 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -353,13 +204,41 @@
     <Content Include="Views\Shared\_MyLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Magzines\Index.cshtml" />
+    <Content Include="Views\Destinations\Index.cshtml" />
+    <Content Include="Views\Shared\_MyLayout2.cshtml" />
+    <Content Include="Views\Destinations\Detail.cshtml" />
+    <Content Include="Views\Shared\HeaderNavBar.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Yachts\Index.cshtml" />
+    <Content Include="Views\Yachts\SubIndex.cshtml" />
+    <Content Include="Views\Yachts\Detail.cshtml" />
+    <Content Include="Views\Cars\Detail.cshtml" />
+    <Content Include="Views\Cars\Index.cshtml" />
+    <Content Include="Views\Cars\SubIndex.cshtml" />
+    <Content Include="Views\Services\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\CONCIERGE.cshtml" />
+    <Content Include="Views\Shared\_LinksLayout.cshtml" />
+    <Content Include="Views\Home\UsefuLink.cshtml" />
+    <Content Include="Views\Destinations\CityIndex.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomModels\CustomModels.csproj">
+      <Project>{58493a1e-75b1-48f7-9cd9-71cac91085c6}</Project>
+      <Name>CustomModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LayerDAO\LayerDAO.csproj">
+      <Project>{ecfd3571-ec80-43fc-8f81-9b2cfad0bfd0}</Project>
+      <Name>LayerDAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LayerDB\LayerDB.csproj">
+      <Project>{1963a38c-3566-467e-8cc9-eaa4b9836951}</Project>
+      <Name>LayerDB</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -389,6 +268,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

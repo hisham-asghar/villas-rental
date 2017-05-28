@@ -96,7 +96,7 @@ demo = {
                 $(element).parent('div').addClass('has-error');
              }
     	});
-
+        /*
         // Wizard Initialization
       	$('.wizard-card').bootstrapWizard({
             'tabClass': 'nav nav-pills',
@@ -181,7 +181,7 @@ demo = {
                 refreshAnimation($wizard, index);
             }
       	});
-
+        */
 
         // Prepare the preview for profile picture
         $("#wizard-picture").change(function(){

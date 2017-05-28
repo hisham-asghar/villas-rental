@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="cd-section" id="headers">
+    <div class="header-2">
+        <div class="page-header header-filter" style="background-image: url('/Content/assets/img/d_casa_oliver.jpg'); height: 50vh;">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <h1 class="title">
+                                Cars
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .features-5 .container .row [class*="col-"] {
+        border: 0;
+    }
+    .features-5 .container .row [class*="col-"]:nth-child(2) {
+        border-left: 1px solid rgba(255, 255, 255, 0.35);
+        border-right: 1px solid rgba(255, 255, 255, 0.35);
+    }
+</style>
+@model List<LayerDB.City>
+<div class="cd-section" id="projects">
+    <div class="col-md-8 col-md-offset-2 text-center">
+        <h2 class="title">Boat Rental & Yacht Charters</h2>
+    </div>
+    <div class="container" style="padding:60px;">
+        <div class="row">
+            @foreach (var c in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card ">
+                        <div class="content" style="padding: 23% 30px;">
+                            <a href="/Destinations?token=@c.guid">
+                                <h3 class="card-title">@c.CityName</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

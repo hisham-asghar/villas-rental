@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Add New";
+}
+
+<h3>Add New Yacht</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-11">
+
+            <form id="saveProject" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">Name</label>
+                            <input type="text" name="model.name" class="form-control">
+                        </div>
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">Length (in Feet)</label>
+                            <input type="text" name="model.length" class="form-control">
+                        </div>
+                        @foreach (var sp in @ViewBag.Specs)
+                        {
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">@sp.SpecName</label>
+                                <input type="text" name="@sp.SpecName" class="form-control">
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-12">
+
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Description</label>
+                        <textarea name="model.description" class="form-control" id="editingData" rows="15"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-8">
+                    <h2><small>Yacht Banner</small></h2>
+                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                        <div class="fileinput-new thumbnail img-raised">
+                            <img src="/Content/assets/img/image_placeholder.jpg" alt="...">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
+                        <div>
+                            <span class="btn btn-raised btn-default btn-file">
+                                <span class="fileinput-new">Select image</span>
+                                <span class="fileinput-exists">Change</span>
+                                <input type="file" name="banner">
+                            </span>
+                            <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- blueimp File Upload & Gallery styles -->
+                <link rel="stylesheet" href="~/Content/jQuery.FileUpload/css/jquery.fileupload.css" />
+                <link rel="stylesheet" href="~/Content/jQuery.FileUpload/css/jquery.fileupload-ui.css" />
+                <link rel="stylesheet" href="~/Content/blueimp-gallery2/css/blueimp-gallery.css" />
+                <link rel="stylesheet" href="~/Content/blueimp-gallery2/css/blueimp-gallery-video.css" />
+                <link rel="stylesheet" href="~/Content/blueimp-gallery2/css/blueimp-gallery-indicator.css" />
+
+
+            </form>
+            <div class="col-md-12 card " style="padding: 5%;">
+                @Html.Partial("_Files")
+            </div>
+
+            <div class="col-md-12">
+                <a href="#" id="saveProjectbtn" class="btn btn-danger fileinput-exists">Save</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    
+<script src="~/Scripts/jQuery.FileUpload/vendor/jquery.ui.widget.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/tmpl.min.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/load-image.all.min.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/canvas-to-blob.min.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.iframe-transport.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-process.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-image.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-audio.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-video.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-validate.js"></script>
+<script src="~/Scripts/jQuery.FileUpload/jquery.fileupload-ui.js"></script>
+<script src="~/Scripts/blueimp-gallery2/js/blueimp-gallery.js"></script>
+<script src="~/Scripts/blueimp-gallery2/js/jquery.blueimp-gallery.min.js"></script>
+<script src="~/Scripts/blueimp-gallery2/js/blueimp-gallery-video.js"></script>
+<script src="~/Scripts/blueimp-gallery2/js/blueimp-gallery-indicator.js"></script>
+<script src="~/Scripts/blueimp-gallery2/js/jquery.blueimp-gallery.js"></script>
+    <script>
+        
+        var $form = null;
+        $(function () {
+
+            $form = $('#fileupload').fileupload({
+                dataType: 'json',
+                maxFileSize: 1024 * 1024 * 10,
+                done: function (e, data) {
+                    debugger;
+                    var files = data.result.files;
+                    for (var f in files) {
+                        debugger;
+                        var hidden = $("<input type=hidden name=YachtsImage>");
+                        hidden.val(files[f].guid);
+                        $("#saveProject").append(hidden);
+                    }
+                }
+            });
+
+        });
+        $('#fileupload').addClass('fileupload-processing');
+        $(document).ready(function () {
+            $("#saveProjectbtn").click(function () {
+                $("#saveProject").submit();
+            });
+        });
+
+    </script>
+
+}
+<script src="/Content/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#editingData',
+        skin: 'lightgray',
+        toolbar: 'save | newdocument | bold | italic | underline | strikethrough |alignleft | aligncenter | alignright | alignjustify | styleselect | formatselect | fontselect | fontsizeselect | cut | copy | paste | bullist | numlist | outdent | indent | blockquote | undo | redo | removeformat | subscript | superscript | forecolor backcolor',
+        plugins: 'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker'+
+            ' searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking'+
+            ' save table contextmenu directionality emoticons template paste textcolor'
+    });
+</script>

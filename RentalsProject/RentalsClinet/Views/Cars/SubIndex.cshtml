@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Index";
+    ViewBag.UploadLocation = RentalsClinet.Helpers.CustomActions.getUploadLocation();  
+}
+<div class="page-header header-filter clear-filter" style="background-image: url('/Content/assets/img/d_casa_oliver.jpg'); height: 50vh;">
+    <div class="container" style="padding-top: 10vh;">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" style="text-align: center;">
+                <div class="brand">
+                    <h1>
+                        Cars
+                    </h1>
+
+                    <h3 class="title">
+                        @ViewBag.Token Cars
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .features-5 .container .row [class*="col-"] {
+        border: 0;
+    }
+
+        .features-5 .container .row [class*="col-"]:nth-child(2) {
+            border-left: 1px solid rgba(255, 255, 255, 0.35);
+            border-right: 1px solid rgba(255, 255, 255, 0.35);
+        }
+</style>
+@model List<List<CustomModels.Cars.CarModel>>
+<div class="cd-section" id="projects">
+    <div class="col-md-8 col-md-offset-2 text-center">
+        <h2 class="title">&nbsp;</h2>
+    </div>
+    <div class="container" style="padding:60px;">
+        @{
+            var x = 0;
+        }
+        @foreach (var yl in Model)
+        {
+            <div class="row">
+                @foreach (var y in yl)
+                {
+                    <div class="col-md-4">
+                        <div class="card card-background" style="background-image: url(@(ViewBag.UploadLocation + y.banner)) !important">
+                            <div class="content" style="padding: 23% 30px;">
+                                <a href="/Cars?token=@y.guid">
+                                    <h3 class="card-title">@y.name</h3>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "UpdateExtras";
+}
+@model CustomModels.UpdateExtraModel
+<form method="post" enctype="multipart/form-data">
+
+    <div class="card">
+        <div class="card-content">
+            <div class="card-title">
+                Extras
+            </div>
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        Video URL:
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label">
+                            <small>(required)</small>
+                        </label>
+                        <input name="emodel.videoURL" type="text" value="@Model.videoUrl" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                PDF File
+                <input name="emodel.pdf" type="file" class="form-control" style="opacity: 1;    position: relative;">
+            </div>
+            <div class="col-sm-12">
+                <div class="col-md-5 col-sm-8">
+                    <h2><small>Banner</small></h2>
+                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                        <div class="fileinput-new thumbnail img-raised">
+                            <img src='@(string.IsNullOrWhiteSpace(Model.bannerUrl) ? "/uploads/image_placeholder.jpg" : "/uploads/"+Model.bannerUrl)' alt="...">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
+                        <div>
+                            <span class="btn btn-raised btn-default btn-file">
+                                <span class="fileinput-new">Select image</span>
+                                <span class="fileinput-exists">Change</span>
+                                <input type="file" name="emodel.banner">
+                            </span>
+                            <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="saveProject">
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-default pull-left">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,270 @@
+﻿@model CustomModels.PropertyBasicInfo
+@section scripts{
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVTDNg0tY6gnDu6NnoIuVG7VTtvS9pyzU"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        demo.initMaterialWizard();
+        CustomMap(@Model.latitude, @Model.longitude);
+    });
+
+    function showResult(result) {
+        debugger;
+        var lati = result.geometry.location.lat();
+        var longi = result.geometry.location.lng();
+        console.log(lati + " : lati");
+        console.log(longi + " : longi");
+        $("#longi").val(longi);
+        $("#lati").val(lati);
+        CustomMap(longi, lati);
+    }
+
+    function generateBtnClick() {
+        debugger;
+        var address = $("#street").val();
+        address += ", " + $("#city").val();
+        address += ", " + $("#country").val();
+        address += ", " + $("#postalcode").val();
+        getLatitudeLongitude(showResult, address);
+    }
+
+    function getLatitudeLongitude(callback, address) {
+        // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
+        debugger;
+        // Initialize the Geocoder
+        geocoder = new google.maps.Geocoder();
+        if (geocoder) {
+            geocoder.geocode({
+                'address': address
+            },
+                function (results, status) {
+                    debugger;
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        showResult(results[0]);
+                    }
+                });
+        }
+    }
+
+    function CustomMap(longi, lati) {
+        debugger;
+        var myLatlng = new google.maps.LatLng(longi, lati);
+        var mapOptions = {
+            zoom: 10,
+            center: myLatlng,
+            scrollwheel: true,
+            //we disable de scroll over the map, it is a really annoing when you scroll through page
+            disableDefaultUI: true, // a way to quickly hide all controls
+            zoomControl: true,
+            styles: [
+                {
+                    "featureType": "water",
+                    "stylers": [{ "saturation": 43 }, { "lightness": -11 }, { "hue": "#0088ff" }]
+                }, {
+                    "featureType": "road",
+                    "elementType": "geometry.fill",
+                    "stylers": [{ "hue": "#ff0000" }, { "saturation": -100 }, { "lightness": 99 }]
+                }, {
+                    "featureType": "road",
+                    "elementType": "geometry.stroke",
+                    "stylers": [{ "color": "#808080" }, { "lightness": 54 }]
+                }, {
+                    "featureType": "landscape.man_made",
+                    "elementType": "geometry.fill",
+                    "stylers": [{ "color": "#ece2d9" }]
+                }, {
+                    "featureType": "poi.park",
+                    "elementType": "geometry.fill",
+                    "stylers": [{ "color": "#ccdca1" }]
+                },
+                { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#767676" }] },
+                { "featureType": "road", "elementType": "labels.text.stroke", "stylers": [{ "color": "#ffffff" }] },
+                { "featureType": "poi", "stylers": [{ "visibility": "off" }] },
+                {
+                    "featureType": "landscape.natural",
+                    "elementType": "geometry.fill",
+                    "stylers": [{ "visibility": "on" }, { "color": "#b8cb93" }]
+                }, { "featureType": "poi.park", "stylers": [{ "visibility": "on" }] },
+                { "featureType": "poi.sports_complex", "stylers": [{ "visibility": "on" }] },
+                { "featureType": "poi.medical", "stylers": [{ "visibility": "on" }] },
+                { "featureType": "poi.business", "stylers": [{ "visibility": "simplified" }] }
+            ]
+
+        }
+
+        var map = new google.maps.Map(document.getElementById("customSkinMap"), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title: "Property Map"
+        });
+
+        marker.setMap(map);
+    }
+
+</script>
+
+
+}
+<form method="post">
+
+    <div class="card">
+        <div class="card-content">
+
+            <div class="title">
+                <h3>Basic Info</h3>
+            </div>
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        Property Name:
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label">
+                            Give your Property a name. 70 characters is ideal. 0 /150
+                            <small>(required)</small>
+                        </label>
+                        <input name="model.propertyname" type="text" value="@Model.propertyname" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        Property Sub Name:
+                    </span>
+                    <div class="form-group label-floating">
+                        <label class="control-label">
+                            Give your Property a Sub name. 70 characters is ideal. 0 /150
+                            <small>(required)</small>
+                        </label>
+                        <input name="model.propertysubname" type="text" value="@Model.propertysubname" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        Property Type:
+                    </span>
+
+                    <span class="input-group-addon" style="padding-right: 0;">
+                        It's
+                    </span>
+                    <div class="form-group label-floating col-md-4">
+                        <label class="control-label">Please Select</label>
+                        <select class="form-control" name="model.propertyType" data-val="true" data-val-number="The field Type must be a number." data-val-required="Property Type is required" data-validation-index="1" id="Details_Type" name="Details.Type" tabindex="-1" aria-hidden="true" aria-required="true">
+                            @foreach (var type in ViewBag.propertyTypes)
+                            {
+                                <option value="@type.PropertyTypeId" @(type.PropertyTypeId == Model.propertyType ? "selected=''" : "") >@type.PropertyTypeName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <span class="input-group-addon" style="padding-right: 0; padding-left: 0;">
+                        & it people limit
+                    </span>
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Max. Guests Limit</label>
+                            <input class="form-control" type="text" value="@Model.maxguests" name="model.maxguests" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+
+                <div class="form-group label-floating">
+                    <label class="control-label">Per Night Price</label>
+                    <input class="form-control" type="number" name="model.night" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr />
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        Location:
+                    </span>
+                    <div class="row col-xs-9">
+                        <div class="col-sm-12">
+                            <h4 class="info-text"> Please type the address of your property </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Street Name or No.</label>
+                                <input type="text" id="street" name="model.street" value="@Model.street" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Country</label>
+                                <input type="text" id="country" name="model.country" value="@Model.country" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <select class="select form-control" id="city" name="model.city" placeholder="Choose an option">
+                                @foreach (var c in ViewBag.cities)
+                                {
+                                    <option value="@c.CityId" @(c.CityId == Model.city ? "selected=''" : "")>@c.CityName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Postcode</label>
+                                <input type="text" id="postalcode" name="model.postalcode" value="@Model.postalcode" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group ">
+                                <label class="control-label">Longitude</label>
+                                <input type="text" id="longi" name="model.longitude" value="@Model.longitude" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group ">
+                                <label class="control-label">Latitude</label>
+                                <input type="text" id="lati" name="model.latitude" value="@Model.latitude" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button id="generateMap" type="button" class="btn btn-info pull-right" onclick="return generateBtnClick()">Generate</button>
+
+
+
+                <div class="card" style="background: rgba(238, 238, 238, 0.62);">
+                    <div class="card-header card-header-icon" data-background-color="rose">
+                        <i class="material-icons">room</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">Property Map</h4>
+                        <div id="customSkinMap" class="map"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-info pull-right">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form>

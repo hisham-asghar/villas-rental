@@ -126,7 +126,7 @@
         <div class="col-md-7 description__">
             <p><strong>@Model.name</strong></p>
             <p>
-                @Model.description
+                @Html.Raw(Model.description)&hellip; 
             </p>
             <p>&nbsp;</p>
         </div>

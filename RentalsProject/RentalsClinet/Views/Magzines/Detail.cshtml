@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Detail";
+    ViewBag.UploadLocation = RentalsClinet.Helpers.CustomActions.getUploadLocation();
+}
+@model Dictionary<string,string>
+<style>
+    p {
+        font-size: 17px;
+    }
+</style>
+<div class="cd-section" id="headers">
+    <div class="header-2">
+        <div class="page-header header-filter" style="background-image: url('@(ViewBag.UploadLocation)@(Model["banner"])'); height: 100vh;">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <h1 class="title">
+                                @Model["title"]
+                            </h1>
+                            <h3>
+                                @Model["subtitle"]
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cd-section" id="projects">
+    <div class="container" style="margin-bottom: 25vh;">
+        <div class="section section-text">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <p>
+                        @(Model["text"].Contains("\n") ? Html.Raw(Model["text"].Replace("\n", "<br />")) : Html.Raw(Model["text"]))
+                    </p>
+                </div>
+                @if (Model.ContainsKey("WideImage") && Model["WideImage"] != null)
+                {
+                    <div class="section col-md-10 col-md-offset-1">
+                        <div class="col-md-12">
+                            @if (Model.ContainsKey("WideImage"))
+                            {
+                                <img class="img-rounded img-responsive img-raised" alt="Raised Image" src="@(ViewBag.UploadLocation)@Model["WideImage"]">
+                            }
+                        </div>
+                    </div>
+                }
+                @if (Model.ContainsKey("MiddleText") && Model["MiddleText"] != null)
+                {
+                    <div class="col-md-8 col-md-offset-2">
+                        <p>
+                            @(Model["MiddleText"].Contains("\n") ? Html.Raw(Model["MiddleText"].Replace("\n", "<br />")) : Html.Raw(Model["MiddleText"]))
+                        </p>
+                    </div>
+                }
+                @if (ViewBag.images == null)
+                {
+                    <div class="section col-md-10 col-md-offset-1">
+                        <div class="col-md-4">
+                            @if (Model.ContainsKey("Image1"))
+                            {
+                                <img class="img-rounded img-responsive img-raised" alt="Raised Image" src="@(ViewBag.UploadLocation)@Model["Image1"]">
+                            }
+                        </div>
+                        <div class="col-md-4">
+                            @if (Model.ContainsKey("Image2"))
+                            {
+                                <img class="img-rounded img-responsive img-raised" alt="Raised Image" src="@(ViewBag.UploadLocation)@Model["Image2"]">
+                            }
+                        </div>
+                        <div class="col-md-4">
+                            @if (Model.ContainsKey("Image3"))
+                            {
+                                <img class="img-rounded img-responsive img-raised" alt="Raised Image" src="@(ViewBag.UploadLocation)@Model["Image3"]">
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            @if (Model.ContainsKey("LowerText") && Model["LowerText"] != null)
+            {
+                <div class="col-md-8 col-md-offset-2">
+                    <p>
+                        @(Model["LowerText"].Contains("\n") ? Html.Raw(Model["LowerText"].Replace("\n", "<br />")) : Html.Raw(Model["LowerText"]))
+                    </p>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

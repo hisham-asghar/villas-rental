@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.IO;
+using System.Net;
 using System.Web.Mvc;
+using AuthorizeMerchantLibrary.Models;
 using LayerDAO;
 using RentalsClinet.Helpers;
+using CustomModels;
+using RentalHelper.Helper;
 
 namespace RentalsClinet.Controllers
 {
@@ -13,17 +14,44 @@ namespace RentalsClinet.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index()
+        public ActionResult Test()
         {
             /*
-            EmailHelper.SendMail(new SendEmailModel()
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            return Json(MerchantHelper.ChargeCreditCardHelperRunDump(), JsonRequestBehavior.AllowGet);
+            */
+            var line = Helpers.MerchantHelper.GetTransactionRes(null);
+            if (line.result == ResultType.OK)
+            {
+                
+            }
+            else if (line.result == ResultType.ERROR)
+            {
+                
+            }
+            return Json(line, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult TestMail()
+        {
+
+            var res = EmailHelper.SendMail(new SendEmailModel()
             {
                 Subject = "Testing Local",
                 Body = "Testing <b>local</b>",
                 To = "hisham@octacer.com"
-            });*/
+            });
 
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Index()
+        {
+            
             var mainMetas = SiteMetaDAO.getMetaChilds("Index_Page");
+
+            ViewBag.Index = CustomModels.Helper.getDicData(mainMetas, "Index_Page_Banner");
+
             ViewBag.servicePanel1H = CustomModels.Helper.getDicData(mainMetas,"main_panel_services_1_head");
             ViewBag.servicePanel1H = CustomModels.Helper.getDicData(mainMetas, "main_panel_services_1_head");
             ViewBag.servicePanel1B = CustomModels.Helper.getDicData(mainMetas, "main_panel_services_1_body");
@@ -54,7 +82,7 @@ namespace RentalsClinet.Controllers
             ViewBag.service3LN = CustomModels.Helper.getDicData(mainMetas,"main_panel_bst_3_linkName");
             ViewBag.service3L = CustomModels.Helper.getDicData(mainMetas,"main_panel_bst_3_linkRef");
 
-
+            ViewBag.cities = LayerDAO.PropertyDAO.GetCities();
 
             return View();
         }
@@ -78,6 +106,7 @@ namespace RentalsClinet.Controllers
                 EmailHelper.InquiryWork(model, Request.MapPath("~/App_Data/"));
             }
             var mainMetas = SiteMetaDAO.getMetaChilds("AboutUs_Page");
+            ViewBag.AboutUs = Helper.getDicData(mainMetas, "AboutUs_Page_Banner");
             ViewBag.aboutText = CustomModels.Helper.getDicData(mainMetas, "main_about_text");
             ViewBag.aboutTag = CustomModels.Helper.getDicData(mainMetas, "about_tag_line");
             return View("About");
@@ -87,10 +116,21 @@ namespace RentalsClinet.Controllers
         {
             return View("CONCIERGE");
         }
+
+
+        public ActionResult Testimonals()
+        {
+            var list = LayerDAO.TestimonalDAO.getAll();
+            return View("Testimonals",list);
+        }
+
         public ActionResult FAQ()
         {
+            var mainMetas = SiteMetaDAO.getMetaChilds("FAQ_Page");
+            ViewBag.Index = CustomModels.Helper.getDicData(mainMetas, "Index_Page_Banner");
             ViewBag.HeadTitle = "FAQ";
-            return View("UsefuLink");
+            var list = LayerDAO.FAQDAO.getAllFAQ();
+            return View("FAQs", list);
         }
         public ActionResult EVENTS()
         {

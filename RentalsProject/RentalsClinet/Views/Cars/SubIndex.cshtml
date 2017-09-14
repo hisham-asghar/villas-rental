@@ -2,7 +2,7 @@
     ViewBag.Title = "Index";
     ViewBag.UploadLocation = RentalsClinet.Helpers.CustomActions.getUploadLocation();  
 }
-<div class="page-header header-filter clear-filter" style="background-image: url('/Content/assets/img/d_casa_oliver.jpg'); height: 50vh;">
+<div class="page-header header-filter clear-filter" style="background-image: url('@ViewBag.HeaderImg'); height: 50vh; min-height: 50vh;">
     <div class="container" style="padding-top: 10vh;">
         <div class="row">
             <div class="col-md-8 col-md-offset-2" style="text-align: center;">
@@ -34,7 +34,7 @@
     <div class="col-md-8 col-md-offset-2 text-center">
         <h2 class="title">&nbsp;</h2>
     </div>
-    <div class="container" style="padding:60px;">
+    <div class="container" style="padding:60px;min-height:100vh;">
         @{
             var x = 0;
         }

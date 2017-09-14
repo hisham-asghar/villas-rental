@@ -17,7 +17,8 @@ namespace RentalsProject.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var list = YachtDAO.getYachts(0, 0);
+            return View("YachtsList", list);
         }
 
         [HttpGet]

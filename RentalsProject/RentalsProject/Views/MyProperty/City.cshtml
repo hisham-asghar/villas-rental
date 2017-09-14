@@ -1,0 +1,108 @@
+﻿@model List<LayerDB.City>
+
+@{
+    ViewBag.Title = "City List";
+}
+
+<a href="/MyProperty/City/Add" class="btn btn-info">Add New City</a><br />
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="purple">
+            <i class="material-icons">assignment</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">@ViewBag.Title</h4>
+            <div class="toolbar">
+                <!-- Here you can write extra buttons/actions for the toolbar -->
+            </div>
+            <div class="material-datatables">
+                <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>City Name</th>
+                            <th>Londitude</th>
+                            <th>Latitude</th>
+                            <th>Address</th>
+                            <th class="disabled-sorting text-right"></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>City Name</th>
+                            <th>Londitude</th>
+                            <th>Latitude</th>
+                            <th>Address</th>
+                            <th class="text-right"></th>
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                        @foreach (var city in Model)
+                        {
+                            <tr city-id="@city.CityId" city-guid="@city.guid">
+                                <td style="font-weight: bold;">@city.CityName</td>
+                                <td>@city.longitude</td>
+                                <td>@city.latitude</td>
+                                <td>@city.Address</td>
+                                <td>
+                                    <a class="btn" href="/MyProperty?city=@city.guid&token=villas">View Villas</a>
+                                    <a class="btn btn-primary" href="/MyProperty/City?id=@city.CityId">Edit</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end content-->
+    </div>
+    <!-- end card -->
+</div>
+@section scripts{
+    <!--  DataTables.net Plugin    -->
+    <script src="/Content/assets/js/jquery.datatables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#datatables').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                responsive: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search records",
+                }
+
+            });
+
+
+            var table = $('#datatables').DataTable();
+
+            // Edit record
+            table.on('click', '.edit', function () {
+                $tr = $(this).closest('tr');
+
+                var data = table.row($tr).data();
+                alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+            });
+
+            // Delete a record
+            table.on('click', '.remove', function (e) {
+                $tr = $(this).closest('tr');
+                table.row($tr).remove().draw();
+                e.preventDefault();
+            });
+
+            //Like record
+            table.on('click', '.like', function () {
+                alert('You clicked on Like button');
+            });
+
+            $('.card .material-datatables label').addClass('form-group');
+        });
+    </script>
+}

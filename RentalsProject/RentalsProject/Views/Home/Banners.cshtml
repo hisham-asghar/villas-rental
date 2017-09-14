@@ -1,0 +1,331 @@
+﻿@{
+    ViewBag.Title = "Banners";
+}
+
+<h2>
+    @ViewBag.Title
+</h2>
+
+<div class="col-md-12">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+
+                    <div class="title">
+                        <h3>Index Banner</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.Index.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.Index.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+
+
+                    <div class="title">
+                        <h3>@ViewBag.Services.MetaName</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.Services.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.Services.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+                    <div class="title">
+                        <h3>@ViewBag.Destinations.MetaName</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.Destinations.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.Destinations.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+                    <div class="title">
+                        <h3>@ViewBag.Yachts.MetaName</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.Yachts.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.Yachts.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+                    <div class="title">
+                        <h3>@ViewBag.Cars.MetaName</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.Cars.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.Cars.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+                    <div class="title">
+                        <h3>@ViewBag.Magzines.MetaName</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.Magzines.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.Magzines.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+                    <div class="title">
+                        <h3>@ViewBag.AboutUs.MetaName</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.AboutUs.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.AboutUs.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+                    <div class="title">
+                        <h3>@ViewBag.Concierge.MetaName</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.Concierge.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.Concierge.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+                    <div class="title">
+                        <h3>@ViewBag.Terms.MetaName</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.Terms.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.Terms.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+                    <div class="title">
+                        <h3>@ViewBag.Policy.MetaName</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.Policy.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.Policy.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+                    <div class="title">
+                        <h3>@ViewBag.FAQ.MetaName</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.FAQ.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.FAQ.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 ">
+            <div class="card">
+                <div class="card-content">
+                    <div class="title">
+                        <h3>@ViewBag.HomeOwner.MetaName</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail">
+                                <img src='/uploads/@(ViewBag.HomeOwner.MetaText ?? "image_placeholder.jpg")' alt="...">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="model.@ViewBag.HomeOwner.MetaName" />
+                                </span>
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-info">Update</button>
+        </div>
+
+    </form>
+</div>

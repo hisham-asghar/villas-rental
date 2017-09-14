@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CustomModels.Cars;
-using CustomModels.Yachts;
 using LayerDAO;
 using RentalsClinet.Helpers;
 
@@ -52,6 +49,7 @@ namespace RentalsClinet.Controllers
                 pgno++;
                 countAdded += count;
             }
+            ViewBag.HeaderImg = "/Content/Images/Luxury-Cars.jpg"; 
             return View("SubIndex", dlist);
         }
         public ActionResult Exotic()
@@ -70,6 +68,7 @@ namespace RentalsClinet.Controllers
                 pgno++;
                 countAdded += count;
             }
+            ViewBag.HeaderImg = "/Content/Images/exotic-cars.jpg";
             return View("SubIndex", dlist);
         }
 

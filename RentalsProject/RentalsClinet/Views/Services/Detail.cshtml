@@ -1,0 +1,49 @@
+﻿@model LayerDB.Service
+
+@{
+    ViewBag.Title = Model.Name;
+    ViewBag.UploadLocation = RentalsClinet.Helpers.CustomActions.getUploadLocation();  
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+<nav class="navbar navbar-transparent navbar-absolute">
+    @Html.Partial("~/Views/Shared/HeaderNavBar.cshtml")
+</nav>
+<div class="page-header header-filter" style="background-image: url('@ViewBag.UploadLocation/@Model.ImageHeader');height:50vh;">
+    <div class="container" style="padding-top:20vh;">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h5 class="title">Services</h5>
+                <h1 class="title">@Model.Name</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .description > * {
+        font-size: 16px;
+    }
+</style>
+<div class="main">
+    <div class="container">
+        <div class="about-description" style="padding-top:10vh; min-height: 80vh;">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="description" style="font-size: 18px;">
+                        @(Html.Raw(Model.Text.Contains("\n") ? Model.Text.Replace("\n", "<br />") : Model.Text))
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .services-list-details img {
+                width: 100px !important;
+                height: 100px !important;
+            }
+
+            .services-list-details a {
+                padding: 20px;
+            }
+        </style>
+    </div>
+</div>

@@ -3,6 +3,12 @@
     .navbar-brand {
         font-weight:bold;
         font-family: Lato;
+        font-weight:bold !important;
+        text-shadow: 1px 1px 1px #777;
+    }
+    .link a{
+        font-weight:bold !important;
+        text-shadow: 1px 1px 1px #777;
     }
 </style>
 <div class="container main_navigation">
@@ -14,7 +20,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="/" style="padding: 5px 15px;">
             <img src="~/Content/assets/img/TMG.png" style="width:50px;display:inline;"/>
             The Maruca Group
         </a>
@@ -37,13 +43,23 @@
                 </a>
             </li>
             <li class="link">
-                <a id="headerMagazineLnk" href="/Magzines" target="_blank" data-name="magazine">
+                <a id="headerMagazineLnk" href="/Magzines" data-name="magazine">
                     Magazine
+                </a>
+            </li>
+            <li class="link">
+                <a href="/homeowner">
+                    Homeowners
                 </a>
             </li>
             <li class="link contact">
                 <a href="/Home/Contact" id="contactToggle" class="hasMenuArrow">
                     Contact
+                </a>
+            </li>
+            <li class="link about">
+                <a href="/Home/About" id="contactToggle" class="hasMenuArrow">
+                    About Us
                 </a>
             </li>
             <li class="link loginWrapper hide noUnderline">

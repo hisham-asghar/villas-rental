@@ -18,6 +18,65 @@ namespace RentalsProject.Controllers
             return View();
         }
 
+        public ActionResult Banners(Banners model)
+        {
+            if(Request.HttpMethod == "POST" && model != null)
+            {
+                saveBanner(model.Index_Page_Banner, "Index_Page_Banner", new List<string>() { "Banners", "Index_Page" });
+                saveBanner(model.AboutUs_Page_Banner, "AboutUs_Page_Banner", new List<string>() { "Banners", "AboutUs_Page" });
+                saveBanner(model.Cars_Page_Banner, "Cars_Page_Banner", new List<string>() { "Banners", "Cars_Page" });
+                saveBanner(model.Concierge_Page_Banner, "Concierge_Page_Banner", new List<string>() { "Banners", "Concierge_Page" });
+                saveBanner(model.Destinations_Page_Banner, "Destinations_Page_Banner", new List<string>() { "Banners", "Destinations_Page" });
+                saveBanner(model.FAQ_Page_Banner, "FAQ_Page_Banner", new List<string>() { "Banners", "FAQ_Page" });
+                saveBanner(model.HomeOwner_Page_Banner, "HomeOwner_Page_Banner", new List<string>() { "Banners", "HomeOwner_Page" });
+                saveBanner(model.Magzines_Page_Banner, "Magzines_Page_Banner", new List<string>() { "Banners", "Magzines_Page" });
+                saveBanner(model.Policy_Page_Banner, "Policy_Page_Banner", new List<string>() { "Banners", "Policy_Page" });
+                saveBanner(model.Services_Page_Banner, "Services_Page_Banner", new List<string>() { "Banners", "Services_Page" });
+                saveBanner(model.Terms_Page_Banner, "Terms_Page_Banner", new List<string>() { "Banners", "Terms_Page" });
+                saveBanner(model.Yachts_Page_Banner, "Yachts_Page_Banner", new List<string>() { "Banners", "Yachts_Page" });
+            }
+            var banners = SiteMetaDAO.getMetaChilds("Banners");
+            ViewBag.Index = Helper.getDicData(banners,"Index_Page_Banner");
+            ViewBag.Services = Helper.getDicData(banners, "Services_Page_Banner");
+            ViewBag.Destinations = Helper.getDicData(banners, "Destinations_Page_Banner");
+            ViewBag.Yachts = Helper.getDicData(banners, "Yachts_Page_Banner");
+            ViewBag.Cars = Helper.getDicData(banners, "Cars_Page_Banner");
+            ViewBag.Magzines = Helper.getDicData(banners, "Magzines_Page_Banner");
+            ViewBag.AboutUs = Helper.getDicData(banners, "AboutUs_Page_Banner");
+            ViewBag.Concierge = Helper.getDicData(banners, "Concierge_Page_Banner");
+            ViewBag.Terms = Helper.getDicData(banners, "Terms_Page_Banner");
+            ViewBag.Policy = Helper.getDicData(banners, "Policy_Page_Banner");
+            ViewBag.FAQ = Helper.getDicData(banners, "FAQ_Page_Banner");
+            ViewBag.HomeOwner = Helper.getDicData(banners, "HomeOwner_Page_Banner");
+            return View();
+        }
+
+        private Meta saveBanner(HttpPostedFileBase pic, string s, List<string> parents)
+        {
+            if (pic != null && pic.ContentLength > 0)
+            {
+                try
+                {
+                    var fileName = Guid.NewGuid() + ".jpg";
+                    var path = Path.Combine(Server.MapPath("~/uploads"), fileName);
+                    pic.SaveAs(path);
+                    return SiteMetaDAO.SaveMeta(new Meta(s, fileName), parents);
+                }
+                catch (Exception)
+                {
+                    return SiteMetaDAO.SaveMeta(new Meta(s, ""), parents);
+                }
+            }
+            else
+                return new Meta(s, "");
+        }
+
+
+        public ActionResult Images()
+        {
+            return View();
+        }
+
         public ActionResult BestOptions(HttpPostedFileBase pic1,HttpPostedFileBase pic2, HttpPostedFileBase pic3 )
         {
             var parents = new List<string>()

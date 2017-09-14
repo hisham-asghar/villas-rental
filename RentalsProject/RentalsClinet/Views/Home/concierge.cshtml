@@ -5,11 +5,14 @@
 @{
     ViewBag.Title = "Contact";
     Layout = "~/Views/Shared/_MyLayout.cshtml";
+
+    var services = LayerDAO.ServicesDao.GetAll();
+    var UploadLoca = RentalsClinet.Helpers.CustomActions.getUploadLocation();
 }
 <nav class="navbar navbar-transparent navbar-absolute">
     @Html.Partial("~/Views/Shared/HeaderNavBar.cshtml")
 </nav>
-<div class="page-header header-filter" style="background-image: url('/Content/assets/img/bg9.jpg');height:40vh;">
+<div class="page-header header-filter" style="background-image: url('/Content/assets/img/bg9.jpg');height:40vh; min-height: 50vh;">
     <div class="container" style="padding-top:20vh;">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -50,56 +53,15 @@
             }
         </style>
         <div class="row services-list-details">
-            <div class="col-md-2 col-md-offset-1">
-                <a href="/Services#Planes" class="">
-                    <img src="/Content/Services/Planes.png" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
-                </a>
-            </div>
-            <div class="col-md-2 col-md-offset-1">
-                <a href="/Services#Cars" class="">
-                    <img src="/Content/Services/Carss.png" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
-                </a>
-            </div>
-            <div class="col-md-2 col-md-offset-1">
-                <a href="/Services#Boats" class="">
-                    <img src="/Content/Services/Boats.png" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
-                </a>
-            </div>
-            <div class="col-md-2 col-md-offset-1">
-                <a href="/Services#Villas" class="">
-                    <img src="/Content/Services/Villas.png" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
-                </a>
-            </div>
-            <div class="col-md-2 col-md-offset-1">
-                <a href="/Services#" class="">
-                    <img src="/Content/Services/Chauffeurs.png" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
-                </a>
-            </div>
-            <div class="col-md-2 col-md-offset-1">
-                <a href="/Services#" class="">
-                    <img src="/Content/Services/Chefs.png" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
-                </a>
-            </div>
-            <div class="col-md-2 col-md-offset-1">
-                <a href="/Services#" class="">
-                    <img src="/Content/Services/Housekeepings.png" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
-                </a>
-            </div>
-            <div class="col-md-2 col-md-offset-1">
-                <a href="/Services#" class="">
-                    <img src="/Content/Services/Tours.png" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
-                </a>
-            </div>
-            <div class="col-md-2 col-md-offset-4">
-                <a href="/Services#" class="">
-                    <img src="/Content/Services/Trainers.png" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
-                </a>
-            </div>
-            <div class="col-md-2 col-md-offset-1">
-                <a href="/Services#" class="">
-                    <img src="/Content/Services/Security.png" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
-                </a>
-            </div>
+            @foreach (var s in services)
+            {
+                <div class="col-md-2 col-md-offset-1">
+                    <a href="/Services/Detail/@s.guid" class="">
+                        <img src="@UploadLoca/@s.ImageSmall" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
+                    </a>
+                 </div>   
+            }
+            
         </div>
     </div>
 </div>

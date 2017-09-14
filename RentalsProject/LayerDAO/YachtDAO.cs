@@ -74,7 +74,19 @@ namespace LayerDAO
         {
             using (var db = new DBModel())
             {
-                if (l1 == 100.0 && l2 == 0.0)
+                if (l1 == 0.0 && l2 == 0.0)
+                {
+                    return db.Yachts.Select(y => new YachtModel()
+                    {
+                        id = y.YachtID,
+                        banner = y.Banner,
+                        description = y.Description,
+                        length = y.Length,
+                        name = y.Name,
+                        guid = y.guid
+                    }).OrderByDescending(y => y.id).ToList();
+                }
+                else if (l1 == 100.0 && l2 == 0.0)
                 {
                     return db.Yachts.Select(y => new YachtModel()
                     {

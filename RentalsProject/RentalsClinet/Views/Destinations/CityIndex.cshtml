@@ -1,17 +1,18 @@
 ﻿@{
     ViewBag.Title = "Index";
+    ViewBag.UploadLocation = RentalsClinet.Helpers.CustomActions.getUploadLocation();    
 }
 
 
 <div class="cd-section" id="headers">
     <div class="header-2">
-        <div class="page-header header-filter" style="background-image: url('/Content/assets/img/d_casa_oliver.jpg'); height: 50vh;">
+        <div class="page-header header-filter" style="background-image: url('/Content/Images/Destinations.jpg'); height: 50vh; min-height: 50vh;">
             <div class="container-fluid">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 text-center">
                             <h1 class="title">
-                                Cars
+                                Destinations
                             </h1>
                         </div>
                     </div>
@@ -28,26 +29,420 @@
         border-left: 1px solid rgba(255, 255, 255, 0.35);
         border-right: 1px solid rgba(255, 255, 255, 0.35);
     }
+    .gm-style {
+        font-size: inherit;
+        font-family: inherit;
+    }
+
+    .gm-style .ol-attribution {
+        bottom: 1em;
+    }
+    .form-group .dropdownjs {
+        padding-bottom: 7px;
+        margin: 27px 0 0 0;
+    }
+    .gm-style .ol-attribution.ol-logo-only {
+        bottom: 1em;
+    }
+    .gm-style-iw .card .content {
+        width: 500px;
+    }
+    #map {
+        margin: 0;
+        border: 0px solid #CDD7EE;
+        border-radius: 0px;
+        width: 100%;
+        padding: 0px;
+        padding-bottom: 5px;
+        max-height: 625px;
+        min-height: 620px;
+    }
+
+    section #map {
+        margin: 0px;
+        margin-left: 0px;
+        border: 0px solid #CDD7EE;
+        border-radius: 0px;
+        width: 100%;
+        height: 720px;
+    }
+
+    #wrapper-map {
+        width: 100%;
+        margin: 0;
+        background-color: white;
+        border-radius: 0px;
+    }
+
+    #content section {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .ol-scale-line {
+        background: #95b9e6;
+        bottom: 0px;
+        left: 0px;
+    }
+
+    #customSkinMap {
+        height: 100vh;
+    }
 </style>
+@{
+    ViewBag.citiesAll = LayerDAO.PropertyDAO.GetCities();
+    ViewBag.TagTypes = LayerDAO.PropertyDAO.GetPropertyTags();
+}
 @model List<LayerDB.City>
-<div class="cd-section" id="projects">
-    <div class="col-md-8 col-md-offset-2 text-center">
-        <h2 class="title">Boat Rental & Yacht Charters</h2>
-    </div>
-    <div class="container" style="padding:60px;">
+<div class="cd-section" style="    background: rgba(238, 238, 238, 0.4);">
+    <div class="container" style="padding:0 60px; margin: 0; width: 100%;">
+
         <div class="row">
-            @foreach (var c in Model)
-            {
-                <div class="col-md-4">
-                    <div class="card ">
-                        <div class="content" style="padding: 23% 30px;">
-                            <a href="/Destinations?token=@c.guid">
-                                <h3 class="card-title">@c.CityName</h3>
-                            </a>
-                        </div>
+            <div id="filter-panel" class="collapse filter-panel ">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form action="/Destinations/Search" method="post">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            REFINE YOUR SEARCH:
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-3 ">
+                                    <select class="select form-control" name="cityName" placeholder="Choose an option">
+                                        <option value="*">All Destinations</option>
+                                        @foreach (var city in ViewBag.citiesAll)
+                                        {
+                                            <option value="@city.guid">@city.CityName</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            Check in &rarr; Check out
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Check in &rarr; Check out</label>
+                                        <input name="model.r" type="text" id="config-demo" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            PRICE DETAILS:
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-md-offset-1 form-group">
+                                    <input type="text" id="example_id" name="price" value="" />
+                                </div>
+                                <div class="col-sm-12 col-md-1">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            SORT ORDER:
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group form-search" style="color: #000;margin:0px 10px;">
+                                        <select class="select form-control" name="sort" placeholder="Featured">
+                                            <option value="5">Featured</option>
+                                            <option value="3">Bedrooms (Min - Max)</option>
+                                            <option value="4">Bedrooms (Max - Min)</option>
+                                            <option value="1">Price (Min - Max)</option>
+                                            <option value="2">Price (Max - Min)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-1">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            GUESTS:
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">
+                                            Guests
+                                        </label>
+                                        <select name="model.guests" class="select form-control" placeholder="Guests">
+                                            @for (int xi = 1; xi <= 100; xi++)
+                                            {
+                                                <option value="@xi">@xi</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            COLLECTIONS:
+
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 form-group">
+                                    @foreach (var tag in ViewBag.TagTypes)
+                                    {
+                                        <div class="col-md-2">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="@tag.TagName">
+                                                    @tag.TagName
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9 col-md-offset-2">
+                                    <button type="submit" class="btn btn-success">
+                                        Apply
+                                    </button>
+                                    <button type="button" data-toggle="collapse" data-target="#filter-panel" class="btn btn-default">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            }
+            </div>
         </div>
     </div>
 </div>
+<div class="cd-section" id="projects">
+    <div class="container" style="padding: 60px; min-height: 100vh; margin: 0; width: 100%;">
+        <div class="row">
+
+            <div class="text-right">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#filter-panel">
+                    Show Filters
+                </button>
+            </div>
+            <div class="nav-align-center">
+                <ul class="nav nav-pills nav-pills-icons" role="tablist">
+                    <li>
+                        <a href="#work" role="tab" data-toggle="tab">
+                            <i class="material-icons">dashboard</i>
+                            City View
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="#connections" role="tab" data-toggle="tab">
+                            <i class="material-icons">location_on</i>
+                            Map View
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane work" id="work">
+                <div class="row">
+                    @foreach (var c in Model)
+                    {
+                        <div class="col-md-4 cityblock" title="@c.CityName" latitude="@c.latitude" longitude="@c.longitude">
+                            <div class="card card-background" style="background-image: url(@(ViewBag.UploadLocation)@(c.banner == null ? "image_placeholder.jpg" : c.banner.Replace(" ", "%20"))) !important">
+                                <div class="content" style="padding: 23% 30px;">
+                                    <a href="/Destinations?token=@c.guid">
+                                        <h3 class="card-title">@c.CityName</h3>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="row">
+
+                    <nav class="text-center">
+                        <ul class="pagination pagination-info" style="zoom: 125%;">
+                            <li class="pag_prev">
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">PREV</span>
+                                </a>
+                            </li>
+                            <li class="pag_next">
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">NEXT</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+            <div class="tab-pane active connections" id="connections">
+                <div class="row">
+                    <div id="account-container">
+                        <div id="wrapper-map">
+                            <div id="content">
+                                <section>
+                                    <div id="map" class="gmap map-boxed card"></div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="container-fluid">
+    
+</div>
+
+@section headScripts
+{
+    
+<script>
+    $(document).ready(function () {
+        pagging();
+        var flag = false;
+        $('#config-demo').focus(function() {
+            if (flag == false) {
+                flag = true;
+                $('#config-demo').daterangepicker({
+                    "minDate": new Date(),
+                    "opens": "center",
+                    isInvalidDate: function (date) {
+                        //debugger;
+                        return false;
+                    }
+                }, function (start, end, label) {
+                    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                });
+            }
+        });
+        $("#example_id").ionRangeSlider({
+            type: "double",
+            grid: true,
+            min: 0,
+            max: @ViewBag.maxPrice,
+            from: 0,
+            to: @ViewBag.maxPrice,
+            prefix: '$',
+            postfix: '/nt'
+        });
+
+    });
+    function myMap() {
+        CustomMap(32.4690717, 74.39393389999998);
+    }
+    function CustomMap(longi, lati) {
+        debugger;
+        var myLatlng = new google.maps.LatLng(37.090240, -95.712891);
+        var mapOptions = {
+            zoom: 4,
+            center: myLatlng,
+            scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+
+            // Styling of the map in JSON object
+            styles: [{ "featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{ "color": "#444444" }] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "color": "#f2f2f2" }] }, { "featureType": "poi", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": 45 }] }, { "featureType": "road.highway", "elementType": "all", "stylers": [{ "visibility": "simplified" }] }, { "featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "color": "#cdd2d4" }, { "visibility": "on" }] }]
+        };
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        $(".cityblock").each(function () {
+            debugger;
+            var lati = parseFloat($(this).attr("latitude"));
+            var longi = parseFloat($(this).attr("longitude"));
+            var title = $(this).attr("title");
+            console.log(title + " = latitude: " + lati + ", longitude: " + longi);
+            var latilongi = new google.maps.LatLng(lati, longi);
+            var marker = new google.maps.Marker({
+                dragable: true,
+                animation: google.maps.Animation.DROP,
+                position: { lat: lati, lng: longi },
+                title: title + " = latitude: " + lati + ", longitude: " + longi
+            });
+            var div = $(this).html();
+
+            var contentString = div;//$(div).find(".content").css("width", "500px").html();
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+
+            marker.setMap(map);
+        });
+        
+        
+    }
+    function pagging() {
+        var pageSize = 12;
+        var pagesCount = $(".cityblock").length;
+        var currentPage = 1;
+
+        /////////// PREPARE NAV ///////////////
+        var nav = '';
+        var totalPages = Math.ceil(pagesCount / pageSize);
+        for (var s = 0; s < totalPages; s++) {
+            nav += '<li class="numeros"><a href="#">' + (s + 1) + '</a></li>';
+        }
+        $(".pag_prev").after(nav);
+        $(".numeros").first().addClass("active");
+        //////////////////////////////////////
+
+        var showPage = function () {
+            $(".cityblock").hide().each(function (n) {
+                if (n >= pageSize * (currentPage - 1) && n < pageSize * currentPage)
+                    $(this).show();
+            });
+        }
+        showPage();
+
+
+        $(".pagination li.numeros").click(function () {
+            $(".pagination li").removeClass("active");
+            $(this).addClass("active");
+            currentPage = parseInt($(this).text());
+            showPage();
+        });
+
+        $(".pagination li.pag_prev").click(function () {
+            if ($(this).next().is('.active')) return;
+            $('.numeros.active').removeClass('active').prev().addClass('active');
+            currentPage = currentPage > 1 ? (currentPage - 1) : 1;
+            showPage();
+        });
+
+        $(".pagination li.pag_next").click(function () {
+            if ($(this).prev().is('.active')) return;
+            $('.numeros.active').removeClass('active').next().addClass('active');
+            currentPage = currentPage < totalPages ? (currentPage + 1) : totalPages;
+            showPage();
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC96Hx9IMfAglwiP9RkQn5cVi4MZKiC5LA&callback=myMap">
+</script>
+
+}

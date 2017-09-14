@@ -2,16 +2,16 @@
     ViewBag.Title = "Index";
     ViewBag.UploadLocation = RentalsClinet.Helpers.CustomActions.getUploadLocation();  
 }
-<div class="page-header header-filter clear-filter" style="background-image: url('/Content/assets/img/d_casa_oliver.jpg'); height: 50vh;">
+<div class="page-header header-filter clear-filter" style="background-image: url('@ViewBag.banner'); height: 60vh; min-height: 50vh;">
     <div class="container" style="padding-top: 10vh;">
         <div class="row">
             <div class="col-md-8 col-md-offset-2" style="text-align: center;">
                 <div class="brand">
-                    <h1>
+                    <h1 class="title" style="text-shadow:1px 1px 1px #000;">
                         Boat Rental & Yacht Charters
                     </h1>
 
-                    <h3 class="title">
+                    <h3 class="title" style="text-shadow:1px 1px 1px #000;">
                         @ViewBag.Token Feet
                     </h3>
                 </div>
@@ -33,7 +33,7 @@
     <div class="col-md-8 col-md-offset-2 text-center">
         <h2 class="title">&nbsp;</h2>
     </div>
-    <div class="container" style="padding:60px;">
+    <div class="container" style="padding:60px;min-height:100vh;">
         @{
             var x = 0;
         }

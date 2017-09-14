@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,18 +40,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Banners.cs" />
     <Compile Include="Cars\CarModel.cs" />
     <Compile Include="Cars\FormModels.cs" />
+    <Compile Include="CityModel.cs" />
     <Compile Include="EmailModels.cs" />
+    <Compile Include="FormModels\DestinationSearchFormModel.cs" />
+    <Compile Include="FormModels\HomeOwnerModel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Meta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertiesModel.cs" />
+    <Compile Include="PropertyModels\PropertyView.cs" />
     <Compile Include="Yachts\FormModels.cs" />
     <Compile Include="Yachts\Specs.cs" />
     <Compile Include="Yachts\YachtModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\LayerDB\LayerDB.csproj">
+      <Project>{1963a38c-3566-467e-8cc9-eaa4b9836951}</Project>
+      <Name>LayerDB</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

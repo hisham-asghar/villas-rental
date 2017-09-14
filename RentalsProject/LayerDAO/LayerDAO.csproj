@@ -59,9 +59,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarDAO.cs" />
+    <Compile Include="FAQDAO.cs" />
+    <Compile Include="HomeOwnerDAO.cs" />
+    <Compile Include="LocationDAO.cs" />
+    <Compile Include="MagzineDAO.cs" />
+    <Compile Include="MailDAO.cs" />
     <Compile Include="PropertyDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TagsDAO.cs" />
+    <Compile Include="ServicesDAO.cs" />
     <Compile Include="SiteMetaDAO.cs" />
+    <Compile Include="TestimonalDAO.cs" />
     <Compile Include="YachtDAO.cs" />
   </ItemGroup>
   <ItemGroup>

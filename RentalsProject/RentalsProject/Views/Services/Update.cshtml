@@ -1,0 +1,77 @@
+﻿@model LayerDB.Service
+@{
+    ViewBag.Title = "Add/Update FAQ";
+}
+<a href="/Testimonals" class="btn btn-info">View All Testimonals</a><br />
+<div class="card">
+    <div class="card-header" data-background-color="purple">
+        <h4 class="card-title">@ViewBag.Title</h4>
+    </div>
+    <div class="card-content">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="model.ServiceId" value="@Model.ServiceId" />
+            <div class="col-md-8">
+                <div class="col-md-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">Name</label>
+                        <input type="text" name="model.Name" class="form-control" value="@(Model.Name ?? "")" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">Sub Text</label>
+                        <input type="text" name="model.SubName" class="form-control" value="@(Model.SubName ?? "")" />
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">Text</label>
+                        <textarea name="model.Text" class="form-control" rows="10">
+                            @(Model.Text ?? "")
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <h5>Service Icon Image</h5>
+                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail">
+                        <img src='/uploads/@(Model.ImageSmall ?? "image_placeholder.jpg")' alt="...">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                    <div>
+                        <span class="btn btn-rose btn-round btn-file">
+                            <span class="fileinput-new">Select image</span>
+                            <span class="fileinput-exists">Change</span>
+                            <input type="file" name="small" />
+                        </span>
+                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h5>Service Header Image</h5>
+                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail">
+                        <img src='/uploads/@(Model.ImageHeader ?? "image_placeholder.jpg")' alt="...">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                    <div>
+                        <span class="btn btn-rose btn-round btn-file">
+                            <span class="fileinput-new">Select image</span>
+                            <span class="fileinput-exists">Change</span>
+                            <input type="file" name="header" />
+                        </span>
+                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success">Save </button><br />
+            </div>
+        </form>
+    </div>
+</div>
+

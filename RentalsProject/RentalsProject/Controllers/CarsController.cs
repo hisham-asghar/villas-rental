@@ -17,7 +17,8 @@ namespace RentalsProject.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var list = CarDAO.getCars(-1);
+            return list != null ? View("CarsList",list) : View();
         }
 
 

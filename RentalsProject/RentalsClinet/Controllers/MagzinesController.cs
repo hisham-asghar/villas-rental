@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using LayerDAO;
 
 namespace RentalsClinet.Controllers
 {
@@ -11,9 +8,18 @@ namespace RentalsClinet.Controllers
         //
         // GET: /Magzines/
 
-        public ActionResult Index()
+        public ActionResult Index(string token)
         {
-            return View();
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                var magzineDictionary = MagzineDAO.GetMagzine(token);
+                if (magzineDictionary.Count > 0)
+                {
+                    return View("Detail", magzineDictionary);
+                }
+            }
+            var list = MagzineDAO.GetMagzines(0);
+            return View(list);
         }
 
     }

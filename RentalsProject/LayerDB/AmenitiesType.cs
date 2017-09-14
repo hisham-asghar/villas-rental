@@ -20,6 +20,9 @@ namespace LayerDB
         [StringLength(256)]
         public string AmenitiesTypeName { get; set; }
 
+        [StringLength(1024)]
+        public string SVG { get; set; }
+
         public virtual ICollection<Amenity> Amenities { get; set; }
     }
 }

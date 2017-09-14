@@ -25,11 +25,11 @@ namespace LayerDB
         [StringLength(256)]
         public string Country { get; set; }
 
-        public long? ZipCode { get; set; }
+        public long ZipCode { get; set; }
 
-        public double? Logitude { get; set; }
+        public double Logitude { get; set; }
 
-        public double? Latitude { get; set; }
+        public double Latitude { get; set; }
 
         public int CityId { get; set; }
 

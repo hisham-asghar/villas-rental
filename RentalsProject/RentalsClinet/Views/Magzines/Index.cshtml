@@ -1,36 +1,26 @@
 ﻿@{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayout2.cshtml";
+    ViewBag.UploadLocation = RentalsClinet.Helpers.CustomActions.getUploadLocation();
 }
-<div class="page-header header-filter" style="background-image: url('http://2mlyl2eanf41pq5h03csafz15gi.wpengine.netdna-cdn.com/wp-content/uploads/2017/03/St-Martin_ocean-1024x683.jpg')">
+@model List<Dictionary<string,string>>
+<div class="page-header header-filter" style="background-image: url('http://2mlyl2eanf41pq5h03csafz15gi.wpengine.netdna-cdn.com/wp-content/uploads/2017/03/St-Martin_ocean-1024x683.jpg');height: 50vh; min-height: 50vh;">
     <div class="container">
         <div class="row">
-            <div class="col-md-7 col-md-offset-5 text-right">
-                <h1 class="title">Day Tripping: St Martin</h1>
-                <h4>
-                    From Anguilla to St Barts... easy island hops from this Caribbean hotspot
-                </h4>
-                <p>
-                    By Joanna Fox
-                </p>
-                <br>
-
-                <div class="buttons">
-                    <a href="#" class="btn btn-success btn-md">
-                        <i class="material-icons">format_align_left</i>
-                        Read More
-                    </a>
-                </div>
-
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <h1 class="title">
+                    Magzines
+                </h1>
             </div>
         </div>
     </div>
 </div>
-<div class="col-md-12 section-white-to-gray">
+<div class="col-md-12 section-white-to-gray" style="min-height: 100vh;">
 
-    <div class="col-md-6 col-md-offset-2 section-white-to-gray" style="box-shadow: 0px -16px 1px 2px transparent linear-gradient(0deg, #e5e5e5 0%, #fff 100%);    border-top-left-radius: 10px;    margin-top: -3%;    z-index: 1;    padding: 5px;    border-top-right-radius: 10px;    background: transparent linear-gradient(0deg, #f6f6f6 0%, #fcfcfc 100%) repeat scroll 0 0;">
+    <div class="col-md-6 col-md-offset-3 section-white-to-gray hide" style="box-shadow: 0px -16px 1px 2px transparent linear-gradient(0deg, #e5e5e5 0%, #fff 100%);    border-top-left-radius: 10px;    margin-top: -3%;    z-index: 1;    padding: 5px;    border-top-right-radius: 10px;    background: transparent linear-gradient(0deg, #f6f6f6 0%, #fcfcfc 100%) repeat scroll 0 0;">
         <ul class="nav nav-pills nav-pills-icons nav-pills-info nav-justified" role="tablist">
             <!--
-                color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+            color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
             -->
             <li class="">
                 <a href="index.html#dashboard-1" role="tab" data-toggle="tab" aria-expanded="false">
@@ -64,106 +54,92 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-8 col-md-offset-1">
+    <style>
+        .blog-detail,
+        .blog-detail *{
+            font-family: arial, helvetica, sans-serif !important;
+            font-size: 18.2px !important;
+            line-height: 1.55em !important;
+        }
+        .blog-detail a {
+            color:#0086d4
+        }
+    </style>
+    <div class="col-md-10 col-md-offset-1">
 
         <div class="tab-content tab-space">
             <div class="tab-pane" id="schedule-1">
                 Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
                 <br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
             </div>
-            <div class="tab-pane active" id="tasks-1">
-                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
-                <br><br>Dynamically innovate resource-leveling customer service for state of the art customer service.
+            <div class="tab-pane" id="tasks-1">
+                
             </div>
-            <div class="tab-pane" id="latest_magzines">
+            <div class="tab-pane active" id="latest_magzines">
                 <h2 class="title">Latest Magzines</h2>
                 <br>
-                <div class="card card-plain card-blog">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="card-image">
-                                <img class="img img-raised" src="http://2mlyl2eanf41pq5h03csafz15gi.wpengine.netdna-cdn.com/wp-content/uploads/2017/03/Featured-Image-400x400.jpg">
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card card-profile card-plain" style="    margin: 0;">
-                                <div class="col-md-3">
-                                    <div class="card-image" style="max-width: 76px;max-height: 76px;">
-                                        <a href="sections.html#pablo">
-                                            <img class="img" src="http://2mlyl2eanf41pq5h03csafz15gi.wpengine.netdna-cdn.com/wp-content/uploads/2016/11/ADAM-Lague_edit-BW-small-150x150.png">
+                @{
+                    var i = 0;
+                }
+                @foreach (var blog in Model)
+                {
+                    <div class="card card-plain card-blog">
+                        <div class="row">
+                            @if (i++ % 2 == 0)
+                            {
+                                <div class="col-md-5">
+                                    <div class="card-image">
+                                        <img class="img img-raised" src="@ViewBag.UploadLocation@blog["banner"]">
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h3 class="card-title">
+                                        <a href="/Magzines?token=@blog["guid"]">
+                                            @blog["title"]
                                         </a>
-                                        <div class="ripple-container"></div>
+                                    </h3>
+                                    <div class="blog-detail">
+                                        <p class="card-description blog">
+                                            @Html.Raw(blog["text"].Substring(0, 300))
+                                            &hellip;<a href="/Magzines?token=@blog["guid"]"> Read More </a>
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="col-md-7" style="text-align: left;padding:0;">
-                                    <div class="">
-                                        <h4 class="card-title" style="    margin: 0;">
-                                            Adam Lague
-                                        </h4>
-                                        <h6 class="category text-muted" style="    margin: 0;">
-                                            Features Writer
-                                        </h6>
+                            }
+                            else
+                            {
+                                <div class="col-md-5 visible-xs visible-sm">
+                                    <div class="card-image">
+                                        <img class="img img-raised" src="@ViewBag.UploadLocation@blog["banner"]">
                                     </div>
-                                    <p class="author">
-                                        March 9, 2017
-                                    </p>
                                 </div>
-                            </div>
-
-                            <h4 class="card-title">
-                                <a href="sections.html#pablo">GO FOR THE GREEN: 5 GREAT GOLFCATIONS</a>
-                            </h4>
-                            <p class="card-description">
-                                Mark Twain once said golf is a good walk spoiled. But for those of us silly enough to play this frustrating game (over and over), it really is a way of life. We practice, we play, we read, and we watch, and if you live in a winter clime, you think about it all winter long. <a href="sections.html#pablo"> Read More </a>
-                            </p>
+                                <div class="col-md-7">
+                                    <h3 class="card-title">
+                                        <a href="/Magzines?token=@blog["guid"]">
+                                            @blog["title"]
+                                        </a>
+                                    </h3>
+                                    <div class="blog-detail">
+                                        <p class="card-description">
+                                            @Html.Raw(blog["text"].Substring(0, 300))
+                                            &hellip;<a href="/Magzines?token=@blog["guid"]"> Read More </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 visible-md visible-lg">
+                                    <div class="card-image">
+                                        <img class="img img-raised" src="@ViewBag.UploadLocation@blog["banner"]">
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
-                </div>
-
-                <div class="card card-plain card-blog">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <div class="card card-profile card-plain" style="    margin: 0;">
-                                <div class="col-md-3">
-                                    <div class="card-image" style="max-width: 76px;max-height: 76px;">
-                                        <a href="sections.html#pablo">
-                                            <img class="img" src="http://2mlyl2eanf41pq5h03csafz15gi.wpengine.netdna-cdn.com/wp-content/uploads/2014/04/Judith_WebsiteWP-150x150.jpg">
-                                        </a>
-                                        <div class="ripple-container"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7" style="text-align: left;padding:0;">
-                                    <div class="">
-                                        <h4 class="card-title" style="    margin: 0;">
-                                            Judith Ritter
-                                        </h4>
-                                        <h6 class="category text-muted" style="    margin: 0;">
-                                            Contributor
-                                        </h6>
-                                    </div>
-                                    <p class="author">March 6, 2017 </p>
-                                </div>
-                            </div>
-
-                            <h4 class="card-title">
-                                <a href="sections.html#pablo">A Slice of Paradise at Tip of the Tail Villa</a>
-                            </h4>
-                            <p class="card-description">
-                                There was nothing in Glenn Garrard’s childhood that would predict that at age 50 he would hand build a six-bedroom Frank Lloyd Wright-inspired home on a deserted tip of a small tropical island and moreover, complete it in a mere 7 months! Glenn, who grew up in a northern climate (Ontario, Canada), had not traveled […]
-                                <a href="sections.html#pablo"> Read More </a>
-                            </p>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="card-image">
-                                <img class="img img-raised" src="http://2mlyl2eanf41pq5h03csafz15gi.wpengine.netdna-cdn.com/wp-content/uploads/2017/03/TurksAndCaicos_TipOfTheTail_42-400x400.jpg">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <br /><br />
+                }
             </div>
         </div>
     </div>
-    <div class="col-md-3" style="box-shadow: -1px 0px 0px 0px #afacac;margin-bottom:3%;">
+    <div class="col-md-3 hide" style="box-shadow: -1px 0px 0px 0px #afacac;margin-bottom:3%;">
         <h2 class="card-title">
             Trending
             <i class="material-icons text-danger">trending_up</i>

@@ -1,0 +1,461 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayout2.cshtml";
+    ViewBag.UploadLocation = RentalsClinet.Helpers.CustomActions.getUploadLocation();    
+}
+<style>
+    .tag {
+        background-color: #cecece;
+        cursor: pointer;
+        border-radius: 12px;
+        margin: 5px 3px 5px 0;
+        padding: 5px 12px;
+        text-transform: uppercase;
+        font-size: 10px;
+        font-weight: 400;
+        position: relative;
+    }
+    .ratings > i {
+        font-size: 16px;
+    }
+    body {
+        background: #eee;
+    }
+     
+</style>
+
+<div class="cd-section" id="headers">
+    <div class="header-2">
+        <div class="page-header header-filter" style="height: 50vh; min-height: 50vh;">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <h1 class="title">
+                                Villa's
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section-space hide"></div>
+@model List<List<CustomModels.PropertyModels.PropertyView>>
+
+<style>
+    .gm-style {
+        font-size: inherit;
+        font-family: inherit;
+    }
+
+    .gm-style .ol-attribution {
+        bottom: 1em;
+    }
+
+    .gm-style .ol-attribution.ol-logo-only {
+        bottom: 1em;
+    }
+
+    #map {
+        margin: 0;
+        border: 0px solid #CDD7EE;
+        border-radius: 0px;
+        width: 100%;
+        padding: 0px;
+        padding-bottom: 5px;
+        max-height: 100vh;
+        min-height: 100vh;
+    }
+
+
+
+    section #map {
+        margin: 5px auto;
+        margin-left: 0px;
+        border: 1px solid #CDD7EE;
+        border-radius: 5px;
+        width: 100%;
+        height: 100vh;
+    }
+
+    #wrapper-map {
+        width: 100%;
+        margin: 0;
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    #content section {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .ol-scale-line {
+        background: #95b9e6;
+        bottom: 5px;
+        left: 35px;
+    }
+
+    #customSkinMap {
+        height: 100vh;
+    }
+    .gm-style-iw .card-image {
+        width: 400px !important;
+    }
+    
+    .form-group .dropdownjs {
+        padding-bottom: 7px;
+        margin: 27px 0 0 0;
+    }
+</style>
+@{
+    ViewBag.citiesAll = LayerDAO.PropertyDAO.GetCities();
+    ViewBag.TagTypes = LayerDAO.PropertyDAO.GetPropertyTags();
+    var date = DateTime.Now;
+}
+<div class="cd-section" style="    background: rgba(238, 238, 238, 0.4);">
+    <div class="container" style="padding:0 60px; margin: 0; width: 100%;">
+
+        <div class="row">
+            <div id="filter-panel" class="filter-panel ">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form action="/Destinations/Search" method="post">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            REFINE YOUR SEARCH:
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-3 ">
+                                    <select class="select form-control" name="model.cityName" placeholder="Choose an option">
+                                        <option value="*">All Destinations</option>
+                                        @foreach (var city in ViewBag.citiesAll)
+                                        {
+                                            <option value="@city.guid" @(ViewBag.modelSearch.cityName == city.guid ? "selected=''" : "")>@city.CityName</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            Check in &rarr; Check out
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    @if (ViewBag.StartDate == null || ViewBag.EndDate == null)
+                                    {
+                                        
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label">Check in &rarr; Check out</label>
+                                            <input name="model.r" type="text" id="config-demo" class="form-control">
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Check in &rarr; Check out</label>
+                                            <input value="@ViewBag.StartDate.ToString("MM/dd/yyyy") - @ViewBag.EndDate.ToString("MM/dd/yyyy")" name="model.r" type="text" id="config-demo" class="form-control">    
+                                        </div>
+                                        
+                                    }
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            PRICE DETAILS:
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-md-offset-1 form-group">
+                                    <input type="text" id="example_id" name="model.price" value="" />
+                                </div>
+                                <div class="col-sm-12 col-md-1">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            SORT ORDER:
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group form-search" style="color: #000;margin:0px 10px;">
+                                        <select class="select form-control" name="model.sort" placeholder="Featured">
+                                            <option value="5" @(ViewBag.modelSearch.sort == 5 ? "selected=''" : "")>Featured</option>
+                                            <option value="3" @(ViewBag.modelSearch.sort == 3 ? "selected=''" : "")>Bedrooms (Min - Max)</option>
+                                            <option value="4" @(ViewBag.modelSearch.sort == 4 ? "selected=''" : "")>Bedrooms (Max - Min)</option>
+                                            <option value="1" @(ViewBag.modelSearch.sort == 1 ? "selected=''" : "")>Price (Min - Max)</option>
+                                            <option value="2" @(ViewBag.modelSearch.sort == 2 ? "selected=''" : "")>Price (Max - Min)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-1">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            GUESTS:
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">
+                                            Guests
+                                        </label>
+                                        <select name="model.guests" class="select form-control" placeholder="Guests">
+                                            @for (int xi = 1; xi <= 100; xi++)
+                                            {
+                                                <option value="@xi" @(ViewBag.modelSearch.guests == xi ? "selected=''" : "")>@xi</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            COLLECTIONS:
+
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 form-group">
+                                    @foreach (var tag in ViewBag.TagTypes)
+                                    {
+                                        <div class="col-md-2">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" @(ViewBag.modelSearch.filter.Contains(tag.TagName) ? "checked=''" : "") name="@tag.TagName">
+                                                    @tag.TagName
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9 col-md-offset-2">
+                                    <button type="submit" class="btn btn-success">
+                                        Apply
+                                    </button>
+                                    <button type="button" data-toggle="collapse" data-target="#filter-panel" class="btn btn-default">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="padding: 40px; padding-top: 60px; margin: 0; min-height: 100vh; width: 100vw;">
+    <div class="row">
+        <div class="nav-align-center">
+            <ul class="nav nav-pills nav-pills-icons" role="tablist">
+                <li>
+                    <a href="#work" role="tab" data-toggle="tab">
+                        <i class="material-icons">dashboard</i>
+                        City View
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#connections" role="tab" data-toggle="tab">
+                        <i class="material-icons">location_on</i>
+                        Map View
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane work" id="work">
+            <div class="content" style="min-height:100vh;">
+                <div class="row">
+                    <div class="col-md-12">
+                        @foreach (var propertyList in Model)
+                        {
+                            <div class="row">
+                                @foreach (var property in propertyList)
+                                {
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="card property_box" title="@property.Name" longitude="@property.Logitude" latitude="@property.Latitude">
+                                            <div class="card-actions hide pull-right" style="position: absolute; right: 5%; top: 5%; color: #555; z-index: 10;">
+                                                <div class="stats" style="padding: 10px; border-radius: 500px; font-size: 32px; background: #ccc;">
+                                                    <i class="material-icons" style="font-size: 32px;">favorite</i>
+                                                </div>
+                                            </div>
+                                            <div class="card-image" style="width: 100%; margin: 0;" onclick="location.href = '/Destinations/Detail?id=@property.PropertyId'">
+                                                <a href="/Destinations/Detail?id=@property.PropertyId">
+                                                    <img class="img" src="@ViewBag.UploadLocation/@property.banner">
+                                                    <div class="card-title">
+                                                        @property.Name
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="content" style="padding: 15px;">
+                                                <h6 class="category text-muted" style="margin: 0; height: 5ch;">@property.SubName</h6>
+                                                <h5 class="card-title" style="margin: 0;">
+                                                    <a href="/Destinations/Detail?id=@property.PropertyId">
+                                                        <i class="material-icons">location_on</i>
+                                                        @property.CityName, @property.Country
+                                                    </a>
+                                                </h5>
+                                                <div class="card-description hide"></div>
+                                                <div>
+                                                    <div class="footer" style="margin: 0 6%; border-top: 1px solid #eee;">
+                                                        <div class="price">
+                                                            <h4 style="margin: 0; font-weight: bold;">
+                                                                $@property.night/night
+                                                            </h4>
+                                                        </div>
+                                                        <div class="author" style="float: right; line-height: 30px; color: #999999;">
+                                                            <a href="#">
+                                                                <i class="material-icons">group</i>
+                                                                @property.MaxGuests
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                            
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane active connections" id="connections">
+            <div class="row">
+                <div id="account-container">
+                    <div id="wrapper-map">
+                        <div id="content">
+                            <section>
+                                <div id="map" class="gmap map-boxed card"></div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            $(".property_box").each(function() {
+                $(this).click(function() {
+                    var id = $(this).attr("propertyId");
+                    location.href = "/Destinations/Detail?id=" + id;
+                });
+            });
+        });
+        var flag = false;
+        $('#config-demo').focus(function() {
+            if (flag == false) {
+                flag = true;
+                $('#config-demo').daterangepicker({
+                    "minDate": new Date(),
+                    "opens": "center",
+                    isInvalidDate: function (date) {
+                        //debugger;
+                        return false;
+                    }
+                }, function (start, end, label) {
+                    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                });
+            }
+        });
+        $("#example_id").ionRangeSlider({
+            type: "double",
+            grid: true,
+            from: @ViewBag.smin,
+            to: @ViewBag.smax,
+            min: 0,
+            max: @ViewBag.maxPrice,
+            prefix: '$',
+            postfix: '/nt'
+        });
+    </script>
+}
+@section headScripts
+{
+
+    <script>
+    $(document).ready(function () {
+        debugger;
+
+    });
+    function myMap() {
+        CustomMap(32.4690717, 74.39393389999998);
+    }
+    function CustomMap(longi, lati) {
+        debugger;
+        var myLatlng = new google.maps.LatLng(37.090240, -95.712891);
+        var mapOptions = {
+            zoom: 4,
+            center: myLatlng,
+            scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+
+            // Styling of the map in JSON object
+            styles: [{ "featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{ "color": "#444444" }] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "color": "#f2f2f2" }] }, { "featureType": "poi", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": 45 }] }, { "featureType": "road.highway", "elementType": "all", "stylers": [{ "visibility": "simplified" }] }, { "featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "color": "#cdd2d4" }, { "visibility": "on" }] }]
+        };
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        $(".property_box").each(function () {
+            debugger;
+            var lati = parseFloat($(this).attr("latitude"));
+            var longi = parseFloat($(this).attr("longitude"));
+            var title = $(this).attr("title");
+            var latilongi = new google.maps.LatLng(lati, longi);
+            var marker = new google.maps.Marker({
+                dragable: true,
+                position: { lat: lati, lng: longi },
+                title: title
+            });
+
+            var div = $(this).html();
+
+            var contentString = div;//$(div).find(".content").css("width", "500px").html();
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+
+            marker.setMap(map);
+
+        });
+
+
+    }
+</script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC96Hx9IMfAglwiP9RkQn5cVi4MZKiC5LA&callback=myMap">
+    </script>
+
+}

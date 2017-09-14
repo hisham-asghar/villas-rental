@@ -84,18 +84,37 @@ namespace LayerDAO
         {
             using (var db = new DBModel())
             {
-                return db.Cars.Select(y => new CarModel()
+                if (type == -1)
                 {
-                    id = y.CarId,
-                    banner = y.Banner,
-                    description = y.Description,
-                    name = y.Name,
-                    guid = y.guid,
-                    Type = y.Type,
-                    priceOneDay = y.OneDay,
-                    priceWeek = y.Week,
-                    priceThreeDays = y.ThreeDay
-                }).Where(s => s.Type == type).ToList();
+                    return db.Cars.Select(y => new CarModel()
+                    {
+                        id = y.CarId,
+                        banner = y.Banner,
+                        description = y.Description,
+                        name = y.Name,
+                        guid = y.guid,
+                        Type = y.Type,
+                        TypeName = y.Type == 0 ? "Exotic" : "Luxury",
+                        priceOneDay = y.OneDay,
+                        priceWeek = y.Week,
+                        priceThreeDays = y.ThreeDay
+                    }).ToList();
+                }
+                else
+                {
+                    return db.Cars.Select(y => new CarModel()
+                    {
+                        id = y.CarId,
+                        banner = y.Banner,
+                        description = y.Description,
+                        name = y.Name,
+                        guid = y.guid,
+                        Type = y.Type,
+                        priceOneDay = y.OneDay,
+                        priceWeek = y.Week,
+                        priceThreeDays = y.ThreeDay
+                    }).Where(s => s.Type == type).ToList();
+                }
             }
         }
 

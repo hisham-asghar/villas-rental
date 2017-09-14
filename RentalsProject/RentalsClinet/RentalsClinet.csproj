@@ -46,6 +46,10 @@
       <HintPath>..\packages\Ical.Net.2.3.0\lib\net40\antlr.runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AuthorizeNet, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AuthorizeNet.1.9.0\lib\AuthorizeNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -63,13 +67,47 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Threading.Tasks">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
     <Reference Include="NodaTime, Version=1.3.0.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
       <HintPath>..\packages\Ical.Net.2.3.0\lib\net40\NodaTime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Reimers.Core, Version=5.3.95.699, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reimers.Core.5.3.95.699\lib\Net40\Reimers.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Reimers.Google.Map, Version=5.3.95.699, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Reimers.Google.Map.5.3.95.699\lib\Net40\Reimers.Google.Map.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid.SmtpApi">
+      <HintPath>..\packages\SendGrid.SmtpApi.1.1.3\lib\net40\SendGrid.SmtpApi.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGridMail">
+      <HintPath>..\packages\SendGrid.Net40.5.1.0.0\lib\net40\SendGridMail.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\net40\System.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\net40\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Threading.Tasks">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\net40\System.Threading.Tasks.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -156,7 +194,9 @@
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\DestinationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\homeownerController.cs" />
     <Compile Include="Controllers\MagzinesController.cs" />
+    <Compile Include="Controllers\MailsController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\YachtsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -164,12 +204,376 @@
     </Compile>
     <Compile Include="Helpers\CustomActions.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\MerchantHelper.cs" />
     <Compile Include="Helpers\SendEmailModel.cs" />
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Data\data.json" />
+    <Content Include="Content\amenities_sprite.png" />
+    <Content Include="Content\assets\assets-for-demo\b_1.jpg" />
+    <Content Include="Content\assets\assets-for-demo\b_2.jpg" />
+    <Content Include="Content\assets\assets-for-demo\b_3.jpg" />
+    <Content Include="Content\assets\assets-for-demo\b_4.jpg" />
+    <Content Include="Content\assets\assets-for-demo\cards-test.png" />
+    <Content Include="Content\assets\assets-for-demo\content-test.png" />
+    <Content Include="Content\assets\assets-for-demo\demo.css" />
+    <Content Include="Content\assets\assets-for-demo\ex-about-us.jpg" />
+    <Content Include="Content\assets\assets-for-demo\ex-blog-post.jpg" />
+    <Content Include="Content\assets\assets-for-demo\ex-blog-posts.jpg" />
+    <Content Include="Content\assets\assets-for-demo\ex-contact.jpg" />
+    <Content Include="Content\assets\assets-for-demo\ex-landing.jpg" />
+    <Content Include="Content\assets\assets-for-demo\ex-login.jpg" />
+    <Content Include="Content\assets\assets-for-demo\ex-pricing.jpg" />
+    <Content Include="Content\assets\assets-for-demo\ex-product.jpg" />
+    <Content Include="Content\assets\assets-for-demo\ex-profile.jpg" />
+    <Content Include="Content\assets\assets-for-demo\ex-register.jpg" />
+    <Content Include="Content\assets\assets-for-demo\f_1.jpg" />
+    <Content Include="Content\assets\assets-for-demo\f_2.jpg" />
+    <Content Include="Content\assets\assets-for-demo\f_3.jpg" />
+    <Content Include="Content\assets\assets-for-demo\f_4.jpg" />
+    <Content Include="Content\assets\assets-for-demo\f_5.jpg" />
+    <Content Include="Content\assets\assets-for-demo\harvard.jpg" />
+    <Content Include="Content\assets\assets-for-demo\h_1.jpg" />
+    <Content Include="Content\assets\assets-for-demo\h_2.jpg" />
+    <Content Include="Content\assets\assets-for-demo\h_3.jpg" />
+    <Content Include="Content\assets\assets-for-demo\h_4.jpg" />
+    <Content Include="Content\assets\assets-for-demo\jquery.sharrre.js" />
+    <Content Include="Content\assets\assets-for-demo\microsoft.jpg" />
+    <Content Include="Content\assets\assets-for-demo\modernizr.js" />
+    <Content Include="Content\assets\assets-for-demo\m_1.jpg" />
+    <Content Include="Content\assets\assets-for-demo\m_2.jpg" />
+    <Content Include="Content\assets\assets-for-demo\pro_1.jpg" />
+    <Content Include="Content\assets\assets-for-demo\pro_2.jpg" />
+    <Content Include="Content\assets\assets-for-demo\pro_3.jpg" />
+    <Content Include="Content\assets\assets-for-demo\pro_4.jpg" />
+    <Content Include="Content\assets\assets-for-demo\p_1.jpg" />
+    <Content Include="Content\assets\assets-for-demo\p_2.jpg" />
+    <Content Include="Content\assets\assets-for-demo\p_3.jpg" />
+    <Content Include="Content\assets\assets-for-demo\p_4.jpg" />
+    <Content Include="Content\assets\assets-for-demo\p_5.jpg" />
+    <Content Include="Content\assets\assets-for-demo\stanford.jpg" />
+    <Content Include="Content\assets\assets-for-demo\team_1.jpg" />
+    <Content Include="Content\assets\assets-for-demo\team_2.jpg" />
+    <Content Include="Content\assets\assets-for-demo\team_3.jpg" />
+    <Content Include="Content\assets\assets-for-demo\team_4.jpg" />
+    <Content Include="Content\assets\assets-for-demo\team_5.jpg" />
+    <Content Include="Content\assets\assets-for-demo\test1.jpg" />
+    <Content Include="Content\assets\assets-for-demo\test2.jpg" />
+    <Content Include="Content\assets\assets-for-demo\test3.jpg" />
+    <Content Include="Content\assets\assets-for-demo\t_1.jpg" />
+    <Content Include="Content\assets\assets-for-demo\t_2.jpg" />
+    <Content Include="Content\assets\assets-for-demo\t_3.jpg" />
+    <Content Include="Content\assets\assets-for-demo\vertical-nav.css" />
+    <Content Include="Content\assets\assets-for-demo\vertical-nav.js" />
+    <Content Include="Content\assets\assets-for-demo\vodafone.jpg" />
+    <Content Include="Content\assets\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\assets\css\bootstrap.min.css" />
+    <Content Include="Content\assets\css\material-kit.css" />
+    <Content Include="Content\assets\css\material-kit.min.css" />
+    <Content Include="Content\assets\img\apple-icon.png" />
+    <Content Include="Content\assets\img\bg.jpg" />
+    <Content Include="Content\assets\img\bg2.jpg" />
+    <Content Include="Content\assets\img\bg3.jpg" />
+    <Content Include="Content\assets\img\bg5.jpg" />
+    <Content Include="Content\assets\img\Boats.png" />
+    <Content Include="Content\assets\img\Carss.png" />
+    <Content Include="Content\assets\img\Chauffeurs.png" />
+    <Content Include="Content\assets\img\Chefs.png" />
+    <Content Include="Content\assets\img\concierge.jpg" />
+    <Content Include="Content\assets\img\dg1.jpg" />
+    <Content Include="Content\assets\img\dg10.jpg" />
+    <Content Include="Content\assets\img\dg2.jpg" />
+    <Content Include="Content\assets\img\dg6.jpg" />
+    <Content Include="Content\assets\img\dg9.jpg" />
+    <Content Include="Content\assets\img\d_casa_oliver.jpg" />
+    <Content Include="Content\assets\img\examples\blog1.jpg" />
+    <Content Include="Content\assets\img\examples\blog3.jpg" />
+    <Content Include="Content\assets\img\examples\blog4.jpg" />
+    <Content Include="Content\assets\img\examples\blog5.jpg" />
+    <Content Include="Content\assets\img\examples\blog6.jpg" />
+    <Content Include="Content\assets\img\examples\blog7.jpg" />
+    <Content Include="Content\assets\img\examples\blog8.jpg" />
+    <Content Include="Content\assets\img\examples\card-blog1.jpg" />
+    <Content Include="Content\assets\img\examples\card-blog2.jpg" />
+    <Content Include="Content\assets\img\examples\card-blog4.jpg" />
+    <Content Include="Content\assets\img\examples\card-product1.jpg" />
+    <Content Include="Content\assets\img\examples\card-product2.jpg" />
+    <Content Include="Content\assets\img\examples\card-product3.jpg" />
+    <Content Include="Content\assets\img\examples\card-product4.jpg" />
+    <Content Include="Content\assets\img\examples\card-profile1.jpg" />
+    <Content Include="Content\assets\img\examples\card-profile2.jpg" />
+    <Content Include="Content\assets\img\examples\card-profile4.jpg" />
+    <Content Include="Content\assets\img\examples\card-project1.jpg" />
+    <Content Include="Content\assets\img\examples\card-project2.jpg" />
+    <Content Include="Content\assets\img\examples\card-project3.jpg" />
+    <Content Include="Content\assets\img\examples\card-project4.jpg" />
+    <Content Include="Content\assets\img\examples\chris4.jpg" />
+    <Content Include="Content\assets\img\examples\chris5.jpg" />
+    <Content Include="Content\assets\img\examples\chris6.jpg" />
+    <Content Include="Content\assets\img\examples\chris7.jpg" />
+    <Content Include="Content\assets\img\examples\chris9.jpg" />
+    <Content Include="Content\assets\img\examples\city.jpg" />
+    <Content Include="Content\assets\img\examples\office1.jpg" />
+    <Content Include="Content\assets\img\examples\office2.jpg" />
+    <Content Include="Content\assets\img\examples\office3.jpg" />
+    <Content Include="Content\assets\img\examples\office4.jpg" />
+    <Content Include="Content\assets\img\examples\office5.jpg" />
+    <Content Include="Content\assets\img\examples\product1.jpg" />
+    <Content Include="Content\assets\img\examples\product2.jpg" />
+    <Content Include="Content\assets\img\examples\product3.jpg" />
+    <Content Include="Content\assets\img\examples\product4.jpg" />
+    <Content Include="Content\assets\img\faces\avatar.jpg" />
+    <Content Include="Content\assets\img\faces\card-profile1-square.jpg" />
+    <Content Include="Content\assets\img\faces\card-profile2-square.jpg" />
+    <Content Include="Content\assets\img\faces\card-profile4-square.jpg" />
+    <Content Include="Content\assets\img\faces\card-profile5-square.jpg" />
+    <Content Include="Content\assets\img\faces\card-profile6-square.jpg" />
+    <Content Include="Content\assets\img\faces\christian.jpg" />
+    <Content Include="Content\assets\img\faces\kendall.jpg" />
+    <Content Include="Content\assets\img\faces\marc.jpg" />
+    <Content Include="Content\assets\img\favicon.png" />
+    <Content Include="Content\assets\img\Housekeepings.png" />
+    <Content Include="Content\assets\img\iBrandPromise.png" />
+    <Content Include="Content\assets\img\iHomeOwner.jpg" />
+    <Content Include="Content\assets\img\image_placeholder.jpg" />
+    <Content Include="Content\assets\img\logo.png" />
+    <Content Include="Content\assets\img\main_head.jpg" />
+    <Content Include="Content\assets\img\office2.jpg" />
+    <Content Include="Content\assets\img\placeholder.jpg" />
+    <Content Include="Content\assets\img\Planes.png" />
+    <Content Include="Content\assets\img\presentation\components.jpg" />
+    <Content Include="Content\assets\img\product1.jpg" />
+    <Content Include="Content\assets\img\product2.jpg" />
+    <Content Include="Content\assets\img\product3.jpg" />
+    <Content Include="Content\assets\img\sections\iphone.png" />
+    <Content Include="Content\assets\img\sections\iphone2.png" />
+    <Content Include="Content\assets\img\Security.png" />
+    <Content Include="Content\assets\img\TMG.png" />
+    <Content Include="Content\assets\img\Tours.png" />
+    <Content Include="Content\assets\img\Trainers.png" />
+    <Content Include="Content\assets\img\Villa.png" />
+    <Content Include="Content\assets\img\vr5\iCol_beachfront.png" />
+    <Content Include="Content\assets\img\vr5\iCol_city.png" />
+    <Content Include="Content\assets\img\vr5\iCol_honeymoon.png" />
+    <Content Include="Content\assets\img\vr5\iCol_new.png" />
+    <Content Include="Content\assets\img\vr5\iCol_promotion.png" />
+    <Content Include="Content\assets\js\atv-img-animation.js" />
+    <Content Include="Content\assets\js\bootstrap-datepicker.js" />
+    <Content Include="Content\assets\js\bootstrap-datetimepicker.js" />
+    <Content Include="Content\assets\js\bootstrap-selectpicker.js" />
+    <Content Include="Content\assets\js\bootstrap-tagsinput.js" />
+    <Content Include="Content\assets\js\bootstrap-_datepicker.js" />
+    <Content Include="Content\assets\js\bootstrap.min.js" />
+    <Content Include="Content\assets\js\gmap.js" />
+    <Content Include="Content\assets\js\jasny-bootstrap.min.js" />
+    <Content Include="Content\assets\js\jquery-3.1.1.min.js" />
+    <Content Include="Content\assets\js\jquery-ui.min.js" />
+    <Content Include="Content\assets\js\jquery.dropdown.js" />
+    <Content Include="Content\assets\js\jquery.flexisel.js" />
+    <Content Include="Content\assets\js\jquery.min.js" />
+    <Content Include="Content\assets\js\jquery.tagsinput.js" />
+    <Content Include="Content\assets\js\jquery.validate.min.js" />
+    <Content Include="Content\assets\js\material-kit.js" />
+    <Content Include="Content\assets\js\material-kit.min.js" />
+    <Content Include="Content\assets\js\material.min.js" />
+    <Content Include="Content\assets\js\moment.min.js" />
+    <Content Include="Content\assets\js\nouislider.min.js" />
+    <Content Include="Content\assets\js\sweetalert2.js" />
+    <Content Include="Content\assets\rangeSlider\css\ion.rangeSlider.css" />
+    <Content Include="Content\assets\rangeSlider\css\ion.rangeSlider.skinFlat.css" />
+    <Content Include="Content\assets\rangeSlider\css\ion.rangeSlider.skinHTML5.css" />
+    <Content Include="Content\assets\rangeSlider\css\ion.rangeSlider.skinModern.css" />
+    <Content Include="Content\assets\rangeSlider\css\ion.rangeSlider.skinNice.css" />
+    <Content Include="Content\assets\rangeSlider\css\ion.rangeSlider.skinSimple.css" />
+    <Content Include="Content\assets\rangeSlider\css\normalize.css" />
+    <Content Include="Content\assets\rangeSlider\img\sprite-skin-flat.png" />
+    <Content Include="Content\assets\rangeSlider\img\sprite-skin-modern.png" />
+    <Content Include="Content\assets\rangeSlider\img\sprite-skin-nice.png" />
+    <Content Include="Content\assets\rangeSlider\img\sprite-skin-simple.png" />
+    <Content Include="Content\assets\rangeSlider\js\ion.rangeSlider.js" />
+    <Content Include="Content\assets\rangeSlider\js\ion.rangeSlider.min.js" />
+    <Content Include="Content\Content.zip" />
+    <Content Include="Content\daterangepicker\daterangepicker.css" />
+    <Content Include="Content\daterangepicker\daterangepicker.js" />
+    <Content Include="Content\daterangepicker\daterangepicker\daterangepicker.css" />
+    <Content Include="Content\daterangepicker\daterangepicker\daterangepicker.js" />
+    <Content Include="Content\icons2.png" />
+    <Content Include="Content\Images\Carbanner.jpg" />
+    <Content Include="Content\Images\Destinations.jpg" />
+    <Content Include="Content\Images\exotic-cars.jpg" />
+    <Content Include="Content\Images\Luxury-Cars.jpg" />
+    <Content Include="Content\Images\Section-1\Section-1.jpg" />
+    <Content Include="Content\Images\Section-3\Beachfront.jpg" />
+    <Content Include="Content\Images\Section-3\CitiSite.jpg" />
+    <Content Include="Content\Images\Section-3\specialOffer.jpg" />
+    <Content Include="Content\Images\Section-4\Section-4.jpeg" />
+    <Content Include="Content\Images\Section-5\Lasvegas.jpg" />
+    <Content Include="Content\Images\Section-5\miami.jpg" />
+    <Content Include="Content\Images\Section-5\SaintTropez.jpg" />
+    <Content Include="Content\Images\Yachtbanner.jpg" />
+    <Content Include="Content\Images\Yachts\100.jpg" />
+    <Content Include="Content\Images\Yachts\36-63.jpg" />
+    <Content Include="Content\Images\Yachts\64-77.jpg" />
+    <Content Include="Content\Images\Yachts\78-99.jpg" />
+    <Content Include="Content\Services\Boats.png" />
+    <Content Include="Content\Services\Cars.png" />
+    <Content Include="Content\Services\Carss.png" />
+    <Content Include="Content\Services\Chauffeurs.png" />
+    <Content Include="Content\Services\Cheff.png" />
+    <Content Include="Content\Services\Chefs.png" />
+    <Content Include="Content\Services\Food.png" />
+    <Content Include="Content\Services\HouseKeeper.png" />
+    <Content Include="Content\Services\Housekeepings.png" />
+    <Content Include="Content\Services\Jet.png" />
+    <Content Include="Content\Services\Masseuse.png" />
+    <Content Include="Content\Services\mayordomo.png" />
+    <Content Include="Content\Services\PersoanlTrainer.png" />
+    <Content Include="Content\Services\PersonlaSecurity.png" />
+    <Content Include="Content\Services\Planes.png" />
+    <Content Include="Content\Services\planner.png" />
+    <Content Include="Content\Services\Security.png" />
+    <Content Include="Content\Services\Tours.png" />
+    <Content Include="Content\Services\Trainers.png" />
+    <Content Include="Content\Services\Villa.png" />
+    <Content Include="Content\Services\Villas.png" />
+    <Content Include="Content\Services\Yacht.png" />
+    <Content Include="Content\Services\Yacht2.png" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\ZoomSlider\bannerscollection_zoominout.css" />
+    <Content Include="Content\ZoomSlider\css3animations.css" />
+    <Content Include="Content\ZoomSlider\js\bannerscollection_zoominout.js" />
+    <Content Include="Content\ZoomSlider\js\jquery.touchSwipe.min.js" />
+    <Content Include="Content\ZoomSlider\skins\1pxline.gif" />
+    <Content Include="Content\ZoomSlider\skins\bgOpFix.jpg" />
+    <Content Include="Content\ZoomSlider\skins\empty.png" />
+    <Content Include="Content\ZoomSlider\skins\empty50.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\carouselLeftNavDisable.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\carouselLeftNavOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\carouselLeftNavON.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\carouselRightNavDisable.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\carouselRightNavOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\carouselRightNavON.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\leftNavOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\leftNavON.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\listIcon.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\pause_off.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\play_off.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\play_overOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\play_overON.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\rightNavOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\rightNavON.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\thumbActiveArrow.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\thumbActiveArrow_.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\thumbsBg.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\videoShadow.png" />
+    <Content Include="Content\ZoomSlider\skins\generous\videoShadow400.png" />
+    <Content Include="Content\ZoomSlider\skins\hand.cur" />
+    <Content Include="Content\ZoomSlider\skins\loader.gif" />
+    <Content Include="Content\ZoomSlider\skins\majestic\border.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\carouselLeftNavDisable.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\carouselLeftNavOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\carouselLeftNavON.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\carouselRightNavDisable.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\carouselRightNavOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\carouselRightNavON.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\leftNavOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\leftNavON.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\listIcon.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\pause_off.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\play_off.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\play_overOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\play_overON.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\rightNavOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\rightNavON.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\thumbActiveArrow.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\videoShadow.png" />
+    <Content Include="Content\ZoomSlider\skins\majestic\videoShadow400.png" />
+    <Content Include="Content\ZoomSlider\skins\noise.png" />
+    <Content Include="Content\ZoomSlider\skins\noise2.png" />
+    <Content Include="Content\ZoomSlider\skins\noise3.png" />
+    <Content Include="Content\ZoomSlider\skins\opportune\bottomNavOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\opportune\bottomNavON.png" />
+    <Content Include="Content\ZoomSlider\skins\opportune\bottomOverThumbBg.png" />
+    <Content Include="Content\ZoomSlider\skins\opportune\leftNavOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\opportune\leftNavON.png" />
+    <Content Include="Content\ZoomSlider\skins\opportune\pause_off.png" />
+    <Content Include="Content\ZoomSlider\skins\opportune\play_off.png" />
+    <Content Include="Content\ZoomSlider\skins\opportune\play_overOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\opportune\play_overON.png" />
+    <Content Include="Content\ZoomSlider\skins\opportune\rightNavOFF.png" />
+    <Content Include="Content\ZoomSlider\skins\opportune\rightNavON.png" />
+    <Content Include="Content\ZoomSlider\skins\smke3.png" />
+    <Content Include="Content\ZoomSlider\skins\snow1.png" />
+    <Content Include="Content\ZoomSlider\skins\snow2.png" />
+    <Content Include="Content\ZoomSlider\skins\snow3.png" />
+    <Content Include="Content\ZoomSlider\skins\texture1.png" />
+    <Content Include="Content\ZoomSlider\skins\texture2.png" />
+    <Content Include="Content\ZoomSlider\skins\texture3.png" />
+    <Content Include="Content\ZoomSlider\skins\texture4.png" />
+    <Content Include="Content\ZoomSlider\skins\texture5.png" />
+    <Content Include="Content\ZoomSlider\skins\texture6.png" />
+    <Content Include="Content\ZoomSlider\skins\texture7.jpg" />
+    <Content Include="Content\ZoomSlider\skins\transp10.png" />
+    <Content Include="Content\ZoomSlider\skins\transp15.png" />
+    <Content Include="Content\ZoomSlider\skins\transp30.png" />
+    <Content Include="Content\ZoomSlider\skins\white_transparency35.png" />
+    <Content Include="Content\ZoomSlider\text_classes.css" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\RentalsClient.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -178,6 +582,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.gmap.js" />
+    <Content Include="Scripts\jquery.gmap.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -221,12 +627,24 @@
     <Content Include="Views\Shared\_LinksLayout.cshtml" />
     <Content Include="Views\Home\UsefuLink.cshtml" />
     <Content Include="Views\Destinations\CityIndex.cshtml" />
+    <Content Include="Views\Destinations\Villas.cshtml" />
+    <Content Include="Views\Magzines\Detail.cshtml" />
+    <Content Include="Views\Destinations\Booking.cshtml" />
+    <Content Include="Views\Home\FAQs.cshtml" />
+    <Content Include="Views\Home\Testimonals.cshtml" />
+    <Content Include="Views\homeowner\HomeOwnerIndex.cshtml" />
+    <Content Include="Views\Destinations\Search.cshtml" />
+    <Content Include="Views\Services\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AuthorizeMerchantLibrary\AuthorizeMerchantLibrary.csproj">
+      <Project>{ff1528d3-a51f-47ab-927f-2114e08c779e}</Project>
+      <Name>AuthorizeMerchantLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomModels\CustomModels.csproj">
       <Project>{58493a1e-75b1-48f7-9cd9-71cac91085c6}</Project>
       <Name>CustomModels</Name>
@@ -258,7 +676,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58925</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58925/</IISUrl>
+          <IISUrl>http://localhost:58967/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -274,6 +692,11 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

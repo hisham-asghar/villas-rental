@@ -2,10 +2,10 @@
     ViewBag.Title = "Contact";
     Layout = "~/Views/Shared/_MyLayout.cshtml";
 }
-<nav class="navbar navbar-inverse navbar-fixed-top ">   
-     @Html.Partial("~/Views/Shared/HeaderNavBar.cshtml")
+<nav class="navbar navbar-transparent navbar-absolute">
+    @Html.Partial("~/Views/Shared/HeaderNavBar.cshtml")
 </nav>
-<div class="page-header header-filter" style="background-image: url('/Content/assets/img/bg9.jpg');height:40vh;">
+<div class="page-header header-filter" style="height:40vh; min-height: 50vh;">
     <div class="container" style="padding-top:20vh;">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -14,7 +14,7 @@
         </div>
     </div>
 </div>
-<div id="contactUsMap" lati="44.433530" longi="26.093928" class="big-map"></div>
+<div class="hide" id="contactUsMap" lati="44.433530" longi="26.093928" class="big-map"></div>
 <div class="main">
     <div class="contact-content">
         <div class="container">

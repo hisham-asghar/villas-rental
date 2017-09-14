@@ -1,0 +1,385 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="cd-section" id="headers">
+    <div class="header-2">
+        <div class="page-header header-filter" style="background-image: url('https://assets.luxuryretreats.com/Images/Desktop/homeowner/bgHomeOwner.jpg'); height: 70vh; min-height: 70vh;">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <h4>
+                                Join the Exclusive
+                            </h4>
+                            <h2 class="title">
+                                The Maruca Group Collection
+                            </h2>
+                            <div style="border-bottom: 1px solid #fff;margin: 45px auto 0;width: 60px;"></div>
+                            <br />
+                            <a href="#applicationForm" class="btn btn-success" >Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .doubleshow .text-left * {
+        text-align: center !important;
+    }
+
+    .card-block-promo {
+        background: transparent;
+        box-shadow: 0 0 0;
+        z-index: 100;
+        margin-top: 25vh;
+    }
+</style>
+<div class="cd-section" id="features">
+    <div class="container">
+        <!--     *********     FEATURES 1      *********      -->
+        <div style="text-align:center">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center" style="margin-top: 5%;">
+                    <h3 class="info-title">
+                        Partnering with The Maruca Group
+                    </h3>
+                    <h4>
+                        We are experts at marketing the world’s finest properties to the most discerning clientele. Homeowners & property managers alike appreciate our valuable partnership:
+                    </h4>
+                </div>
+                <div class="col-md-4">
+                    <div class="info" style="padding: 40px;">
+                        <div class="icon icon-info">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 width="70px" height="70px" viewBox="-12 -12 120 110" style="enable-background: new 0 0 100 100;"
+                                 xml:space="preserve">
+                            <image style="overflow: visible;" width="120" height="360" xlink:href="/Content/assets/img/iHomeOwner.jpg" transform="matrix(1 0 0 1 -11.8726 -16.855)"></image>
+                            </svg>
+                        </div>
+                        <h4 class="info-title">The Right Guests</h4>
+                        <p>Our success has enabled us to build a loyal following of global clientele who comes back to The Maruca Group time and again.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info" style="padding: 40px;">
+                        <div class="icon icon-success">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 width="70px" height="70px" viewBox="-12 -12 120 110" style="enable-background: new 0 0 100 100;"
+                                 xml:space="preserve">
+                            <image style="overflow: visible;" width="120" height="360" xlink:href="/Content/assets/img/iHomeOwner.jpg" transform="matrix(1 0 0 1 -7.0332 -140.9824)"></image>
+                            </svg>
+                        </div>
+                        <h4 class="info-title">Simplify Your Life</h4>
+                        <p>As a full-service vacation rental company, we provide you with a turnkey booking solution, streamlining communication at every step.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info" style="padding: 40px;">
+                        <div class="icon icon-danger">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 width="70px" height="70px" viewBox="-12 -12 120 110" style="enable-background: new 0 0 100 100;"
+                                 xml:space="preserve">
+                            <image style="overflow: visible;" width="120" height="360" xlink:href="/Content/assets/img/iHomeOwner.jpg" transform="matrix(1 0 0 1 -6.9507 -259.8774)"></image>
+                            </svg>
+                        </div>
+                        <h4 class="info-title">No Risk Proposition</h4>
+                        <p>We believe in a pay-for-performance model so there are no sign-up fees or costs. We’re successful when you’re successful.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--     *********    END FEATURES 1      *********      -->
+    </div>
+</div>
+<style>
+    .description p {
+        font-size: 16px;
+    }
+</style>
+<div class="cd-section" style="background: rgba(238, 238, 238, 0.39);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="margin-top: 10vh; margin-bottom: 5vh;">
+                <h1 class="col-md-8 col-md-offset-2 title text-center">
+                    FAQs
+                </h1>
+            </div>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin-top: 12px;">
+                @foreach (var f in ViewBag.FAQs)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id='@("heading" + f.faqId)'>
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href='@("#collapse" + f.faqId)' aria-expanded="false" aria-controls='@("collapse" + f.faqId)'>
+                                <h4 class="panel-title" style="font-weight: bold;">
+                                    @(f.Question.Contains("\n") ? f.Question.Replace("\n", "<br />") : f.Question)
+                                    <i class="material-icons">keyboard_arrow_down</i>
+                                </h4>
+                            </a>
+                        </div>
+                        <div id='@("collapse" + f.faqId)' class="panel-collapse collapse" role="tabpanel" aria-labelledby='@("heading" + f.faqId)'>
+                            <div class="panel-body">
+                                @(Html.Raw(f.Answer.Contains("\n") ? f.Answer.Replace("\n", "<br />") : f.Answer))
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2 text-center" style="margin-top: 10vh; margin-bottom: 10vh;">
+            <a href="#applicationForm" class="btn btn-success">Apply Now</a>
+        </div>
+    </div>
+</div>
+<style>
+    .section-image:after {
+        background-color: rgba(0, 0, 0, 0.0);
+    }
+</style>
+<div class="cd-section col-md-5" id="contactus" style="padding: 0;">
+    <!--     *********    CONTACT US 1     *********      -->
+    <div class="contactus-1 section-image" style="padding: 25% 0; background-image: url('https://assets.luxuryretreats.com/Images/Desktop/homeowner/applyCollectionBg.jpg')">
+        <div class="container " style="width: 100%;">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="" style="color: #fff;">
+                        <h4 class="info-title" style="color: white; margin-bottom: 0px;">Interested?</h4>
+                        <h2 class="title" style="margin-top: 0px;">Apply to the Collection</h2>
+                        <p style="font-size: 18px;line-height: 2;font-weight: 100;">
+                            We select only the finest properties to be a part of our exclusive The Maruca Group Collection. If you think your vacation home would be a good fit, please send us more details so that we might evaluate your property. Note that only a very select number of properties will be invited in any given destination to ensure that each of our vacation rental partners receives the exposure and attention they deserve.
+                        </p>
+                        <div class="info info-horizontal">
+                            <div class="icon icon-primary">
+                                <i class="material-icons">pin_drop</i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">Find us at the office</h4>
+                                <p>
+                                    @Html.Raw(ViewBag.location.MetaText.Replace("\n", "<br />"))
+                                </p>
+                            </div>
+                        </div>
+                        <div class="info info-horizontal">
+                            <div class="icon icon-primary">
+                                <i class="material-icons">phone</i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">Give us a ring</h4>
+                                <p>
+                                    @Html.Raw(ViewBag.phone.MetaText.Replace("\n", "<br />"))
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--     *********    END CONTACT US 1      *********      -->
+</div>
+<style>
+    div.dropdownjs ul {
+        max-height: 300px;
+    }
+</style>
+<div class="cd-section col-md-5 col-md-offset-1" id="contactus" style="padding: 0;">
+    <!--     *********    CONTACT US 1     *********      -->
+    <div class="">
+        <div class="container " style="width: 100%;">
+            <form method="post" id="applicationForm">
+
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="title text-center">Application Form</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Your name and/or entity name</label>
+                                <input type="text" name="name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Your entity name</label>
+                                <input type="text" name="entityName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Email</label>
+                                <input type="text" name="email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Phone (Include Area Code)</label>
+                                <input type="text" name="phone" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group" style="margin-top: 35px;padding-bottom: 0;">
+                                <p>Your role</p>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group is-empty">
+                                <select class="select form-control" name="role" placeholder="Your role">
+                                    <option value="">Please select one</option>
+                                    <option value="Homeowner">Homeowner</option>
+                                    <option value="Property Manager">Property Manager</option>
+                                    <option value="Realtor">Realtor</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group" style="margin-top: 35px;padding-bottom: 0;">
+                                <p>Villa location: Country *</p>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group is-empty">
+                                <input type="hidden" id="countryHidden" name="country" value="@ViewBag.Countries[0].Value" />
+                                <select class="select form-control" id="countryCC" name="countryCC" placeholder="Villa location: Country *">
+                                    @foreach (var c in ViewBag.Countries)
+                                    {
+                                        <option value="@c.Key">@c.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group" style="margin-top: 35px;padding-bottom: 0;">
+                                <p>Villa location: City/Town/Region *</p>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group is-empty" id="cityBoxDropdown">
+                                <select class="select form-control" id="cityId" name="city" placeholder="Villa location: Country *">
+                                    @foreach (var c in ViewBag.cities)
+                                    {
+                                        <option value="@c.Key">@c.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group" style="margin-top: 35px;padding-bottom: 0;">
+                                <p>How did you hear about us?</p>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group is-empty">
+                                <select class="select form-control" name="source" placeholder="How did you hear about us?">
+                                    <option value="">Please select one</option>
+                                    <option value="I have travelled with The Maruca Group">I have travelled with The Maruca Group</option>
+                                    <option value="I found your website searching online">I found your website searching online</option>
+                                    <option value="I met a The Maruca Group Representative at an event">I met a The Maruca Group Representative at an event</option>
+                                    <option value="I received an email campaign ">I received an email campaign </option>
+                                    <option value="I received a card in the mail">I received a card in the mail</option>
+                                    <option value="I saw you on social media (LinkedIn, FB, Pinterest, Twitter etc.)">I saw you on social media (LinkedIn, FB, Pinterest, Twitter etc.)</option>
+                                    <option value="I saw you in a magazine or newspaper">I saw you in a magazine or newspaper</option>
+                                    <option value="I was referred by another homeowner who works with The Maruca Group">I was referred by another homeowner who works with The Maruca Group</option>
+                                    <option value="I was referred by a real estate agent">I was referred by a real estate agent</option>
+                                    <option value="I was referred by my wealth manager">I was referred by my wealth manager</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Website or link to property photos*</label>
+                                <input type="text" name="link" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">
+                                    Tell us a little bit about what you're looking for...
+                                </label>
+                                <textarea class="form-control" name="message" rows="3"></textarea>
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="">
+                                <p>Is this your primary residence ?</p>
+                            </div>
+
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="primary_residence" value="yes" checked="true"><span class="circle"></span><span class="check"></span>
+                                    Yes
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="primary_residence" value="no"><span class="circle"></span><span class="check"></span>
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-success">Submit Application</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--     *********    END CONTACT US 1      *********      -->
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#countryCC").change(function () {
+                $("#countryHidden").val($('#countryCC option[value='+$(this).val()+']').text());
+                var geoid = $(this).val();
+                var url = "http://api.geonames.org/childrenJSON?username=themarucagroup&formatted=true&geonameId=" +
+                    geoid;
+                var settings = {
+                    url: url,
+                    success: function(data) {
+                        data = data.geonames;
+                        var optionStr = "";
+                        for (var city in data) {
+                            if (data.hasOwnProperty(city)) {
+                                var nameCity = data[city].name;
+                                var optionCity = '<option value="' + nameCity + '">' + nameCity + '</option>';
+                                optionStr += optionCity;
+                            }
+                        }
+                        $("#cityId").next().remove();
+                        //var optionsz = $("#cityId").html();
+                        $("#cityBoxDropdown").html("");
+                        var selectTag =
+                            $(
+                                '<select class="select form-control" id="cityId" name="cityId" placeholder="Villa location: Country *"></select>');
+                        selectTag.html(optionStr);
+                        $("#cityBoxDropdown").append(selectTag);
+                        //    Activate bootstrap-select
+                        $(".select").dropdown({ "dropdownClass": "dropdown-menu", "optionClass": "" });
+                    }
+                };
+                $.ajax(settings);
+
+            });
+        });
+    </script>
+}

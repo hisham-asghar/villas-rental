@@ -19,8 +19,11 @@ var navbar_initialized = false;
 $(document).ready(function(){
 
     // Init Material scripts for buttons ripples, inputs animations etc, more info on the next link https://github.com/FezVrasta/bootstrap-material-design#materialjs
-    $.material.init();
-
+    try {
+        $.material.init();
+    } catch (e) {
+        
+    }
     window_width = $(window).width();
 
     //  Activate the Tooltips
@@ -35,15 +38,21 @@ $(document).ready(function(){
 
     //    Activate bootstrap-select
     $(".select").dropdown({ "dropdownClass": "dropdown-menu", "optionClass": "" });
+    try {
 
-    // Activate Popovers
-    $('[data-toggle="popover"]').popover();
+        // Activate Popovers
+        $('[data-toggle="popover"]').popover();
 
+    } catch (e) {
+        
+    }
     // Active Carousel
-	$('.carousel').carousel({
-      interval: 400000
-    });
+	try {
+	    $('.carousel').carousel({
+	        interval: 400000
+	    });
 
+	}catch(e){}
     //Activate tags
     if($(".tagsinput").length != 0){
         $(".tagsinput").tagsInput();

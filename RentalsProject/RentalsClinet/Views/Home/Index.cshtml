@@ -1,11 +1,11 @@
 ﻿@{
     ViewBag.Title = "Index";
-    ViewBag.serverLoc = "http://localhost:54557";
+    ViewBag.UploadLocation = RentalsClinet.Helpers.CustomActions.getUploadLocation();
 }
 
 <div class="cd-section" id="headers">
     <div class="header-2">
-        <div class="page-header header-filter" style="background-image: url('/Content/assets/img/d_casa_oliver.jpg');">
+        <div class="page-header header-filter" style="background-image: url('/Content/assets/img/main_head.jpg');">
             <div class="container-fluid">
 
                 <div class="container" style="padding:15px;margin:0px;width:auto; padding-top: 40vh;">
@@ -13,48 +13,45 @@
                         <div class="col-md-10 col-md-offset-1">
                             <div class="card card-raised card-form-horizontal">
                                 <div class="content">
-                                    <form method="post" action="#">
+                                    <form method="post" action="/Destinations/Search">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group label-static">
                                                     <label class="control-label">
                                                         Where's your luxury retreat?
                                                     </label>
-                                                    <select class="select form-control" placeholder="Select a destination">
-                                                        <option disabled selected class="disabled">Select a destination</option>
-                                                        <option value="BAHAMAS">BAHAMAS </option>
-                                                        <option value="MIAMI">MIAMI </option>
-                                                        <option value="LOS ANGELES">LOS ANGELES </option>
-                                                        <option value="LAS VEGAS">LAS VEGAS </option>
-                                                        <option value="FRENCH RIVIERA">FRENCH RIVIERA </option>
-                                                        <option value="GREEK ISLANDS">GREEK ISLANDS </option>
-                                                        <option value="IBIZA">IBIZA </option>
-                                                        <option value="NEW ENGLAND">NEW ENGLAND </option>
-                                                        <option value="HAMPTONS">HAMPTONS </option>
-                                                        <option value="PALM SPRINGS">PALM SPRINGS </option>
+                                                    <select name="model.cityName" class="select form-control" placeholder="Select a destination">
+                                                        <option value="0" disabled selected class="disabled">Select a destination</option>
+                                                        @foreach (var c in ViewBag.cities)
+                                                        {
+                                                            <option value="@c.guid">@c.CityName</option>
+                                                        }
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Check in &rarr; Check out</label>
+                                                    <input name="model.r" type="text" id="config-demo" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">                                                
                                                 <div class="form-group label-floating">
-                                                    <label class="control-label">Check in</label>
-                                                    <input type="text" class="form-control StartDate" />
+                                                    <label class="control-label">
+                                                        Guests
+                                                    </label>
+                                                    <select name="model.guests" class="select form-control" placeholder="Guests">
+                                                        @for (int xi = 1; xi <= 100; xi++)
+                                                        {
+                                                            <option value="@xi">@xi</option>
+                                                        }
+                                                    </select>
                                                 </div>
+
                                             </div>
                                             <div class="col-md-2">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Check out</label>
-                                                    <input type="text" class="EndDate form-control" value="10/10/2016">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-group is-empty">
-                                                    <input type="number" value="" placeholder="Guests" class="form-control">
-                                                    <span class="material-input"></span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button type="button" class="btn btn-info btn-block">Search</button>
+                                                <button type="submit" class="btn btn-info btn-block">Search</button>
                                             </div>
                                         </div>
                                     </form>
@@ -81,8 +78,12 @@
     .doubleshow .text-left * {
         text-align: center !important;
     }
-    .card-block-promo{
-        background:transparent;box-shadow: 0 0 0 ;z-index:100;margin-top:25vh;
+
+    .card-block-promo {
+        background: transparent;
+        box-shadow: 0 0 0;
+        z-index: 100;
+        margin-top: 25vh;
     }
 </style>
 <div class="cd-section" id="features">
@@ -96,7 +97,7 @@
                             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                  width="50px" height="50px" viewBox="0 0 95.17 86.168" style="enable-background:new 0 0 95.17 86.168;"
                                  xml:space="preserve">
-                                <image style="overflow:visible;" width="120" height="360" xlink:href="/Content/assets/img/iBrandPromise.png" transform="matrix(1 0 0 1 -11.8726 -16.855)"></image>
+                            <image style="overflow:visible;" width="120" height="360" xlink:href="/Content/assets/img/iBrandPromise.png" transform="matrix(1 0 0 1 -11.8726 -16.855)"></image>
                             </svg>
                         </div>
                         <h4 class="info-title">@ViewBag.servicePanel1H.MetaText</h4>
@@ -141,8 +142,9 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner doubleshow">
                     <div class="item active">
-                        <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_new800x660.jpg');height:90vh;">
+
+                        <div class="col-xs-12 visible-sm visible-xs" style="padding:0;">
+                            <div class="page-header header-filter" style="background-image: url('/Content/Images/Section-3/specialOffer.jpg');height:70vh;">
                                 <div class="card card-block-promo" style="">
                                     <div class="content">
                                         <a href="#pablo">
@@ -161,20 +163,41 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_promotion800x660.jpg');height:90vh;">
-                                <div class="card card-block-promo" >
+                        <div class="col-md-6 visible-lg visible-md" style="padding: 0;">
+                            <div class="page-header header-filter" style=" background-image: url('/Content/Images/Section-3/specialOffer.jpg'); height: 70vh;">
+                                <div class="card card-block-promo" style="">
                                     <div class="content">
                                         <a href="#pablo">
-                                            <h2 class="card-title" style="text-transform:uppercase; color:#fff;">
+                                            <h2 class="card-title" style="text-transform: uppercase; color: #fff;">
+                                                Special Offer
+                                            </h2>
+                                        </a>
+                                        <p class="card-description" style="color: #fff;">
+                                            Special Offers on villas
+                                        </p>
+                                        <br />
+                                        <a href="#pablo" class="label label-rose" style="border-radius: 0">
+                                            View Collection
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 visible-lg visible-md" style="padding: 0;">
+                            <div class="page-header header-filter" 
+                                 style=" background-image: url('/Content/Images/Section-3/Beachfront.jpg'); height: 70vh;">
+                                <div class="card card-block-promo">
+                                    <div class="content">
+                                        <a href="#pablo">
+                                            <h2 class="card-title" style="text-transform: uppercase; color: #fff;">
                                                 Beachfront
                                             </h2>
                                         </a>
-                                        <p class="card-description" style="color:#fff;">
+                                        <p class="card-description" style="color: #fff;">
                                             Beachfront vacation rentals steps from the sand
                                         </p>
                                         <br />
-                                        <a href="#pablo" class="label label-rose" style="border-radius:0">
+                                        <a href="#pablo" class="label label-rose" style="border-radius: 0">
                                             View Collection
                                         </a>
                                     </div>
@@ -183,8 +206,9 @@
                         </div>
                     </div>
                     <div class="item ">
-                        <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_promotion800x660.jpg');height:90vh;">
+                        <div class="col-xs-12 visible-sm visible-xs" style="padding:0;">
+                            <div class="page-header header-filter" style="
+    background-image: url('/Content/Images/Section-3/Beachfront.jpg');height:70vh;">
                                 <div class="card card-block-promo">
                                     <div class="content">
                                         <a href="#pablo">
@@ -203,8 +227,30 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_new800x660.jpg');height:90vh;">
+                        <div class="col-md-6 visible-lg visible-md" style="padding:0;">
+                            <div class="page-header header-filter" style="
+    background-image: url('/Content/Images/Section-3/Beachfront.jpg');height:70vh;">
+                                <div class="card card-block-promo">
+                                    <div class="content">
+                                        <a href="#pablo">
+                                            <h2 class="card-title" style="text-transform:uppercase; color:#fff;">
+                                                Beachfront
+                                            </h2>
+                                        </a>
+                                        <p class="card-description" style="color:#fff;">
+                                            Beachfront vacation rentals steps from the sand
+                                        </p>
+                                        <br />
+                                        <a href="#pablo" class="label label-rose" style="border-radius:0">
+                                            View Collection
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 visible-lg visible-md" style="padding:0;">
+                            <div class="page-header header-filter" style="
+    background-image: url('/Content/Images/Section-3/CitiSite.jpg');height:70vh;">
                                 <div class="card card-block-promo">
                                     <div class="content">
                                         <a href="#pablo">
@@ -225,8 +271,9 @@
                         </div>
                     </div>
                     <div class="item ">
-                        <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_new800x660.jpg');height:90vh;">
+                        <div class="col-xs-12 visible-sm visible-xs" style="padding:0;">
+                            <div class="page-header header-filter" style="
+    background-image: url('/Content/Images/Section-3/CitiSite.jpg');height:70vh;">
                                 <div class="card card-block-promo">
                                     <div class="content">
                                         <a href="#pablo">
@@ -245,8 +292,29 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6" style="padding:0;">
-                            <div class="page-header header-filter" style="background-image: url('//resources.luxuryretreats.com/www/images/vr5/home_col_new800x660.jpg');height:90vh;">
+                        <div class="col-md-6 visible-lg visible-md" style="padding:0;">
+                            <div class="page-header header-filter" style="
+    background-image: url('/Content/Images/Section-3/CitiSite.jpg');height:70vh;">
+                                <div class="card card-block-promo">
+                                    <div class="content">
+                                        <a href="#pablo">
+                                            <h2 class="card-title" style="text-transform:uppercase; color:#fff;">
+                                                City Sites Description
+                                            </h2>
+                                        </a>
+                                        <p class="card-description" style="color:#fff;">
+                                            Beachfront vacation rentals steps from the sand
+                                        </p>
+                                        <br />
+                                        <a href="#pablo" class="label label-rose" style="border-radius:0">
+                                            View Collection
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 visible-lg visible-md" style="padding:0;">
+                            <div class="page-header header-filter" style="background-image: url('/Content/Images/Section-3/specialOffer.jpg');height:70vh;">
                                 <div class="card card-block-promo" style="">
                                     <div class="content">
                                         <a href="#pablo">
@@ -290,7 +358,7 @@
                                 <div class="col-md-5">
                                     <div class="card-image" style="    border-radius: 500px;">
                                         <a href="sections.html#pablo">
-                                            <img class="img" src="//resources.luxuryretreats.com/www/images/vr5/whatsnewwithuspyramid.png">
+                                            <img class="img" src="~/Content/Images/Section-4/Section-4.jpeg">
                                         </a>
                                     </div>
                                 </div>
@@ -302,7 +370,7 @@
                                         </h5>
                                         <p class="card-description"></p>
                                         <a style="font-weight:bold;" class="text-success" href="/Home/CONCIERGE" target="_blank">Explore</a>
-                                        <br />           
+                                        <br />
                                     </div>
                                 </div>
                             </div>
@@ -335,7 +403,7 @@
                     <div class="card card-plain">
                         <a href="#" target="_blank">
                             <div class="card-image">
-                                <img src='@((ViewBag.service1IMG.MetaText == null || ViewBag.service1IMG.MetaText == "") ? ViewBag.serverLoc + "/Content/assets/img/image_placeholder.jpg" : ViewBag.serverLoc + "/uploads/" + ViewBag.service1IMG.MetaText)' />
+                                <img src='@( (ViewBag.service1IMG.MetaText == null || ViewBag.service1IMG.MetaText == "") ? ViewBag.UploadLocation + "image_placeholder.jpg" : ViewBag.UploadLocation + ViewBag.service1IMG.MetaText)' />
                             </div>
                         </a>
                         <div class="content">
@@ -354,12 +422,12 @@
                     <div class="card card-plain">
                         <a href="#" target="_blank">
                             <div class="card-image">
-                                <img src='@((ViewBag.service2IMG.MetaText == null || ViewBag.service2IMG.MetaText == "") ? ViewBag.serverLoc + "/Content/assets/img/image_placeholder.jpg" : ViewBag.serverLoc + "/uploads/" + ViewBag.service2IMG.MetaText)' />
+                                <img src='@((ViewBag.service2IMG.MetaText == null || ViewBag.service2IMG.MetaText == "") ? ViewBag.UploadLocation + "image_placeholder.jpg" : ViewBag.UploadLocation + ViewBag.service2IMG.MetaText)' />
                             </div>
                         </a>
                         <div class="content">
                             <a href="#" target="_blank">
-                                <h4 class="card-title" style="display:inline-block;">Best For: @ViewBag.service2H.MetaText</h4>
+                                <h4 class="card-title" style="display:inline-block;">@ViewBag.service2H.MetaText</h4>
                             </a>
                             <h3 class="category card-title">@ViewBag.service2SH.MetaText </h3>
                             <p class="card-description">
@@ -373,12 +441,12 @@
                     <div class="card card-plain">
                         <a href="#" target="_blank">
                             <div class="card-image">
-                                <img src='@((ViewBag.service3IMG.MetaText == null || ViewBag.service3IMG.MetaText == "") ? ViewBag.serverLoc + "/Content/assets/img/image_placeholder.jpg" : ViewBag.serverLoc + "/uploads/" + ViewBag.service3IMG.MetaText)' />
+                                <img src='@((ViewBag.service3IMG.MetaText == null || ViewBag.service3IMG.MetaText == "") ? ViewBag.UploadLocation + "image_placeholder.jpg" : ViewBag.UploadLocation + ViewBag.service3IMG.MetaText)' />
                             </div>
                         </a>
                         <div class="content">
                             <a href="#" target="_blank">
-                                <h4 class="card-title" style="display:inline-block;">Best For: @ViewBag.service3H.MetaText</h4>
+                                <h4 class="card-title" style="display:inline-block;">@ViewBag.service3H.MetaText</h4>
                             </a>
                             <h3 class="category card-title">@ViewBag.service3SH.MetaText </h3>
                             <p class="card-description">
@@ -392,7 +460,6 @@
         </div>
     </div>
 </div>
-
 <div class="cd-section" id="clients">
     <!--     *********    TESTIMONIALS 2     *********      -->
     <div class="testimonials-2 section-gray">
@@ -407,7 +474,7 @@
                                         <i class="material-icons">format_quote</i>
                                     </div>
                                     <div class="content">
-                                        <h5 class="card-description">                                            
+                                        <h5 class="card-description">
                                             STAY TMG and BOOK NOW!
                                         </h5>
                                     </div>
@@ -433,7 +500,6 @@
     <!--     *********    END TESTIMONIALS 2      *********      -->
     <!--     *********    TESTIMONIALS 1     *********      -->
 </div>
-
 <div class="cd-section" id="contactus">
     <!--     *********    CONTACT US 1     *********      -->
     <div class="contactus-1 section-image" style="background-image: url('/Content/assets/img/examples/city.jpg')">
@@ -450,8 +516,10 @@
                             <div class="description">
                                 <h4 class="info-title">Find us at the office</h4>
                                 <p>
-                                    Bld Mihail Kogalniceanu, nr. 8,<br>
-                                    7652 Bucharest,<br>
+                                    Bld Mihail Kogalniceanu, nr. 8,
+                                    <br>
+                                    7652 Bucharest,
+                                    <br>
                                     Romania
                                 </p>
                             </div>
@@ -463,8 +531,10 @@
                             <div class="description">
                                 <h4 class="info-title">Give us a ring</h4>
                                 <p>
-                                    Michael Jordan<br>
-                                    +40 762 321 762<br>
+                                    Michael Jordan
+                                    <br>
+                                    +40 762 321 762
+                                    <br>
                                     Mon - Fri, 8:00-22:00
                                 </p>
                             </div>
@@ -585,7 +655,10 @@
                                             <span class="input-group-addon">
                                                 <i class="material-icons" style="color:white;">mail</i>
                                             </span>
-                                            <div class="form-group is-empty"><input type="email" style="color:white;" value="" placeholder="Your Email..." class="form-control"><span class="material-input"></span></div>
+                                            <div class="form-group is-empty">
+                                                <input type="email" style="color:white;" value="" placeholder="Your Email..." class="form-control">
+                                                <span class="material-input"></span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -603,35 +676,21 @@
 </div>
 @section scripts{
     <script>
+        var flag = false;
         $(document).ready(function () {
-            $('.StartDate').datetimepicker({
-                format: 'MM/DD/YYYY',
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-chevron-up",
-                    down: "fa fa-chevron-down",
-                    previous: 'fa fa-chevron-left',
-                    next: 'fa fa-chevron-right',
-                    today: 'fa fa-screenshot',
-                    clear: 'fa fa-trash',
-                    close: 'fa fa-remove',
-                    inline: true
-                }
-            });
-            $('.EndDate').datetimepicker({
-                format: 'MM/DD/YYYY',
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-chevron-up",
-                    down: "fa fa-chevron-down",
-                    previous: 'fa fa-chevron-left',
-                    next: 'fa fa-chevron-right',
-                    today: 'fa fa-screenshot',
-                    clear: 'fa fa-trash',
-                    close: 'fa fa-remove',
-                    inline: true
+            $('#config-demo').focus(function() {
+                if (flag == false) {
+                    flag = true;
+                    $('#config-demo').daterangepicker({
+                        "minDate": new Date(),
+                        "opens": "center",
+                        isInvalidDate: function (date) {
+                            //debugger;
+                            return false;
+                        }
+                    }, function (start, end, label) {
+                        console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                    });
                 }
             });
         });

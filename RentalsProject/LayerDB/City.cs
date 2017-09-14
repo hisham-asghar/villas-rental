@@ -16,17 +16,21 @@ namespace LayerDB
 
         public int CityId { get; set; }
 
-        [Required]
         [StringLength(256)]
         public string CityName { get; set; }
 
-        [Required]
         [StringLength(256)]
         public string guid { get; set; }
 
-        [Required]
         [StringLength(256)]
         public string banner { get; set; }
+
+        public double? longitude { get; set; }
+
+        public double? latitude { get; set; }
+
+        [StringLength(1024)]
+        public string Address { get; set; }
 
         public virtual ICollection<Location> Locations { get; set; }
     }

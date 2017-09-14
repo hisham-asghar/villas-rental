@@ -83,49 +83,64 @@
         left:0 !important;
     }
     .contentHolderVisibleWrapper{
-            background-position: center center;
-    background-size: cover;
+        background-position: center center;
+        background-size: cover;
     }
-</style>
+    .gm-style {
+        font-size: inherit;
+        font-family: inherit;
+    }
 
+        .gm-style .ol-attribution {
+            bottom: 1em;
+        }
 
-@model CustomModels.PropertiesModelGetter
-           
-<div class="page-header header-filter clear-filter" style="background: rgba(0, 0, 0, 0.4); height: 40vh;">
-    <div class="container" style="padding-top: 15vh;">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2" style="text-align: center;">
-                <div class="brand">
-                    <h1 style="text-shadow: 2px 3px 6px #222;">
-                        @Model.propertyname
-                    </h1>
-                    <h3>
-                        <i class="material-icons">location_on</i>
-                        @Model.city, @Model.country
-                    </h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div style="height: 100vh;">
-    <div id="bannerscollection_zoominout_1" style="">
-        <div class="myloader"></div>
-        <ul class="bannerscollection_zoominout_list">
-            @for (int i = 0; i < Model.ImagesList.Count; i++)
-            {
-                <li data-text-id="" data-video="false"
-                    data-bottom-thumb="@ViewBag.UploadLocation/@Model.ImagesList[i]" data-link="" data-target="" data-horizontalposition="center"
-                    data-verticalposition="center" data-initialzoom="0.9" data-finalzoom="1" data-duration=""
-                    data-zoomeasing="">
-                    <img src="@ViewBag.UploadLocation/@Model.ImagesList[i]" style="width:100%;height:100vh;" alt="" />
-                </li>
-
+            .gm-style .ol-attribution.ol-logo-only {
+                bottom: 1em;
             }
-        </ul>
-    </div>
-</div>
-<style>
+
+    #map {
+        margin: 5px auto;
+        border: 1px solid #CDD7EE;
+        border-radius: 5px;
+        width: 1102px;
+        padding: 5px;
+        padding-bottom: 5px;
+        max-height: 625px;
+        min-height: 620px;
+    }
+
+    section #map {
+        margin: 5px auto;
+        margin-left: 25px;
+        border: 1px solid #CDD7EE;
+        border-radius: 5px;
+        width: 1050px;
+        height: 620px;
+    }
+
+    #wrapper-map {
+        width: 1114px;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    #content section {
+        width: 1105px;
+        display: inline-block;
+    }
+
+
+    .ol-scale-line {
+        background: #95b9e6;
+        bottom: 5px;
+        left: 75px;
+    }
+
+    #customSkinMap {
+        height: 100%;
+    }
     .roomdetailsIcon > li.active > a {
         background-color: transparent !important;
         color: black !important;
@@ -140,18 +155,54 @@
         padding: 25px 50px;
     }
 </style>
+
+@model CustomModels.PropertyModels.PropertyView
+           
+    <div class="page-header header-filter clear-filter" style="background: rgba(0, 0, 0, 0.4); height: 40vh; min-height: 50vh;">
+        <div class="container" style="padding-top: 15vh;">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2" style="text-align: center;">
+                    <div class="brand">
+                        <h1 style="text-shadow: 2px 3px 6px #222;">
+                            @Model.Name
+                        </h1>
+                        <h3 class="visible-lg visible-md">
+                            <i class="material-icons">location_on</i>
+                            @Html.Raw(Model.StreetName) @Model.CityName, @Model.Country
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 100vh;">
+        <div id="bannerscollection_zoominout_1" style="">
+            <div class="myloader"></div>
+            <ul class="bannerscollection_zoominout_list">
+                @foreach (string t in Model.imageList)
+                {
+                    <li data-text-id="" data-video="false" data-zoomeasing=""
+                        data-bottom-thumb="@ViewBag.UploadLocation/@t" data-link="" data-target=""
+                        data-horizontalposition="center" data-verticalposition="center"
+                        data-initialzoom="0.9" data-finalzoom="1" data-duration="">
+                        <img src="@ViewBag.UploadLocation/@t" style="width:100%;height:100vh;" alt="" />
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
 <div class="container-fluid section-light-gray">
 
     <div class="container">
         <div class="row">
             <div class="col-md-5">
                 <h2 class="title">
-                    @Model.propertyname
+                    @Model.Name
                 </h2>
                 <h4 class="title" style="font-weight: 100;">
-                    @Model.propertyname, @Model.city, @Model.country
+                    @Model.Name, @Model.CityName, @Model.Country
                     <br />
-                    Sleeps @Model.maxguests:  $@(Model.rates.Min(r => r.price)) - $@(Model.rates.Max(r => r.price)) / night
+                    Sleeps @Model.MaxGuests:  $@(Model.night) / night
                 </h4>
                 <ul class="nav nav-pills nav-pills-icons roomdetailsIcon" role="tablist">
                     <!--
@@ -161,29 +212,173 @@
                         <a href="index.html#dashboard-1" role="tab" data-toggle="tab">
                             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                  width="50px" height="50px" viewBox="0 0 50 50" style="enable-background: new 0 0 50 50;" xml:space="preserve">
-                            <image style="overflow: visible;" width="50" height="1000" xlink:href="/Content/icons2.png" transform="matrix(1.0124 0 0 1.0124 0 0)"></image>
+                                <image style="overflow: visible;" width="50" height="1000" xlink:href="/Content/icons2.png" transform="matrix(1.0124 0 0 1.0124 0 0)"></image>
                             </svg>
-                            @Model.beds - Bedrooms
+                            @Model.Bedrooms - Bedrooms
                         </a>
                     </li>
                     <li>
                         <a href="#" role="tab" data-toggle="tab">
                             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                  width="50px" height="50px" viewBox="0 50 50 50" style="enable-background: new 0 0 50 50;" xml:space="preserve">
-                            <image style="overflow: visible;" width="50" height="1000" xlink:href="/Content/icons2.png" transform="matrix(1.0124 0 0 1.0124 0 0)"></image>
+                                <image style="overflow: visible;" width="50" height="1000" xlink:href="/Content/icons2.png" transform="matrix(1.0124 0 0 1.0124 0 0)"></image>
                             </svg>
-                            @Model.baths - Bathrooms
+                            @Model.Bathrooms - Bathrooms
                         </a>
                     </li>
                 </ul>
                 <h4 class="title" style="font-weight: 100;">
-                    @Html.Raw(Model.description.Substring(0, 300))&hellip; <br />
-                    <a href="#details_property" class="text-info" style="color: #00bcd4;">Read More</a>
+                    @Html.Raw(Model.Description.Length < 300 ? Model.Description : Model.Description.Substring(0, 300))&hellip; 
+                    <br />
+                    <a href="#details_property" class="text-info" style="color: #00bcd4;">
+                        Read More
+                    </a>
                 </h4>
 
             </div>
             <div class="col-md-5 col-md-offset-2">
+
                 <div class="card card-contact" style="margin-top:8%;">
+                    <form role="form"  method="post">
+                        <div class="header header-raised header-primary text-center hide">
+                            <div class="card-title">
+                                <div class="row text">
+                                    <div class="pull-left" style="padding-left: 5%;">starting from</div>
+                                    <div class="pull-right" style="padding-right: 5%;">per night</div>
+                                </div>
+                                <div class="price h3" style="font-weight: bold; margin: 0;">
+                                    <span>$</span>@(Model.night)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h5 class="title">Book Villa Now</h5>
+                            <div class="col-md-12">
+                                <div class="form-group label-floating hide">
+                                    <label class="control-label"></label>
+                                    <input type="text" id="config-demo" class="form-control hide">
+                                </div>
+                                <div class="row">
+                                    
+                                    <div class="col-md-12">
+                                        <h6>Check In &rarr; Check Out</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label" for="from">Check In</label>
+                                            <input type="text" id="from" class="form-control" name="bmodel.from">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label" for="to">Check Out</label>
+                                            <input type="text" id="to" class="form-control" name="bmodel.to">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h6>House Keeping</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="margin-top: 0;">
+                                            <label class="control-label" for="to">Days</label>
+                                            <select name="bmodel.hk.d" class="form-control days" placeholder="Days">
+                                                @for (var i = 0; i <= 1; i++)
+                                                {
+                                                    <option value="@i">@i</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="margin-top: 0;">
+                                            <label class="control-label" for="to">Hours</label>
+                                            <select name="bmodel.hk.h" class="form-control" placeholder="Hours/Day">
+                                                @for (var i = 4; i <= 10; i++)
+                                                {
+                                                    <option value="@i">@i</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h6>Private Chief</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="margin-top: 0;">
+                                            <label class="control-label" for="to">Days</label>
+                                            <select name="bmodel.pc.d" class="form-control days" placeholder="Days">
+                                                @for (var i = 0; i <= 1; i++)
+                                                {
+                                                    <option value="@i">@i</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="margin-top: 0;">
+                                            <label class="control-label" for="to">Hours</label>
+                                            <select name="bmodel.pc.h" class="form-control" placeholder="Hours/Day">
+                                                @for (var i = 4; i <= 10; i++)
+                                                {
+                                                    <option value="@i">@i</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <button type="submit" class="btn btn-block btn-success">Book Now</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid section-dark">
+    <div class="">
+        <div class="row" style="color: #fff;">
+            <div class="col-md-5 col-md-offset-1">
+                <h3>
+                    Rates
+                </h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr class="">
+                            <th>Season Name:</th>
+                            <th>Date Range:</th>
+                            <th>Nightly Rate:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var r in Model.rates)
+                        {
+                            <tr class="rate">
+                                <td>@(r.SeasonName ?? "")</td>
+                                <td class="DateRange">@r.sd.ToString("MMM. dd") - @r.ed.ToString("MMM. dd")</td>
+                                <td class="NightlyRate">
+                                    USD @r.price
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+
+                <div class="card card-contact" style="margin-top: 8%;">
                     <form role="form" id="contact-form" method="post">
                         <div class="header header-raised header-primary text-center">
                             <div class="card-title">
@@ -192,7 +387,7 @@
                                     <div class="pull-right" style="padding-right: 5%;">per night</div>
                                 </div>
                                 <div class="price h3" style="font-weight: bold; margin: 0;">
-                                    <span>$</span>@(Model.rates.Min(r => r.price))
+                                    <span>$</span>@(Model.night)
                                 </div>
                             </div>
                         </div>
@@ -267,43 +462,10 @@
         </div>
     </div>
 </div>
-<div class="container-fluid section-dark">
-    <div class="container">
-        <div class="row" style="color: #fff;">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Rates
-                </h3>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr class="">
-                                <th>Date Range:</th>
-                                <th>Nightly Rate:</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var r in Model.rates)
-                            {
-                                <tr class="rate">
-                                    <td class="DateRange">@r.sd.ToString("MMM. dd") - @r.ed.ToString("MMM. dd")</td>
-                                    <td class="NightlyRate">
-                                        USD @r.price
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
 <div class="container-fluid">
     <div class="container" style="padding:50px 20px;">
         <div class="row">
-            <h2>Amenities</h2>
+            <h2 class="title">Amenities</h2>
             <div class="col-md-8 col-md-offset-2">
                 <ul class="nav nav-pills nav-pills-icons roomdetailsIcon amenities" role="tablist">
                     <!--
@@ -318,12 +480,10 @@
                             Bedrooms
                         </a>
                     </li>
-                    @foreach (var a in Model.amenities)
+                    @foreach (var a in Model.amenitiesList)
                     {
                         <li>
-                            <a href="#" role="tab" data-toggle="tab">
-                                @a.Value
-                            </a>
+                            <a href="#">@a</a>
                         </li>
                     }
                 </ul>
@@ -335,10 +495,10 @@
 <div class="container-fluid section-light-gray">
     <div class="container" id="details_property" style="padding:50px 20px;">
         <div class="row">
-            <h2>Details</h2>
-            <div class="col-md-10 col-md-offset-1" style="font-size: 17px;">
+            <h2 class="title">Description</h2>
+            <div class="col-md-10 col-md-offset-1 title" style="font-size: 17px; font-weight: 100;">
                 @{ 
-                    var str = Model.description;
+                    var str = Model.Description;
                     string[] strList = str.Split(new string[] { "\n","\r" },StringSplitOptions.RemoveEmptyEntries);
                     str = String.Join("<br />", strList);
                 }
@@ -347,61 +507,6 @@
         </div>
     </div>
 </div>
-<style>
-    .gm-style {
-  font-size: inherit;
-  font-family: inherit;
-}
-
-.gm-style .ol-attribution {
-  bottom: 1em;
-}
-
-.gm-style .ol-attribution.ol-logo-only {
-  bottom: 1em;
-}
-
-#map {
-	margin: 5px auto;
-	border: 1px solid #CDD7EE;
-    border-radius: 5px;
-	width: 1102px;
-	padding: 5px;
-	padding-bottom: 5px;
-	max-height: 625px;
-    min-height: 620px;
-}
-
-section #map {
-	margin: 5px auto;
-	margin-left: 25px;
-	border: 1px solid #CDD7EE;
-    border-radius: 5px;
-	width: 1050px;
-    height: 620px;
-}
-
-#wrapper-map{
-	width: 1114px;
-    margin: 0 auto;
-	background-color: white;
-	border-radius: 5px;
-}
-
-#content section{
-    width: 1105px;
-	display: inline-block;
-}
-
-.ol-scale-line {
-	background: #95b9e6;
-	bottom: 5px;
-    left: 75px;
-}
-    #customSkinMap {
-        height: 100%;
-      }
-</style>
 <div class="container-fluid">
     <div id="account-container">
         <div id="wrapper-map">
@@ -413,112 +518,239 @@ section #map {
         </div>
     </div>
 </div>
-
+<style>
+    td.highlight, table.ui-datepicker-calendar tbody td.highlight a { 
+        background: none !important;
+        background-color: #fffac2 !important; 
+        color: #FF0000;
+    }
+</style>
 <script>
-        $(document).ready(function() {
-            debugger;
-            //CustomMap(@Model.longitude, @Model.latitude);
+    
+    
+    $(document).ready(function() {
+        debugger;
+        //CustomMap(@Model.Logitude, @Model.Latitude);
+        JQueryDateRange();
 
-        });
+    });
+    function JQueryDateRange() {
+        var dateFormat = "mm/dd/yy",
+            from = $( "#from" )
+                .datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2,
+                    beforeShowDay: function(date) {
+                        
+                        var str = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                        var rates = "@Newtonsoft.Json.JsonConvert.SerializeObject(Model.rates)";
+                        if (rates != undefined && rates != null && rates !== "") {
+                            rates = JSON.parse(rates.split("&quot;").join("\""));
+                        }
+                        
+                        var bookingsList = "@Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.bookingsList)";
+                        if (bookingsList != undefined && bookingsList != null && bookingsList !== "") {
+                            bookingsList = JSON.parse(bookingsList.split("&quot;").join("\""));
+                        }
+
+                        for (var r in bookingsList) {
+                            debugger;
+                            var sd = bookingsList[r].sd.split("T")[0].split("-");
+                            sd = sd.join("-");
+                            
+                            var ed = bookingsList[r].ed.split("T")[0].split("-");
+                            ed = ed.join("-");
+
+                            if (str >= sd && str <= ed) {
+                                return [false,"danger","Already Booked"];
+                            }
+                        }
+
+                        debugger;
+                        
+                        var curDate = moment();
+                        if (moment(date).isBefore(curDate, 'day')) {
+                            var arr = [];
+                            arr.push(false);
+                            arr.push("");
+                            arr.push("Cannot Select This Date");
+                            return arr;
+                        }
+
+
+                        for (var r in rates) {
+                            var sd = rates[r].sd.split("T")[0].split("-");
+                            sd[0] = jQuery.datepicker.formatDate('yy', date);
+                            sd = sd.join("-");
+                            
+                            var ed = rates[r].ed.split("T")[0].split("-");
+                            ed[0] = jQuery.datepicker.formatDate('yy', date);
+                            ed = ed.join("-");
+
+                            if (str >= sd && str <= ed) {
+                                return [true,"special","$"+rates[r].price+" - "+rates[r].SeasonName];
+                            }
+                        }
+
+
+                        var arr = [];
+                        arr.push(true);
+                        arr.push("");
+                        arr.push("$@Model.night");
+                        return arr;
+                    }
+                })
+                .on( "change", function() {
+                    to.datepicker( "option", "minDate", getDate( this ) );
+                }),
+            to = $( "#to" ).datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 2
+                })
+                .on( "change", function() {
+                    from.datepicker( "option", "maxDate", getDate( this ) );
+                    var toDate = to.val().split("/");
+                    toDate = new Date(toDate[2],toDate[0]-1,toDate[1]);
+
+                    var fromDate = from.val().split("/");
+                    fromDate = new Date(fromDate[2],fromDate[0]-1,fromDate[1]);
+
+                    var days = (toDate - fromDate) / 86400000;
+                    var optionDaysStr = "";
+                    for (var i = 0; i <= days; i++) {
+                        optionDaysStr += '<option value=' + i + '>' + i + '</option>';
+                    }
+                    $(".days").html(optionDaysStr);
+                    debugger;
+                });
+ 
+        function getDate( element ) {
+            var date;
+            try {
+                date = $.datepicker.parseDate( dateFormat, element.value );
+            } catch( error ) {
+                date = null;
+            }
+ 
+            return date;
+        }
+    }
     function myMap() {
-        CustomMap(@Model.longitude, @Model.latitude);
+        CustomMap(@Model.Logitude, @Model.Latitude);
 //        CustomMap(32.4690717, 74.39393389999998);
     }
-        function CustomMap(longi, lati) {
-            debugger;
-            var myLatlng = new google.maps.LatLng(lati, longi);
-            var mapOptions = {
-                zoom: 15,
-                center: myLatlng,
-                scrollwheel: true,
-                //we disable de scroll over the map, it is a really annoing when you scroll through page
-                disableDefaultUI: true, // a way to quickly hide all controls
-                zoomControl: true,
-                styles: [
-                    {
-                        "featureType": "water",
-                        "stylers": [{ "saturation": 43 }, { "lightness": -11 }, { "hue": "#0088ff" }]
-                    }, {
-                        "featureType": "road",
-                        "elementType": "geometry.fill",
-                        "stylers": [{ "hue": "#ff0000" }, { "saturation": -100 }, { "lightness": 99 }]
-                    }, {
-                        "featureType": "road",
-                        "elementType": "geometry.stroke",
-                        "stylers": [{ "color": "#808080" }, { "lightness": 54 }]
-                    }, {
-                        "featureType": "landscape.man_made",
-                        "elementType": "geometry.fill",
-                        "stylers": [{ "color": "#ece2d9" }]
-                    }, {
-                        "featureType": "poi.park",
-                        "elementType": "geometry.fill",
-                        "stylers": [{ "color": "#ccdca1" }]
-                    },
-                    { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#767676" }] },
-                    { "featureType": "road", "elementType": "labels.text.stroke", "stylers": [{ "color": "#ffffff" }] },
-                    { "featureType": "poi", "stylers": [{ "visibility": "off" }] },
-                    {
-                        "featureType": "landscape.natural",
-                        "elementType": "geometry.fill",
-                        "stylers": [{ "visibility": "on" }, { "color": "#b8cb93" }]
-                    }, { "featureType": "poi.park", "stylers": [{ "visibility": "on" }] },
-                    { "featureType": "poi.sports_complex", "stylers": [{ "visibility": "on" }] },
-                    { "featureType": "poi.medical", "stylers": [{ "visibility": "on" }] },
-                    { "featureType": "poi.business", "stylers": [{ "visibility": "simplified" }] }
-                ]
+    function CustomMap(longi, lati) {
+        //debugger;
+        var myLatlng = new google.maps.LatLng(lati, longi);
+        var mapOptions = {
+            zoom: 15,
+            center: myLatlng,
+            scrollwheel: true,
+            //we disable de scroll over the map, it is a really annoing when you scroll through page
+            disableDefaultUI: true, // a way to quickly hide all controls
+            zoomControl: true,
+            styles: [
+                {
+                    "featureType": "water",
+                    "stylers": [{ "saturation": 43 }, { "lightness": -11 }, { "hue": "#0088ff" }]
+                }, {
+                    "featureType": "road",
+                    "elementType": "geometry.fill",
+                    "stylers": [{ "hue": "#ff0000" }, { "saturation": -100 }, { "lightness": 99 }]
+                }, {
+                    "featureType": "road",
+                    "elementType": "geometry.stroke",
+                    "stylers": [{ "color": "#808080" }, { "lightness": 54 }]
+                }, {
+                    "featureType": "landscape.man_made",
+                    "elementType": "geometry.fill",
+                    "stylers": [{ "color": "#ece2d9" }]
+                }, {
+                    "featureType": "poi.park",
+                    "elementType": "geometry.fill",
+                    "stylers": [{ "color": "#ccdca1" }]
+                },
+                { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#767676" }] },
+                { "featureType": "road", "elementType": "labels.text.stroke", "stylers": [{ "color": "#ffffff" }] },
+                { "featureType": "poi", "stylers": [{ "visibility": "off" }] },
+                {
+                    "featureType": "landscape.natural",
+                    "elementType": "geometry.fill",
+                    "stylers": [{ "visibility": "on" }, { "color": "#b8cb93" }]
+                }, { "featureType": "poi.park", "stylers": [{ "visibility": "on" }] },
+                { "featureType": "poi.sports_complex", "stylers": [{ "visibility": "on" }] },
+                { "featureType": "poi.medical", "stylers": [{ "visibility": "on" }] },
+                { "featureType": "poi.business", "stylers": [{ "visibility": "simplified" }] }
+            ]
 
-            }
-
-            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                title: "Property Map"
-            });
-
-            marker.setMap(map);
         }
+
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title: "Property Map"
+        });
+
+        marker.setMap(map);
+    }
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC96Hx9IMfAglwiP9RkQn5cVi4MZKiC5LA&callback=myMap">
 </script>
 
+<script src="/Content/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 <script>
-    $(document).ready(function () {
-        $('.StartDate').datetimepicker({
-            format: 'MM/DD/YYYY',
-            icons: {
-                time: "fa fa-clock-o",
-                date: "fa fa-calendar",
-                up: "fa fa-chevron-up",
-                down: "fa fa-chevron-down",
-                previous: 'fa fa-chevron-left',
-                next: 'fa fa-chevron-right',
-                today: 'fa fa-screenshot',
-                clear: 'fa fa-trash',
-                close: 'fa fa-remove',
-                inline: true
-            }
-        });
-        $('.EndDate').datetimepicker({
-            format: 'MM/DD/YYYY',
-            icons: {
-                time: "fa fa-clock-o",
-                date: "fa fa-calendar",
-                up: "fa fa-chevron-up",
-                down: "fa fa-chevron-down",
-                previous: 'fa fa-chevron-left',
-                next: 'fa fa-chevron-right',
-                today: 'fa fa-screenshot',
-                clear: 'fa fa-trash',
-                close: 'fa fa-remove',
-                inline: true
+    var flag = false;
+    $(document).ready(function() {
+        $('#config-demo').focus(function() {
+            if (flag == false) {
+                flag = true;
+                $('#config-demo').daterangepicker({
+                    "minDate": new Date(),
+                    "opens": "center",
+                    isInvalidDate: function(date) {
+                        //debugger;
+                        var rangeDates = [];
+                        @foreach (var d in Model.rates)
+                        {
+                            @:rangeDates.push({start : '@d.sd.ToString()', end : '@d.ed.ToString()' });
+                        }
+                        var curDate = new Date(date.format("MM/DD/YY"));
+                        var found = false;
+                        for (var x in rangeDates) {
+                            var start = new Date(rangeDates[x].start.substr(0, 6) + curDate.getUTCFullYear());
+                            var end = new Date(rangeDates[x].end.substr(0, 6) + curDate.getUTCFullYear());
+                            if (curDate >= start && curDate <= end) {
+                                found = true;
+                                break;
+                            }
+
+                        }
+                        return !found;
+                    }
+                }, function (start, end, label) {
+                    //debugger;
+
+                    var price = @(Model.night);
+                    var duration = moment.duration(end.diff(start));
+                    var days = Math.ceil(duration.asDays());
+                    debugger;
+                    $("#calcBill").text(days * price);
+                    $("#vcalcBill").val(days * price);
+                    $("#startCheckIn").val(start.format('MM-DD-YYYY'));
+                    $("#endCheckIn").val(end.format('MM-DD-YYYY'));
+                    console.log(days);
+                    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                });
             }
         });
     });
 </script>
 @section scripts{
+
 
 
 }

@@ -1,0 +1,156 @@
+﻿
+<div class="col-md-12">
+    <form method="post">
+        <div class="card">
+            @if (ViewBag.list != null)
+            {<div>
+                @DateTime.Now
+                @foreach (var r in ViewBag.list)
+                {
+                    <p>
+                        @r.StartDate.ToString() - @r.EndDate.ToString() -
+                    </p>
+                }
+            </div>
+            }@if (ViewBag.rates != null)
+            {<div>
+                @DateTime.Now
+                @foreach (var r in ViewBag.rates)
+                {
+                    <p>
+                        @r.sd.ToString() - @r.ed.ToString() -
+                    </p>
+                }
+            </div>
+            }
+            <div class="card-content">
+                <div class="card-title">
+                    <h2>Price Details</h2>
+                    <p>
+                        Give Details Price For Full Year,Time Details will be ignored
+                    </p>
+                </div>
+                <div class="">
+
+                    <button id="addRateBtn" data-toggle="tab" class="btn btn-info pull-right">
+                        Add Row
+                    </button>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                Season Name
+                            </th>
+                            <th>
+                                From
+                            </th>
+                            <th>
+                                To
+                            </th>
+                            <th>
+                                Price
+                            </th>
+                            <th>
+                                Extra Guest Price
+                            </th>
+                            <th>
+                                Minimum Stay
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="ratesList">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="label-control">Season Name</label>
+                                    <input type="text" name="rates[0].SeasonName" class="form-control"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label class="label-control">Start Date</label>
+                                    <input type="date" name="rates[0].sd" class="form-control datetimepicker"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label class="label-control">End Date</label>
+                                    <input type="date" name="rates[0].ed" class="form-control datetimepicker" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group is-empty">
+                                    <input type="number" name="rates[0].price" value="" placeholder="Price" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group is-empty">
+                                    <input type="number" name="rates[0].guest_price" value="" placeholder="Guest Price" class="form-control">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group is-empty">
+                                    <input type="number" name="rates[0].minStay" value="" placeholder="Min. Price" class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-default pull-left">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section scripts
+{
+
+    <script type="text/javascript">
+        var rateId = 1;
+        $(document).ready(function() {
+            $('.datetimepicker2').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove'
+                },
+                viewMode: 'months',
+                format: 'DD/MM/YYYY'
+            });
+            $("#addRateBtn").click(function () {
+                var trr =
+                    $('<tr><td><div class="form-group"><label class="label-control">Start Date</label><input type="text" name="rates[' + rateId + '].sd" class="form-control datetimepicker" value="01/01/2016" /></div></td><td><div class="form-group"><label class="label-control">End Date</label><input type="text" name="rates[' + rateId + '].ed" class="form-control datetimepicker" value="31/12/2016" /></div></td><td><div class="form-group is-empty"><input type="number" name="rates[' + rateId + '].price" value="" placeholder="Price" class="form-control"></div></td></tr>');
+                var tr = $('<tr><td><div class="form-group"><label class="label-control">Season Name</label><input type="text" name="rates[' + rateId + '].SeasonName" class="form-control " /></div></td><td><div class="form-group"><label class="label-control">Start Date</label><input type="date" name="rates[' + rateId + '].sd" class="form-control datetimepicker"  /></div></td><td><div class="form-group"><label class="label-control">End Date</label><input type="date" name="rates[' + rateId + '].ed" class="form-control datetimepicker" /></div></td><td><div class="form-group is-empty"><input type="number" name="rates[' + rateId + '].price" value="" placeholder="Price" class="form-control"></div></td><td><div class="form-group is-empty"><input type="number" name="rates[' + rateId + '].guest_price" value="" placeholder="Price" class="form-control"></div></td><td><div class="form-group is-empty"><input type="number" name="rates[' + rateId + '].minStay" value="" placeholder="Price" class="form-control"></div></td></tr>');
+                $("#ratesList").append(tr);
+                tr.find('.datetimepicker2').datetimepicker({
+                    icons: {
+                        time: "fa fa-clock-o",
+                        date: "fa fa-calendar",
+                        up: "fa fa-chevron-up",
+                        down: "fa fa-chevron-down",
+                        previous: 'fa fa-chevron-left',
+                        next: 'fa fa-chevron-right',
+                        today: 'fa fa-screenshot',
+                        clear: 'fa fa-trash',
+                        close: 'fa fa-remove'
+                    },
+                    viewMode: 'months',
+                    format: 'DD/MM/YYYY'
+                });
+                rateId++;
+            });
+        });
+    </script>
+    
+}
+

@@ -8,13 +8,13 @@
 
             demo.initMaterialWizard();
 
-            $("#saveProjectbtn").click(function () {
+            $("#saveProjectbtn").click(function() {
                 $("#innerformImages").remove();
                 FinishAdd();
-            })
+            });
 
             CustomMap(32.4690717, 74.39393389999998);
-            $('.datetimepicker').datetimepicker({
+            $('.datetimepicker2').datetimepicker({
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
@@ -61,10 +61,11 @@
                 });
             });
             $("#addRateBtn").click(function() {
-                var tr =
+                var trr =
                     $('<tr><td><div class="form-group"><label class="label-control">Start Date</label><input type="text" name="model.rates[' + rateId + '].sd" class="form-control datetimepicker" value="01/01/2016" /></div></td><td><div class="form-group"><label class="label-control">End Date</label><input type="text" name="model.rates[' + rateId + '].ed" class="form-control datetimepicker" value="31/12/2016" /></div></td><td><div class="form-group is-empty"><input type="number" name="model.rates[' + rateId + '].price" value="" placeholder="Price" class="form-control"></div></td></tr>');
+                var tr = $('<tr><td><div class="form-group"><label class="label-control">Season Name</label><input type="text" name="model.rates[' + rateId + '].SeasonName" class="form-control " /></div></td><td><div class="form-group"><label class="label-control">Start Date</label><input type="date" name="model.rates[' + rateId + '].sd" class="form-control datetimepicker" value="01/01/2016" /></div></td><td><div class="form-group"><label class="label-control">End Date</label><input type="date" name="model.rates[' + rateId + '].ed" class="form-control datetimepicker" value="31/12/2016" /></div></td><td><div class="form-group is-empty"><input type="number" name="model.rates[' + rateId + '].price" value="" placeholder="Price" class="form-control"></div></td><td><div class="form-group is-empty"><input type="number" name="model.rates[' + rateId + '].guest_price" value="" placeholder="Price" class="form-control"></div></td><td><div class="form-group is-empty"><input type="number" name="model.rates[' + rateId + '].minStay" value="" placeholder="Price" class="form-control"></div></td></tr>');
                 $("#ratesList").append(tr);
-                tr.find('.datetimepicker').datetimepicker({
+                tr.find('.datetimepicker2').datetimepicker({
                     icons: {
                         time: "fa fa-clock-o",
                         date: "fa fa-calendar",
@@ -103,6 +104,7 @@
             var address = $("#street").val();
             address += ", " + $("#city").val();
             address += ", " + $("#country").val();
+            address += ", " + $("#postalcode").val();
             getLatitudeLongitude(showResult, address);
         }
 
@@ -303,6 +305,20 @@
                             <div class="col-md-12">
                                 <div class="input-group">
                                     <span class="input-group-addon">
+                                        Property Sub Name:
+                                    </span>
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">
+                                            Give your Property a Sub name. 70 characters is ideal. 0 /150
+                                            <small>(required)</small>
+                                        </label>
+                                        <input name="model.propertysubname" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
                                         Property Type:
                                     </span>
 
@@ -335,6 +351,13 @@
                                             <input class="form-control" type="text" name="model.maxguests" />
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Per Night Price</label>
+                                    <input class="form-control" type="number" name="model.night" />
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -382,14 +405,26 @@
                                                 <input type="text" id="postalcode" name="model.postalcode" class="form-control">
                                             </div>
                                         </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group ">
+                                                <label class="control-label">Longitude</label>
+                                                <input type="text" id="longi" name="model.longitude" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group ">
+                                                <label class="control-label">Latitude</label>
+                                                <input type="text" id="lati" name="model.latitude" class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <button id="generateMap" type="button" class="btn btn-info pull-right" onclick="return generateBtnClick()">Generate</button>
 
-                                <input type="hidden" id="longi" name="model.longitude" class="form-control">
-                                <input type="hidden" id="lati" name="model.latitude" class="form-control">
+                                
+                                
                                 <div class="card" style="background: rgba(238, 238, 238, 0.62);">
                                     <div class="card-header card-header-icon" data-background-color="rose">
                                         <i class="material-icons">room</i>
@@ -429,7 +464,7 @@
                                         </span>
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label">Number of bedrooms</label>
-                                            <input class="form-control" type="number" name="model.bedrooms" number="true" />
+                                            <input class="form-control" type="number" name="model.beds" number="true" />
                                             <span class="help-block"> (keep 0 if it's a studio)</span>
                                         </div>
                                     </div>
@@ -446,7 +481,7 @@
                                         </span>
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label">Number of bathrooms </label>
-                                            <input class="form-control" type="number" name="model.bathrooms" number="true" />
+                                            <input class="form-control" type="number" name="model.baths" number="true" />
                                             <span class="help-block"> (or shower rooms)</span>
                                         </div>
                                     </div>
@@ -613,35 +648,60 @@
                                 </button>
                                 <table class="table">
                                     <thead>
-                                        <tr>
-                                            <th>
-                                                From
-                                            </th>
-                                            <th>
-                                                To
-                                            </th>
-                                            <th>
-                                                Price
-                                            </th>
-                                        </tr>
+                                    <tr>
+                                        <th>
+                                            Season Name
+                                        </th>
+                                        <th>
+                                            From
+                                        </th>
+                                        <th>
+                                            To
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Extra Guest Price
+                                        </th>
+                                        <th>
+                                            Minimum Stay
+                                        </th>
+                                    </tr>
                                     </thead>
                                     <tbody id="ratesList">
                                         <tr>
                                             <td>
                                                 <div class="form-group">
+                                                    <label class="label-control">Season Name</label>
+                                                    <input type="text" name="model.rates[0].SeasonName" class="form-control" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
                                                     <label class="label-control">Start Date</label>
-                                                    <input type="text" name="model.rates[0].sd" class="form-control datetimepicker" value="01/01/2016" />
+                                                    <input type="date" name="model.rates[0].sd" class="form-control datetimepicker" value="01/01/2016" />
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="form-group">
                                                     <label class="label-control">End Date</label>
-                                                    <input type="text" name="model.rates[0].ed" class="form-control datetimepicker" value="31/12/2016" />
+                                                    <input type="date" name="model.rates[0].ed" class="form-control datetimepicker" value="31/12/2016" />
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="form-group is-empty">
                                                     <input type="number" name="model.rates[0].price" value="" placeholder="Price" class="form-control">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group is-empty">
+                                                    <input type="number" name="model.rates[0].guest_price" value="" placeholder="Guest Price" class="form-control">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group is-empty">
+                                                    <input type="number" name="model.rates[0].minStay" value="" placeholder="Min. Price" class="form-control">
                                                 </div>
                                             </td>
                                         </tr>

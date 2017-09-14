@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using LayerDAO;
 
 namespace RentalsClinet.Controllers
 {
@@ -13,7 +11,19 @@ namespace RentalsClinet.Controllers
 
         public ActionResult Index()
         {
-            return View("Index");
+            var list = ServicesDao.GetAll();
+            return View("Index",list);
+        }
+        public ActionResult Detail()
+        {
+            if (Request.Url == null || Request.Url.Segments.Length < 4) return RedirectToAction("Index");
+            var serviceToken = Request.Url.Segments[3];
+            if (serviceToken.Contains(' '))
+                serviceToken = serviceToken.Replace(" ", "-");
+            serviceToken = serviceToken.ToLower();
+            var serivce = ServicesDao.Get(serviceToken);
+            if (serivce == null) return RedirectToAction("Index");
+            return View("Detail",serivce);
         }
 
     }

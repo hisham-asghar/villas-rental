@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using CustomModels.Yachts;
 using LayerDAO;
 using RentalsClinet.Helpers;
@@ -34,24 +30,31 @@ namespace RentalsClinet.Controllers
                 "34-63",
                 "64-77",
                 "78-99",
-                "100+"
-            };
-            if (token != null && tokenList.Any(p => p == token))
+                "100"
+            };            
+            if (token != null && tokenList.Any(p => p == token.Replace("+", "").Replace(" ", "")))
             {
                 List<YachtModel> list = null;
+                token = token.Replace("+", "").Replace(" ", "");
+                ViewBag.Token = token;
                 switch (token)
                 {
                     case "34-63":
                         list  = YachtDAO.getYachts(34, 63);
+                        ViewBag.banner = "/Content/Images/Yachts/36-63.jpg";
                         break;
                     case "64-77":
                         list = YachtDAO.getYachts(64, 77);
+                        ViewBag.banner = "/Content/Images/Yachts/64-77.jpg";
                         break;
                     case "78-99":
                         list = YachtDAO.getYachts(78, 99);
+                        ViewBag.banner = "/Content/Images/Yachts/78-99.jpg";
                         break;
-                    case "100+":
+                    case "100":
                         list = YachtDAO.getYachts(100, 0);
+                        ViewBag.Token = "100+";
+                        ViewBag.banner = "/Content/Images/Yachts/100.jpg";
                         break;
                 }
                 if (list != null)
@@ -68,7 +71,6 @@ namespace RentalsClinet.Controllers
                         countAdded += count;
                     }
                     //ViewBag.list = dlist;
-                    ViewBag.Token = token;
                     return View("SubIndex", dlist);
                 }
             }

@@ -1,0 +1,247 @@
+﻿@model CustomModels.DetailBookingModel
+
+@section scripts
+{
+    <script>
+        // wait for the DOM to be loaded
+        $(document).ready(function() {
+            $('#myForm').submit(function(e) {
+                e.preventDefault();
+                var $this = $(this),
+                    action = $this.attr('action');
+
+                // The AJAX requrest
+                $.post(
+                    action,
+                    $this.serialize(),
+                    function(data) {
+                        debugger;
+                        var modal = {
+                            text: "We couldn't Process your transaction.",
+                            btnClass: "btn-danger",
+                            func: function () {
+                                $("#smallAlertModal").modal('hide');
+                            }
+                        }
+                        var flag = false;
+                        if (data == null) {
+
+                            $("#smallAlertModal .message-text").text(modal.text);
+                            $("#smallAlertModal #modalBTN").removeAttr("class").addClass("btn btn-danger");
+                            $("#smallAlertModal").attr("check", "false");
+                            $("#smallAlertModal").modal('show');
+                        } else {
+                            data = JSON.parse(data);
+
+                            $("#smallAlertModal #modalBTN").removeAttr("class");
+                            if (data.ResponseCode == "1" && data.MessageCode == "1") {
+                                $("#smallAlertModal .message-text").text(data.Description);
+                                $("#smallAlertModal").attr("check", "true");
+                                $("#smallAlertModal #modalBTN").addClass("btn btn-success");
+                            } else {
+                                $("#smallAlertModal").attr("check", "true");
+                                $("#smallAlertModal .message-text").text(data.MessageCode);
+                                $("#smallAlertModal #modalBTN").addClass("btn btn-warning");
+                            }
+                            
+                            
+                            $("#smallAlertModal").modal('show');
+                        }
+                    }
+                );
+            });
+
+
+            $("#smallAlertModal #modalBTN").click(function () {
+                if ($("#smallAlertModal").attr("check") == "false")
+                    $("#smallAlertModal").modal('hide');
+                else
+                    location.href = "/Destinations";
+            });
+        });
+    </script>
+
+}
+<div class="page-header header-filter clear-filter" style="background: rgba(0, 0, 0, 0.4); height: 40vh; min-height: 50vh;">
+    <div class="container" style="padding-top: 15vh;">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" style="text-align: center;">
+                <div class="brand">
+                    <h1 style="text-shadow: 2px 3px 6px #222;">
+                        @Model.Property.Name
+                    </h1>
+                    <h3>
+                        <i class="material-icons">location_on</i>
+                        @Model.Property.CityName, @Model.Property.Country
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="min-height: 100vh;">
+    <div class="container">
+        <div class="col-md-8">
+            <form id="myForm" action="/Destinations/BookVilla" method="post">
+                <h3 style="font-weight: bold;">
+                    Your Information
+                </h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">First name</label>
+                            <input type="text" name="model.firstname" id="firstname" pattern="[a-zA-Z][a-zA-Z\s]*" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Last name</label>
+                            <input type="text" name="model.lastname" id="lastname" pattern="[a-zA-Z][a-zA-Z\s]*" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Phone</label>
+                            <input type="tel" name="model.phoneNumber" pattern="[0-9]{7,}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Email</label>
+                            <input type="email" name="model.email" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <h3 style="font-weight: bold;">
+                    Card Information
+                </h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Name on Card</label>
+                            <input type="text" name="card.name" pattern="[a-zA-Z][a-zA-Z\s]*" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Card Number</label>
+                            <input type="number" name="card.cardNumber" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Exp. MMYY</label>
+                            <input type="number" name="card.expirationDate" pattern="^[0-9]{2}$" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">CVV</label>
+                            <input type="number" name="card.cardCode" pattern="^[0-9]{3,4}$" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <h3 style="font-weight: bold;">
+                    Billing Information
+                </h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Street Address</label>
+                            <input type="text" name="model.address" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">City</label>
+                            <input type="text" name="model.city" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Country</label>
+                            <input type="text" name="model.country" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">State</label>
+                            <input type="text" name="model.state" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Zip Code</label>
+                            <input type="number" name="model.zip" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="booking" value="@ViewBag.BookingId" />
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-2">
+                        <button type="submit" class="btn btn-success">Submit Booking Request</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <div class="card" style="margin-top: 5%;">
+                <div class="content">
+                    <h4 class="card-title">
+                        <a href="#">
+                            Rental Details
+                        </a>
+                    </h4>
+                    <div class="card-description " style="font-weight: bold;">
+                        <p>From: @Model.fromDate.ToString("D")</p>
+                        <p>To: @Model.toDate.ToString("D")</p>
+                        <hr />
+
+                        <p> @(Model.SeasonName != null ? "Season: " + Model.SeasonName : "")  </p>
+                        <p> Per Night Price: $@Model.perNightRate  </p>
+                        <p> Bedrooms Price (@Model.bed.count beds): $@Model.bed.price  </p>
+                        <hr />
+
+                        <p> House Kepping Charges: $@Model.hk.price  </p>
+                        <p> Private Cheff Charges: $@Model.pc.price  </p>
+                        <hr />
+
+
+                        <p> Total Amount : $@Model.TotalPrice  </p>
+                        <p> Tax (@Model.Tax%): $@Model.TotalTaxPrice </p>
+                        <p> Total Amount With Tax: $@(Model.TotalPriceWithTax)</p>
+                        <hr />
+
+                        <p> Transaction Charges (2.9%): $@(Math.Floor(Model.TotalPriceWithTax * 0.029))</p>
+                        <p> Gross Amount: $@(Math.Floor(Model.TotalPriceWithTax * 1.029))</p>
+                        
+                    </div>
+                </div>
+                <div style="background: #ccc;">
+                    <img src="/Content/assets/img/TMG.png" style="width: 50%;margin: auto;left: 25%;position: relative;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="smallAlertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-small ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="message-text"></h5>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" id="modalBTN" class="btn btn-simple">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

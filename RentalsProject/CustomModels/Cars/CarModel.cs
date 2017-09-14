@@ -17,6 +17,7 @@ namespace CustomModels.Cars
         public double priceThreeDays { get; set; }
         public double priceWeek { get; set; }
         public int Type { get; set; }
+        public string TypeName { get; set; }
     }
     public class CarModelDetail : CarModel
     {

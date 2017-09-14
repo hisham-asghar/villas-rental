@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayerDB", "LayerDB\LayerDB.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModels", "CustomModels\CustomModels.csproj", "{58493A1E-75B1-48F7-9CD9-71CAC91085C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizeMerchantLibrary", "AuthorizeMerchantLibrary\AuthorizeMerchantLibrary.csproj", "{FF1528D3-A51F-47AB-927F-2114E08C779E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalHelper", "RentalHelper\RentalHelper.csproj", "{936DEDB5-76B4-4BB8-A9B6-2BC2D92FE59C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +50,14 @@ Global
 		{58493A1E-75B1-48F7-9CD9-71CAC91085C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58493A1E-75B1-48F7-9CD9-71CAC91085C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58493A1E-75B1-48F7-9CD9-71CAC91085C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF1528D3-A51F-47AB-927F-2114E08C779E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF1528D3-A51F-47AB-927F-2114E08C779E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF1528D3-A51F-47AB-927F-2114E08C779E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF1528D3-A51F-47AB-927F-2114E08C779E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{936DEDB5-76B4-4BB8-A9B6-2BC2D92FE59C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{936DEDB5-76B4-4BB8-A9B6-2BC2D92FE59C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{936DEDB5-76B4-4BB8-A9B6-2BC2D92FE59C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{936DEDB5-76B4-4BB8-A9B6-2BC2D92FE59C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

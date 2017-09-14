@@ -8,6 +8,11 @@ namespace LayerDB
 
     public partial class PropertyRentalBudgetDetail
     {
+        public PropertyRentalBudgetDetail()
+        {
+            Bookings = new HashSet<Booking>();
+        }
+
         [Key]
         public int RentalBudgetId { get; set; }
 
@@ -21,7 +26,16 @@ namespace LayerDB
 
         public DateTime onModified { get; set; }
 
-        public int Price { get; set; }
+        public double Price { get; set; }
+
+        [StringLength(256)]
+        public string SeasonName { get; set; }
+
+        public double guest_price { get; set; }
+
+        public int minStay { get; set; }
+
+        public virtual ICollection<Booking> Bookings { get; set; }
 
         public virtual PropertyDetail PropertyDetail { get; set; }
     }

@@ -33,12 +33,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -54,33 +54,50 @@
   <ItemGroup>
     <Compile Include="AmenitiesType.cs" />
     <Compile Include="Amenity.cs" />
+    <Compile Include="BlogViewItem.cs" />
+    <Compile Include="BlogViewType.cs" />
     <Compile Include="Booking.cs" />
     <Compile Include="Car.cs" />
     <Compile Include="CarSpecification.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="CityCC.cs" />
     <Compile Include="Composition.cs" />
+    <Compile Include="Country.cs" />
     <Compile Include="DBModel.cs" />
+    <Compile Include="FAQ.cs" />
     <Compile Include="File.cs" />
+    <Compile Include="HomeOwner.cs" />
     <Compile Include="Inquiry.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="Magzine.cs" />
+    <Compile Include="MagzineCategory.cs" />
+    <Compile Include="MagzineItem.cs" />
+    <Compile Include="Mail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyAmenitiesView.cs" />
+    <Compile Include="PropertyBookingService.cs" />
     <Compile Include="PropertyDetail.cs" />
+    <Compile Include="PropertyDetailView.cs" />
     <Compile Include="PropertyRentalBudgetDetail.cs" />
     <Compile Include="PropertyReview.cs" />
+    <Compile Include="PropertyService.cs" />
     <Compile Include="PropertyTag.cs" />
+    <Compile Include="PropertyTagsView.cs" />
     <Compile Include="PropertyType.cs" />
+    <Compile Include="PropertyUnavailablity.cs" />
+    <Compile Include="Service.cs" />
     <Compile Include="SiteMeta.cs" />
     <Compile Include="SiteMetaMatch.cs" />
     <Compile Include="Specification.cs" />
-    <Compile Include="sysdiagram.cs" />
     <Compile Include="Tag.cs" />
+    <Compile Include="Testimonal.cs" />
+    <Compile Include="UrlMeta.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Yacht.cs" />
     <Compile Include="YachtSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="App.Config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

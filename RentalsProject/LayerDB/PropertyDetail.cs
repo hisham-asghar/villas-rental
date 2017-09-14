@@ -17,6 +17,7 @@ namespace LayerDB
             PropertyRentalBudgetDetails = new HashSet<PropertyRentalBudgetDetail>();
             PropertyReviews = new HashSet<PropertyReview>();
             PropertyTags = new HashSet<PropertyTag>();
+            PropertyUnavailablities = new HashSet<PropertyUnavailablity>();
         }
 
         [Key]
@@ -25,6 +26,9 @@ namespace LayerDB
         [Required]
         [StringLength(256)]
         public string Name { get; set; }
+
+        [StringLength(256)]
+        public string SubName { get; set; }
 
         public int TypeId { get; set; }
 
@@ -57,9 +61,13 @@ namespace LayerDB
         [StringLength(256)]
         public string guid { get; set; }
 
+        [StringLength(512)]
         public string videoURL { get; set; }
 
+        [StringLength(256)]
         public string pdfFile { get; set; }
+
+        public double night { get; set; }
 
         public virtual ICollection<Amenity> Amenities { get; set; }
 
@@ -78,5 +86,7 @@ namespace LayerDB
         public virtual ICollection<PropertyReview> PropertyReviews { get; set; }
 
         public virtual ICollection<PropertyTag> PropertyTags { get; set; }
+
+        public virtual ICollection<PropertyUnavailablity> PropertyUnavailablities { get; set; }
     }
 }

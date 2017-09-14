@@ -16,39 +16,59 @@ namespace LayerDB
 
         public int UserId { get; set; }
 
-        [Required]
-        [StringLength(256)]
-        public string Username { get; set; }
-
-        [Required]
         [StringLength(256)]
         public string Password { get; set; }
 
-        [Required]
         [StringLength(256)]
         public string FirstName { get; set; }
 
-        [Required]
         [StringLength(256)]
         public string LastName { get; set; }
 
-        [Required]
         [StringLength(256)]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(256)]
+        [StringLength(20)]
         public string PhoneNumber { get; set; }
 
-        public int LocationId { get; set; }
+        [StringLength(12)]
+        public string Zip { get; set; }
 
         [Column(TypeName = "ntext")]
-        [Required]
         public string Description { get; set; }
 
-        public DateTime onCreated { get; set; }
+        public DateTime? onCreated { get; set; }
 
-        public DateTime onModified { get; set; }
+        public DateTime? onModified { get; set; }
+
+        [StringLength(50)]
+        public string Country { get; set; }
+
+        [StringLength(256)]
+        public string Address { get; set; }
+
+        [StringLength(256)]
+        public string Address2 { get; set; }
+
+        [StringLength(256)]
+        public string VerificationCode { get; set; }
+
+        public bool? EmailVerified { get; set; }
+
+        [StringLength(256)]
+        public string City { get; set; }
+
+        [StringLength(256)]
+        public string State { get; set; }
+
+        [StringLength(256)]
+        public string CardNumber { get; set; }
+
+        [StringLength(10)]
+        public string ExpirationDate { get; set; }
+
+        [StringLength(5)]
+        public string CardCode { get; set; }
 
         public virtual ICollection<Booking> Bookings { get; set; }
 

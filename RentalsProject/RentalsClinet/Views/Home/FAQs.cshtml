@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = ViewBag.HeadTitle;
+}
+@{
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+@model List<LayerDB.FAQ>
+<nav class="navbar navbar-transparent navbar-absolute">
+    @Html.Partial("~/Views/Shared/HeaderNavBar.cshtml")
+</nav>
+<div class="page-header header-filter" style="background-image: url('/Content/assets/img/bg9.jpg');height:40vh; min-height: 50vh;">
+    <div class="container" style="padding-top:20vh;">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 class="title">
+                    FAQs
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .description p {
+        font-size: 16px;
+    }
+</style>
+<div class="main">
+    <div class="container" style="min-height:100vh;">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        @foreach (var f in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id='@("heading" + f.faqId)'>
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href='@("#collapse"+f.faqId)' aria-expanded="false" aria-controls='@("collapse"+f.faqId)'>
+                        <h4 class="panel-title" style="font-weight:bold;">
+                            @(f.Question.Contains("\n") ? f.Question.Replace("\n", "<br />") : f.Question)
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </h4>
+                    </a>
+                </div>
+                <div id='@("collapse"+f.faqId)' class="panel-collapse collapse" role="tabpanel" aria-labelledby='@("heading" + f.faqId)'>
+                    <div class="panel-body">
+                        @(Html.Raw(f.Answer.Contains("\n") ? f.Answer.Replace("\n", "<br />") : f.Answer))
+                    </div>
+                </div>
+            </div>
+        }
+        </div>        
+    </div>
+</div>

@@ -63,10 +63,11 @@ Modules - reusable parts of our design
 
 #cd-vertical-nav ul{
     list-style: none;
+    padding: 0;
 }
 #cd-vertical-nav {
   position: fixed;
-  right: 40px;
+  right: -78px;
   top: 50%;
   bottom: auto;
   -webkit-transform: translateY(-50%);
@@ -84,6 +85,7 @@ Modules - reusable parts of our design
   /* prevent weird movements on hover when you use a CSS3 transformation - webkit browsers */
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  width: 100%;
 }
 #cd-vertical-nav a:after {
   content: "";
@@ -109,12 +111,17 @@ Modules - reusable parts of our design
 }
 #cd-vertical-nav a:hover .cd-label {
   opacity: 1;
+  left: -100%;
+  -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+  -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
 }
 
 #cd-vertical-nav .cd-dot {
   position: relative;
   /* we set a top value in order to align the dot with the label. If you change label's font, you may need to change this top value*/
   top: 8px;
+  right: calc(100% - 15px);
   height: 12px;
   width: 12px;
   border-radius: 50%;
@@ -138,9 +145,6 @@ Modules - reusable parts of our design
   border-radius: 20px;
   text-transform: uppercase;
   font-weight: 600;
-  -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
-  -moz-transition: -moz-transform 0.2s, opacity 0.2s;
-  transition: transform 0.2s, opacity 0.2s;
   opacity: 0;
   -webkit-transform-origin: 100% 50%;
   -moz-transform-origin: 100% 50%;
@@ -148,6 +152,7 @@ Modules - reusable parts of our design
   -o-transform-origin: 100% 50%;
   transform-origin: 100% 50%;
 }
+
 
 /* Touch devices */
 .touch .cd-nav-trigger {

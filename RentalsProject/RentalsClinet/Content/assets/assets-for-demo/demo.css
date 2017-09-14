@@ -64,6 +64,10 @@
     background-attachment: scroll;
 }
 
+.tim-container .noUi-horizontal{
+    margin: 30px 0;
+}
+
 .navigation-example{
     background-image: url('../img/bg.jpg');
     background-position: center center;
@@ -132,6 +136,7 @@
     float: left;
     margin-left: 10px;
     margin-top: 7px;
+    color: #fff;
     width: 70px;
     height: 40px;
     text-align: left;
@@ -159,8 +164,9 @@
 
 .fixed-section{
     top: 90px;
-    max-height: 80vh;
+    max-height: 71vh;
     overflow: scroll;
+    border-bottom: 1px solid rgba(220,220,220, .8);
 }
 .fixed-section ul li{
     list-style: none;
@@ -247,6 +253,13 @@
     }
 }
 
+@media (max-width: 991px) {
+    .fixed-section.affix {
+        position: relative;
+        margin-bottom: 100px;
+    }
+}
+
 @media (max-width: 768px){
     .btn, .btn-morphing{
         margin-bottom: 10px;
@@ -277,7 +290,7 @@
     padding-bottom: 0;
 }
 #javascriptComponents .btn-raised{
-    margin: 10px 5px;
+    margin: 10px 0px;
 }
 
 
@@ -377,4 +390,33 @@
 .components-page .title,
 .tutorial-page .title{
     color: #FFFFFF;
+}
+
+@media (max-width: 830px){
+    .main-raised{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+@media all and (min-width: 1200px){
+    #modal-row [class*="col-"]:nth-child(1),
+    #modal-row [class*="col-"]:nth-child(4),
+    #javascriptComponents [class*="col-"]:nth-child(2),
+    #javascriptComponents [class*="col-"]:nth-child(5){
+        padding-right: 3px;
+    }
+
+    #modal-row [class*="col-"]:nth-child(2),
+    #javascriptComponents [class*="col-"]:nth-child(3){
+        padding-right: 3px;
+        padding-left: 3px;
+    }
+
+    #modal-row [class*="col-"]:nth-child(3),
+    #modal-row [class*="col-"]:nth-child(5),
+    #javascriptComponents [class*="col-"]:nth-child(4),
+    #javascriptComponents [class*="col-"]:nth-child(6){
+        padding-left: 3px;
+    }
 }

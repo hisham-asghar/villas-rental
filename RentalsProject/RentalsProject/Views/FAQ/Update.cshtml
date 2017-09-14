@@ -1,0 +1,36 @@
+﻿@model LayerDB.FAQ
+@{
+    ViewBag.Title = "Add/Update FAQ";
+}
+<a href="/FAQ" class="btn btn-info">View All FAQs</a><br />
+<div class="card">
+    <div class="card-header" data-background-color="purple">
+        <h4 class="card-title">@ViewBag.Title</h4>
+    </div>
+    <div class="card-content">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="model.faqId" value="@Model.faqId" />
+            <div class="col-md-8">
+                <div class="col-md-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">Question</label>
+                        <textarea name="model.Question" class="form-control">
+                            @(Model.Question ?? "")
+                        </textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">Answer</label>
+                        <textarea name="model.Answer" class="form-control" rows="10">
+                            @(Model.Answer ?? "")
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success">Save </button><br />
+            </div>
+        </form>
+    </div>
+</div>

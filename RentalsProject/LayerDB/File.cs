@@ -26,7 +26,6 @@ namespace LayerDB
 
         public int? FileTypeId { get; set; }
 
-        [Required]
         [StringLength(1024)]
         public string Description { get; set; }
     }

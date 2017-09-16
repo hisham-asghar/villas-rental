@@ -19,7 +19,7 @@ namespace LayerDAO
         {
             using (var db = new DBModel())
             {
-                return db.Tags.ToList();
+                return db.Tags.Include("PropertyTags").ToList();
             }
         }
         public static bool Delete(int id)
@@ -27,9 +27,10 @@ namespace LayerDAO
             using (var db = new DBModel())
             {
                 var tag = db.Tags.FirstOrDefault(t => t.TagId == id);
-                db.Tags.Remove(tag);
                 try
                 {
+                    db.PropertyTags.RemoveRange(tag.PropertyTags);
+                    db.Tags.Remove(tag); 
                     db.SaveChanges();
                 }
                 catch (Exception e)

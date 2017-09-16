@@ -425,6 +425,40 @@
             styles: [{ "featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{ "color": "#444444" }] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "color": "#f2f2f2" }] }, { "featureType": "poi", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": 45 }] }, { "featureType": "road.highway", "elementType": "all", "stylers": [{ "visibility": "simplified" }] }, { "featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "color": "#cdd2d4" }, { "visibility": "on" }] }]
         };
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+       // var MiamiKMLLayer = new google.maps.KmlLayer('http://www.charts.noaa.gov/OnLineViewer/Prototype/miami.kml');
+       // MiamiKMLLayer.setMap(map);
+        
+        var listTrz = [
+            {lat: -79.16473388671875, lng: 30.681620845933267},
+            {lat: -85.31707763671875, lng: 29.4647097013022},
+            {lat: -83.91082763671875, lng: 24.93252145867791},
+            {lat: -75.91278076171875, lng: 25.64771645312254},
+            {lat: -74.06707763671875, lng: 30.45459295698005}
+        ];
+        var liz = [];
+        for (var x in listTrz)
+        {
+            liz.push({
+                lng: listTrz[x].lat,
+                lat: listTrz[x].lng
+            })
+        }
+
+        var bermudaTriangle = new google.maps.Polygon({
+            paths: liz,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.7,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.25
+        });
+        
+        
+        
+        bermudaTriangle.setMap(map);
+        
+
+
         $(".property_box").each(function () {
             debugger;
             var lati = parseFloat($(this).attr("latitude"));
@@ -437,6 +471,14 @@
                 title: title
             });
 
+            map.addListener('center_changed', function() {
+                // 3 seconds after the center of the map has changed, pan back to the
+                // marker.
+                window.setTimeout(function() {
+                    map.panTo(marker.getPosition());
+                }, 3000);
+            });
+
             var div = $(this).html();
 
             var contentString = div;//$(div).find(".content").css("width", "500px").html();
@@ -445,6 +487,9 @@
             });
             marker.addListener('click', function () {
                 infowindow.open(map, marker);
+                map.setZoom(8);
+                map.setCenter(marker.getPosition());
+
             });
 
             marker.setMap(map);

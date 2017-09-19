@@ -4,79 +4,37 @@
     ViewBag.UploadLocation = RentalsClinet.Helpers.CustomActions.getUploadLocation();  
 }
 @section headScripts{
-    <link href="~/Content/ZoomSlider/bannerscollection_zoominout.css" rel="stylesheet" type="text/css">
-    <link href="~/Content/ZoomSlider/text_classes.css" rel="stylesheet" type="text/css">
-    <link href="~/Content/ZoomSlider/css3animations.css" rel="stylesheet" type="text/css">
 
-    <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/Content/Slider/revolution/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css">
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="/Content/Slider/revolution/css/settings.css">
+    <!-- REVOLUTION LAYERS STYLES -->
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script src="~/Content/ZoomSlider/js/jquery.touchSwipe.min.js" type="text/javascript"></script>
-    <script src="~/Content/ZoomSlider/js/bannerscollection_zoominout.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/Content/Slider/revolution/css/layers.css">
 
-    <script>
-        
-        jQuery(function() {
-            jQuery("#bannerscollection_zoominout_1").bannerscollection_zoominout({				
-                skin:"generous",
-                width:1920,
-                height:600,
-                width100Proc:true,
-                height100Proc:true,
-                responsive:true,
-                responsiveRelativeToBrowser:true,
-                setAsBg:false,
-                autoPlay:11,
-                loop:true,
-                fadeSlides:true,
-                horizontalPosition:"center",
-                verticalPosition:"center",
-                initialZoom:1,
-                finalZoom:0.8,
-                duration:20,
-                durationIEfix:30,
-                zoomEasing:"ease",
-                target:"_blank",
-                pauseOnMouseOver:false,
-                showAllControllers:true,
-                showNavArrows:true,
-                showOnInitNavArrows:true,
-                autoHideNavArrows:true,
-                showBottomNav:true,
-                showOnInitBottomNav:true,
-                autoHideBottomNav:true,
-                showPreviewThumbs:true,
-                enableTouchScreen:true,
-                absUrl:"",
-                scrollSlideDuration:0.8,
-                scrollSlideEasing:"swing",
-                defaultEasing:"swing",
-                myloaderTime:1,
-                showCircleTimer:true,
-                circleRadius:13,
-                circleLineWidth:2,
-                circleColor:"#ffffff",
-                circleAlpha:100,
-                behindCircleColor:"##ffffff",
-                behindCircleAlpha:20,
-                numberOfThumbsPerScreen:0,
-                thumbsWrapperMarginTop:-110,
-                thumbsOnMarginTop:10,
-                defaultExitLeft:0,
-                defaultExitTop:0,
-                defaultExitFade:1,
-                defaultExitDuration:0,
-                defaultExitDelay:0,
-                defaultExitEasing:"swing",
-                defaultExitOFF:true			
-            });
-        });
-    </script>
+    <!-- REVOLUTION NAVIGATION STYLES -->
+    <link rel="stylesheet" type="text/css" href="/Content/Slider/revolution/css/navigation.css">
+
+    <!-- FONT AND STYLE FOR BASIC DOCUMENTS, NO NEED FOR FURTHER USAGE IN YOUR PROJECTS-->
+    <link href="http://fonts.googleapis.com/css?family=Roboto%3A700%2C300" rel="stylesheet" property="stylesheet" type="text/css" media="all" />
+    <!-- REVOLUTION JS FILES -->
+    <script type="text/javascript" src="/Content/Slider/revolution/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="/Content/Slider/revolution/js/jquery.themepunch.revolution.min.js"></script>
+
+    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+    <script type="text/javascript" src="/Content/Slider/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="/Content/Slider/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+    <script type="text/javascript" src="/Content/Slider/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script type="text/javascript" src="/Content/Slider/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="/Content/Slider/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+    <script type="text/javascript" src="/Content/Slider/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="/Content/Slider/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script type="text/javascript" src="/Content/Slider/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="/Content/Slider/revolution/js/extensions/revolution.extension.video.min.js"></script>
+
 }
-<style>
+    <style>
     .contentHolderUnit img{
         width:100% !important;
         height:100% !important;
@@ -154,11 +112,48 @@
     .roomdetailsIcon.amenities > li > a {
         padding: 25px 50px;
     }
+    .erinyen.tparrows{
+        min-height: 50px;
+        min-width: 50px;
+    }
+
+    .erinyen.tparrows:before {
+      font-size:18px;
+      line-height: 50px;
+    }
+    
+    .hebe .tp-bullet-image {
+      width:50px;
+      height:50px;
+    }
+    .erinyen .tp-bullet-image {
+      width:50px;
+      height:50px;
+    }
+
+    .erinyen .tp-arr-titleholder {
+      line-height:50px;
+    }
+    .erinyen .tp-title-wrap {
+        min-height: 50px;
+        line-height: 50px;
+        height: 50px;
+        min-width: 50px;
+        width: 50px;
+    }
+    .main_header_back,
+    #rev_slider_474_1_wrapper{
+        background: #4c4c4c; /* Old browsers */
+        background: -moz-linear-gradient(-45deg, #4c4c4c 0%, #595959 12%, #666666 25%, #1c1c1c 61%, #1c1c1c 65%, #474747 83%, #474747 83%, #131313 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, #4c4c4c 0%,#595959 12%,#666666 25%,#1c1c1c 61%,#1c1c1c 65%,#474747 83%,#474747 83%,#131313 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, #4c4c4c 0%,#595959 12%,#666666 25%,#1c1c1c 61%,#1c1c1c 65%,#474747 83%,#474747 83%,#131313 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
 </style>
 
 @model CustomModels.PropertyModels.PropertyView
            
-    <div class="page-header header-filter clear-filter" style="background: rgba(0, 0, 0, 0.4); height: 40vh; min-height: 50vh;">
+    <div class="page-header header-filter clear-filter main_header_back" style="min-height: 35vh;height: 35vh;">
         <div class="container" style="padding-top: 15vh;">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2" style="text-align: center;">
@@ -175,22 +170,144 @@
             </div>
         </div>
     </div>
-    <div style="height: 100vh;">
-        <div id="bannerscollection_zoominout_1" style="">
-            <div class="myloader"></div>
-            <ul class="bannerscollection_zoominout_list">
-                @foreach (string t in Model.imageList)
-                {
-                    <li data-text-id="" data-video="false" data-zoomeasing=""
-                        data-bottom-thumb="@ViewBag.UploadLocation/@t" data-link="" data-target=""
-                        data-horizontalposition="center" data-verticalposition="center"
-                        data-initialzoom="0.9" data-finalzoom="1" data-duration="">
-                        <img src="@ViewBag.UploadLocation/@t" style="width:100%;height:100vh;" alt="" />
-                    </li>
-                }
-            </ul>
-        </div>
+    <div>
+        
+        <div id="rev_slider_474_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="showcase-carousel" 
+             data-source="gallery" 
+             style="margin:0px auto;padding:0px;margin-top:0px;margin-bottom:0px;
+                background-repeat:no-repeat;background-size:cover;background-position:center center;">
+            <!-- START REVOLUTION SLIDER 5.4.1 fullwidth mode -->
+            <div id="rev_slider_474_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.4.1">
+                <ul>
+                    <!-- SLIDE  -->
+                    @{ var xslide = 1636;}
+                    @foreach (string t in Model.imageList)
+                    {
+                        <li data-index="rs-@(xslide++)" data-transition="fade" data-slotamount="7" data-hideafterloop="0"
+                            data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300"
+                            data-thumb="@ViewBag.UploadLocation/thumbs/@(t.Substring(0,t.LastIndexOf(".jpg")) + "80x80.jpg")" data-rotate="0" data-saveperformance="off"
+                            data-title="" data-param1="" data-param2="" data-param3="" data-param4="" data-param5=""
+                            data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                            <!-- MAIN IMAGE -->
+                            <img src="@ViewBag.UploadLocation/@t" alt="" data-bgposition="center center"
+                                 data-bgfit="contain" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                            <!-- LAYERS -->
+                        </li>
+                    }
+                    
+                    <!-- SLIDE  -->
+
+                </ul>
+                <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
+            </div>
+
+        </div><!-- END REVOLUTION SLIDER -->
+        <script type="text/javascript">
+						var tpj=jQuery;
+
+			var revapi474;
+			tpj(document).ready(function() {
+				if(tpj("#rev_slider_474_1").revolution == undefined){
+					revslider_showDoubleJqueryError("#rev_slider_474_1");
+				}else{
+					revapi474 = tpj("#rev_slider_474_1").show().revolution({
+						sliderType:"carousel",
+jsFileLocation:"revolution/js/",
+						sliderLayout:"fullwidth",
+						dottedOverlay:"none",
+						delay:9000,
+						navigation: {
+							keyboardNavigation:"off",
+							keyboard_direction: "horizontal",
+							mouseScrollNavigation:"off",
+ 							mouseScrollReverse:"default",
+							onHoverStop:"off",
+							arrows: {
+								style:"erinyen",
+								enable:true,
+								hide_onmobile:false,
+								hide_onleave:false,
+								tmp:'<div class="tp-title-wrap">  	<div class="tp-arr-imgholder"></div>    <div class="tp-arr-img-over"></div>	<span class="tp-arr-titleholder">{{title}}</span> </div>',
+								left: {
+									h_align:"left",
+									v_align:"center",
+									h_offset:15,
+									v_offset:0
+								},
+								right: {
+									h_align:"right",
+									v_align:"center",
+									h_offset:15,
+									v_offset:0
+								}
+							}
+							,
+							thumbnails: {
+								style:"gyges",
+								enable:true,
+								width:60,
+								height:60,
+								min_width:60,
+								wrapper_padding:20,
+								wrapper_color:"#000000",
+								wrapper_opacity:"0.15",
+								tmp:'<span class="tp-thumb-img-wrap">  <span class="tp-thumb-image"></span></span>',
+								visibleAmount:9,
+								hide_onmobile:false,
+								hide_onleave:false,
+								direction:"horizontal",
+								span:true,
+								position:"outer-bottom",
+								space:10,
+								h_align:"center",
+								v_align:"bottom",
+								h_offset:0,
+								v_offset:0
+							}
+						},
+						carousel: {
+							maxRotation: 65,
+							vary_rotation: "on",
+							minScale: 55,
+							vary_scale: "off",
+							horizontal_align: "center",
+							vertical_align: "center",
+							fadeout: "on",
+							vary_fade: "on",
+							maxVisibleItems: 5,
+							infinity: "off",
+							space: -150,
+							stretch: "off"
+						},
+						visibilityLevels:[1240,1024,778,480],
+						gridwidth:600,
+						gridheight:600,
+						lazyType:"none",
+						shadow:0,
+						spinner:"off",
+						stopLoop:"on",
+						stopAfterLoops:0,
+						stopAtSlide:1,
+						shuffle:"off",
+						autoHeight:"off",
+						disableProgressBar:"on",
+						hideThumbsOnMobile:"off",
+						hideSliderAtLimit:0,
+						hideCaptionAtLimit:0,
+						hideAllCaptionAtLilmit:0,
+						debugMode:false,
+						fallbacks: {
+							simplifyAll:"off",
+							nextSlideOnWindowFocus:"off",
+							disableFocusListener:false,
+						}
+					});
+				}
+			});	/*ready*/
+        </script>
     </div>
+<div class="clearfix"></div>
+<script type="text/javascript" src="/Content/Slider/assets/warning.js"></script>
 <div class="container-fluid section-light-gray">
 
     <div class="container">
@@ -496,7 +613,7 @@
     <div class="container" id="details_property" style="padding:50px 20px;">
         <div class="row">
             <h2 class="title">Description</h2>
-            <div class="col-md-10 col-md-offset-1 title" style="font-size: 17px; font-weight: 100;">
+            <div class="col-md-12 title" style="font-size: 17px; font-weight: 100;">
                 @{ 
                     var str = Model.Description;
                     string[] strList = str.Split(new string[] { "\n","\r" },StringSplitOptions.RemoveEmptyEntries);

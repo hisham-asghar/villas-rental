@@ -126,6 +126,7 @@
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
+    <Compile Include="Controllers\FiltersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MagzinesController.cs" />
     <Compile Include="Controllers\MyPropertyController.cs" />
@@ -693,6 +694,8 @@
     <Content Include="Views\Services\Update.cshtml" />
     <Content Include="Views\MyProperty\RentalRates.cshtml" />
     <Content Include="Views\MyProperty\UpdateRates.cshtml" />
+    <Content Include="Views\Filters\Index.cshtml" />
+    <Content Include="Views\Filters\PropertyFilters.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

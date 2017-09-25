@@ -51,6 +51,7 @@
     <Compile Include="Meta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertiesModel.cs" />
+    <Compile Include="PropertyModels\PropertyFilters.cs" />
     <Compile Include="PropertyModels\PropertyView.cs" />
     <Compile Include="Yachts\FormModels.cs" />
     <Compile Include="Yachts\Specs.cs" />

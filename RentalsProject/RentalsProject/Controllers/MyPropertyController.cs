@@ -29,6 +29,7 @@ namespace RentalsProject.Controllers
 
             return View("PropertyList",list);
         }
+        
         // GET: MyProperties
         public ActionResult DeactivedVillas()
         {
@@ -38,12 +39,14 @@ namespace RentalsProject.Controllers
             var list = PropertyDAO.GetDeactivatedPropertyList(0);
             return View("PropertyList", list);
         }
+        
         public ActionResult Sample()
         {
             var model = new MainModel();
             ViewBag.Model = model;
             return null;
         }
+        
         public ActionResult RenewRates(List<RateModel> rates, int id = 0)
         {
             if (id == 0 && !PropertyDAO.Verify(id))
@@ -187,6 +190,7 @@ namespace RentalsProject.Controllers
             ViewBag.Model = model;
             return View();
         }
+        
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult AddNewProperty(PropertiesModel model, List<HttpPostedFileBase> files, List<string> PropertyImages,HttpPostedFileBase banner)
@@ -249,12 +253,14 @@ namespace RentalsProject.Controllers
             ViewBag.Model = model_;
             return View("AddNew");
         }
+        
         public ActionResult Edit()
         {
             var model = new MainModel();
             ViewBag.Model = model;
             return View();
         }
+        
         public ActionResult UpdateExtras(UpdateExtraModel emodel,int id = 0)
         {
             var getModel = PropertyDAO.GetExtraModel(id);
@@ -324,17 +330,21 @@ namespace RentalsProject.Controllers
             ViewBag.Model = model;
             return View();
         }
+        
         public ActionResult MultiCalendar()
         {
             var model = new MainModel();
             ViewBag.Model = model;
             return View();
         }
+        
         public ActionResult AdvancedSettings()
         {
             var model = new MainModel();
             ViewBag.Model = model;
             return View();
         }
+
+
     }
 }

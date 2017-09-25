@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Filters";
+}
+@model List<LayerDB.Tag>
+<h2>@ViewBag.Title</h2>
+
+
+<button type="button" rel="tooltip" class="btn btn-success addTag">
+    Add Filter
+</button>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="rose">
+            <i class="material-icons">assignment</i>
+        </div>
+        <h4 class="card-title">@ViewBag.Title</h4>
+        <div class="card-content">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Name</th>
+                            <th class="text-center">Property Count</th>
+                            <th class="text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var tag in Model)
+                        {
+                            <tr tag="@tag.TagId">
+                                <td class="text-center">@tag.TagId</td>
+                                <td class="tagName" tagName="@tag.TagName">@tag.TagName</td>
+                                <td class="text-center">@tag.PropertyTags.Count</td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" class="btn btn-info editTag">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                    <button type="button" rel="tooltip" class="btn btn-danger deleteTag">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            
+            $(".editTag").each(function () {
+                $(this).click(function () {
+                    var tagId = $(this).closest("tr").attr("tag");
+                    var tagName = $(this).closest("tr").find(".tagName").attr("tagName");
+                    swal({
+                        title: 'Input something',
+                        html: '<div class="form-group">' +
+                                  '<input id="input-field" type="text" value="'+tagName+'" class="form-control" />' +
+                              '</div>',
+                        showCancelButton: true,
+                        confirmButtonClass: 'btn btn-success',
+                        cancelButtonClass: 'btn btn-danger',
+                        buttonsStyling: false
+                    }).then(function (result) {
+                        var tagName = $('#input-field').val();
+                        if (tagName.trim().length > 0)
+                            location.href = "/Filters/Update?id=" + tagId +"&name="+tagName;
+                    }).catch(swal.noop)
+                
+                });
+            });
+
+            $(".addTag").each(function () {
+                $(this).click(function () {
+                    swal({
+                        title: 'Input something',
+                        html: '<div class="form-group">' +
+                                  '<input id="input-field" type="text" class="form-control" />' +
+                              '</div>',
+                        showCancelButton: true,
+                        confirmButtonClass: 'btn btn-success',
+                        cancelButtonClass: 'btn btn-danger',
+                        buttonsStyling: false
+                    }).then(function (result) {
+                        var tagName = $('#input-field').val();
+                        if(tagName.trim().length > 0)
+                            location.href = "/Filters/Update?name=" + tagName;
+                    }).catch(swal.noop)
+
+                });
+            });
+
+            $(".deleteTag").each(function () {
+                $(this).click(function () {
+                    var tagId = $(this).closest("tr").attr("tag");
+                    swal({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonClass: 'btn btn-success',
+                        cancelButtonClass: 'btn btn-danger',
+                        confirmButtonText: 'Yes, delete it!',
+                        buttonsStyling: false
+                    }).then(function () {
+                        location.href = "/Filters/Delete?id=" + tagId;
+                    });
+                });
+            })
+        });
+    </script>
+}

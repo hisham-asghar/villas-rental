@@ -921,6 +921,20 @@ namespace LayerDAO
                 return true;
             }
         }
+
+        public static List<PropertyFilters> GetPropertiesFilters()
+        {
+            using(var db = new DBModel())
+            {
+                return db.PropertyDetails.Include("PropertyTags")
+                    .Where(p => p.isActive && p.Availablity).Select(p => new PropertyFilters()
+                {
+                    id = p.PropertyId,
+                    name = p.Name,
+                    filters = p.PropertyTags.Select(pf => pf.TagId).ToList()
+                }).ToList();
+            }
+        }
     }
 }
 

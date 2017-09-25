@@ -417,6 +417,7 @@
     <Content Include="Content\Images\Yachts\36-63.jpg" />
     <Content Include="Content\Images\Yachts\64-77.jpg" />
     <Content Include="Content\Images\Yachts\78-99.jpg" />
+    <Content Include="Content\markerwithlabel.js" />
     <Content Include="Content\Services\Boats.png" />
     <Content Include="Content\Services\Cars.png" />
     <Content Include="Content\Services\Carss.png" />
@@ -444,6 +445,7 @@
     <Content Include="Content\Slider\assets\css\jquery_preview_warning.jpg" />
     <Content Include="Content\Slider\assets\css\jquery_visual_editor_ad.jpg" />
     <Content Include="Content\Slider\assets\css\noneed.css" />
+    <Content Include="Content\Slider\assets\images\dummy.png" />
     <Content Include="Content\Slider\assets\svg\action\ic_3d_rotation_24px.svg" />
     <Content Include="Content\Slider\assets\svg\action\ic_accessibility_24px.svg" />
     <Content Include="Content\Slider\assets\svg\action\ic_accessible_24px.svg" />
@@ -3030,7 +3032,7 @@
     <Content Include="Views\Magzines\Index.cshtml" />
     <Content Include="Views\Destinations\Index.cshtml" />
     <Content Include="Views\Shared\_MyLayout2.cshtml" />
-    <Content Include="Views\Destinations\Detail.cshtml" />
+    <Content Include="Views\Destinations\_Detail.cshtml" />
     <Content Include="Views\Shared\HeaderNavBar.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Yachts\Index.cshtml" />
@@ -3054,6 +3056,8 @@
     <Content Include="Views\Destinations\Search.cshtml" />
     <Content Include="Views\Services\Detail.cshtml" />
     <Content Include="Views\Destinations\Detail - Copy.cshtml" />
+    <Content Include="Views\Destinations\Detail.cshtml" />
+    <Content Include="Views\Shared\MapScriptPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,151 @@
+﻿
+<script>
+            var cityCircles= [];
+            var showMap = false;
+            var clickBtn = false;
+            $(document).ready(function () {
+                //debugger;
+                $("#mapLinkShow").click(function(){
+                    if(clickBtn == false){
+                        clickBtn = true;
+                        if(showMap == false)
+                        {
+                            myMap();
+                        }
+                    }
+                });
+            });
+
+
+            function myMap() {
+                if(clickBtn == true)
+                {
+                    CustomMap(32.4690717, 74.39393389999998);
+                    showMap = true;
+                }
+            }
+            function CustomMap(longi, lati) {
+                //debugger;
+
+                var myLatlng = new google.maps.LatLng(@(ViewBag.city == null ? 37.090240 : ViewBag.city.latitude), @(ViewBag.city == null ? -95.712891 : ViewBag.city.longitude));
+                var mapOptions = {
+                    zoom: @(ViewBag.city == null ? 4 : 13),
+                    center: myLatlng,
+                    scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+
+                    //we disable de scroll over the map, it is a really annoing when you scroll through page
+                    disableDefaultUI: true, // a way to quickly hide all controls
+                    zoomControl: true,
+                    // Styling of the map in JSON object
+                    styles: [{ "featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{ "color": "#444444" }] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "color": "#f2f2f2" }] }, { "featureType": "poi", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": 45 }] }, { "featureType": "road.highway", "elementType": "all", "stylers": [{ "visibility": "simplified" }] }, { "featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "color": "#cdd2d4" }, { "visibility": "on" }] }]
+                };
+                // this is a visibility flag. don't change it manually
+                google.maps.Polygon.prototype._visible = true;
+
+                // this will save opacity values and set them to 0, and rebound the polygon to the map
+                google.maps.Circle.prototype.hide = function(){
+                    if (this._visible) {
+                        this._visible = false;
+                        this._strokeOpacity = this.strokeOpacity;
+                        this._fillOpacity = this.fillOpacity;
+                        this.strokeOpacity = 0;
+                        this.fillOpacity = 0;
+                        this.setMap(this.map);
+                    }
+                }
+
+                // this will restore opacity values. and rebound the polygon to the map
+                google.maps.Circle.prototype.show = function() {
+                    if (!this._visible) {
+                        this._visible = true;
+                        this.strokeOpacity = this._strokeOpacity;
+                        this.fillOpacity = this._fillOpacity;
+                        this.setMap(this.map);
+                    }
+                }
+                var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                $(".property_box").each(function () {
+                    //debugger;
+                    var lati = parseFloat($(this).attr("latitude"));
+                    var longi = parseFloat($(this).attr("longitude"));
+                    var title = $(this).attr("title");
+                    var latilongi = new google.maps.LatLng(lati, longi);
+                    var htmlLabel = $('<div class="_1dyc0dw"><div class="_1joivwj"><div class="_1q8mwr8"></div><div class="_13nx4oo"><div class="_qtix31"><div class="_ni9axhe price_box__" >$127</div><div class="_ni9axhe"><div style="margin-left:2px;"><span class="_qtix31"></span></div></div></div></div><div class="_mmb1j9"></div></div></div>')
+
+                    var pictureLabel = document.createElement("h5");
+                    pictureLabel.innerText = $(this).attr("price");
+                    var price = $(this).attr("price");
+                    htmlLabel.find(".price_box__").text(price);
+                    pictureLabel.style.fontSize = 15;
+                    var marker = new MarkerWithLabel({
+                        position: { lat: lati, lng: longi },
+                        map: map,
+                        draggable: false,
+                        raiseOnDrag: true,
+                        title: title,
+                        icon: '',
+                        labelContent: htmlLabel[0],
+                        labelAnchor: new google.maps.Point(50, 0),
+                        labelClass: "Maplabels", // the CSS class for the label
+                    });
+
+
+                    /*
+                    var marker = new google.maps.Marker({
+                        dragable: true,
+                        position: { lat: lati, lng: longi },
+                        title: title
+                    });*/
+
+                    var div = $(this).html();
+
+                    var contentString = div;//$(div).find(".content").css("width", "500px").html();
+                    var infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+                    marker.addListener('click', function () {
+
+                        if(map.getZoom() > 15)
+                            infowindow.open(map, marker);
+
+                        map.setZoom(16);
+                        map.setCenter(marker.getPosition());
+                    });
+
+
+
+                    marker.setMap(map);
+                    var cityCircle = new google.maps.Circle({
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 0.35,
+                        strokeWeight: 1,
+                        fillColor: '#FF0000',
+                        fillOpacity: 0.35,
+                        center: { lat: lati, lng: longi },
+                        radius: 100
+                    });
+                    cityCircles.push(cityCircle);
+                    google.maps.event.addListener(map, 'zoom_changed', function() {
+                        if (map.getZoom()<14) {
+                            for(var x = 0; x < cityCircles.length; x++)
+                            {
+                                cityCircles[x].setMap(null);
+                            }
+                        }
+                        else {
+
+                            for(var x = 0; x < cityCircles.length; x++)
+                            {
+                                cityCircles[x].setMap(map);
+                            }
+                        }
+                    });
+
+                });
+
+
+            }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC96Hx9IMfAglwiP9RkQn5cVi4MZKiC5LA&callback=myMap">
+</script>
+<script src="~/Content/markerwithlabel.js"></script>

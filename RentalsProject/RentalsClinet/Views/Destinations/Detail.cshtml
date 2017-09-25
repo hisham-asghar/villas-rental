@@ -56,39 +56,34 @@
             .gm-style .ol-attribution.ol-logo-only {
                 bottom: 1em;
             }
-
-    #map {
-        margin: 5px auto;
-        border: 1px solid #CDD7EE;
-        border-radius: 5px;
-        width: 1102px;
-        padding: 5px;
+#map {
+        margin: 0;
+        border: 0;
+        width: 99vw;
+        padding: 0;
         padding-bottom: 5px;
-        max-height: 625px;
-        min-height: 620px;
+        max-height: 90vh;
+        min-height: 90vh;
     }
 
     section #map {
-        margin: 5px auto;
-        margin-left: 25px;
-        border: 1px solid #CDD7EE;
-        border-radius: 5px;
-        width: 1050px;
-        height: 620px;
+        margin: 0;
+        border: 0;
+        width: 99vw;
+        height: 90vh;
     }
 
     #wrapper-map {
-        width: 1114px;
-        margin: 0 auto;
+        width: 99vw;
+        margin: 0;
         background-color: white;
-        border-radius: 5px;
+        border-radius: 0;
     }
 
     #content section {
-        width: 1105px;
+        width: 99vw;
         display: inline-block;
     }
-
 
     .ol-scale-line {
         background: #95b9e6;
@@ -110,7 +105,8 @@
     }
 
     .roomdetailsIcon.amenities > li > a {
-        padding: 25px 50px;
+        padding: 10px;
+        margin: 5px;
     }
     .erinyen.tparrows{
         min-height: 50px;
@@ -143,11 +139,12 @@
     }
     .main_header_back,
     #rev_slider_474_1_wrapper{
-        background: #4c4c4c; /* Old browsers */
-        background: -moz-linear-gradient(-45deg, #4c4c4c 0%, #595959 12%, #666666 25%, #1c1c1c 61%, #1c1c1c 65%, #474747 83%, #474747 83%, #131313 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(-45deg, #4c4c4c 0%,#595959 12%,#666666 25%,#1c1c1c 61%,#1c1c1c 65%,#474747 83%,#474747 83%,#131313 100%); /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(135deg, #4c4c4c 0%,#595959 12%,#666666 25%,#1c1c1c 61%,#1c1c1c 65%,#474747 83%,#474747 83%,#131313 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        background: #f3e2c7; /* Old browsers */
+        background: -moz-linear-gradient(-45deg, #f3e2c7 0%, #c19e67 12%, #c19e67 12%, #b68d4c 45%, #c19e67 64%, #c19e67 64%, #c19e67 64%, #c19e67 65%, #e9d4b3 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, #f3e2c7 0%,#c19e67 12%,#c19e67 12%,#b68d4c 45%,#c19e67 64%,#c19e67 64%,#c19e67 64%,#c19e67 65%,#e9d4b3 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, #f3e2c7 0%,#c19e67 12%,#c19e67 12%,#b68d4c 45%,#c19e67 64%,#c19e67 64%,#c19e67 64%,#c19e67 65%,#e9d4b3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3e2c7', endColorstr='#e9d4b3',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
     }
 </style>
 
@@ -156,15 +153,11 @@
     <div class="page-header header-filter clear-filter main_header_back" style="min-height: 35vh;height: 35vh;">
         <div class="container" style="padding-top: 15vh;">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2" style="text-align: center;">
+                <div class="col-md-12" style="text-align: center;">
                     <div class="brand">
                         <h1 style="text-shadow: 2px 3px 6px #222;">
                             @Model.Name
                         </h1>
-                        <h3 class="visible-lg visible-md">
-                            <i class="material-icons">location_on</i>
-                            @Html.Raw(Model.StreetName) @Model.CityName, @Model.Country
-                        </h3>
                     </div>
                 </div>
             </div>
@@ -185,7 +178,7 @@
                     {
                         <li data-index="rs-@(xslide++)" data-transition="fade" data-slotamount="7" data-hideafterloop="0"
                             data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300"
-                            data-thumb="@ViewBag.UploadLocation/thumbs/@(t.Substring(0,t.LastIndexOf(".jpg")) + "80x80.jpg")" data-rotate="0" data-saveperformance="off"
+                            data-thumb="@ViewBag.UploadLocation/@(t)" data-rotate="0" data-saveperformance="off"
                             data-title="" data-param1="" data-param2="" data-param3="" data-param4="" data-param5=""
                             data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
                             <!-- MAIN IMAGE -->
@@ -600,7 +593,7 @@ jsFileLocation:"revolution/js/",
                     @foreach (var a in Model.amenitiesList)
                     {
                         <li>
-                            <a href="#">@a</a>
+                            <a href="#">@Html.Raw(a)</a>
                         </li>
                     }
                 </ul>
@@ -624,7 +617,7 @@ jsFileLocation:"revolution/js/",
         </div>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid" style="padding:0;margin:0;">
     <div id="account-container">
         <div id="wrapper-map">
             <div id="content">
@@ -646,7 +639,7 @@ jsFileLocation:"revolution/js/",
     
     
     $(document).ready(function() {
-        debugger;
+        //debugger;
         //CustomMap(@Model.Logitude, @Model.Latitude);
         JQueryDateRange();
 
@@ -672,7 +665,7 @@ jsFileLocation:"revolution/js/",
                         }
 
                         for (var r in bookingsList) {
-                            debugger;
+                            //debugger;
                             var sd = bookingsList[r].sd.split("T")[0].split("-");
                             sd = sd.join("-");
                             
@@ -684,7 +677,7 @@ jsFileLocation:"revolution/js/",
                             }
                         }
 
-                        debugger;
+                        //debugger;
                         
                         var curDate = moment();
                         if (moment(date).isBefore(curDate, 'day')) {
@@ -740,7 +733,7 @@ jsFileLocation:"revolution/js/",
                         optionDaysStr += '<option value=' + i + '>' + i + '</option>';
                     }
                     $(".days").html(optionDaysStr);
-                    debugger;
+                    //debugger;
                 });
  
         function getDate( element ) {
@@ -759,15 +752,15 @@ jsFileLocation:"revolution/js/",
 //        CustomMap(32.4690717, 74.39393389999998);
     }
     function CustomMap(longi, lati) {
-        //debugger;
+        ////debugger;
         var myLatlng = new google.maps.LatLng(lati, longi);
         var mapOptions = {
-            zoom: 15,
+            zoom: 16,
             center: myLatlng,
-            scrollwheel: true,
+            scrollwheel: false,
             //we disable de scroll over the map, it is a really annoing when you scroll through page
             disableDefaultUI: true, // a way to quickly hide all controls
-            zoomControl: true,
+            zoomControl: false,
             styles: [
                 {
                     "featureType": "water",
@@ -781,37 +774,34 @@ jsFileLocation:"revolution/js/",
                     "elementType": "geometry.stroke",
                     "stylers": [{ "color": "#808080" }, { "lightness": 54 }]
                 }, {
-                    "featureType": "landscape.man_made",
-                    "elementType": "geometry.fill",
-                    "stylers": [{ "color": "#ece2d9" }]
-                }, {
                     "featureType": "poi.park",
                     "elementType": "geometry.fill",
                     "stylers": [{ "color": "#ccdca1" }]
-                },
-                { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#767676" }] },
-                { "featureType": "road", "elementType": "labels.text.stroke", "stylers": [{ "color": "#ffffff" }] },
-                { "featureType": "poi", "stylers": [{ "visibility": "off" }] },
-                {
-                    "featureType": "landscape.natural",
-                    "elementType": "geometry.fill",
-                    "stylers": [{ "visibility": "on" }, { "color": "#b8cb93" }]
-                }, { "featureType": "poi.park", "stylers": [{ "visibility": "on" }] },
-                { "featureType": "poi.sports_complex", "stylers": [{ "visibility": "on" }] },
-                { "featureType": "poi.medical", "stylers": [{ "visibility": "on" }] },
-                { "featureType": "poi.business", "stylers": [{ "visibility": "simplified" }] }
+                }
+                
             ]
 
         }
 
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+        var cityCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center: myLatlng,
+            radius: 200
+        });
+
         var marker = new google.maps.Marker({
             position: myLatlng,
             title: "Property Map"
         });
 
-        marker.setMap(map);
+        //marker.setMap(map);
     }
 </script>
 <script async defer
@@ -829,7 +819,7 @@ jsFileLocation:"revolution/js/",
                     "minDate": new Date(),
                     "opens": "center",
                     isInvalidDate: function(date) {
-                        //debugger;
+                        ////debugger;
                         var rangeDates = [];
                         @foreach (var d in Model.rates)
                         {
@@ -849,12 +839,12 @@ jsFileLocation:"revolution/js/",
                         return !found;
                     }
                 }, function (start, end, label) {
-                    //debugger;
+                    ////debugger;
 
                     var price = @(Model.night);
                     var duration = moment.duration(end.diff(start));
                     var days = Math.ceil(duration.asDays());
-                    debugger;
+                    //debugger;
                     $("#calcBill").text(days * price);
                     $("#vcalcBill").val(days * price);
                     $("#startCheckIn").val(start.format('MM-DD-YYYY'));

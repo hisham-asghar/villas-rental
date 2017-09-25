@@ -67,6 +67,8 @@ namespace RentalsClinet.Controllers
             if (!string.IsNullOrWhiteSpace(model.cityName) && !string.Equals(model.cityName, "*", StringComparison.Ordinal))
             {
                 list = list.Where(p => p.CityGuid == model.cityName).ToList();
+
+                ViewBag.city = PropertyDAO.GetCity(model.cityName);
             }
 
             if (model.g > 0)

@@ -45,26 +45,34 @@
 @model List<List<CustomModels.PropertyModels.PropertyView>>
 
 <style>
+    
+    .form-group .dropdownjs {
+        padding-bottom: 7px;
+        margin: 27px 0 0 0;
+    }
+</style>
+
+<style>
     .gm-style {
         font-size: inherit;
         font-family: inherit;
     }
 
-    .gm-style .ol-attribution {
-        bottom: 1em;
-    }
+        .gm-style .ol-attribution {
+            bottom: 1em;
+        }
 
-    .gm-style .ol-attribution.ol-logo-only {
-        bottom: 1em;
-    }
+            .gm-style .ol-attribution.ol-logo-only {
+                bottom: 1em;
+            }
 
     #map {
         margin: 0;
         border: 0px solid #CDD7EE;
         border-radius: 0px;
-        width: 100%;
+        width: 97vw;
         padding: 0px;
-        padding-bottom: 5px;
+        padding-bottom: 0px;
         max-height: 100vh;
         min-height: 100vh;
     }
@@ -72,23 +80,21 @@
 
 
     section #map {
-        margin: 5px auto;
-        margin-left: 0px;
-        border: 1px solid #CDD7EE;
-        border-radius: 5px;
-        width: 100%;
+        margin: 0;
+        border: 0;
+        width: 98vw;
         height: 100vh;
     }
 
     #wrapper-map {
-        width: 100%;
+        width: 97vw;
         margin: 0;
         background-color: white;
-        border-radius: 5px;
+        border-radius: 0;
     }
 
     #content section {
-        width: 100%;
+        width: 97vw;
         display: inline-block;
     }
 
@@ -101,13 +107,104 @@
     #customSkinMap {
         height: 100vh;
     }
+
     .gm-style-iw .card-image {
         width: 400px !important;
     }
-    
-    .form-group .dropdownjs {
-        padding-bottom: 7px;
-        margin: 27px 0 0 0;
+
+    .Maplabels {
+        /* color: black;
+     padding: 4px;
+     border: 1px solid black;
+     background-color: white;
+     font-family: "Lucida Grande", "Arial", sans-serif;
+     font-size: 10px;
+     text-align: center;
+     width: 10px;
+     white-space: nowrap;*/
+        overflow: visible !important;
+        width: auto !important;
+        height: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    .gmnoprint .gmnoprint * {
+        display: none;
+    }
+
+    ._1dyc0dw {
+        -webkit-transform: translate(-50%, -31px) !important;
+        -ms-transform: translate(-50%, -31px) !important;
+        transform: translate(-50%, -31px) !important;
+    }
+
+    ._1joivwj {
+        position: relative !important;
+        display: inline-block !important;
+        margin-top: -8px !important;
+    }
+
+    ._1q8mwr8 {
+        bottom: -4px !important;
+        left: 50% !important;
+        margin-left: -4px !important;
+        box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.15) !important;
+        width: 8px !important;
+        height: 8px !important;
+        -webkit-transform: rotate(45deg) !important;
+        -ms-transform: rotate(45deg) !important;
+        transform: rotate(45deg) !important;
+        position: absolute !important;
+    }
+
+    ._13nx4oo {
+        font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+        font-size: 15px !important;
+        line-height: 18px !important;
+        letter-spacing: 0.2px !important;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        color: #222222 !important;
+        font-weight: 700 !important;
+        background-color: #ffffff !important;
+        border: 1px solid rgba(0, 0, 0, 0.2) !important;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15) !important;
+        border-radius: 2px !important;
+        padding: 4px 5px 4px 6px !important;
+        position: relative !important;
+    }
+
+    ._qtix31 {
+        display: table !important;
+    }
+
+    ._ni9axhe {
+        display: table-cell !important;
+        vertical-align: middle !important;
+    }
+
+    ._ni9axhe {
+        display: table-cell !important;
+        vertical-align: middle !important;
+    }
+
+    ._qtix31 {
+        display: table !important;
+    }
+
+    ._mmb1j9 {
+        border-right: 1px solid rgba(0, 0, 0, 0.2) !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+        bottom: -4px !important;
+        left: 50% !important;
+        margin-left: -4px !important;
+        background-color: #ffffff !important;
+        width: 8px !important;
+        height: 8px !important;
+        -webkit-transform: rotate(45deg) !important;
+        -ms-transform: rotate(45deg) !important;
+        transform: rotate(45deg) !important;
+        position: absolute !important;
     }
 </style>
 @{
@@ -271,25 +368,24 @@
     <div class="row">
         <div class="nav-align-center">
             <ul class="nav nav-pills nav-pills-icons" role="tablist">
-                <li>
+                <li class="active">
                     <a href="#work" role="tab" data-toggle="tab">
                         <i class="material-icons">dashboard</i>
                         City View
                     </a>
                 </li>
-                <li class="active">
-                    <a href="#connections" role="tab" data-toggle="tab">
+                <li>
+                    <a href="#connections" id="mapLinkShow" role="tab" data-toggle="tab">
                         <i class="material-icons">location_on</i>
                         Map View
                     </a>
                 </li>
             </ul>
-
         </div>
     </div>
 
     <div class="tab-content">
-        <div class="tab-pane work" id="work">
+        <div class="tab-pane active  work" id="work">
             <div class="content" style="min-height:100vh;">
                 <div class="row">
                     <div class="col-md-12">
@@ -299,7 +395,7 @@
                                 @foreach (var property in propertyList)
                                 {
                                     <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <div class="card property_box" title="@property.Name" longitude="@property.Logitude" latitude="@property.Latitude">
+                                        <div class="card property_box" price="$@property.night" title="@property.Name" longitude="@property.Logitude" latitude="@property.Latitude">
                                             <div class="card-actions hide pull-right" style="position: absolute; right: 5%; top: 5%; color: #555; z-index: 10;">
                                                 <div class="stats" style="padding: 10px; border-radius: 500px; font-size: 32px; background: #ccc;">
                                                     <i class="material-icons" style="font-size: 32px;">favorite</i>
@@ -323,7 +419,7 @@
                                                 </h5>
                                                 <div class="card-description hide"></div>
                                                 <div>
-                                                    <div class="footer" style="margin: 0 6%; border-top: 1px solid #eee;">
+                                                    <div class="footer" style="margin: 0 6%;border-top: 1px solid #eee;">
                                                         <div class="price">
                                                             <h4 style="margin: 0; font-weight: bold;">
                                                                 $@property.night/night
@@ -339,9 +435,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-                            
                                 }
                             </div>
                         }
@@ -349,7 +443,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane active connections" id="connections">
+        <div class="tab-pane connections" id="connections">
             <div class="row">
                 <div id="account-container">
                     <div id="wrapper-map">
@@ -404,58 +498,5 @@
 }
 @section headScripts
 {
-
-    <script>
-    $(document).ready(function () {
-        debugger;
-
-    });
-    function myMap() {
-        CustomMap(32.4690717, 74.39393389999998);
-    }
-    function CustomMap(longi, lati) {
-        debugger;
-        var myLatlng = new google.maps.LatLng(37.090240, -95.712891);
-        var mapOptions = {
-            zoom: 4,
-            center: myLatlng,
-            scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-
-            // Styling of the map in JSON object
-            styles: [{ "featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{ "color": "#444444" }] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "color": "#f2f2f2" }] }, { "featureType": "poi", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "saturation": -100 }, { "lightness": 45 }] }, { "featureType": "road.highway", "elementType": "all", "stylers": [{ "visibility": "simplified" }] }, { "featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "color": "#cdd2d4" }, { "visibility": "on" }] }]
-        };
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-        $(".property_box").each(function () {
-            debugger;
-            var lati = parseFloat($(this).attr("latitude"));
-            var longi = parseFloat($(this).attr("longitude"));
-            var title = $(this).attr("title");
-            var latilongi = new google.maps.LatLng(lati, longi);
-            var marker = new google.maps.Marker({
-                dragable: true,
-                position: { lat: lati, lng: longi },
-                title: title
-            });
-
-            var div = $(this).html();
-
-            var contentString = div;//$(div).find(".content").css("width", "500px").html();
-            var infowindow = new google.maps.InfoWindow({
-                content: contentString
-            });
-            marker.addListener('click', function () {
-                infowindow.open(map, marker);
-            });
-
-            marker.setMap(map);
-
-        });
-
-
-    }
-</script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC96Hx9IMfAglwiP9RkQn5cVi4MZKiC5LA&callback=myMap">
-    </script>
-
+    @Html.Partial("~/Views/Shared/MapScriptPartial.cshtml")
 }

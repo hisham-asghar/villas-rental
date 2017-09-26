@@ -11,6 +11,7 @@ using RentalsProject.Models;
 
 namespace RentalsProject.Controllers
 {
+    [AuthorizeSession]
     public class MyPropertyController : Controller
     {
         // GET: MyProperties

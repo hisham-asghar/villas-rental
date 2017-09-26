@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace RentalsProject.Controllers
 {
+    [AuthorizeSession]
     public class ServicesController : Controller
     {
         //

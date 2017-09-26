@@ -10,6 +10,7 @@ using LayerDB;
 
 namespace RentalsProject.Controllers
 {
+    [AuthorizeSession]
     public class CarsController : Controller
     {
         //

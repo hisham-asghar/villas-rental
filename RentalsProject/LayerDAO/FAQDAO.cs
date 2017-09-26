@@ -22,6 +22,13 @@ namespace LayerDAO
                 return db.FAQs.ToList();
             }
         }
+        public static List<FAQ> getAll(int type = 0)
+        {
+            using (var db = new DBModel())
+            {
+                return db.FAQs.Where(f => f.type == type).ToList();
+            }
+        }
         public static bool SaveFAQ(FAQ model)
         {
             using (var db = new DBModel())
@@ -35,6 +42,7 @@ namespace LayerDAO
                 {
                     faq.Question = model.Question;
                     faq.Answer = model.Answer;
+                    faq.type = model.type;
                 }
                 try
                 {

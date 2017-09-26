@@ -19,6 +19,8 @@ namespace RentalsProject.Controllers
         public int itemId { get; set; }
         public HttpPostedFileBase value { get; set; }
     }
+
+    [AuthorizeSession]
     public class MagzinesController : Controller
     {
         //

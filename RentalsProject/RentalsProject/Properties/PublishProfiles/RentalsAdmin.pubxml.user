@@ -6,35 +6,35 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>E:\Deployed\TheMarucaGroup\RentalsAdmin\08-10-17</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\Deployed\TheMarucaGroup\RentalsAdmin\09-26-17</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/CustomModels.dll">
-      <publishTime>08/07/2017 22:37:53</publishTime>
+      <publishTime>09/26/2017 04:20:09</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>04/12/2017 02:29:52</publishTime>
+      <publishTime>03/02/2015 09:32:24</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>04/12/2017 02:29:52</publishTime>
+      <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/LayerDAO.dll">
-      <publishTime>08/07/2017 22:37:55</publishTime>
+      <publishTime>09/26/2017 04:20:11</publishTime>
     </File>
     <File Include="bin/LayerDB.dll">
-      <publishTime>08/07/2017 22:37:53</publishTime>
+      <publishTime>09/26/2017 04:20:08</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>03/21/2017 10:17:44</publishTime>
+      <publishTime>07/25/2012 11:48:56</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
-      <publishTime>03/21/2017 10:17:46</publishTime>
+      <publishTime>09/14/2012 15:06:22</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>03/21/2017 10:17:44</publishTime>
+      <publishTime>11/20/2012 22:45:56</publishTime>
     </File>
     <File Include="bin/RentalsProject.dll">
-      <publishTime>08/10/2017 09:15:01</publishTime>
+      <publishTime>09/26/2017 04:27:15</publishTime>
     </File>
     <File Include="bin/System.Net.Http.dll">
       <publishTime>07/11/2012 00:07:38</publishTime>
@@ -43,22 +43,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/11/2012 00:07:38</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>03/21/2017 10:17:45</publishTime>
+      <publishTime>05/07/2013 13:09:18</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>03/21/2017 10:17:45</publishTime>
+      <publishTime>05/07/2013 13:09:14</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>03/21/2017 10:17:44</publishTime>
+      <publishTime>05/20/2013 08:04:52</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>03/21/2017 10:17:45</publishTime>
+      <publishTime>05/07/2013 13:09:18</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>03/21/2017 10:17:45</publishTime>
+      <publishTime>05/07/2013 13:09:18</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>03/21/2017 10:17:45</publishTime>
+      <publishTime>05/07/2013 13:09:18</publishTime>
     </File>
     <File Include="Content/assets/css/bootstrap.min.css">
       <publishTime>03/21/2017 10:18:23</publishTime>
@@ -4306,10 +4306,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/21/2017 20:32:56</publishTime>
     </File>
     <File Include="Views/FAQ/Index.cshtml">
-      <publishTime>07/07/2017 18:34:07</publishTime>
+      <publishTime>09/26/2017 03:49:16</publishTime>
     </File>
     <File Include="Views/FAQ/Update.cshtml">
-      <publishTime>07/07/2017 18:48:47</publishTime>
+      <publishTime>09/26/2017 03:55:15</publishTime>
+    </File>
+    <File Include="Views/Filters/Index.cshtml">
+      <publishTime>09/26/2017 01:50:02</publishTime>
+    </File>
+    <File Include="Views/Filters/PropertyFilters.cshtml">
+      <publishTime>09/26/2017 03:02:40</publishTime>
     </File>
     <File Include="Views/Home/AboutUs.cshtml">
       <publishTime>05/27/2017 01:09:02</publishTime>
@@ -4357,7 +4363,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2017 10:18:59</publishTime>
     </File>
     <File Include="Views/MyProperty/PropertyList.cshtml">
-      <publishTime>06/07/2017 14:47:51</publishTime>
+      <publishTime>08/17/2017 06:13:45</publishTime>
     </File>
     <File Include="Views/MyProperty/RenewRates.cshtml">
       <publishTime>06/04/2017 02:14:16</publishTime>
@@ -4381,7 +4387,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/25/2017 11:36:42</publishTime>
     </File>
     <File Include="Views/Services/Index.cshtml">
-      <publishTime>07/07/2017 19:55:05</publishTime>
+      <publishTime>09/26/2017 02:11:33</publishTime>
     </File>
     <File Include="Views/Services/Update.cshtml">
       <publishTime>07/07/2017 19:15:09</publishTime>
@@ -4390,22 +4396,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2017 10:18:59</publishTime>
     </File>
     <File Include="Views/Shared/_MyLayout.cshtml">
-      <publishTime>04/27/2017 17:55:21</publishTime>
+      <publishTime>09/26/2017 03:29:18</publishTime>
     </File>
     <File Include="Views/Shared/__Footer.cshtml">
       <publishTime>05/18/2017 22:47:21</publishTime>
     </File>
     <File Include="Views/Shared/__Header.cshtml">
-      <publishTime>04/27/2017 18:03:03</publishTime>
+      <publishTime>09/26/2017 03:37:45</publishTime>
     </File>
     <File Include="Views/Shared/__Sidebar.cshtml">
-      <publishTime>07/07/2017 19:11:32</publishTime>
+      <publishTime>09/19/2017 22:47:43</publishTime>
     </File>
     <File Include="Views/Testimonals/Index.cshtml">
-      <publishTime>07/07/2017 18:52:39</publishTime>
+      <publishTime>09/17/2017 03:19:27</publishTime>
     </File>
     <File Include="Views/Testimonals/Update.cshtml">
       <publishTime>07/07/2017 18:48:44</publishTime>
+    </File>
+    <File Include="Views/User/SignIn.cshtml">
+      <publishTime>09/26/2017 03:33:55</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>03/21/2017 10:17:42</publishTime>
@@ -4426,7 +4435,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2017 10:18:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/01/2017 23:36:29</publishTime>
+      <publishTime>09/26/2017 04:27:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

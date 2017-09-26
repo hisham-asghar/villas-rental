@@ -16,7 +16,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th></th>
                             <th class="text-center">#</th>
                             <th>Name</th>
                             @foreach(var f in ViewBag.taglist)
@@ -24,23 +23,28 @@
                                 <th>@f.TagName</th>
                             }
                         </tr>
+                        <tr>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach (var prop in Model)
                         {
-                            <tr>
-                                <td>
-                                    <i class="material-icons">done</i>
-                                </td>
+                            <tr pid="@prop.id">
                                 <td class="text-center">@prop.id</td>
                                 <td class="tagName">@prop.name</td>
                                 @foreach (var f in ViewBag.taglist)
                                 {
                                     <td>
-                                        <input type="checkbox" @(prop.filtersDic[f.TagId] ? "checked=''" : "''") />
-                                    </td>                                    
+                                        <input tag="@f.TagId" type="checkbox"  @(prop.filtersDic[f.TagId] ? "checked=''" : "''") />
+                                    </td>
                                 }
+                                <td>
+                                    <button type="button" rel="tooltip" class="btn btn-sm btn-info editTag">
+                                        Update
+                                    </button>
+                                </td>
                             </tr>
+
                         }                        
                     </tbody>
                 </table>
@@ -51,66 +55,39 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            
             $(".editTag").each(function () {
                 $(this).click(function () {
-                    var tagId = $(this).closest("tr").attr("tag");
-                    var tagName = $(this).closest("tr").find(".tagName").attr("tagName");
-                    swal({
-                        title: 'Input something',
-                        html: '<div class="form-group">' +
-                                  '<input id="input-field" type="text" value="'+tagName+'" class="form-control" />' +
-                              '</div>',
-                        showCancelButton: true,
-                        confirmButtonClass: 'btn btn-success',
-                        cancelButtonClass: 'btn btn-danger',
-                        buttonsStyling: false
-                    }).then(function (result) {
-                        var tagName = $('#input-field').val();
-                        if (tagName.trim().length > 0)
-                            location.href = "/Filters/Update?id=" + tagId +"&name="+tagName;
-                    }).catch(swal.noop)
-                
+                    debugger;
+                    var tags = $(this).closest("tr").find("td > input[type=checkbox]");
+                    var pid = $(this).closest("tr").attr("pid");
+                    try{
+                        pid = parseInt(pid);
+                    }catch(e){return;}
+                    var tagList = [];
+                    for (var i = 0; i < tags.length; i++)
+                    {
+                        if($(tags[i]).is(":checked"))
+                        {
+                            try{
+                                tagList.push(parseInt($(tags[i]).attr("tag")))
+                            }catch(e){}
+                        }
+                    }
+                    var settings = {
+                        type: "post",
+                        data: {
+                            list: tagList,
+                            id: pid 
+                        },
+                        traditional: true,
+                        url: "/Filters/UpdatePropertyFilters",
+                        success: function (data) {
+                            alert(data);
+                        }
+                    }
+                    $.ajax(settings);
                 });
             });
-
-            $(".addTag").each(function () {
-                $(this).click(function () {
-                    swal({
-                        title: 'Input something',
-                        html: '<div class="form-group">' +
-                                  '<input id="input-field" type="text" class="form-control" />' +
-                              '</div>',
-                        showCancelButton: true,
-                        confirmButtonClass: 'btn btn-success',
-                        cancelButtonClass: 'btn btn-danger',
-                        buttonsStyling: false
-                    }).then(function (result) {
-                        var tagName = $('#input-field').val();
-                        if(tagName.trim().length > 0)
-                            location.href = "/Filters/Update?name=" + tagName;
-                    }).catch(swal.noop)
-
-                });
-            });
-
-            $(".deleteTag").each(function () {
-                $(this).click(function () {
-                    var tagId = $(this).closest("tr").attr("tag");
-                    swal({
-                        title: 'Are you sure?',
-                        text: "You won't be able to revert this!",
-                        type: 'warning',
-                        showCancelButton: true,
-                        confirmButtonClass: 'btn btn-success',
-                        cancelButtonClass: 'btn btn-danger',
-                        confirmButtonText: 'Yes, delete it!',
-                        buttonsStyling: false
-                    }).then(function () {
-                        location.href = "/Filters/Delete?id=" + tagId;
-                    });
-                });
-            })
         });
     </script>
 }

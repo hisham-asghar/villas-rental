@@ -21,5 +21,7 @@ namespace LayerDB
         public int likes { get; set; }
 
         public int dislikes { get; set; }
+
+        public int type { get; set; }
     }
 }

@@ -16,6 +16,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Question</th>
+                        <th>Type</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -23,6 +24,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Question</th>
+                        <th>Type</th>
                         <th></th>
                     </tr>
                     </tfoot>
@@ -32,6 +34,7 @@
                         <tr>
                             <td>@p.faqId</td>
                             <td>@p.Question</td>
+                            <td>@(p.type == 0 ? "General" : "HomeOwner")</td>
                             <td>
                                 <a href="/FAQ/Update?id=@p.faqId" class="btn btn-sm">Edit</a>
                             </td>

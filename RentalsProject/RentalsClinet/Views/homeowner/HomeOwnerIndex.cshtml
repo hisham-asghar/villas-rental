@@ -101,6 +101,9 @@
         font-size: 16px;
     }
 </style>
+@if (ViewBag.FAQs.Count > 0)
+{
+    
 <div class="cd-section" style="background: rgba(238, 238, 238, 0.39);">
     <div class="container">
         <div class="row">
@@ -135,6 +138,7 @@
         </div>
     </div>
 </div>
+}
 <style>
     .section-image:after {
         background-color: rgba(0, 0, 0, 0.0);

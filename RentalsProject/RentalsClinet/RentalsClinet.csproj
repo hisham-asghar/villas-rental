@@ -418,29 +418,6 @@
     <Content Include="Content\Images\Yachts\64-77.jpg" />
     <Content Include="Content\Images\Yachts\78-99.jpg" />
     <Content Include="Content\markerwithlabel.js" />
-    <Content Include="Content\Services\Boats.png" />
-    <Content Include="Content\Services\Cars.png" />
-    <Content Include="Content\Services\Carss.png" />
-    <Content Include="Content\Services\Chauffeurs.png" />
-    <Content Include="Content\Services\Cheff.png" />
-    <Content Include="Content\Services\Chefs.png" />
-    <Content Include="Content\Services\Food.png" />
-    <Content Include="Content\Services\HouseKeeper.png" />
-    <Content Include="Content\Services\Housekeepings.png" />
-    <Content Include="Content\Services\Jet.png" />
-    <Content Include="Content\Services\Masseuse.png" />
-    <Content Include="Content\Services\mayordomo.png" />
-    <Content Include="Content\Services\PersoanlTrainer.png" />
-    <Content Include="Content\Services\PersonlaSecurity.png" />
-    <Content Include="Content\Services\Planes.png" />
-    <Content Include="Content\Services\planner.png" />
-    <Content Include="Content\Services\Security.png" />
-    <Content Include="Content\Services\Tours.png" />
-    <Content Include="Content\Services\Trainers.png" />
-    <Content Include="Content\Services\Villa.png" />
-    <Content Include="Content\Services\Villas.png" />
-    <Content Include="Content\Services\Yacht.png" />
-    <Content Include="Content\Services\Yacht2.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Slider\assets\css\jquery_preview_warning.jpg" />
     <Content Include="Content\Slider\assets\css\jquery_visual_editor_ad.jpg" />
@@ -3059,7 +3036,9 @@
     <Content Include="Views\Destinations\Detail.cshtml" />
     <Content Include="Views\Shared\MapScriptPartial.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\Services\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

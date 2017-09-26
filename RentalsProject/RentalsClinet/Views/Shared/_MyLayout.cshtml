@@ -73,6 +73,13 @@
         .services-list.small-list img {
             margin: 5%;
         }
+        .page-header.header-filter{
+            background: #595959; /* Old browsers */
+            background: -moz-linear-gradient(-45deg, #595959 12%, #4c4c4c 16%, #4c4c4c 16%, #666666 25%, #111111 41%, #2c2c2c 50%, #111111 56%, #474747 79%, #474747 79%, #111111 87%, #111111 87%, #131313 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(-45deg, #595959 12%,#4c4c4c 16%,#4c4c4c 16%,#666666 25%,#111111 41%,#2c2c2c 50%,#111111 56%,#474747 79%,#474747 79%,#111111 87%,#111111 87%,#131313 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(135deg, #595959 12%,#4c4c4c 16%,#4c4c4c 16%,#666666 25%,#111111 41%,#2c2c2c 50%,#111111 56%,#474747 79%,#474747 79%,#111111 87%,#111111 87%,#131313 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#595959', endColorstr='#131313',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+        }
     </style>
 </head>
 <body class="section-white" @(ViewBag.load ?? "")  style="overflow-x:hidden;">

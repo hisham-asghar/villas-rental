@@ -50,9 +50,6 @@
         padding-bottom: 7px;
         margin: 27px 0 0 0;
     }
-</style>
-
-<style>
     .gm-style {
         font-size: inherit;
         font-family: inherit;
@@ -206,6 +203,15 @@
         transform: rotate(45deg) !important;
         position: absolute !important;
     }
+    .container.map-part{
+             padding-top: 60px;
+    margin: 0;
+    min-height: 100vh;
+    max-width: 100vw;
+    min-width: 97vw;
+    width: 97vw;
+    padding-left: 1.5vw;
+     }
 </style>
 @{
     ViewBag.citiesAll = LayerDAO.PropertyDAO.GetCities();
@@ -213,7 +219,7 @@
     var date = DateTime.Now;
 }
 <div class="cd-section" style="    background: rgba(238, 238, 238, 0.4);">
-    <div class="container" style="padding:0 60px; margin: 0; width: 100%;">
+    <div class="container map-part">
 
         <div class="row">
             <div id="filter-panel" class="filter-panel ">
@@ -251,7 +257,7 @@
                                 <div class="col-md-3">
                                     @if (ViewBag.StartDate == null || ViewBag.EndDate == null)
                                     {
-                                        
+
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label">Check in &rarr; Check out</label>
                                             <input name="model.r" type="text" id="config-demo" class="form-control">
@@ -261,11 +267,11 @@
                                     {
                                         <div class="form-group label-floating">
                                             <label class="control-label">Check in &rarr; Check out</label>
-                                            <input value="@ViewBag.StartDate.ToString("MM/dd/yyyy") - @ViewBag.EndDate.ToString("MM/dd/yyyy")" name="model.r" type="text" id="config-demo" class="form-control">    
+                                            <input value="@ViewBag.StartDate.ToString("MM/dd/yyyy") - @ViewBag.EndDate.ToString("MM/dd/yyyy")" name="model.r" type="text" id="config-demo" class="form-control">
                                         </div>
-                                        
+
                                     }
-                                    
+
                                 </div>
                             </div>
                             <div class="row">
@@ -395,7 +401,7 @@
                                 @foreach (var property in propertyList)
                                 {
                                     <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <div class="card property_box" price="$@property.night" title="@property.Name" longitude="@property.Logitude" latitude="@property.Latitude">
+                                        <div class="card property_box" propertyid="@property.PropertyId" price="$@property.night" title="@property.Name" longitude="@property.Logitude" latitude="@property.Latitude">
                                             <div class="card-actions hide pull-right" style="position: absolute; right: 5%; top: 5%; color: #555; z-index: 10;">
                                                 <div class="stats" style="padding: 10px; border-radius: 500px; font-size: 32px; background: #ccc;">
                                                     <i class="material-icons" style="font-size: 32px;">favorite</i>

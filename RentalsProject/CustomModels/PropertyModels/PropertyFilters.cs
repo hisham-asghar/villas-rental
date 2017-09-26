@@ -9,7 +9,7 @@ namespace CustomModels.PropertyModels
     {
         public int id { get; set; }
         public string name { get; set; }
-        public List<int> filters { get; set; }
+        public List<KeyValuePair<int,bool>> filters { get; set; }
         public Dictionary<int,bool> filtersDic { get; set; }
     }
 }

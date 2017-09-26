@@ -14,6 +14,8 @@ namespace LayerDB
 
         public int TagId { get; set; }
 
+        public bool Value { get; set; }
+
         public virtual PropertyDetail PropertyDetail { get; set; }
 
         public virtual Tag Tag { get; set; }

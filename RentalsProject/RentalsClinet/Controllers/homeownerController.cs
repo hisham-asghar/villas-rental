@@ -25,7 +25,7 @@ namespace RentalsClinet.Controllers
             var mainMetas = SiteMetaDAO.getMetaChilds("Contact_Page");
             ViewBag.location = CustomModels.Helper.getDicData(mainMetas, "contact_location");
             ViewBag.phone = CustomModels.Helper.getDicData(mainMetas, "contact_phone");
-            ViewBag.FAQs = FAQDAO.getAllFAQ();
+            ViewBag.FAQs = FAQDAO.getAll(1) ?? new List<FAQ>();
             var url = "http://api.geonames.org/countryInfoJSON?formatted=true&username=themarucagroup";
             var request = WebRequest.Create(url);
             var countriesList = new List<KeyValuePair<string, string>>();

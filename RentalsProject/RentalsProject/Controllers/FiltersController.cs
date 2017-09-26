@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace RentalsProject.Controllers
 {
+    [AuthorizeSession]
     public class FiltersController : Controller
     {
         //
@@ -17,6 +18,27 @@ namespace RentalsProject.Controllers
             return View(list);
         }
 
+        [HttpPost]
+        public ActionResult UpdatePropertyFilters(List<int> list, int id = 0)
+        {
+            var model = new CustomModels.PropertyModels.PropertyFilters()
+            {
+                id = id
+            };
+            model.filters = new List<KeyValuePair<int, bool>>();
+            model.filtersDic = new Dictionary<int, bool>();
+            foreach(var i in list)
+            {
+                model.filters.Add(new KeyValuePair<int,bool>(i,true));
+                model.filtersDic[i] = true;
+            }
+            if (model != null)
+            {
+                LayerDAO.PropertyDAO.UpdatePropertyFilters(model);
+            }
+            return Json("true", JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult PropertyFilters()
         {
             var list = LayerDAO.PropertyDAO.GetPropertiesFilters();
@@ -26,10 +48,22 @@ namespace RentalsProject.Controllers
             
             foreach(var p in list)
             {
-                p.filtersDic = new Dictionary<int, bool>();
+                if(p.filtersDic == null)
+                    p.filtersDic = new Dictionary<int, bool>();
                 foreach(var tag in taglist)
                 {
-                    p.filtersDic[tag.TagId] = p.filters.Contains(tag.TagId);
+                    try
+                    {
+                        var ff = p.filters.FirstOrDefault(pair => pair.Key == tag.TagId);
+                        p.filtersDic[tag.TagId] = ff.Value;
+                    }catch(ArgumentNullException e)
+                    {
+                        p.filtersDic[tag.TagId] = false;
+                    }
+                    catch (Exception e)
+                    {
+                        p.filtersDic[tag.TagId] = false;
+                    }
                 }
             }
 

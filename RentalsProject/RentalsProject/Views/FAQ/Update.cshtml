@@ -11,19 +11,25 @@
         <form method="post" enctype="multipart/form-data">
             <input type="hidden" name="model.faqId" value="@Model.faqId" />
             <div class="col-md-8">
+                <div class="col-md-6">
+                    <select name="model.type" >
+                        <option value="0">General</option>
+                        <option value="1" @(Model.type == 1 ? "selected" : "")>HomeOwner</option>
+                    </select>
+                </div>
                 <div class="col-md-12">
                     <div class="form-group label-floating">
                         <label class="control-label">Question</label>
                         <textarea name="model.Question" class="form-control">
-                            @(Model.Question ?? "")
+                            @(string.IsNullOrWhiteSpace(Model.Question) ? "" : Model.Question.Trim())
                         </textarea>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group label-floating">
                         <label class="control-label">Answer</label>
-                        <textarea name="model.Answer" class="form-control" rows="10">
-                            @(Model.Answer ?? "")
+                        <textarea name="model.Answer" class="form-control" rows="10">                            
+                            @(string.IsNullOrWhiteSpace(Model.Answer) ? "" : Model.Answer.Trim())
                         </textarea>
                     </div>
                 </div>

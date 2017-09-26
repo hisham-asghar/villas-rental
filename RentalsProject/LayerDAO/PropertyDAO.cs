@@ -924,15 +924,66 @@ namespace LayerDAO
 
         public static List<PropertyFilters> GetPropertiesFilters()
         {
-            using(var db = new DBModel())
+            using (var db = new DBModel())
             {
-                return db.PropertyDetails.Include("PropertyTags")
-                    .Where(p => p.isActive && p.Availablity).Select(p => new PropertyFilters()
+                var propList = db.PropertyDetails.Include("PropertyTags")
+                    .Where(p => p.isActive && p.Availablity).ToList();
+                var list = new List<PropertyFilters>();
+                foreach (var prop in propList)
                 {
-                    id = p.PropertyId,
-                    name = p.Name,
-                    filters = p.PropertyTags.Select(pf => pf.TagId).ToList()
-                }).ToList();
+                    var ppf = new PropertyFilters()
+                    {
+                        id = prop.PropertyId,
+                        name = prop.Name
+                    };
+                    ppf.filters = prop.PropertyTags.Select(pf => new KeyValuePair<int, bool>(pf.TagId, pf.Value)).ToList();
+                    ppf.filtersDic = prop.PropertyTags.ToDictionary(pf => pf.TagId, pk => pk.Value);
+                    list.Add(ppf);
+                }
+                return list;
+            }
+        }
+        public static bool UpdatePropertyFilters(PropertyFilters filter)
+        {
+            if (filter.id <= 0 || filter.filters == null)
+                return false;
+            using (var db = new DBModel())
+            {
+                var prop = db.PropertyDetails.FirstOrDefault(p => p.PropertyId == filter.id);
+                
+                if (prop == null) return false;
+
+                var dbFilters = prop.PropertyTags;
+
+                foreach (var f in dbFilters)
+                {
+                    var val = filter.filtersDic.ContainsKey(f.TagId);
+                    f.Value = val;
+                    if (val)
+                        filter.filtersDic.Remove(f.TagId);
+                }
+                foreach(var f in filter.filtersDic)
+                {
+                    db.PropertyTags.Add(new PropertyTag()
+                    {
+                        PropertyId = prop.PropertyId,
+                        TagId = f.Key,
+                        Value = f.Value
+                    });
+                }
+                try
+                {
+                    db.SaveChanges();
+                    return true;
+                }catch(DbEntityValidationException e)
+                {
+                    return false;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+
             }
         }
     }

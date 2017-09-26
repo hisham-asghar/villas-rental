@@ -2,6 +2,7 @@
     ViewBag.Title = "Contact";
     Layout = "~/Views/Shared/_MyLayout.cshtml";
 }
+
 <nav class="navbar navbar-transparent navbar-absolute">
     @Html.Partial("~/Views/Shared/HeaderNavBar.cshtml")
 </nav>
@@ -14,7 +15,6 @@
         </div>
     </div>
 </div>
-<div class="hide" id="contactUsMap" lati="44.433530" longi="26.093928" class="big-map"></div>
 <div class="main">
     <div class="contact-content">
         <div class="container">
@@ -94,7 +94,7 @@
         $(document).ready(function () {
             debugger;
             //ContactUsMap();
-            $("body").attr("class", "contact-page");
+            //$("body").attr("class", "contact-page");
         });
 
         function ContactUsMap() {

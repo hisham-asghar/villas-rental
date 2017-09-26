@@ -129,7 +129,7 @@ namespace RentalsClinet.Controllers
             var mainMetas = SiteMetaDAO.getMetaChilds("FAQ_Page");
             ViewBag.Index = CustomModels.Helper.getDicData(mainMetas, "Index_Page_Banner");
             ViewBag.HeadTitle = "FAQ";
-            var list = LayerDAO.FAQDAO.getAllFAQ();
+            var list = LayerDAO.FAQDAO.getAll(0);
             return View("FAQs", list);
         }
         public ActionResult EVENTS()

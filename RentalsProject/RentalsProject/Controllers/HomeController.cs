@@ -8,6 +8,7 @@ using LayerDAO;
 
 namespace RentalsProject.Controllers
 {
+    [AuthorizeSession]
     public class HomeController : Controller
     {
         //

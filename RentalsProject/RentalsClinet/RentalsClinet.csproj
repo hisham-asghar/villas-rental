@@ -203,6 +203,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomActions.cs" />
+    <Compile Include="Helpers\DestinationHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\MerchantHelper.cs" />
     <Compile Include="Helpers\SendEmailModel.cs" />

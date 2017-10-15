@@ -12,6 +12,7 @@ namespace RentalsClinet.Controllers
         {
             if (!string.IsNullOrWhiteSpace(token))
             {
+                token = Helpers.CustomFunctions.LinkModifier(token);
                 var magzineDictionary = MagzineDAO.GetMagzine(token);
                 if (magzineDictionary.Count > 0)
                 {

@@ -129,6 +129,7 @@
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\FiltersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LinkController.cs" />
     <Compile Include="Controllers\MagzinesController.cs" />
     <Compile Include="Controllers\MyPropertyController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CustomActions.cs" />
     <Compile Include="Helpers\FilesHelper.cs" />
     <Compile Include="Helpers\FilesViewModel.cs" />
     <Compile Include="Helpers\ImageHandler.cs" />
@@ -699,6 +701,9 @@
     <Content Include="Views\Filters\Index.cshtml" />
     <Content Include="Views\Filters\PropertyFilters.cshtml" />
     <Content Include="Views\User\SignIn.cshtml" />
+    <Content Include="Views\Link\Index.cshtml" />
+    <Content Include="Views\Link\Update.cshtml" />
+    <Content Include="Views\Filters\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

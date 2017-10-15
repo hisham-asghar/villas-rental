@@ -28,7 +28,8 @@ namespace RentalsProject.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            // ReSharper disable once Mvc.ViewNotResolved
+            return RedirectToAction("Add");
         }
         [ValidateInput(false)]
         public ActionResult Add(List<itemText> model, List<itemImage> modelImg,int categoryId = 0)

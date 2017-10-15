@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
@@ -35,15 +36,19 @@ namespace LayerDAO
             }
         }
 
+        public static List<String> GetCitiesUrl()
+        {
+            using (var db = new DBModel())
+            {
+                return db.Cities.Select(c => c.guid).ToList();
+            }
+        }
+
         public static int SaveCity(City city)
         {
             using (var db = new DBModel())
             {
-                var guid = city.CityName.ToLower();
-                if (guid.Contains(" "))
-                {
-                    guid = guid.Replace(" ", "-");
-                }
+                var guid = CustomFunctions.Guid(city.CityName);
                 city.guid = guid;
                 if (city.CityId > 0)
                 {
@@ -67,7 +72,7 @@ namespace LayerDAO
                 }
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     return city.CityId;
                 }
                 catch (Exception e)
@@ -93,6 +98,8 @@ namespace LayerDAO
 
         public static int SaveProperty(PropertiesModel model)
         {
+
+            var guid = CustomFunctions.Guid(model.propertyname);
             var propertyDetail = new PropertyDetail
             {
                 TypeId = model.propertyType,
@@ -106,7 +113,7 @@ namespace LayerDAO
                 SpaceFT =  0,
                 SpaceM2 = 0,
                 MinStay = 0,
-                guid = Guid.NewGuid().ToString(),
+                guid = guid,
                 banner = model.banner,
                 pdfFile = model.pdfFile,
                 videoURL = model.pdfFile,
@@ -137,7 +144,7 @@ namespace LayerDAO
                 db.Locations.Add(location);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                 }
                 catch (Exception e)
                 {
@@ -148,7 +155,7 @@ namespace LayerDAO
                 db.PropertyDetails.Add(propertyDetail);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                 }
                 catch (Exception e)
                 {
@@ -159,7 +166,7 @@ namespace LayerDAO
                 db.Compositions.Add(compositionProperty);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                 }
                 catch (Exception e)
                 {
@@ -177,7 +184,7 @@ namespace LayerDAO
                 }
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                 }
                 catch (Exception e)
                 {
@@ -198,7 +205,7 @@ namespace LayerDAO
                     }
                     try
                     {
-                        db.SaveChanges();
+                        db.SaveChanges(); StaticData.updateData();
                     }
                     catch (Exception e)
                     {
@@ -223,7 +230,7 @@ namespace LayerDAO
                 }
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                 }
                 catch (Exception e)
                 {
@@ -247,9 +254,10 @@ namespace LayerDAO
                     };
                     db.PropertyRentalBudgetDetails.Add(t);
 
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                 }
-
+                updateNights();
+                    
                 return propertyDetail.PropertyId;
 
             }
@@ -562,7 +570,7 @@ namespace LayerDAO
                         model.guid = guid;
                     }
                     model.isActive = val;
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     return true;
                 }
                 catch(Exception e)
@@ -593,9 +601,11 @@ namespace LayerDAO
 
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     db.PropertyRentalBudgetDetails.AddRange(list);
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
+                    updateNights();
+                    
                     return true;
 
                 }
@@ -636,7 +646,7 @@ namespace LayerDAO
                     extra.pdfFile = model.pdfUrl;
                     extra.videoURL = model.videoUrl;
                     extra.banner = model.bannerUrl;
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     return true;
                 }
                 catch (DbEntityValidationException e)
@@ -690,7 +700,7 @@ namespace LayerDAO
                 property.Location.ZipCode = model.postalcode;
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     return true;
                 }
                 catch (DbEntityValidationException e)
@@ -724,12 +734,10 @@ namespace LayerDAO
                     {
                         p.night = min.Min(pr => pr.Price);
                     }
-                    if (string.IsNullOrWhiteSpace(p.guid))
-                        p.guid = Guid.NewGuid().ToString();
                 }
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                 }
                 catch (DbEntityValidationException e)
                 {
@@ -777,7 +785,7 @@ namespace LayerDAO
                 db.Bookings.Add(bookingModel);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                 }
                 catch (DbEntityValidationException)
                 {
@@ -878,7 +886,7 @@ namespace LayerDAO
                         var user = db.Users.OrderByDescending(p => p.UserId).FirstOrDefault();
                         if(user != null)
                         booking.UserId = user.UserId;
-                        db.SaveChanges();
+                        db.SaveChanges(); StaticData.updateData();
                     }
                 }
                 catch (DbEntityValidationException e)
@@ -912,7 +920,7 @@ namespace LayerDAO
                 {
                     booking.isBooked = true;
                     booking.guid = Guid.NewGuid().ToString();
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                 }
                 catch (Exception e)
                 {
@@ -973,7 +981,7 @@ namespace LayerDAO
                 }
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     return true;
                 }catch(DbEntityValidationException e)
                 {
@@ -984,6 +992,195 @@ namespace LayerDAO
                     return false;
                 }
 
+            }
+        }
+
+        public static List<string> GetVillasUrl()
+        {
+            using (var db = new DBModel())
+            {
+                return db.PropertyDetails.Where(p => p.Availablity && p.isActive).Select(p => p.guid).ToList();
+            }
+        }
+
+        public static bool updateVillaGenericUrl()
+        {
+            using (var db = new DBModel())
+            {
+                var list = db.PropertyDetails.Where(p => p.Availablity && p.isActive);
+                foreach(var p in list)
+                {
+                    p.guid = CustomFunctions.Guid(p.Name);
+                }
+                try
+                {
+                    db.SaveChanges(); StaticData.updateData();
+                    return true;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    return false;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+
+        
+
+        public static PropertyView GetPropertyByGuid(string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+                return null;
+            token = token.ToLower();
+            if (token.Contains(' '))
+                token = token.Replace(' ', '-');
+
+            using (var db = new DBModel())
+            {
+                var prop = db.PropertyDetailViews.Where(p => p.guid == token)
+                    .Select(p => new PropertyView()
+                    {
+                        Country = p.Country,
+                        CityGuid = p.CityGuid,
+                        AmenitiesList = p.AmenitiesList,
+                        Availablity = p.Availablity,
+                        Bathrooms = p.Bathrooms,
+                        Bedrooms = p.Bedrooms,
+                        CityId = p.CityId,
+                        CityName = p.CityName,
+                        pdfFile = p.pdfFile,
+                        CompositionId = p.CompositionId,
+                        Description = p.Description,
+                        Expr1 = p.Expr1,
+                        Images = p.Images,
+                        Latitude = p.Latitude,
+                        LocationId = p.LocationId,
+                        Logitude = p.Logitude,
+                        MaxGuests = p.MaxGuests,
+                        MinStay = p.MinStay,
+                        Name = p.Name,
+                        OnCreated = p.OnCreated,
+                        OnModified = p.OnModified,
+                        PropertyId = p.PropertyId,
+                        PropertyTagsList = p.PropertyTagsList,
+                        SpaceFT = p.SpaceFT,
+                        SpaceM2 = p.SpaceM2,
+                        StreetName = p.StreetName,
+                        StreetNo = p.StreetNo,
+                        SubName = p.SubName,
+                        Toilets = p.Toilets,
+                        TypeId = p.TypeId,
+                        ZipCode = p.ZipCode,
+                        banner = p.banner,
+                        guid = p.guid,
+                        isActive = p.isActive,
+                        night = p.night,
+                        videoURL = p.videoURL
+                    }).FirstOrDefault();
+                if (prop == null) return null;
+
+                prop.imageList = !string.IsNullOrWhiteSpace(prop.Images) ? new List<string>(prop.Images.Split('#')) : new List<string>();
+                prop.amenitiesList = !string.IsNullOrWhiteSpace(prop.AmenitiesList) ? new List<string>(prop.AmenitiesList.Split('#')) : new List<string>();
+                prop.tagsList = !string.IsNullOrWhiteSpace(prop.PropertyTagsList) ? new List<string>(prop.PropertyTagsList.Split('#')) : new List<string>();
+                prop.rates = db.PropertyRentalBudgetDetails.Where(r => r.PropertyId == prop.PropertyId)
+                        .Select(r => new RateModel()
+                        {
+                            sd = r.StartDate,
+                            ed = r.EndDate,
+                            price = r.Price,
+                            SeasonName = r.SeasonName,
+                            guest_price = r.guest_price,
+                            minStay = r.minStay,
+                            SeasonId = r.RentalBudgetId
+                        }).ToList();
+                prop.rates = prop.rates ?? new List<RateModel>();
+                return prop;
+            }
+        }
+
+        public static Dictionary<string, string> GetDestinationVillasUrl()
+        {
+            using (var db = new DBModel())
+            {
+                return db.PropertyDetails.Where(p => p.Availablity && p.isActive)
+                    .ToDictionary(key=> key.guid, value=> value.Location.City.CityName);
+                
+            }
+        }
+
+
+        public static List<PropertyView> GetFilterProperties(int cnt, string token)
+        {
+            using (var db = new DBModel())
+            {
+                var tag = db.Tags.FirstOrDefault(pt => pt.guid.ToLower() == token.ToLower());
+                if (tag == null)
+                {
+                    return new List<PropertyView>();
+                }
+                var ppList = tag.PropertyTags.Select(pt => pt.PropertyId).ToList();
+                var list = db.PropertyDetailViews.Where(p => p.isActive && p.Availablity && p.night > 0 && ppList.Any(pp => pp == p.PropertyId)).ToList();
+
+               
+                var nlist = new List<PropertyView>();
+                foreach (var p in list)
+                {
+                    var pro = new PropertyView
+                    {
+                        Country = p.Country,
+                        CityGuid = p.CityGuid,
+                        AmenitiesList = p.AmenitiesList,
+                        Availablity = p.Availablity,
+                        Bathrooms = p.Bathrooms,
+                        Bedrooms = p.Bedrooms,
+                        CityId = p.CityId,
+                        CityName = p.CityName,
+                        pdfFile = p.pdfFile,
+                        CompositionId = p.CompositionId,
+                        Description = p.Description,
+                        Expr1 = p.Expr1,
+                        Images = p.Images,
+                        Latitude = p.Latitude,
+                        LocationId = p.LocationId,
+                        Logitude = p.Logitude,
+                        MaxGuests = p.MaxGuests,
+                        MinStay = p.MinStay,
+                        Name = p.Name,
+                        OnCreated = p.OnCreated,
+                        OnModified = p.OnModified,
+                        PropertyId = p.PropertyId,
+                        PropertyTagsList = p.PropertyTagsList,
+                        SpaceFT = p.SpaceFT,
+                        SpaceM2 = p.SpaceM2,
+                        StreetName = p.StreetName,
+                        StreetNo = p.StreetNo,
+                        SubName = p.SubName,
+                        Toilets = p.Toilets,
+                        TypeId = p.TypeId,
+                        ZipCode = p.ZipCode,
+                        banner = p.banner,
+                        guid = p.guid,
+                        isActive = p.isActive,
+                        night = p.night,
+                        videoURL = p.videoURL
+                    };
+                    pro.imageList = !string.IsNullOrWhiteSpace(pro.Images) ? new List<string>(p.Images.Split('#')) : new List<string>();
+                    pro.amenitiesList = !string.IsNullOrWhiteSpace(pro.AmenitiesList) ? new List<string>(p.AmenitiesList.Split('#')) : new List<string>();
+                    pro.tagsList = !string.IsNullOrWhiteSpace(pro.PropertyTagsList) ? new List<string>(p.PropertyTagsList.Split('#')) : new List<string>();
+                    nlist.Add(pro);
+                }
+                return nlist;
+            }
+        }
+
+        public static object GetLast(int cnt)
+        {
+            using (var db = new DBModel())
+            {
+                return db.PropertyDetailViews.OrderByDescending(p => p.PropertyId).Take(cnt).ToList();
             }
         }
     }

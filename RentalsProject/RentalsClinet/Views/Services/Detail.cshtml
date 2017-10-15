@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h5 class="title">Services</h5>
-                <h1 class="title">@Model.Name</h1>
+                <h1 class="title">@(string.IsNullOrWhiteSpace(Model.Name) ? "" : Model.Name)</h1>
             </div>
         </div>
     </div>
@@ -28,8 +28,11 @@
         <div class="about-description" style="padding-top:10vh; min-height: 80vh;">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
+                    <div class="description title" style="font-size: 18px;">
+                        @(string.IsNullOrWhiteSpace(Model.SubName) ? "" : Model.SubName.Contains("\n") ? Model.SubName.Replace("\n", "<br />") : Model.SubName)
+                    </div>
                     <div class="description" style="font-size: 18px;">
-                        @(Html.Raw(Model.Text.Contains("\n") ? Model.Text.Replace("\n", "<br />") : Model.Text))
+                        @(Html.Raw(string.IsNullOrWhiteSpace(Model.Text) ? "" : Model.Text.Contains("\n") ? Model.Text.Replace("\n", "<br />") : Model.Text))
                     </div>
                 </div>
             </div>

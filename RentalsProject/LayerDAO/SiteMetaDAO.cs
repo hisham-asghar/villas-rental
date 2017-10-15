@@ -81,7 +81,7 @@ namespace LayerDAO
                 }
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     if (MetaParents != null)
                         foreach (var parent in MetaParents)
                         {
@@ -99,7 +99,7 @@ namespace LayerDAO
                                     db.SiteMetas.Add(pmeta);
                                     try
                                     {
-                                        db.SaveChanges();
+                                        db.SaveChanges(); StaticData.updateData();
                                     }
                                     catch (Exception e)
                                     {
@@ -119,7 +119,7 @@ namespace LayerDAO
                                     });
                                     try
                                     {
-                                        db.SaveChanges();
+                                        db.SaveChanges(); StaticData.updateData();
                                     }
                                     catch (Exception e)
                                     {

@@ -52,7 +52,8 @@ namespace RentalsProject.Controllers
             return View();
         }
 
-        private Meta saveBanner(HttpPostedFileBase pic, string s, List<string> parents)
+        // ReSharper disable once InconsistentNaming
+        public Meta saveBanner(HttpPostedFileBase pic, string s, List<string> parents)
         {
             if (pic != null && pic.ContentLength > 0)
             {
@@ -68,13 +69,13 @@ namespace RentalsProject.Controllers
                     return SiteMetaDAO.SaveMeta(new Meta(s, ""), parents);
                 }
             }
-            else
-                return new Meta(s, "");
+            return new Meta(s, "");
         }
 
 
         public ActionResult Images()
         {
+            // ReSharper disable once Mvc.ViewNotResolved
             return View();
         }
 
@@ -319,6 +320,7 @@ namespace RentalsProject.Controllers
         }
 
         [ValidateInput(false)]
+        // ReSharper disable once InconsistentNaming
         public ActionResult AboutUs(string main_about_text)
         {
 

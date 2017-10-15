@@ -23,6 +23,12 @@ namespace LayerDB
         [StringLength(1024)]
         public string SVG { get; set; }
 
+        [StringLength(256)]
+        public string Image { get; set; }
+
+        [Column(TypeName = "ntext")]
+        public string Text { get; set; }
+
         public virtual ICollection<Amenity> Amenities { get; set; }
     }
 }

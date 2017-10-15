@@ -1,0 +1,9 @@
+diff a/RentalsProject/RentalsClinet/Controllers/DestinationsController.cs b/RentalsProject/RentalsClinet/Controllers/DestinationsController.cs	(rejected hunks)
+@@ -181,7 +181,6 @@
+ 
+         public ActionResult Detail(BookingModel2 bmodel)
+         {
+-                "M/d/yyyy", 
+             
+             var id = Request.QueryString["id"];
+             if (id == null) return RedirectToAction("Index");

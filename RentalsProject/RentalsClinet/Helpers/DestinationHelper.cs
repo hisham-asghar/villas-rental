@@ -1,5 +1,6 @@
 ﻿using CustomModels;
 using CustomModels.PropertyModels;
+using LayerDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace RentalsClinet.Helpers
 {
     public static class DestinationHelper
     {
-
+        /*
         public static ActionResult VillaBooking(BookingModel2 bmodel, int _id, ActionResult resultView, PropertyView model)
         {
             string[] formats = {
@@ -27,7 +28,7 @@ namespace RentalsClinet.Helpers
                                };
             if (bmodel.hk == null)
             {
-                ViewBag.villaId = _id;
+                //ViewBag.villaId = _id;
                 if (model != null)
                     resultView = View(model);
             }
@@ -139,16 +140,16 @@ namespace RentalsClinet.Helpers
                 if (res)
                 {
                     bookingModel = PropertyDAO.BookProperty(bookingModel);
-                    ViewBag.book = bmodel;
+                    //ViewBag.book = bmodel;
                     resultView = RedirectToAction("Booking", new { id = bookingModel.guid });
                 }
-                ViewBag.villaId = _id;
+                //ViewBag.villaId = _id;
                 if (model != null)
                     resultView = View(model);
             }
             return resultView;
         }
-
+*/
         public static bool isBooked(Booking model, List<DateModel> bookings)
         {
             var bookingFlag = true;

@@ -19,6 +19,19 @@ namespace LayerDB
         [StringLength(100)]
         public string TagName { get; set; }
 
+        [Required]
+        [StringLength(100)]
+        public string guid { get; set; }
+
+        [StringLength(4096)]
+        public string Text { get; set; }
+
+        [StringLength(256)]
+        public string image { get; set; }
+
         public virtual ICollection<PropertyTag> PropertyTags { get; set; }
+
+        [StringLength(256)]
+        public string banner { get; set; }
     }
 }

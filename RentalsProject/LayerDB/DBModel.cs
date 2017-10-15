@@ -65,6 +65,10 @@ namespace LayerDB
                 .IsUnicode(false);
 
             modelBuilder.Entity<AmenitiesType>()
+                .Property(e => e.Image)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AmenitiesType>()
                 .HasMany(e => e.Amenities)
                 .WithRequired(e => e.AmenitiesType)
                 .WillCascadeOnDelete(false);
@@ -429,6 +433,18 @@ namespace LayerDB
             modelBuilder.Entity<Tag>()
                 .Property(e => e.TagName)
                 .IsUnicode(false);
+            modelBuilder.Entity<Tag>()
+                .Property(e => e.guid)
+                .IsUnicode(false);
+            modelBuilder.Entity<Tag>()
+                .Property(e => e.Text)
+                .IsUnicode(false);
+            modelBuilder.Entity<Tag>()
+                .Property(e => e.image)
+                .IsUnicode(false);
+            modelBuilder.Entity<Tag>()
+                .Property(e => e.banner)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Tag>()
                 .HasMany(e => e.PropertyTags)
@@ -452,23 +468,11 @@ namespace LayerDB
                 .IsUnicode(false);
 
             modelBuilder.Entity<UrlMeta>()
-                .Property(e => e.guid)
+                .Property(e => e.RealLink)
                 .IsUnicode(false);
 
             modelBuilder.Entity<UrlMeta>()
-                .Property(e => e.Controller)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<UrlMeta>()
-                .Property(e => e.ActionName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<UrlMeta>()
-                .Property(e => e.QueryString)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<UrlMeta>()
-                .Property(e => e.Url)
+                .Property(e => e.DummyLink)
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()

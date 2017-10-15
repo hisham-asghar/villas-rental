@@ -32,7 +32,7 @@ namespace LayerDAO
                 db.Mails.Remove(faq);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     return true;
                 }
                 catch (Exception e)
@@ -66,7 +66,7 @@ namespace LayerDAO
                 }
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     return true;
                 }
                 catch (Exception e)

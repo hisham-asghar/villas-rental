@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using CustomModels.Yachts;
 using LayerDB;
+using System.Text.RegularExpressions;
+using System.Data.Entity.Validation;
 
 namespace LayerDAO
 {
@@ -66,7 +68,8 @@ namespace LayerDAO
                         Value = ys.Value
                     }).ToList()
                 }).FirstOrDefault(s => s.guid == guid);
-                yt.specs = GetYachtSpecifications(yt.id);
+                if(yt != null)  
+                    yt.specs = GetYachtSpecifications(yt.id);
                 return yt;
             }
         }
@@ -164,7 +167,7 @@ namespace LayerDAO
                             guid = Guid.NewGuid().ToString()
                         };
                         db.Yachts.Add(yacht);
-                        db.SaveChanges();
+                        db.SaveChanges(); StaticData.updateData();
 
                         foreach (var im in model.YachtsImage)
                         {
@@ -178,7 +181,7 @@ namespace LayerDAO
                                 FileType = 3,
                                 FileTypeId = yacht.YachtID
                             });
-                            db.SaveChanges();
+                            db.SaveChanges(); StaticData.updateData();
                         }
 
                         foreach (var sp in specs)
@@ -196,6 +199,43 @@ namespace LayerDAO
                 {
                     return -1;
                 }
+            }
+        }
+
+        public static object updateYachtsUrl()
+        {
+            using (var db = new DBModel())
+            {
+                var list = db.Yachts.ToList();
+                foreach (var p in list)
+                {
+                    var guid = p.Name.Trim().ToLower();
+                    if (guid.Contains(' '))
+                        guid = guid.Replace(' ', '-');
+                    guid = Regex.Replace(guid, @"[^0-9a-zA-Z]+", "-");
+                    p.guid = guid;
+                }
+                try
+                {
+                    db.SaveChanges(); StaticData.updateData();
+                    return true;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    return false;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public static List<string> GetYachtsUrl()
+        {
+            using(var db = new DBModel())
+            {
+                return db.Yachts.Select(y => y.guid).ToList();
             }
         }
     }

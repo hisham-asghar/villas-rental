@@ -12,6 +12,14 @@ namespace RentalsClinet.Controllers
         //
         // GET: /Yachts/
 
+
+        public ActionResult updateUrls()
+        {
+            var res = YachtDAO.updateYachtsUrl();
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+
         public ActionResult Index(UserReuqestYacht model)
         {
             if (Request.HttpMethod == "POST" && model != null)
@@ -25,6 +33,14 @@ namespace RentalsClinet.Controllers
                 }
             }
             var token = Request.QueryString["token"];
+            if (Request.Url.Segments.Length == 3)
+                token = Request.Url.Segments[2];
+
+
+            if (token.Contains(' '))
+                token = token.Replace(" ", "-");
+            token = Helpers.CustomFunctions.LinkModifier(token);
+
             var tokenList = new List<string>()
             {
                 "34-63",

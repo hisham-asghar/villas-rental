@@ -1,0 +1,277 @@
+﻿@{
+    ViewBag.maxPrice = LayerDAO.PropertyDAO.GetMaxNightPrice(0);
+
+    ViewBag.citiesAll = LayerDAO.PropertyDAO.GetCities();
+    ViewBag.TagTypes = LayerDAO.PropertyDAO.GetPropertyTags();
+}
+<nav class="navbar" id="sectionsNav" style="border-radius:0;z-index:100;padding:0px;">
+    <div class="container-fluid" style="width:100vw;">
+
+        <form method="post" action="/Destinations/Search" style="@(Request.Browser.IsMobileDevice ? "zoom:85%;" : "")">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header col-md-12" style="">
+                <div class="row">
+                    <div class="col-xs-3 col-md-1">
+                        <div class="form-group" style="margin-top:7px;">
+                            <img src="~/Content/assets/img/logo.png" style="@(Request.Browser.IsMobileDevice ? "width:65px;" : "")" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+                        <div class="form-group label-static">
+                            <label class="control-label">
+                                Where's your luxury?
+                            </label>
+                            <select name="model.cityName" class="select form-control" placeholder="Select a destination">
+                                <option value="0" disabled selected class="disabled">Select a destination</option>
+                                @foreach (var city in ViewBag.citiesAll)
+                                {
+                                    <option value="@city.guid" @(ViewBag.modelSearch.cityName == city.guid ? "selected=''" : "")>@city.CityName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    @if (!Request.Browser.IsMobileDevice)
+                    {
+                        <div class="col-md-5 visible-md visible-lg">
+
+                            <div class="col-md-5 col-xs-5">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">
+                                        Guests
+                                    </label>
+                                    <select name="model.guests" class="select form-control" placeholder="Guests">
+                                        @for (int xi = 1; xi <= 100; xi++)
+                                        {
+                                                <option value="@xi" @(ViewBag.modelSearch.guests == xi ? "selected=''" : "")>@xi</option>
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-md-7 col-xs-7">
+                                @if (ViewBag.StartDate == null || ViewBag.EndDate == null)
+                                {
+
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Check in &rarr; Check out</label>
+                                        <input name="model.r" type="text" id="" class="form-control config-demo2">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Check in &rarr; Check out</label>
+                                        <input value="@ViewBag.StartDate.ToString("MM/dd/yyyy") - @ViewBag.EndDate.ToString("MM/dd/yyyy")" name="model.r" type="text" id="" class="form-control config-demo2">
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                    }
+                    <div class="col-md-2 col-xs-3">
+                        <div class="col-xs-4 col-md-3">
+                            <div class="form-group">
+                                <a type="button" style="background:transparent;padding:5px;" class="filterBtn" data-toggle="collapse" href="#collapse1">
+                                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                        <path fill="#000000" d="M3,2H21V2H21V4H20.92L14,10.92V22.91L10,18.91V10.91L3.09,4H3V2Z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-md-8">
+                            <div class="form-group">
+                                <button type="submit" class="btn text-info visible-xs visible-sm" style="padding: 5px;background:transparent;">
+                                    <i class="material-icons" style="font-size: 24px;">search</i>
+                                </button>
+                                <button type="submit" class="btn btn-info btn-block  visible-lg visible-md">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="container-fluid">
+                    <div class="col-md-11 col-md-offset-1">
+
+                        <div class="row">
+                            
+                            <div class="col-xs-4 col-md-2">
+                                <div class="form-group">
+                                    <span class="input-group-addon"
+                                          style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                        PRICE DETAILS:
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-8 col-md-offset-1 form-group">
+                                <input type="text" id="example_id" name="model.price" value="" />
+                            </div>
+                            <div class="col-xs-4 col-md-1">
+                                <div class="form-group">
+                                    <span class="input-group-addon"
+                                          style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                        SORT ORDER:
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-8">
+                                <div class="form-group form-search" style="color: #000;margin:0px 10px;">
+                                    <select class="select form-control" name="model.sort" placeholder="Featured">
+                                        <option value="5" @(ViewBag.modelSearch.sort == 5 ? "selected=''" : "")>Featured</option>
+                                        <option value="3" @(ViewBag.modelSearch.sort == 3 ? "selected=''" : "")>Bedrooms (Min - Max)</option>
+                                        <option value="4" @(ViewBag.modelSearch.sort == 4 ? "selected=''" : "")>Bedrooms (Max - Min)</option>
+                                        <option value="1" @(ViewBag.modelSearch.sort == 1 ? "selected=''" : "")>Price (Min - Max)</option>
+                                        <option value="2" @(ViewBag.modelSearch.sort == 2 ? "selected=''" : "")>Price (Max - Min)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        @if (Request.Browser.IsMobileDevice)
+                        {
+                            <div class="row">
+
+                                <div class="col-xs-12 visible-sm visible-xs">
+                                    
+                                    <div class="col-md-7 col-xs-12">
+                                        @if (ViewBag.StartDate == null || ViewBag.EndDate == null)
+                                        {
+
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label">Check in &rarr; Check out</label>
+                                                <input name="model.r" type="text" id="" class="form-control config-demo2">
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Check in &rarr; Check out</label>
+                                                <input value="@ViewBag.StartDate.ToString("MM/dd/yyyy") - @ViewBag.EndDate.ToString("MM/dd/yyyy")" name="model.r" type="text" id="" class="form-control config-demo2">
+                                            </div>
+
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="row">
+                            <div class="col-xs-7">
+
+                                <div class="col-sm-12 col-md-2">
+                                    <div class="form-group">
+                                        <span class="input-group-addon"
+                                              style="padding-top: 13px;background: transparent;border: 0; font-weight: bold;">
+                                            COLLECTIONS:
+
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 form-group">
+                                    @foreach (var tag in ViewBag.TagTypes)
+                                    {
+                                        <div class="col-md-3">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" @(ViewBag.modelSearch.filter.Contains(tag.TagName) ? "checked=''" : "") name="@tag.TagName">
+                                                    @tag.TagName
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                            @if(Request.Browser.IsMobileDevice)
+                            {
+                                <div class="col-md-5 col-xs-5 visible-xs visible-sm">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">
+                                            Guests
+                                        </label>
+                                        <select name="model.guests" class="select form-control" placeholder="Guests">
+                                            @for (int xi = 1; xi <= 100; xi++)
+                                            {
+                                                <option value="@xi" @(ViewBag.modelSearch.guests == xi ? "selected=''" : "")>@xi</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+</nav>
+<style>
+    div.dropdownjs > ul {
+        max-height: 400px !important;
+    }div.dropdownjs::after {
+        display: none;
+    }
+     
+    #sectionsNav .navbar-collapse.collapse{
+        height: 0px !important;
+    }
+    
+        
+    div.dropdownjs > ul * {
+        text-transform: uppercase;
+    }
+    #sectionsNav{
+        background-image:url(/Content/assets/img/search_bar.jpg);
+        background-size: 100vw 100vh;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        var vflag = false;
+
+        $("#bs-lower").collapse("hide");
+        var filterCollapseHide = true;
+        $(".filterBtn").each(function(){
+            $(this).click(function(){
+                if(filterCollapseHide == true)
+                    $("#bs-lower").collapse("show");
+                else
+                    $("#bs-lower").collapse("hide");
+            });
+        })
+
+        $('.config-demo2').each(function(){
+            $(this).focus(function () {
+                if (vflag == false) {
+                    vflag = true;
+                    $(this).daterangepicker({
+                        "minDate": new Date(),
+                        "opens": "center",
+                        isInvalidDate: function (date) {
+                            //debugger;
+                            return false;
+                        }
+                    }, function (start, end, label) {
+                        console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                    });
+                }
+            })
+        });
+
+
+        $("#example_id").ionRangeSlider({
+            type: "double",
+            grid: true,
+            from: @(ViewBag.smin == null ? 0 : ViewBag.smin) ,
+            to: @(ViewBag.smax == null ? ViewBag.maxPrice : ViewBag.smax),
+            min: 0,
+            max: @ViewBag.maxPrice,
+            prefix: '$',
+            postfix: '/nt'
+        });
+    });
+</script>

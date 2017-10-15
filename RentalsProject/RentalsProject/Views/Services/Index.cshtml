@@ -34,7 +34,7 @@
                         <tr>
                             <td>@p.ServiceId</td>
                             <td>@p.Name</td>
-                            <td>@p.Text.Substring(0,50)&hellip;</td>
+                            <td>@(string.IsNullOrWhiteSpace(p.Text) ? "" : p.Text.Length > 50 ? p.Text.Substring(0, 50) : p.Text)&hellip;</td>
                             <td>
                                 <a href="/Services/Update?id=@p.ServiceId" class="btn btn-sm">Edit</a>
                             </td>

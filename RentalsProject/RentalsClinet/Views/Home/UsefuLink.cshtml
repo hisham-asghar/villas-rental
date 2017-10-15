@@ -2,13 +2,17 @@
     ViewBag.Title = ViewBag.HeadTitle;
 }
 @{
-    ViewBag.Title = "Contact";
     Layout = "~/Views/Shared/_MyLayout.cshtml";
+    string background = null;
+    if (ViewBag.HeadTitle == "POLICY")
+    {
+        background = "Policy.jpg";
+    }
 }
 <nav class="navbar navbar-transparent navbar-absolute">
     @Html.Partial("~/Views/Shared/HeaderNavBar.cshtml")
 </nav>
-<div class="page-header header-filter" style="height:40vh; min-height: 50vh;">
+<div class="page-header header-filter" style="height:40vh; min-height: 50vh;@(background == null ? "" : "background-image: url('/Content/assets/img/"+background+"')")">
     <div class="container" style="padding-top:20vh;">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">

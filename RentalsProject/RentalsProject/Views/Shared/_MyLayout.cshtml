@@ -110,6 +110,15 @@
     <script src="/Content/assets/js/demo.js"></script>
 
     @RenderSection("scripts",false)
+    
+    <script>
+        $(document).ready(function () {
+            $("textarea").each(function () {
+                $(this).val($(this).val().trim());
+            });
+        });
+    </script>
+
 </body>
 
 </html>

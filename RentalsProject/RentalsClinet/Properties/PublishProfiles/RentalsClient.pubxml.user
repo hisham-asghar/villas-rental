@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>E:\Deployed\TheMarucaGroup\RentalsClient\10-03-17</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\Deployed\TheMarucaGroup\RentalsClient\10-14-17</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/antlr.runtime.dll">
@@ -22,7 +22,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/12/2016 21:23:04</publishTime>
     </File>
     <File Include="bin/CustomModels.dll">
-      <publishTime>10/03/2017 00:03:18</publishTime>
+      <publishTime>10/14/2017 16:32:47</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 09:32:24</publishTime>
@@ -37,10 +37,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/02/2017 16:51:36</publishTime>
     </File>
     <File Include="bin/LayerDAO.dll">
-      <publishTime>10/03/2017 00:03:23</publishTime>
+      <publishTime>10/15/2017 04:38:04</publishTime>
     </File>
     <File Include="bin/LayerDB.dll">
-      <publishTime>10/03/2017 00:03:17</publishTime>
+      <publishTime>10/14/2017 16:32:47</publishTime>
     </File>
     <File Include="bin/Microsoft.Threading.Tasks.dll">
       <publishTime>04/07/2014 12:26:14</publishTime>
@@ -70,7 +70,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/04/2012 11:19:10</publishTime>
     </File>
     <File Include="bin/RentalsClinet.dll">
-      <publishTime>10/03/2017 00:03:32</publishTime>
+      <publishTime>10/15/2017 04:38:06</publishTime>
     </File>
     <File Include="bin/SendGrid.SmtpApi.dll">
       <publishTime>05/21/2014 16:09:02</publishTime>
@@ -301,7 +301,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2017 16:06:18</publishTime>
     </File>
     <File Include="Content/assets/img/apple-icon.png">
-      <publishTime>10/01/2017 16:06:18</publishTime>
+      <publishTime>10/01/2017 16:06:19</publishTime>
     </File>
     <File Include="Content/assets/img/bg.jpg">
       <publishTime>10/01/2017 16:06:18</publishTime>
@@ -811,7 +811,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/21/2017 22:25:00</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>10/01/2017 16:05:53</publishTime>
+      <publishTime>10/12/2017 04:54:00</publishTime>
     </File>
     <File Include="Content/Slider/assets/.DS_Store">
       <publishTime>10/01/2017 16:05:53</publishTime>
@@ -9487,28 +9487,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2017 16:06:25</publishTime>
     </File>
     <File Include="Views/Cars/Index.cshtml">
-      <publishTime>10/01/2017 16:06:25</publishTime>
+      <publishTime>10/12/2017 07:03:33</publishTime>
     </File>
     <File Include="Views/Cars/SubIndex.cshtml">
-      <publishTime>10/01/2017 16:06:25</publishTime>
+      <publishTime>10/13/2017 05:44:07</publishTime>
     </File>
     <File Include="Views/Destinations/Booking.cshtml">
-      <publishTime>10/01/2017 16:06:25</publishTime>
+      <publishTime>10/12/2017 23:25:59</publishTime>
     </File>
     <File Include="Views/Destinations/CityIndex.cshtml">
-      <publishTime>10/01/2017 16:06:25</publishTime>
+      <publishTime>10/13/2017 03:46:37</publishTime>
     </File>
     <File Include="Views/Destinations/Detail - Copy.cshtml">
       <publishTime>10/01/2017 16:06:25</publishTime>
     </File>
     <File Include="Views/Destinations/Detail.cshtml">
-      <publishTime>10/01/2017 19:26:08</publishTime>
+      <publishTime>10/13/2017 06:52:37</publishTime>
     </File>
     <File Include="Views/Destinations/Index.cshtml">
-      <publishTime>10/01/2017 16:06:25</publishTime>
+      <publishTime>10/14/2017 10:21:43</publishTime>
     </File>
     <File Include="Views/Destinations/Search.cshtml">
-      <publishTime>10/01/2017 16:06:25</publishTime>
+      <publishTime>10/13/2017 05:30:30</publishTime>
     </File>
     <File Include="Views/Destinations/Villas.cshtml">
       <publishTime>10/01/2017 16:06:25</publishTime>
@@ -9517,25 +9517,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2017 16:06:25</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>10/01/2017 16:06:25</publishTime>
+      <publishTime>10/12/2017 06:53:20</publishTime>
     </File>
     <File Include="Views/Home/CONCIERGE.cshtml">
       <publishTime>10/01/2017 16:06:26</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
-      <publishTime>10/01/2017 16:06:25</publishTime>
+      <publishTime>10/12/2017 06:53:29</publishTime>
     </File>
     <File Include="Views/Home/FAQs.cshtml">
       <publishTime>10/01/2017 16:06:25</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>10/01/2017 16:06:26</publishTime>
+      <publishTime>10/13/2017 02:21:24</publishTime>
     </File>
     <File Include="Views/Home/Testimonals.cshtml">
-      <publishTime>09/27/2017 03:12:47</publishTime>
+      <publishTime>10/14/2017 13:50:11</publishTime>
     </File>
     <File Include="Views/Home/UsefuLink.cshtml">
-      <publishTime>10/01/2017 16:06:26</publishTime>
+      <publishTime>10/13/2017 02:44:40</publishTime>
     </File>
     <File Include="Views/homeowner/HomeOwnerIndex.cshtml">
       <publishTime>10/01/2017 16:06:26</publishTime>
@@ -9544,22 +9544,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2017 16:06:26</publishTime>
     </File>
     <File Include="Views/Magzines/Index.cshtml">
-      <publishTime>10/01/2017 16:06:26</publishTime>
+      <publishTime>10/13/2017 05:49:36</publishTime>
     </File>
     <File Include="Views/Services/Detail.cshtml">
-      <publishTime>10/01/2017 16:06:26</publishTime>
+      <publishTime>10/12/2017 23:14:19</publishTime>
     </File>
     <File Include="Views/Services/Index.cshtml">
-      <publishTime>10/01/2017 16:06:26</publishTime>
+      <publishTime>10/13/2017 05:54:09</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>10/01/2017 16:06:26</publishTime>
+      <publishTime>10/13/2017 05:47:37</publishTime>
     </File>
     <File Include="Views/Shared/HeaderNavBar.cshtml">
-      <publishTime>10/01/2017 16:06:26</publishTime>
+      <publishTime>10/13/2017 02:13:08</publishTime>
     </File>
     <File Include="Views/Shared/MapScriptPartial.cshtml">
       <publishTime>10/01/2017 16:06:26</publishTime>
+    </File>
+    <File Include="Views/Shared/SearchNavigationBar.cshtml">
+      <publishTime>10/14/2017 10:03:02</publishTime>
+    </File>
+    <File Include="Views/Shared/VillaItemBox.cshtml">
+      <publishTime>10/13/2017 03:26:58</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>10/01/2017 16:06:26</publishTime>
@@ -9568,7 +9574,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2017 16:06:26</publishTime>
     </File>
     <File Include="Views/Shared/_MyLayout.cshtml">
-      <publishTime>10/01/2017 16:06:26</publishTime>
+      <publishTime>10/13/2017 06:49:19</publishTime>
     </File>
     <File Include="Views/Shared/_MyLayout2.cshtml">
       <publishTime>10/01/2017 16:06:26</publishTime>
@@ -9580,10 +9586,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/01/2017 16:06:26</publishTime>
     </File>
     <File Include="Views/Yachts/Index.cshtml">
-      <publishTime>10/01/2017 16:06:26</publishTime>
+      <publishTime>10/13/2017 06:39:42</publishTime>
     </File>
     <File Include="Views/Yachts/SubIndex.cshtml">
-      <publishTime>10/01/2017 16:06:26</publishTime>
+      <publishTime>10/13/2017 05:45:33</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
       <publishTime>10/01/2017 16:06:26</publishTime>

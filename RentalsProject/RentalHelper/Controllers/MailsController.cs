@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using LayerDAO;
+using RentalHelper.Helper;
 
 namespace RentalHelper.Controllers
 {
@@ -11,13 +9,14 @@ namespace RentalHelper.Controllers
         // GET: Mails
         public ActionResult Index()
         {
+            // ReSharper disable once Mvc.ViewNotResolved
             return View();
         }
         // GET: Mails
         public ActionResult Send(string guid)
         {
-            var mail = LayerDAO.MailDAO.get(guid);
-            var res = Helper.EmailHelper.SendMail(new RentalHelper.Helper.SendEmailModel()
+            var mail = MailDAO.get(guid);
+            var res = EmailHelper.SendMail(new SendEmailModel
             {
                 Body = mail.Text,
                 Subject = mail.Subject,
@@ -27,7 +26,7 @@ namespace RentalHelper.Controllers
         }
         public ActionResult Test(string to = "hisham@octacer.com")
         {
-            var res = Helper.EmailHelper.SendMail(new RentalHelper.Helper.SendEmailModel()
+            var res = EmailHelper.SendMail(new SendEmailModel
             {
                 Body = "Testing Helper Body",
                 Subject = "Testing Helper SUbject",

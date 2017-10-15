@@ -1,14 +1,14 @@
-﻿@model LayerDB.Service
+﻿@model LayerDB.Tag
 @{
-    ViewBag.Title = "Add/Update FAQ";
+    ViewBag.Title = "Add/Update Service";
 }
-<a href="/Testimonals" class="btn btn-info">View All Testimonals</a><br />
+<a href="/Services" class="btn btn-info">View All Services</a><br />
 <div class="card">
     <div class="card-header" data-background-color="purple">
         <h4 class="card-title">@ViewBag.Title</h4>
     </div>
     <div class="card-content">
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" action="/Filters/Update">
             <input type="hidden" name="model.ServiceId" value="@Model.ServiceId" />
             <div class="col-md-8">
                 <div class="col-md-12">

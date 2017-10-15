@@ -12,6 +12,14 @@ namespace RentalsClinet.Controllers
         //
         // GET: /Cars/
 
+
+        public ActionResult updateUrls()
+        {
+            var res = CarDAO.updateCarsUrl();
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+
         public ActionResult Index(UserReuqestCar model)
         {
             if (Request.HttpMethod == "POST" && model != null)
@@ -24,9 +32,15 @@ namespace RentalsClinet.Controllers
                     EmailHelper.InquiryCars(model, Request.MapPath("~/App_Data/"));
                 }
             }
+
             var token = Request.QueryString["token"];
+
+            if (Request.Url.Segments.Length == 3)
+                token = Request.Url.Segments[2];
+
+            
             if (token == null) return View();
-            var yacht = CarDAO.getCarDetail(token);
+            var yacht = CarDAO.getCarDetail(Helpers.CustomFunctions.LinkModifier(token));
             return yacht != null ? View("Detail", yacht) : View();
         }
         public ActionResult Detail()

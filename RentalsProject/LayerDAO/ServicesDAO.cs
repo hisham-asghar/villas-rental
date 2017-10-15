@@ -31,7 +31,7 @@ namespace LayerDAO
                 db.Services.Remove(faq);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     return true;
                 }
                 catch (Exception)
@@ -55,19 +55,17 @@ namespace LayerDAO
         {
             using (var db = new DBModel())
             {
+
+                var guid = CustomFunctions.Guid(model.Name);
                 var faq = db.Services.FirstOrDefault(f => f.ServiceId == model.ServiceId);
                 if (faq == null)
                 {
-                    if (model.Name.Contains(" "))
-                        model.guid = model.Name.Replace(" ", "-");
-                    model.guid = model.guid.ToLower();
+                    model.guid = guid;
                     db.Services.Add(model);
                 }
                 else
                 {
-                    if (model.Name.Contains(" "))
-                        model.guid = model.Name.Replace(" ", "-");
-                    faq.guid = model.guid.ToLower();
+                    faq.guid = guid;
                     faq.ImageHeader = string.IsNullOrWhiteSpace(model.ImageHeader) ? faq.ImageHeader : model.ImageHeader;
                     faq.ImageSmall = string.IsNullOrWhiteSpace(model.ImageSmall) ? faq.ImageSmall : model.ImageSmall;
                     faq.Text = model.Text;
@@ -76,13 +74,21 @@ namespace LayerDAO
                 }
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     return true;
                 }
                 catch (Exception )
                 {
                     return false;
                 }
+            }
+        }
+
+        public static List<string> GetServicesUrl()
+        {
+            using(var db = new DBModel())
+            {
+                return db.Services.Select(s => s.guid).ToList();
             }
         }
     }

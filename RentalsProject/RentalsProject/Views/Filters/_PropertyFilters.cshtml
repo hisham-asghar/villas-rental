@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "Property Filters";
+}
+@model List<CustomModels.PropertyModels.PropertyFilters>
+<h2>@ViewBag.Title</h2>
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="purple">
+            <i class="material-icons">assignment</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">Properties Filters</h4>
+            <div class="toolbar">
+                <!-- Here you can write extra buttons/actions for the toolbar -->
+            </div>
+            <div class="material-datatables">
+                <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width: 100%">
+
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Name</th>
+                            @foreach (var f in ViewBag.taglist)
+                            {
+                                <th>@f.TagName</th>
+                            }
+                        </tr>
+                        <tr></tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Name</th>
+                            @foreach (var f in ViewBag.taglist)
+                            {
+                                <th>@f.TagName</th>
+                            }
+                        </tr>
+                        <tr></tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var prop in Model)
+                        {
+                            <tr pid="@prop.id">
+                                <td class="text-center">@prop.id</td>
+                                <td class="tagName">@prop.name</td>
+                                @foreach (var f in ViewBag.taglist)
+                                {
+                                    <td>
+                                        <input tag="@f.TagId" type="checkbox" @(prop.filtersDic[f.TagId] ? "checked=''" : "''") />
+                                    </td>
+                                }
+                                <td>
+                                    <button type="button" rel="tooltip" class="btn btn-sm btn-info editTag">
+                                        Update
+                                    </button>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end content-->
+    </div>
+    <!-- end card -->
+</div>
+@section scripts{
+    <!-- DataTables.net Plugin -->
+<script src="/Content/assets/js/jquery.datatables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#datatables').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            responsive: true,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search records",
+            }
+
+        });
+
+
+        var table = $('#datatables').DataTable();
+
+        // Edit record
+        table.on('click',
+            '.edit',
+            function () {
+                $tr = $(this).closest('tr');
+
+                var data = table.row($tr).data();
+                alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+            });
+
+        // Delete a record
+        table.on('click',
+            '.remove',
+            function (e) {
+                $tr = $(this).closest('tr');
+                table.row($tr).remove().draw();
+                e.preventDefault();
+            });
+
+        //Like record
+        table.on('click',
+            '.like',
+            function () {
+                alert('You clicked on Like button');
+            });
+
+        $('.card .material-datatables label').addClass('form-group');
+    });
+</script>
+
+    <script>
+        $(document).ready(function () {
+            $(".editTag").each(function () {
+                $(this).click(function () {
+                    debugger;
+                    var tags = $(this).closest("tr").find("td > input[type=checkbox]");
+                    var pid = $(this).closest("tr").attr("pid");
+                    try{
+                        pid = parseInt(pid);
+                    }catch(e){return;}
+                    var tagList = [];
+                    for (var i = 0; i < tags.length; i++)
+                    {
+                        if($(tags[i]).is(":checked"))
+                        {
+                            try{
+                                tagList.push(parseInt($(tags[i]).attr("tag")))
+                            }catch(e){}
+                        }
+                    }
+                    var settings = {
+                        type: "post",
+                        data: {
+                            list: tagList,
+                            id: pid 
+                        },
+                        traditional: true,
+                        url: "/Filters/UpdatePropertyFilters",
+                        success: function (data) {
+                            alert(data);
+                        }
+                    }
+                    $.ajax(settings);
+                });
+            });
+        });
+    </script>
+}

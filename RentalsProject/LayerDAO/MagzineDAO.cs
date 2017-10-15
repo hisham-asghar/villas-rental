@@ -48,11 +48,8 @@ namespace LayerDAO
         {
             using (var db = new DBModel())
             {
-                var guid = title.ToLower();
-                if (guid.Contains(" "))
-                {
-                    guid = guid.Replace(" ", "-");
-                }
+                
+                var guid = CustomFunctions.Guid(title);
                 try
                 {
                     var mgz = new Magzine()
@@ -65,7 +62,7 @@ namespace LayerDAO
                         GUID = guid
                     };
                     db.Magzines.Add(mgz);
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                     return true;
                 }
                 catch (DbEntityValidationException e)
@@ -90,6 +87,14 @@ namespace LayerDAO
                 foreach (var item in itemList)
                     items.Add(item.BlogViewItem.TypeName, item.Text);
                 return items;
+            }
+        }
+
+        public static List<string> GetUrls()
+        {
+            using (var db = new DBModel())
+            {
+                return db.Magzines.Select(c => c.GUID).ToList();
             }
         }
     }

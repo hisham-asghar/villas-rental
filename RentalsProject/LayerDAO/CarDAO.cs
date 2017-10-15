@@ -5,6 +5,7 @@ using System.Text;
 using CustomModels.Cars;
 using CustomModels.Yachts;
 using LayerDB;
+using System.Data.Entity.Validation;
 
 namespace LayerDAO
 {
@@ -76,7 +77,8 @@ namespace LayerDAO
                         Value = ys.Value
                     }).ToList()
                 }).FirstOrDefault(s => s.guid == guid);
-                yt.specs = GetYachtSpecifications(yt.id);
+                if(yt != null)
+                    yt.specs = GetYachtSpecifications(yt.id);
                 return yt;
             }
         }
@@ -160,53 +162,88 @@ namespace LayerDAO
             {
                 try
                 {
-                    if (id == 0)
+                    var guidUrl = CustomFunctions.Guid(model.name);
+                    if (id != 0) return id;
+                    var yacht = new Car()
                     {
+                        Name = model.name.Replace("'", "'"),
+                        Description = model.description,
+                        Banner = model.banner,
+                        OneDay = model.priceOneDay,
+                        ThreeDay = model.priceThreeDays,
+                        Week = model.priceWeek,
+                        Type = model.Type,
+                        guid = guidUrl
+                    };
+                    db.Cars.Add(yacht);
+                    db.SaveChanges(); StaticData.updateData();
 
-                        var yacht = new Car()
+                    foreach (var im in model.YachtsImage)
+                    {
+                        db.Files.Add(new File()
                         {
-                            Name = model.name.Replace("'", "'"),
-                            Description = model.description,
-                            Banner = model.banner,
-                            OneDay = model.priceOneDay,
-                            ThreeDay = model.priceThreeDays,
-                            Week = model.priceWeek,
-                            Type = model.Type,
-                            guid = Guid.NewGuid().ToString()
-                        };
-                        db.Cars.Add(yacht);
-                        db.SaveChanges();
-
-                        foreach (var im in model.YachtsImage)
-                        {
-                            db.Files.Add(new File()
-                            {
-                                FileName = im,
-                                mimeType = "image",
-                                onCreated = DateTime.Now,
-                                onModified = DateTime.Now,
-                                Description = "",
-                                FileType = 2,
-                                FileTypeId = yacht.CarId
-                            });
-                            db.SaveChanges();
-                        }
-
-                        foreach (var sp in specs)
-                        {
-                            var query =
-                                "INSERT INTO [dbo].[CarSpecification]([CarId],[CarSpecID],[Value])VALUES({0},{1},'{2}');";
-                            query = string.Format(query, yacht.CarId, sp.Specification.SpecId, sp.Value.Replace("'", "''"));
-                            db.Database.ExecuteSqlCommand(query);
-                        }
-                        id = yacht.CarId;
+                            FileName = im,
+                            mimeType = "image",
+                            onCreated = DateTime.Now,
+                            onModified = DateTime.Now,
+                            Description = "",
+                            FileType = 2,
+                            FileTypeId = yacht.CarId
+                        });
+                        db.SaveChanges(); StaticData.updateData();
                     }
+
+                    foreach (var sp in specs)
+                    {
+                        var query =
+                            "INSERT INTO [dbo].[CarSpecification]([CarId],[CarSpecID],[Value])VALUES({0},{1},'{2}');";
+                        query = string.Format(query, yacht.CarId, sp.Specification.SpecId, sp.Value.Replace("'", "''"));
+                        db.Database.ExecuteSqlCommand(query);
+                    }
+                    id = yacht.CarId;
                     return id;
                 }
                 catch (Exception e)
                 {
                     return -1;
                 }
+            }
+        }
+
+        public static bool updateCarsUrl()
+        {
+            using (var db = new DBModel())
+            {
+                var list = db.Cars.ToList();
+                foreach (var p in list)
+                {
+                    var guid = p.Name.Trim().ToLower();
+                    if (guid.Contains(' '))
+                        guid = guid.Replace(' ', '-');
+                    guid = System.Text.RegularExpressions.Regex.Replace(guid, @"[^0-9a-zA-Z]+", "-");
+                    p.guid = guid;
+                }
+                try
+                {
+                    db.SaveChanges(); StaticData.updateData();
+                    return true;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    return false;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public static List<string> GetUrls()
+        {
+            using(var db = new DBModel())
+            {
+                return db.Cars.Select(c => c.guid).ToList();
             }
         }
     }

@@ -15,7 +15,7 @@ namespace LayerDAO
                 db.HomeOwners.Add(model);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(); StaticData.updateData();
                 }
                 catch (Exception e)
                 {

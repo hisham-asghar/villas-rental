@@ -82,7 +82,9 @@
 
     function showResult(result) {
         debugger;
+// ReSharper disable once Es6Feature
         const lati = result.geometry.location.lat();
+// ReSharper disable once Es6Feature
         const longi = result.geometry.location.lng();
         console.log(lati + " : lati");
         console.log(longi + " : longi");
@@ -101,13 +103,15 @@
         // If adress is not supplied, use default value 'Ferrol, Galicia, Spain'
         debugger;
         // Initialize the Geocoder
+// ReSharper disable once AssignToImplicitGlobalInFunctionScope
         geocoder = new google.maps.Geocoder();
         if (geocoder) {
             geocoder.geocode({
-                'address': address
-            },
+                    'address': address
+                },
                 function (results, status) {
                     debugger;
+// ReSharper disable once CoercedEqualsUsing
                     if (status == google.maps.GeocoderStatus.OK) {
                         showResult(results[0]);
                     }

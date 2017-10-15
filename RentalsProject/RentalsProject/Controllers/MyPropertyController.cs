@@ -11,7 +11,6 @@ using RentalsProject.Models;
 
 namespace RentalsProject.Controllers
 {
-    [AuthorizeSession]
     public class MyPropertyController : Controller
     {
         // GET: MyProperties
@@ -22,15 +21,23 @@ namespace RentalsProject.Controllers
             ViewBag.Model = model;
             if (!string.IsNullOrWhiteSpace(Request.QueryString["city"]) && !string.IsNullOrWhiteSpace(Request.QueryString["token"]))
             {
-                var list2 = PropertyDAO.GetPropertyList(0,Request.QueryString["city"]);
-                if(list2 != null)
+                var list2 = PropertyDAO.GetPropertyList(0, Request.QueryString["city"]);
+                if (list2 != null)
                     return View("PropertyList", list2);
             }
             var list = PropertyDAO.GetPropertyList(0);
 
-            return View("PropertyList",list);
+            return View("PropertyList", list);
         }
-        
+
+
+        // GET: MyProperties
+        public ActionResult JSONTest()
+        {
+            var list = LayerDAO.PropertyDAO.GetLast(5);
+            return Json(list,JsonRequestBehavior.AllowGet);
+        }
+
         // GET: MyProperties
         public ActionResult DeactivedVillas()
         {
@@ -83,7 +90,7 @@ namespace RentalsProject.Controllers
             }
             var rentalsList = PropertyDAO.GetPropertyRentalDetails(id);
             ViewBag.property = PropertyDAO.GetProperty(id);
-            return View("UpdateRates",rentalsList);
+            return View("RenewRates",rentalsList);
         }
 
         public ActionResult Deactivate(int id = 0)

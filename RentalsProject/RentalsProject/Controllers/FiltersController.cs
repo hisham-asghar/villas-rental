@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,8 +15,19 @@ namespace RentalsProject.Controllers
 
         public ActionResult Index()
         {
-            var list = LayerDAO.TagsDAO.getAll();
+            var list = LayerDAO.TagsDAO.GetDetailAll();
             return View(list);
+        }
+
+        [ActionName("Add")]
+        public ActionResult Edit(int id = 0)
+        {
+            if (id > 0)
+            {
+                return View("Edit",LayerDAO.TagsDAO.get(id) ?? new LayerDB.Tag());    
+            }
+            return View("Edit", new LayerDB.Tag());
+            
         }
 
         [HttpPost]
@@ -43,7 +55,7 @@ namespace RentalsProject.Controllers
         {
             var list = LayerDAO.PropertyDAO.GetPropertiesFilters();
 
-            var taglist = LayerDAO.TagsDAO.getAll();
+            var taglist = LayerDAO.TagsDAO.GetAll();
             ViewBag.taglist = taglist;
             
             foreach(var p in list)
@@ -77,19 +89,40 @@ namespace RentalsProject.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Update(string name, int id = 0)
+        public ActionResult Update(string name, string text, HttpPostedFileBase pic, HttpPostedFileBase banner, int id = 0)
         {
-            LayerDB.Tag model = new LayerDB.Tag()
+            var image = UploadImage(pic);
+            var bimage = UploadImage(banner);
+            var model = new LayerDB.Tag()
             {
                 TagId = id,
-                TagName = name
+                TagName = name,
+                Text = text,
+                image = image,
+                banner = bimage
             };
-            if (model != null)
-            {
-                LayerDAO.TagsDAO.Save(model);                
-            }
+            LayerDAO.TagsDAO.Save(model);
             return RedirectToAction("Index");
         }
 
+        private string UploadImage(HttpPostedFileBase pic)
+        {
+            string image = null;
+            if (pic != null && pic.ContentLength > 0)
+            {
+                try
+                {
+                    var fileName = Guid.NewGuid() + ".jpg";
+                    var path = Path.Combine(Server.MapPath("~/uploads"), fileName);
+                    pic.SaveAs(path);
+                    image = fileName;
+                }
+                catch (Exception)
+                {
+                    // model.banner = "";
+                }
+            }
+            return image;
+        }
     }
 }

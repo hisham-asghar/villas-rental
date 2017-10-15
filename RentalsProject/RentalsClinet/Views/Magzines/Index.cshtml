@@ -4,7 +4,7 @@
     ViewBag.UploadLocation = RentalsClinet.Helpers.CustomActions.getUploadLocation();
 }
 @model List<Dictionary<string,string>>
-<div class="page-header header-filter" style="background-image: url('http://2mlyl2eanf41pq5h03csafz15gi.wpengine.netdna-cdn.com/wp-content/uploads/2017/03/St-Martin_ocean-1024x683.jpg');height: 50vh; min-height: 50vh;">
+<div class="page-header header-filter" style="background-image: url('/Content/assets/img/magzines.jpg');height: 50vh; min-height: 50vh;">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
@@ -94,14 +94,14 @@
                                 </div>
                                 <div class="col-md-7">
                                     <h3 class="card-title">
-                                        <a href="/Magzines?token=@blog["guid"]">
+                                        <a href="/Magzines/@blog["guid"]">
                                             @blog["title"]
                                         </a>
                                     </h3>
                                     <div class="blog-detail">
                                         <p class="card-description blog">
                                             @Html.Raw(blog["text"].Substring(0, 300))
-                                            &hellip;<a href="/Magzines?token=@blog["guid"]"> Read More </a>
+                                            &hellip;<a href="/Magzines/@blog["guid"]"> Read More </a>
                                         </p>
                                     </div>
                                 </div>
@@ -115,14 +115,14 @@
                                 </div>
                                 <div class="col-md-7">
                                     <h3 class="card-title">
-                                        <a href="/Magzines?token=@blog["guid"]">
+                                        <a href="/Magzines/@blog["guid"]">
                                             @blog["title"]
                                         </a>
                                     </h3>
                                     <div class="blog-detail">
                                         <p class="card-description">
                                             @Html.Raw(blog["text"].Substring(0, 300))
-                                            &hellip;<a href="/Magzines?token=@blog["guid"]"> Read More </a>
+                                            &hellip;<a href="/Magzines/@blog["guid"]"> Read More </a>
                                         </p>
                                     </div>
                                 </div>

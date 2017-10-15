@@ -32,6 +32,18 @@ namespace RentalsClinet.Controllers
             return Json(line, JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult updateData(string code)
+        {
+            if (code == "hisham@octacer.com")
+            {
+                var res = LayerDAO.CustomFunctions.updateUrls();
+                LayerDAO.StaticData.updateData();
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+            return new EmptyResult();
+        }
+
         public ActionResult TestMail()
         {
 
@@ -142,12 +154,13 @@ namespace RentalsClinet.Controllers
             ViewBag.HeadTitle = "POLICY";
             return View("UsefuLink");
         }
+        /*
         [ActionName("TERMS-OF-SERVICE")]
         public ActionResult Terms()
         {
             ViewBag.HeadTitle = "TERMS-OF-SERVICE";
             return View("UsefuLink");
-        }
+        }*/
 
     }
 }

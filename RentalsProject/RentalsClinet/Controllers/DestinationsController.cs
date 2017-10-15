@@ -21,22 +21,63 @@ namespace RentalsClinet.Controllers
 
         public ActionResult Index()
         {
-            var token = Request.QueryString["token"];
-            if (token == null)
+            ViewBag.modelSearch = new CustomModels.FormModels.DestinationSearchFormModel() { 
+                cityName = "*",
+                filter = new List<string>()                
+            };
+            string token = null;
+            if (Request.Url.Segments.Length == 2)
+            {
+                token = (String)Request.Url.Segments[1];
+            }
+            token = Helpers.CustomFunctions.LinkModifier(token);
+            if (token == null || token.Trim().ToLower() == "destinations")
             {
                 var cities = PropertyDAO.GetCities().OrderBy(p => p.CityName.ToLower()).ToList();
                 ViewBag.maxPrice = PropertyDAO.GetMaxNightPrice(0);
                 return View("CityIndex", cities);
             }
             const int cnt = 0;
-            var list = PropertyDAO.GetPropertyDetailList(cnt,token);
+            var list = PropertyDAO.GetPropertyDetailList(cnt, token);
 
-            if(list == null)
+            if (list == null)
             {
                 return RedirectToAction("Index");
             }
 
             ViewBag.city = PropertyDAO.GetCity(token);
+            return View("Index", list);
+        }
+
+
+        public ActionResult Filter()
+        {
+            ViewBag.modelSearch = new CustomModels.FormModels.DestinationSearchFormModel()
+            {
+                cityName = "*",
+                filter = new List<string>()
+            };
+            string token = null;
+            if (Request.Url.Segments.Length == 2)
+            {
+                token = (String)Request.Url.Segments[1];
+            }
+            if (token == null || token.Trim().ToLower() == "destinations")
+            {
+                var cities = PropertyDAO.GetCities().OrderBy(p => p.CityName.ToLower()).ToList();
+                ViewBag.maxPrice = PropertyDAO.GetMaxNightPrice(0);
+                return View("CityIndex", cities);
+            }
+            const int cnt = 0;
+            var list = PropertyDAO.GetFilterProperties(cnt, Helpers.CustomFunctions.LinkModifier(token));
+
+            if (list == null)
+            {
+                return RedirectToAction("Index");
+
+            }
+
+            ViewBag.filter = TagsDAO.get(token);
             return View("Index", list);
         }
 
@@ -56,12 +97,13 @@ namespace RentalsClinet.Controllers
             }
 
             ViewBag.modelSearch = model;
-            
+
             if (model.filter.Count > 0)
             {
-                list = (from p in list 
-                        from filter in model.filter 
-                        where p.tagsList.Contains(filter) select p).ToList();
+                list = (from p in list
+                        from filter in model.filter
+                        where p.tagsList.Contains(filter)
+                        select p).ToList();
             }
 
             if (!string.IsNullOrWhiteSpace(model.cityName) && !string.Equals(model.cityName, "*", StringComparison.Ordinal))
@@ -103,7 +145,7 @@ namespace RentalsClinet.Controllers
                 ViewBag.smax = PropertyDAO.GetMaxNightPrice(0);
                 ViewBag.smin = 0;
             }
-            if(!string.IsNullOrWhiteSpace(model.r) && model.r.Contains("-"))
+            if (!string.IsNullOrWhiteSpace(model.r) && model.r.Contains("-"))
             {
                 var ranges = model.r.Split('-');
                 var start = ranges[0].Trim();
@@ -112,13 +154,13 @@ namespace RentalsClinet.Controllers
                 var endArr = end.Split('/');
                 var startDate = new DateTime(Convert.ToInt32(startArr[2]), Convert.ToInt32(startArr[0]), Convert.ToInt32(startArr[1]));
                 var endDate = new DateTime(Convert.ToInt32(endArr[2]), Convert.ToInt32(endArr[0]), Convert.ToInt32(endArr[1]));
-                
+
                 var dumpList = new List<PropertyView>();
                 foreach (var p in list)
                 {
                     var rates = PropertyDAO.GetPropertyBookingsVerified(p.PropertyId);
-                    bool flagRes = VerifyPropertyAvailablity(p, rates,startDate,endDate);
-                    if(flagRes)
+                    bool flagRes = VerifyPropertyAvailablity(p, rates, startDate, endDate);
+                    if (flagRes)
                         dumpList.Add(p);
                 }
                 list = dumpList;
@@ -146,16 +188,23 @@ namespace RentalsClinet.Controllers
             {
                 return RedirectToAction("Index");
             }
+            var listCity = ListCity(list);
+
+            ViewBag.maxPrice = PropertyDAO.GetMaxNightPrice(0);
+            return View("Search", listCity);
+        }
+
+        private static List<List<PropertyView>> ListCity(List<PropertyView> list)
+        {
             var listCity = new List<List<PropertyView>>();
             var nsize = 3;
             while (list.Any())
             {
-                listCity.Add(list.Take(nsize).ToList());;
+                listCity.Add(list.Take(nsize).ToList());
+                ;
                 list = list.Skip(nsize).ToList();
             }
-
-            ViewBag.maxPrice = PropertyDAO.GetMaxNightPrice(0);
-            return View("Search", listCity);
+            return listCity;
         }
 
         private bool VerifyPropertyAvailablity(PropertyView propertyView, List<DateModel> rates, DateTime startDate, DateTime endDate)
@@ -179,47 +228,207 @@ namespace RentalsClinet.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult updateUrls()
+        {
+            var res = PropertyDAO.updateVillaGenericUrl();
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult updateStatic()
+        {
+            var res = LayerDAO.StaticData.updateData();
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Detail(BookingModel2 bmodel)
         {
-            
+            string[] formats = {
+                "M/d/yyyy", 
+                "M/d/yyyy", 
+                "MM/dd/yyyy", 
+                "M/d/yyyy", 
+                "M/d/yyyy", 
+                "M/d/yyyy", 
+                "M/d/yyyy", 
+                "M/d/yyyy", 
+                "MM/dd/yyyy", 
+                "M/dd/yyyy"
+                               };
             var id = Request.QueryString["id"];
-            if (id == null) return RedirectToAction("Index");
-            var _id = Convert.ToInt32(id);
-            ActionResult resultView = null;
+
+            string token = null;
+            if (Request.Url.Segments.Length == 2)
+            {
+                token = (String)Request.Url.Segments[1];
+            }
+            if (Request.Url.Segments.Length == 3)
+            {
+                token = (String)Request.Url.Segments[2];
+            }
+            token = Helpers.CustomFunctions.LinkModifier(token);
+            if (token == null) return RedirectToAction("Index");
             try
             {
-                var model = PropertyDAO.GetPropertyById(_id);
-                if(!model.isActive)
-                    resultView = RedirectToAction("Index");
-                ViewBag.bookingsList = PropertyDAO.GetPropertyBookingsVerified(_id);
+                var model = PropertyDAO.GetPropertyByGuid(token);
+                if (model == null || !model.isActive)
+                    return RedirectToAction("Index");
+                ViewBag.bookingsList = PropertyDAO.GetPropertyBookingsVerified(model.PropertyId);
                 if (bmodel != null)
                 {
-                    resultView = DestinationHelper.VillaBooking(bmodel, _id, resultView, model);
+                    if (bmodel.hk == null)
+                    {
+                        ViewBag.villaId = model.PropertyId;
+                        if (model != null)
+                            return View(model);
+                    }
+
+                    DateTime outParam;
+                    if (DateTime.TryParseExact(bmodel.@from, formats, new CultureInfo("en-US"), DateTimeStyles.None, out outParam))
+                    {
+                        bmodel.fromDate = outParam;
+                    }
+                    if (DateTime.TryParseExact(bmodel.to, formats, new CultureInfo("en-US"), DateTimeStyles.None, out outParam))
+                    {
+                        bmodel.toDate = outParam;
+                    }
+
+                    bmodel.days = (int)Math.Floor((bmodel.toDate - bmodel.fromDate).TotalDays);
+
+                    if (bmodel.hk != null && bmodel.hk.d > bmodel.days)
+                        bmodel.hk.d = bmodel.days;
+                    if (bmodel.pc.d > bmodel.days)
+                        bmodel.pc.d = bmodel.days;
+
+                    var services = PropertyDAO.GetPropertyServices();
+
+                    if (model != null)
+                    {
+                        bmodel.bed = new ServiceBed
+                        {
+                            count = model.Bedrooms,
+                            days = bmodel.days
+                        };
+                        bmodel.bed.price = (int)(services["bed"].Price * bmodel.bed.count * bmodel.days);
+
+                        bmodel.pc.price = (int)(services["pc"].Price * bmodel.pc.h * bmodel.pc.d);
+                        bmodel.hk.price = (int)(services["hk"].Price * bmodel.hk.h * bmodel.hk.d);
+                        bmodel.perNightRate = 0;
+                        bmodel.SeasonName = null;
+                        foreach (var r in model.rates)
+                        {
+                            var startdate = new DateTime(bmodel.fromDate.Year, r.sd.Month, r.sd.Day);
+                            var enddate = new DateTime(bmodel.fromDate.Year, r.ed.Month, r.ed.Day);
+                            var checkdate = new DateTime(bmodel.fromDate.Year, bmodel.fromDate.Month, bmodel.fromDate.Day);
+
+                            if (checkdate < startdate || checkdate > enddate) continue;
+                            bmodel.perNightRate = r.price;
+                            bmodel.SeasonName = r.SeasonName;
+                            bmodel.SeasonId = r.SeasonId;
+                            break;
+                        }
+                        if (bmodel.SeasonName == null)
+                        {
+                            bmodel.perNightRate = model.night;
+                            bmodel.SeasonId = 0;
+                        }
+
+                        bmodel.TotalRoomPrice = bmodel.perNightRate * bmodel.days;
+
+                        bmodel.TotalPrice = bmodel.TotalRoomPrice + bmodel.bed.price + bmodel.hk.price +
+                                            bmodel.pc.price;
+
+                        bmodel.Tax = 13;
+
+                        bmodel.TotalPriceWithTax = bmodel.TotalPrice * bmodel.Tax / 100;
+
+                        var bookingModel = new LayerDB.Booking()
+                        {
+                            PropertyId = model.PropertyId,
+                            CalculatedAmount = bmodel.TotalPrice,
+                            TotalPrice = bmodel.TotalPrice,
+                            StartDate = bmodel.fromDate,
+                            EndDate = bmodel.toDate,
+                            TotalPriceWithTax = bmodel.TotalPriceWithTax + bmodel.TotalPrice,
+                            Tax = (int)bmodel.Tax,
+                            isChecked = false,
+                            isBooked = false,
+                            TotalTaxPrice = bmodel.TotalPriceWithTax,
+                            onCreated = DateTime.Now,
+                            onModified = DateTime.Now,
+                            Days = bmodel.days,
+                            guid = Guid.NewGuid().ToString()
+                        };
+                        if (bmodel.SeasonId > 0)
+                        {
+                            bookingModel.SeasonId = bmodel.SeasonId;
+                        }
+
+                        var listSerivces = new List<PropertyBookingService>
+                        {
+                            new PropertyBookingService()
+                            {
+                                PropertyServiceId = services["bed"].PropertyServiceId,
+                            },
+                            new PropertyBookingService()
+                            {
+                                PropertyServiceId = services["hk"].PropertyServiceId,
+                                TimeLimitPerDay = bmodel.hk.d,
+                                TimeLimitPerHour = bmodel.hk.h
+                            },
+                            new PropertyBookingService()
+                            {
+                                PropertyServiceId = services["pc"].PropertyServiceId,
+                                TimeLimitPerDay = bmodel.pc.d,
+                                TimeLimitPerHour = bmodel.pc.h
+                            }
+                        };
+                        bookingModel.PropertyBookingServices = listSerivces;
+
+                        var res = VerifyBooking(bookingModel,
+                            PropertyDAO.GetPropertyBookingsVerified(bookingModel.PropertyId));
+                        if (res)
+                        {
+                            bookingModel = PropertyDAO.BookProperty(bookingModel);
+                            ViewBag.book = bmodel;
+                            return RedirectToAction("Booking", new { id = bookingModel.guid });
+                        }
+                        ViewBag.villaId = model.PropertyId;
+                        if (model != null)
+                            return View(model);
+                    }
                 }
-                ViewBag.villaId = _id;
+                ViewBag.villaId = model.PropertyId;
                 if (model != null)
-                    resultView = View(model);
-                resultView = RedirectToAction("Index");
+                    return View(model);
+                return RedirectToAction("Index");
             }
             catch (Exception e)
             {
-                resultView = RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
-            resultView = RedirectToAction("Index");
-            return resultView;
+            return RedirectToAction("Index");
         }
 
         private static bool VerifyBooking(Booking model, List<DateModel> bookings)
         {
-            return DestinationHelper.isBooked(model, bookings, isBooked);
+            foreach (var b in bookings)
+            {
+                if (model.StartDate >= b.sd && model.StartDate <= b.ed)
+                {
+                    return false;
+                }
+                if (model.EndDate >= b.sd && model.EndDate <= b.ed)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
-        
         public ActionResult BookVilla(string booking, BillingAddress model, CreditCard card)
         {
             if (string.IsNullOrWhiteSpace(booking)) return RedirectToAction("Index");
 
-            
+
             var modelBooking = PropertyDAO.GetBooking(booking);
 
 
@@ -257,12 +466,12 @@ namespace RentalsClinet.Controllers
             var location = CustomActions.getMerchantLocation();
             var locationUrl = location + "/Destinations/BookingUpdate?id=" + modelBooking.guid;
             var request = WebRequest.Create(locationUrl) as HttpWebRequest;
-            
+
             var response = request.GetResponse() as HttpWebResponse;
             var streamr = new StreamReader(response.GetResponseStream());
             var line = streamr.ReadToEnd();
             var errorLine = "Could not Process the transaction";
-            
+
             /*
             var result = MerchantHelper.GetTransactionRes(line);
             if (result == null || result.response == null)
@@ -350,7 +559,7 @@ namespace RentalsClinet.Controllers
         {
             if (Request.Url == null && id == null)
                 return RedirectToAction("Index");
-            if ((Request.Url.Segments.Length < 4 || string.IsNullOrWhiteSpace(Request.Url.Segments[3])) &&  id == null)
+            if ((Request.Url.Segments.Length < 4 || string.IsNullOrWhiteSpace(Request.Url.Segments[3])) && id == null)
                 return RedirectToAction("Index");
 
             if (id == null)
@@ -365,7 +574,7 @@ namespace RentalsClinet.Controllers
 
             if (booking.StartDate <= DateTime.Now || booking.EndDate <= DateTime.Now)
                 return RedirectToAction("Index");
-            
+
             var bm = new DetailBookingModel()
             {
                 days = booking.Days,
@@ -388,7 +597,7 @@ namespace RentalsClinet.Controllers
                     {
                         d = service.TimeLimitPerDay ?? 0,
                         h = service.TimeLimitPerHour ?? 0,
-                        
+
                     };
                     bm.hk.price = (int)(services[service.PropertyServiceId].Price * bm.hk.d * bm.hk.h);
                 }

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="/Content/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="/Content/assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/Content/assets/img/logo.png">
+    <link rel="icon" type="image/png" href="/Content/assets/img/logo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title> The Maruca Group </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -17,6 +17,7 @@
 
     <link href="/Content/daterangepicker/daterangepicker.css" rel="stylesheet" />
     <link href="/Content/assets/css/material-kit.css" rel="stylesheet" />
+    <link href="/Content/assets/LogoFont.css" rel="stylesheet" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="/Content/assets/assets-for-demo/vertical-nav.css" rel="stylesheet" />
@@ -64,7 +65,7 @@
 
     <style>
         p,h1,h2,h3,h4,h5,h6 {
-            font-family: arial, helvetica, sans-serif !important;
+            font-family: LogoFont, arial, helvetica, sans-serif !important;
         }
          .services-list img{
              width: 70px !important;
@@ -79,8 +80,36 @@
             background: -webkit-linear-gradient(-45deg, #595959 12%,#4c4c4c 16%,#4c4c4c 16%,#666666 25%,#111111 41%,#2c2c2c 50%,#111111 56%,#474747 79%,#474747 79%,#111111 87%,#111111 87%,#131313 100%); /* Chrome10-25,Safari5.1-6 */
             background: linear-gradient(135deg, #595959 12%,#4c4c4c 16%,#4c4c4c 16%,#666666 25%,#111111 41%,#2c2c2c 50%,#111111 56%,#474747 79%,#474747 79%,#111111 87%,#111111 87%,#131313 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#595959', endColorstr='#131313',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+                background-size: 100vw 100vh;
+        }
+        *:not(i) {
+            
+            font-family: "LogoFont","Segoe UI", Verdana, Helvetica, Sans-Serif !important;
+        }
+        *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(h7):not(div):not(i){
+            font-size: 15px !important;
+        }
+        .card a{
+            font-size:17px;
+        }
+        .card .card-image .card-title{
+            font-size: 1.7em !important;
         }
     </style>
+    @if(ViewBag.smallHeader == true)
+    {
+        <style>
+            .page-header.header-filter{
+            height:35vh !important;
+            min-height:35vh !important;
+        }
+        .page-header.header-filter > .container,        
+        .page-header.header-filter > .container-fluid > .container{
+            padding-top: 15vh  !important;
+            padding-bottom: 15vh  !important;
+        }
+        </style>
+    }
 </head>
 <body class="section-white" @(ViewBag.load ?? "")  style="overflow-x:hidden;">
 @RenderBody()
@@ -89,10 +118,16 @@
     <div class="container">
         <div class="content">
             <div class="row services-list">
+                @{var service_xi = 0;}
                 @foreach(var s in ViewBag.services)
                 {
-                    <div class="col-md-1 col-md-offset-1">
-                        <a href="/Services/Detail/@s.guid" class="">
+                    <div class="col-md-1 visible-lg visible-md">
+                        <a href="/Services/@s.guid" class="">
+                            <img src="@ViewBag.UploadLoca/@s.ImageSmall" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
+                        </a>
+                    </div>   
+                    <div class="col-xs-3 @(service_xi % 2 == 0 ? "col-xs-offset-1" : "col-xs-offset-3") visible-xs visible-sm">
+                        <a href="/Services/@s.guid" class="">
                             <img src="@ViewBag.UploadLoca/@s.ImageSmall" alt="Thumbnail Image" class="img-circle img-raised img-responsive">
                         </a>
                     </div>   
@@ -100,23 +135,23 @@
             </div>
 
             <hr/>
-            <div class="row">
+            <div class="row visible-lg visible-md">
                 <div class="col-md-2">
                     <h5>DESTINATIONS</h5>
                     <ul class="links-vertical">
                         @foreach (var c in ViewBag.cities)
                         {
-                            <li><a href="/Destinations?token=@c.guid">@c.CityName</a></li>
+                            <li><a href="/@c.guid">@c.CityName</a></li>
                         }
                     </ul>
                 </div>
                 <div class="col-md-2 col-md-offset-1">
                     <h5>YACHTS</h5>
                     <ul class="links-vertical">
-                        <li><a href="/Yachts?token=34-63">34-63 Feet</a></li>
-                        <li><a href="/Yachts?token=64-77">64-77 Feet</a></li>
-                        <li><a href="/Yachts?token=78-99">78-99 Feet</a></li>
-                        <li><a href="/Yachts?token=100+">100+ Feet</a></li>
+                        <li><a href="/Yachts/34-63">34-63 Feet</a></li>
+                        <li><a href="/Yachts/64-77">64-77 Feet</a></li>
+                        <li><a href="/Yachts/78-99">78-99 Feet</a></li>
+                        <li><a href="/Yachts/100+">100+ Feet</a></li>
                     </ul>
                     <h5>CARS</h5>
                     <ul class="links-vertical">
@@ -132,7 +167,6 @@
                         <li><a href="/Home/CONCIERGE">CONCIERGE</a></li>
                         <li><a href="/Magzines">OUR BLOG</a></li>
                         <li><a href="/Home/Testimonals">TESTIMONALS</a></li>
-                        <li><a href="/Home/TERMS-OF-SERVICE">TERMS OF SERVICE</a></li>
                         <li><a href="/Home/POLICY">POLICY</a></li>
                         <li><a href="/Home/FAQ">FAQ</a></li>
                         <li><a href="/Services">SERVICES</a></li>
@@ -178,6 +212,131 @@
                         </li>
                     </ul>
                     <br/><br/>
+                    <div align="center">
+                        <span style="color: #ffffff;"><strong>305-218-5216</strong></span><br>
+                        <span style="color: #ffffff;"><strong><a href="mailto:reservations@themarucagroup.com" hidefocus="true" style="outline: none;">reservations@themarucagroup.com</a></strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row visible-sm visible-xs">
+                <div class="col-md-2">
+                    <h5>DESTINATIONS</h5>
+                </div>
+                @{
+                    var cii = 0;
+                }
+                <div class="col-xs-6 visible-xs visible-sm">
+
+                    <ul class="links-vertical ">
+                        @foreach (var c in ViewBag.cities)
+                        {
+                            if (cii++ % 2 == 0)
+                            {
+                                <li><a href="/Destinations?token=@c.guid">@c.CityName</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+                @{cii = 0;}
+                <div class="col-xs-6 visible-xs visible-sm">
+                    <ul class="links-vertical ">
+                        @foreach (var c in ViewBag.cities)
+                        {
+                            if (cii++ % 2 == 1)
+                            {
+                                <li><a href="/Destinations?token=@c.guid">@c.CityName</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="col-md-2 col-md-offset-1">
+                    <h5>YACHTS</h5>
+                </div>
+                <div class="col-md-2 col-xs-6">
+                    <ul class="links-vertical">
+                        <li><a href="/Yachts?token=34-63">34-63 Feet</a></li>
+                        <li><a href="/Yachts?token=64-77">64-77 Feet</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-xs-6">
+                    <ul class="links-vertical">
+                        <li><a href="/Yachts?token=78-99">78-99 Feet</a></li>
+                        <li><a href="/Yachts?token=100+">100+ Feet</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-md-offset-1">
+                    <h5>CARS</h5>
+                </div>
+                <div class="col-md-2 col-xs-6">
+                    <ul class="links-vertical">
+                        <li><a href="/Cars/Luxury">Luxury Cars</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-xs-6">
+                    <ul class="links-vertical">
+                        <li><a href="/Cars/Exotic">Exotic Cars</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-md-offset-1">
+                    <h5>USEFUL LINKS</h5>
+                </div>
+                <div class="col-md-2 col-xs-6">
+                    <ul class="links-vertical">
+                        <li><a href="/Home/About">ABOUT US</a></li>
+                        <li><a href="/Home/Contact/">CONTACT US</a></li>
+                        <li><a href="/Home/CONCIERGE">CONCIERGE</a></li>
+                        <li><a href="/Magzines">OUR BLOG</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-xs-6">
+                    <ul class="links-vertical">
+                        <li><a href="/Home/Testimonals">TESTIMONALS</a></li>
+                        <li><a href="/Home/POLICY">POLICY</a></li>
+                        <li><a href="/Home/FAQ">FAQ</a></li>
+                        <li><a href="/Services">SERVICES</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-12 col-xs-12 col-md-offset-1">
+                    <h5>Follow Us</h5>
+                    <ul class="social-buttons">
+                        <li>
+                            <a href="https://twitter.com/TheMarucaGroup" title="Twitter" target="blank" class="btn btn-just-icon btn-simple btn-twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/TheMarucaGroup/" title="Facebook" target="blank" class="btn btn-just-icon btn-simple btn-facebook">
+                                <i class="fa fa-facebook-square"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/channel/UCLw70uM-OTE41EHLZCTwodQ" title="YouTube" target="blank" class="btn btn-just-icon btn-simple btn-youtube">
+                                <i class="fa fa-youtube-play"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://plus.google.com/108056308587956692719/posts" title="Google+" target="blank" class="btn btn-just-icon btn-simple btn-google">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/themarucagroup/" title="Instagram" target="blank" class="btn btn-just-icon btn-simple btn-instagram">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/the-maruca-group" title="LinkedIn" target="blank" class="btn btn-just-icon btn-simple btn-linkedin">
+                                <i class="fa fa-linkedin-square"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.pinterest.com/themarucagroup" title="Pinterest" target="blank" class="btn btn-just-icon btn-simple btn-pinterest">
+                                <i class="fa fa-pinterest"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <br /><br />
                     <div align="center">
                         <span style="color: #ffffff;"><strong>305-218-5216</strong></span><br>
                         <span style="color: #ffffff;"><strong><a href="mailto:reservations@themarucagroup.com" hidefocus="true" style="outline: none;">reservations@themarucagroup.com</a></strong></span>

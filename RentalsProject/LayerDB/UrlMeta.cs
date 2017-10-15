@@ -12,19 +12,10 @@ namespace LayerDB
         public int UrlMetaId { get; set; }
 
         [Required]
-        [StringLength(1024)]
-        public string guid { get; set; }
+        [StringLength(4096)]
+        public string RealLink { get; set; }
 
-        [StringLength(256)]
-        public string Controller { get; set; }
-
-        [StringLength(256)]
-        public string ActionName { get; set; }
-
-        [StringLength(256)]
-        public string QueryString { get; set; }
-
-        [StringLength(2048)]
-        public string Url { get; set; }
+        [Required]
+        public string DummyLink { get; set; }
     }
 }
